@@ -21,7 +21,7 @@ public class XvpAspect {
 	private final String ERROR_CODE03 = "xvp_error_003";
 	private final String ERROR_MESSAGE03 = "请求处理发生未知失败";
 
-	@Pointcut("execution(* cn.rongcapital.xvp.openapi.client.controller..*.*(..))")
+	@Pointcut("execution(* com.lingke.xvp.demo.controller..*.*(..))")
 	public void pointcut() {
 	}
 
@@ -35,13 +35,13 @@ public class XvpAspect {
 			logger.info("调用接口结束：{}，响应参数：{}", method, result.toString());
 			return result;
 		} catch (RuntimeException e) {
-			logger.error("请求处理返回运行时异常，errorMessage：{}", e.getMessage());
+			logger.error("请求处理返回运行时异常，errorMessage：{}", e.getMessage(),e);
 			ExceptionResponse exceptionResponse = new ExceptionResponse();
 			exceptionResponse.setError_code(ERROR_CODE01);
 			exceptionResponse.setError_msg(e.getMessage());
 			return exceptionResponse;
 		} catch (ApiException e) {
-			logger.error("请求处理返回Rop调用异常，errorMessage：{}", e.getMessage());
+			logger.error("请求处理返回Rop调用异常，errorMessage：{}", e.getMessage(),e);
 			ExceptionResponse exceptionResponse = new ExceptionResponse();
 			exceptionResponse.setError_code(ERROR_CODE02);
 			exceptionResponse.setError_msg(e.getMessage());
