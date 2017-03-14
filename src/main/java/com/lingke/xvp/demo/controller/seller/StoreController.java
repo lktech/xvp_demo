@@ -21,9 +21,9 @@ import com.lingke.xvp.demo.controller.response.XvpResponse;
 public class StoreController {
 	@Autowired
 	private XvpRopClient ropClientAdapter;
-	@RequestMapping(path="/create",method=RequestMethod.POST)
+	@RequestMapping(path="/add",method=RequestMethod.POST)
 	@ResponseBody
-	public XvpResponse ctreatStore(@RequestBody StoreCreateRequest request) throws ApiException{
+	public XvpResponse createStore(@RequestBody StoreCreateRequest request) throws ApiException{
 		XvpStoreCreateRequest ropRequst = new XvpStoreCreateRequest();
 		//TODO
 		ropRequst.setApp_id("");

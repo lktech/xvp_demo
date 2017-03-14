@@ -46,5 +46,9 @@ public class XvpRopClient implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		ropClient = new DefaultRopClient(ropUrl, appKey, appSecret, "json");
 	}
+	
+	public String getAppId(){
+		return appKey;
+	}
 
 }
