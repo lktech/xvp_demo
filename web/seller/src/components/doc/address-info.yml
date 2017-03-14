@@ -1,0 +1,29 @@
+component:
+  address-info
+
+about:
+  地址信息组件
+
+author:
+  zhaoze
+
+props:
+  id:可选
+  name:可选
+  phone:可选
+  address:可选
+  arrows:可选项（是否显示右边箭头，Boolean）
+
+methods:
+  click(){
+      //回调函数
+  }
+
+
+示例：
+<c-group>
+    <c-address-info id="1" name="张三" phone="123456" address="地址" arrows="true" @click="click"></c-address-info>
+</c-group>
+
+备注：
+@click:回调函数

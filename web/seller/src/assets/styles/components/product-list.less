@@ -1,0 +1,19 @@
+@import "../common/var.less";
+.product-list{padding: 0px @distance;}
+.product{background: @color-white;margin-bottom: @distance;float:left;width: 48.5%;}
+.product-big{width: 100%;float: none !important;}
+.product:nth-child(even){float:right;}
+.product .pdt-info{padding: @px10;font-size: @fts-small;}
+.product .pdt-img>img{width:100%;}
+.product .pdt-tit{height: 32px;overflow: hidden;line-height: 1.2;margin-bottom: 5px;}
+.product .pnow{color:@color-org;font-size: @fts-big;}
+.product .pold{color:@color9;text-decoration: line-through;margin-left: 5px;}
+.product .pdt-postage{font-size: @fts-smaller;color:@color9;}
+.product-list-big .product{width:100%;float:none;}
+.product-list-big .product:nth-child(even){float:none;}
+.product-list-small .product{width:100%;float:none;height: 120px;padding: @distance;}
+.product-list-small .product:nth-child(even){float:none;}
+.product-list-small .product .pdt-img{float:left;}
+.product-list-small .product .pdt-img>img{height: 100px;width: 100px;}
+.product-list-small .product .pdt-info{padding-left: 110px;}
+.product-list-small .product .pdt-price{margin-top: 30px;}

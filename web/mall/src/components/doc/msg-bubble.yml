@@ -1,0 +1,54 @@
+component:
+  msg-bubble
+
+about:
+  归档消息预览
+
+author:
+  qian
+
+props:
+  bub-list:
+    参数定义: 归档消息数组。
+    是否必填: 是
+    可选项: 无
+    默认值: 无
+    备注: 
+  format:
+    参数定义: 归档消息数组格式转化。
+            {'type':'msgtype','time':'createtime','headUrl':'groupenduimg','nike':'fromname','msg':'content','file':'filepath','userName':'groupsenduname','group':'group'}。
+            其中value值msgtype、createtime、groupenduimg、fromname、content、filepath、groupsenduname、group为异步请求得到的字段名称。
+    是否必填: 是
+    可选项: 无
+    默认值: 无
+    备注: 
+  link:
+    参数定义: 确认按钮需要跳转的链接。
+    是否必填: 是
+    可选项: 无
+    默认值: 无
+    备注:
+  type:
+    参数定义: 确认按钮及文本颜色。
+    是否必填: 否
+    可选项: primary（绿色）、warn（红色）、default（灰色）、org（橘黄色）、blue（蓝色）、blue2（蓝色2）、plain_primary（绿边框）、plain_default（黑边框）
+    默认值: blue2
+    备注:
+  btn-txt:
+    参数定义: 按钮名称。
+    是否必填: 否
+    可选项: 无
+    默认值: “确认”
+    备注: 
+  replace-c:
+    参数定义: 是否去掉中间页，返回到最初页面。
+    是否必填: 否
+    可选项: 无
+    默认值: false
+    备注:
+
+
+应用demo:
+<template>
+    <msg-bubble :bub-list="bubList" :format="{'type':'msgtype','time':'createtime','headUrl':'groupenduimg','nike':'fromname','msg':'content','file':'filepath','userName':'groupsenduname','group':'group'}" link="test" type="warn" btn-txt="设置" replace-c="true"></msg-bubble>
+</template>

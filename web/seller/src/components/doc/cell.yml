@@ -1,0 +1,66 @@
+component:
+  cell
+
+about:
+  cell组件
+
+author:
+  bob
+props:
+  title:
+    参数定义: 列表name   [String]
+    是否必填: 是
+    可选项: 无
+    默认值: 无
+    备注: 无
+  value:
+    参数定义: 右侧内容   [String, Number]
+    是否必填: 否
+    可选项: 无
+    默认值: 无
+    备注: 若有此参数，则内容会在右侧显示
+  isLink:
+      参数定义: 是否是链接   [Boolean]
+      是否必填: 否
+      可选项: 无
+      默认值: 无
+      备注: 若有此参数，右侧会有箭头显示
+  link:
+      参数定义: 跳转链接   [String, Object]
+      是否必填: 否
+      可选项: 无
+      默认值: 无
+      备注: 若有此参数，cell为跳转cell
+  primary:
+      参数定义: 是否有weui_cell_primary样式   [String]
+      是否必填: 否
+      可选项: 'title'
+      默认值: 'title'
+      备注: 若此参数不是'title',则箭头不在最又边（很少用到）
+  inline-desc:
+        参数定义: 第二行描述   [String]
+        是否必填: 否
+        可选项: 无
+        默认值: 无
+        备注: 若此参数不是'title',则箭头不在最又边（很少用到）
+   
+  colorred   可选   将右边的文字变为红色  例如删除
+  colororg  可选   将右边的文字变为橙色  例如删除
+     参数定义: true
+
+  methods:
+     // 删除   返回id
+    deleteitem(id) {
+       console.log('最后', id)
+    },
+
+
+示例：
+  <c-cell-wrap title="列表名称">
+      <c-cell title="用户名" value="张三" :colorred='colorred' @ondelete='deleteitem'></c-cell>
+      <c-cell title="跳转到外部页面" is-link link="http://www.baidu.com" inline-desc="群标签"></c-cell>
+      <c-cell title="跳转到内部页面" is-link :link="{name:'testG'}" primary="title"></c-cell>
+      <c-cell title="带icon的cell" is-link>
+          <img slot="icon" src="123.png">
+      </c-cell>
+  </c-cell-wrap>

@@ -1,0 +1,21 @@
+component:
+  datanull
+
+about:
+  数据为空时提示组件，可接收slot
+
+author:
+  bob
+
+props:
+  msg:
+    参数定义: 显示文字
+    是否必填: 否
+    可选项: 无
+    默认值: 暂无数据
+    备注: 无
+
+
+<c-datanull msg="您还没有数据哦~">
+    <c-button size="small" @click="showConfirm" text="返回首页"></c-button>
+</c-datanull>

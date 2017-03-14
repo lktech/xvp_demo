@@ -1,0 +1,68 @@
+component:
+  sku
+
+about:
+  sku选择组件
+
+author:
+  bob
+
+props: {
+    //是否显示SKU组件
+    show: {
+        type: Boolean,
+        required: true,
+        twoWay: true
+    },
+
+    //按钮文字
+    text:{
+        type:String,
+        default:"下一步"
+    },
+
+    //按钮样式，可选项同button
+    type:{
+        type:String,
+        default:"org"
+    },
+
+    //sku列表，[{"id":1,"name":"红色 XL"}]
+    sku:{
+        type:Array,
+        default(){
+            return [];
+        }
+    },
+    //商品信息{"id": 1,"type":"product","title":"小米手机5s Plus 128G 白色","price": 1000,"old_price": 1888,"min_price": 999,"max_price": 2088,"pic": "asdasd.png"}
+    product:{
+        type:Object,
+        default(){
+            return {};
+        }
+    },
+    //可选择的最大数量
+    max:{
+        type:Number,
+        default(){
+            return -1;
+        }
+    },
+    //单个sku信息请求接口，接口返回 价格，库存  格式：{"price":888,"stock":5}
+    url:{
+        type:String,
+        default:""
+    },
+
+    //提示名词，默认“规格”，提示“请选择规格”
+    name:{
+        type:String,
+        default:"规格"
+    }
+}
+
+示例：
+   <c-sku :show.sync="skuStatus" :sku='[{"id":1,"name":"红色 XLL"},{"id":2,"name":"黑色 XL"},{"id":3,"name":"灰色 L"}]' :product='skuProduct' :url="skuUrl" :max="20" @submit="skuSubmit"></c-sku>
+
+
+接收submit,返回参数为：this.$emit("submit",{"id":this.product.id,"num":this.selectNum,"sid":this.actId});

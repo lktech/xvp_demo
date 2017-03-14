@@ -1,0 +1,56 @@
+component:
+  c-cart
+
+about:
+  购物车全选删除，结算，增加减按钮
+
+author:
+  zhaoze
+
+data:function(){
+  return{
+     shop:'测试店铺1',          // 店铺名
+                    list: [{
+                        name: '26度果园 芒果攀枝花果树26度果园 芒果攀枝花果树攀枝花果树攀枝花果树攀枝花果树攀枝花果树',  //商品名字
+                        format: '规格',                  // 第二行文字
+                        formatsel: '大号',             
+                        checked: true,                  //全选控制按钮
+                        price: 546600,                 // 价格
+                        id: 1,                        // 商品id
+                        count: 1,   // 数量
+                        sourceUrl: '//img.alicdn.com/bao/uploaded/i3/TB1gjXtNpXXXXXhXpXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg ',  // 商品图片
+                        link:'https://www.baidu.com/',   // 商品链接
+                        num:5   // 最大值，限购数量
+
+                    }
+
+  }
+}
+
+
+
+methods: {
+                hander(checkList, surplusList, clicktype) {
+                    console.log(checkList);     // 选中的，要删除的
+                    console.log(surplusList);   // 去结算的
+                    if(clicktype == 'delete') {
+                        this.list = surplusList;
+
+                    } else {
+                        alert("结算");
+                    }
+                },
+            },
+
+   示例：
+   <c-cart :list="list" @hander='hander' v-if="list.length>0" :shop='shop'></c-cart>
+        <div class="jumbotron" v-else>
+            <h1>您的购物车空了</h1>
+            <p>是否去重新挑选</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">重新挑选</a>
+            </p>
+        </div>
+   
+   备注：
+   

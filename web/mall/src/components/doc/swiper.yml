@@ -1,0 +1,82 @@
+component:
+  swiper
+
+about:
+  图片轮播
+
+author:
+  bob
+
+props: {
+    list: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    direction: {
+      type: String,
+      default: 'horizontal'
+    },
+    showDots: {
+      type: Boolean,
+      default: true
+    },
+    showDescMask: {
+      type: Boolean,
+      default: true
+    },
+    dotsPosition: {
+      type: String,
+      default: 'right'
+    },
+    dotsClass: String,
+    auto: {
+      type: Boolean,
+      default: false
+    },
+    loop: Boolean,
+    interval: {
+      type: Number,
+      default: 3000
+    },
+    threshold: {
+      type: Number,
+      default: 50
+    },
+    duration: {
+      type: Number,
+      default: 300
+    },
+    height: {
+      type: String,
+      default: 'auto'
+    },
+    aspectRatio: Number,
+    minMovingDistance: {
+      type: Number,
+      default: 0
+    },
+    index: {
+      type: Number,
+      default: 0
+    },
+     format: {
+       type: Object,
+       default () {
+           return {"notneed":true}
+       }
+     }
+  }
+
+应用demo:
+<c-swiper loop auto :list="swiperlist" @on-index-change="swiperchange" :format='{"url":"url1","img":"img1"}'></c-swiper>
+
+
+注意：若数据格式为{"url":"123","img":"456"}格式，则不用传format,若不是，则需要format转换，如demo
+
+swiperlist:[
+    {url1: 'http://m.baidu.com',img1: 'http://www.goingconcern.cn/f/d/eIVVra'},
+    {url1: 'http://m.baidu.com',img1: 'http://www.goingconcern.cn/f/d/AVVna2'},
+    {url1: 'http://m.baidu.com',img1: 'http://www.goingconcern.cn/f/d/f6FJfi'},
+]

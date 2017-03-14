@@ -1,0 +1,24 @@
+
+## API
+<c-number :number="number"></number>
+
+| API            | Type         | data   |params |
+| :------------- |:-------------| :------|:------|
+| number         | Props        | Object |       |
+| change         | Event        |        |number |
+
+
+## 实例：
+
+### number
+
+```
+number: {
+    value: 0,  // 必选 Number 
+    step: 0.1, // 可选
+    min: -5,   // 可选
+    max: 10    // 可选
+}
+```
+
+```

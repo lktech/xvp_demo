@@ -1,0 +1,24 @@
+component:
+  radio
+
+about:
+  radio列表选择
+
+author:
+  zhaoze
+
+methods:{
+          change:function (obj) { //回调函数，
+              //obj.id
+              //obj.name  展示出来的值
+          }
+        }
+示例：
+<c-group title="switch the type">
+   <c-radio :options="[{id:5,name:'张三'},{id:2,name:'李四'},{id:3,name:'王五'}]" @on-change="change" value="5"></c-radio>
+</c-group>
+
+备注：
+options：列表数据(Array)
+value:默认值(ID值)
+change：选择事件

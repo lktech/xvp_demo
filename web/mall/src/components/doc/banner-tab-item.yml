@@ -1,0 +1,47 @@
+component:
+  banner-tab-item
+
+about:
+  顶部banner-tab-item组件,要与c-banner-tab合用
+
+author:
+  bob
+
+props:['title','num','des','link','pernum'],
+  title:
+    参数定义: 标题   [String]
+    是否必填: 是
+    可选项: 无
+    默认值: 无
+    备注: 无
+  num:
+      参数定义: 数量  [String、Number]
+      是否必填: 是
+      可选项: 无
+      默认值: 无
+      备注: 无
+  des:
+      参数定义: 描述  [String]
+      是否必填: 否
+      可选项: 无
+      默认值: 无
+      备注: 无
+
+  link：
+    参数定义: 跳转链接   [String]
+    是否必填: 否
+    可选项: 无
+    默认值: 无
+    备注: 无
+  pernum：
+    参数定义: 一行显示几个   [Number]
+    是否必填: 否
+    可选项: 无
+    默认值: 3
+    备注: 无
+
+
+示例：
+   <c-banner-tab>
+       <c-banner-tab-item v-for="item in bannerTabList" :title="item.title" :num="item.num" :des="item.des" :link="item.link" :pernum="bannerTabList.length"></c-banner-tab-item>
+   </c-banner-tab>

@@ -1,0 +1,45 @@
+@import "../common/var.less";
+
+.button-txt {
+    height: 48px;
+    background-color: #fff;
+
+    &.block {
+        .button-txt-l {
+            display: none
+        }
+        .button-txt-r {
+            width: 100%;
+        }
+    }
+
+    &.fixed {
+        position: fixed;
+        width: 100%;
+        left: 0px;
+        bottom: 0px;
+        z-index: 100;
+    }
+
+    .button-txt-l {
+        float: left;
+        line-height: 48px;
+        padding-left: @px10;
+        font-size: @fts-small;
+        b {
+            font-weight: normal;
+        }
+        span {
+            color: #f05b0b;
+        }
+    }
+    .button-txt-r {
+        float: right;
+        width: 150px;
+        a {
+            height: 48px;
+            line-height: 48px;
+            width: 100%;
+        }
+    }
+}

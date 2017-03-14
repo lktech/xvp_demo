@@ -1,0 +1,34 @@
+component:
+  popup
+
+about:
+  全屏popup
+
+author:
+  zhaoze
+
+data:function(){
+  return{
+      popup_full: false
+  }
+}
+
+备注：
+
+methods:
+   openPopup:function(){ //打开popup
+      this.popup_full=true;
+   },
+   closePopup:function () { //关闭popup
+       this.popup_full=false;
+   }
+
+   示例：
+   <input type="button" value="打开Popup" @click="openPopup"/>
+
+   <c-popup :show.sync="popup_full" height="100%">
+       <div class="popup1">
+           //此处写页面内容
+           <input type="button" value="关闭Popup" @click="closePopup"/>
+       </div>
+   </c-popup>

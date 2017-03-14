@@ -1,0 +1,76 @@
+component:
+  search
+
+about:
+  搜索组件   $emit('on-submit', value)
+
+props: {
+    required: {          //是否必填
+      type: Boolean,
+      default: true
+    },
+    placeholder: {      //placeholder文字
+      type: String,
+      default: '搜索'
+    },
+    cancelText: {       //取消按钮文字
+      type: String,
+      default: '取消'
+    },
+    value: {            //输入框默认值
+      type: [String,Number],
+      twoWay: true,
+      default: ''
+    },
+    results: {        //展示的列表数据（若结构与商品列表一致，则使用此参数，有组件自动渲染列表，若列表结构不一致则搜索结果通过slot传入）
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    autoFixed: {     //聚焦时是否fixed到顶部
+      type: Boolean,
+      default: true
+    },
+    top: {          //聚焦顶部时的top值
+      type: String,
+      default: '0px'
+    },
+    btncolor:{      //搜索、取消按钮的颜色，默认绿色
+      type: String,
+     default: ''
+    }
+  },
+
+
+
+  //提交时发送
+  this.$emit('on-submit',this.value)
+
+  //点击搜索结果时发送
+  this.$emit('result-click', item)
+
+  //输入时发送
+  this.$emit('on-change', this.value)
+
+
+
+
+应用demo:
+
+//搜索结果是商品列表样式时
+<c-search @on-submit="searchSubmit" :value.sync="value" :results="searchList" btncolor="org"></c-search>
+
+
+
+
+//搜索结果自定义时
+<c-search @on-submit="searchSubmit" :value.sync="value" btncolor="org">
+    <div slot="list">
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+    </div>
+</c-search>

@@ -1,0 +1,31 @@
+author:
+  ice-Yao
+  
+component:
+  banner
+  
+about:
+  banner组件
+
+
+props:
+  ['goods','goodsmodal']
+  
+ 参数一(必填)：goods:  -------Object
+                     参数定义：
+            ** sourceUrl: 商品地址, 
+            ** imgUrl: 图片地址, 
+            ** title: 商品标题,
+            ** oldprice: '58.00',  -----------原价
+            ** disprice:商品折扣价,    --------现价
+               discountType: 'discount',  ----判断是否有原价
+               discount: '包邮',    ------------ 不包邮则不填
+            ** locations:发货地,
+               others:'其他信息'
+    
+参数二(选填)，如果不填，则默认商品全屏展示：
+        goodsmodal:-----Aarry   
+                                 参数定义：
+                fullscreen  -----商品图片全屏展示
+                itemtwo   -------商品一行展示两列
+

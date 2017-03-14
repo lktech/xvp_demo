@@ -1,0 +1,27 @@
+component:
+  alert
+
+about:
+  alert插件
+
+author:
+  bob
+
+调用方式：
+
+
+this.$vux.alert.show('Hello');
+this.$vux.alert.show({
+  title: 'Vux',
+  content: 'Be Careful',
+  onShow () {
+    console.log('Plugin: I\'m showing')
+  },
+  onHide () {
+    console.log('Plugin: I\'m hiding')
+    _this.show1 = false
+  }
+})
+
+this.$vux.alert.hide();
+

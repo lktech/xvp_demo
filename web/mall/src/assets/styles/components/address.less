@@ -1,0 +1,48 @@
+@import "../common/var.less";
+
+.vux-actionsheet {
+    .weui_cells_checkbox > label > * {
+        pointer-events: none;
+    }
+    .weui_cells > a {
+        color: #000;
+    }
+
+    .weui_cells {
+        margin-bottom: 0px !important;
+    }
+    .addTitle {
+        line-height: 30px;
+        color: @color9;
+        font-size: @fts-smaller;
+        padding-left: @px10;
+    }
+    .trueName {
+        font-size: @fts-big;
+    }
+    .userName {
+        font-size: @fts-small;
+        color: @color9
+    }
+    .time {
+        font-size: @fts-small;
+        color: @color9
+    }
+    .weui_cell_primary a {
+        display: block;
+    }
+    .active:before {
+        content: '\EA06' !important;
+        color: #09BB07 !important;
+    }
+    .weui_cells_checkbox {
+        max-height: 270px;
+        overflow-y: auto;
+    }
+    .weui_cells:after{
+        content: "" !important;
+        height:0px !important;
+        border-bottom: none;
+
+    }
+}

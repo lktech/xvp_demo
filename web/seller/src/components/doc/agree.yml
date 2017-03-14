@@ -1,0 +1,48 @@
+component:
+  agree
+
+about:
+  同意条款组件
+
+author:
+  bob
+
+props:
+  terms:
+    参数定义: 协议名称   [String]
+    是否必填: 是
+    可选项: 无
+    默认值: 无
+    备注: 无
+  link:
+      参数定义: 条款跳转链接  [String,Object]
+      是否必填: 否
+      可选项: 无
+      默认值: 无
+      备注: 若有此参数，则跳转链接，否则 this.$emit('showterms');
+  checked:
+      参数定义: 是否默认选中  [Boolean]
+      是否必填: 否
+      可选项: true false
+      默认值: true
+      备注: 无
+  title:
+      参数定义: 同意文案  [String]
+      是否必填: 否
+      可选项: 无
+      默认值: 我已阅读并同意
+      备注: 无
+  type：
+    参数定义: 条款显示颜色   [String]
+    是否必填: 否
+    可选项: 3,6,9,gray,blue,blue2,org,green,red,white,dark
+    默认值: green
+    备注: 样式同main.less  clr-样式一致
+
+
+事件：
+    this.$emit('on-change', newVal);
+
+
+示例：
+   <c-agree terms="绑卡协议" @on-change="agreeChange" @showterms="agreeShowTerms" :checked="false"></c-agree>

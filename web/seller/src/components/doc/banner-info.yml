@@ -1,0 +1,39 @@
+component:
+  banner-info
+
+about:
+  顶部banner组件
+
+author:
+  bob
+
+props:
+  title:
+    参数定义: 显示的标题   [String]  {title:'这是一个头部banner的title',logo:'', banner:''}
+    是否必填: 否
+    可选项: 无
+    默认值: 无
+    备注: 无
+  logo:
+      参数定义: logo图的图片地址  [String]
+      是否必填: 是
+      可选项: 无
+      默认值: 无
+      备注: 无
+  banner:
+      参数定义: 背景图 图片地址  [String]
+      是否必填: 否
+      可选项: 无
+      默认值: 无
+      备注: 若有bgcolor参数，则忽略此参数
+
+  bgcolor：
+    参数定义: 显示纯背景色   [String]   颜色色值：如  #000000
+    是否必填: 否
+    可选项: 无
+    默认值: 无
+    备注: 若有此参数，则忽略banner图
+
+示例：
+   <c-banner-info title="这是一个bannertitle" logo="https://gss2.bdstatic.com/5bVYsj_p_tVS5dKfpU_Y_D3/urlicon/21.1.png" banner='http://img3.imgtn.bdimg.com/it/u=3694472273,3312806186&fm=21&gp=0.jpg'>
+   </c-banner-info>

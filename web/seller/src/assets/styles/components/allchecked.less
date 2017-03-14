@@ -1,0 +1,80 @@
+@import "../common/var.less";
+.bottom .pos{
+    padding-left: 28px;
+    position: relative;
+  }
+  
+  .allchecked .fr {
+    float: right;
+  }
+  
+  .allchecked .fl {
+    float: left;
+  }
+  
+  .allchecked input {
+    height: 23px;
+    width: 23px;
+    z-index: 9999;
+    display: none;
+  }
+  
+  .allchecked .bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 49px;
+    line-height: 49px;
+    padding-left: 15px;
+    background-color: @color-white;
+    z-index: 99;
+    -webkit-transform:translateZ(0);
+  }
+  
+  .allchecked .button {
+    width: 120px;
+    height: 49px;
+    color: @color-white;
+    text-align: center;
+    background-color: #31B3F5;
+  }
+
+  .allchecked .btnDefault {
+    color: @color3;
+    background-color: @color-gray;
+  }
+  
+  .allchecked .allblue {
+    color: #31B3F5;
+    width: 150px;
+  }
+  
+  .allchecked .bottom> .fl>.all,
+  .allchecked .bottom> .fl input {
+    margin-top: 11px;
+    margin-right: 10px;
+    position: absolute;
+    left: 0;
+  }
+  .allchecked .iconlist {
+    margin-right: 10px;
+    display: inline-block;
+  }
+  /* 第二行文字 */
+  
+  .allchecked .weui_cell_bd .label9 {
+    color: #666;
+  }
+  /* 第三行文字 */
+  
+  .allchecked .weui_cell_bd .groupname {
+    margin-right: 12px;
+  }
+  .allchecked .weui_cell_bd .time {
+    font-size: 12px;
+    color: #999;
+  }
+  .allchecked .checkBg { background: #f5f5f5;}
+  .allchecked .checkBg .slot { margin-top: 0!important;}
+  .removeBorder:before { border-top: none !important;}
+  .removeBorder:after { border-bottom: none !important;}

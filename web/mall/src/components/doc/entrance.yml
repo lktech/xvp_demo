@@ -1,0 +1,39 @@
+component:
+  entrance
+
+about:
+  九宫格、八宫格等
+
+author:
+  bob
+
+props:
+  pernum:
+    参数定义: 一行显示几个   [Number]
+    是否必填: 否
+    可选项: 无
+    默认值: 3
+    备注: 只有pernum=3时，格子有边线，其余均无边线
+  list:
+    参数定义: 九宫格数据   [Array]  [{title:'美食',link:{name:'test'},icon:'123.png',sysicom:'clazz-demo'}]
+    是否必填: 是
+    可选项: 无
+    默认值: 无
+    备注: 若有sysicom字段，则表示需要显示系统的icon,此时忽略icon图片。（sysicom为icon的className）
+
+
+
+示例：
+ <c-entrance :list="entranceData"></c-entrance>
+
+  entranceData:[
+         {title:'美食',link:{name:'testG'},icon:'https://gss2.bdstatic.com/5bVYsj_p_tVS5dKfpU_Y_D3/urlicon/21.1.png'},
+         {title:'休闲',link:{name:'testG'},icon:'https://gss2.bdstatic.com/5bVYsj_p_tVS5dKfpU_Y_D3/urlicon/21.1.png'},
+         {title:'家具',link:{name:'testG'},icon:'https://gss2.bdstatic.com/5bVYsj_p_tVS5dKfpU_Y_D3/urlicon/21.1.png'},
+         {title:'娱乐',link:{name:'testG'},icon:'https://gss2.bdstatic.com/5bVYsj_p_tVS5dKfpU_Y_D3/urlicon/21.1.png'},
+         {title:'美容',link:{name:'testG'},icon:'https://gss2.bdstatic.com/5bVYsj_p_tVS5dKfpU_Y_D3/urlicon/21.1.png'},
+         {title:'美容',link:{name:'testG'},icon:'https://gss2.bdstatic.com/5bVYsj_p_tVS5dKfpU_Y_D3/urlicon/21.1.png'},
+         {title:'美容',link:{name:'testG'},icon:'https://gss2.bdstatic.com/5bVYsj_p_tVS5dKfpU_Y_D3/urlicon/21.1.png'},
+         {title:'美容',link:{name:'testG'},icon:'https://gss2.bdstatic.com/5bVYsj_p_tVS5dKfpU_Y_D3/urlicon/21.1.png'},
+         {title:'健身',link:{name:'testG'},icon:'https://gss2.bdstatic.com/5bVYsj_p_tVS5dKfpU_Y_D3/urlicon/21.1.png'}
+   ]

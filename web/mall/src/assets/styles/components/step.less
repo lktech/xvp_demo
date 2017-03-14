@@ -1,0 +1,79 @@
+@import "../common/var.less";
+
+.wl-step {
+  width: @width-block;
+  padding-top: 10px;
+  height: 85px;
+  margin-bottom: @px10;
+  overflow: hidden;
+  .step-title {
+    font-size: 12px;
+    color: @color9;
+    margin: auto;
+    padding-bottom: 22px;
+    padding-left: @px20;
+  }
+  .p-wrap {
+    position: relative;
+    margin: auto;
+    width: 75%;
+
+    .p-line {
+      background: @color-gray;
+      height: 3px;
+    }
+
+    ul {
+      position: absolute;
+      top: -5px;
+      width: 100%;
+
+      li {
+        float: left;
+        text-align: center;
+        font-size: @fts-small;
+        &.active {
+          i {
+            background: @color-green;
+          }
+
+        }
+        i {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          display: block;
+          background: @color-gray;
+          margin: auto;
+
+        }
+
+        p {
+          padding-top: @px10;
+          text-align: center;
+        }
+        &:last-child {
+          position: absolute;
+          top: 0px;
+        }
+      }
+    }
+  }
+}
+
+.step-info {
+  margin-left: @px15;
+  padding: @px10 0;
+  margin-top: -@px10;
+  .name {
+    font-size: @fts-normal;
+  }
+  .phone {
+    font-size: @fts-small;
+  }
+  .address {
+    padding-top: @px5;
+    font-size: @fts-smaller;
+    color: gray;
+  }
+}

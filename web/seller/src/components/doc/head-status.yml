@@ -1,0 +1,22 @@
+component:
+  head-status
+
+about:
+  头部状态
+
+author:
+  zhaoze
+
+props:
+  item:{
+      icon:"图片URL",
+      msg:"状态名称",
+      bg:""//默认bg-yellow
+  }
+
+
+
+
+
+示例：
+  <c-head-status :item="{icon:'2.jpg',msg:'等待买家付款',bg:''}"></c-head-status>

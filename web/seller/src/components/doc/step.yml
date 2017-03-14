@@ -1,0 +1,39 @@
+component:
+  step
+
+about:
+  进度组件
+
+author:
+  zhaoze
+
+props:
+  list:
+    参数定义: 进度列表数据   [Array]
+    是否必填: 是
+    可选项: 无
+    默认值: 无
+    备注: 无
+  status:
+    参数定义: 当前列表的进度   [String]
+    是否必填: 是
+    可选项: 无
+    默认值: 无
+    备注: 值为当前数组对应的索引
+  title:
+    参数定义: 当前进度的标题   [String]
+    是否必填: 否
+    可选项: 无
+    默认值: 订单状态
+    备注: 无
+  reveal:
+    参数定义: 是否显示标题   [Boolean]
+    是否必填: 否
+    可选项: 无
+    默认值: false
+    备注: 无
+
+
+
+示例：
+  <c-step :list="["已经发货","已经收货","已经评价","已经发货"]" :status="2" :title="订单状态" :reveal="true"></c-step>

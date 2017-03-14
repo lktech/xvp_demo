@@ -1,0 +1,46 @@
+component:
+    历史消息   三行文本列表
+
+about:
+    三行文本列表(支持列表右边文字，箭头)
+    
+
+author:
+  ice-YY
+
+data() {
+                return {
+                    list2: [{
+                            title: ' 第一行文字',
+                            value:'箭头的字',
+                            inlineDesc:'我是第二行文字',
+                            groupname：'第三行右侧的字'
+                            time:'时间',
+                            groupname:'测试群1',
+                            id: 1,
+                            sourceUrl: '//img.alicdn.com/bao/uploaded/i3/TB1gjXtNpXXXXXhXpXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg ',
+                            link:'https://www.baidu.com/'
+
+                    }, ],
+                }
+            }
+
+
+
+methods:
+   openAddress:function () { //打开收货地址
+       this.adsStatus=true;
+   },
+   'getAddressId':function (id) {//id为当前点击address数组对象里的id值
+       console.log(id)
+   },
+   'addBtn':function () {
+       alert("新增收货地址");
+   }
+
+   示例：
+   <c-history  v-for='item in list' :title='title' :inlineDesc='inlineDesc' :time='time' :groupname='groupname' :checked='checked' :sourceUrl='sourceUrl' :link='link'></c-history>
+
+   备注：
+   list：[]
+   
