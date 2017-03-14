@@ -35,10 +35,12 @@ public class XvpAspect {
 			logger.info("调用接口开始：{}，请求参数：{}", method,
 					joinPoint.getArgs()[0].toString());
 			Object result = joinPoint.proceed();
-			logger.info("调用接口结束：{}，响应参数：{}", method, result.toString());
+			logger.info("调用接口结束：{}，响应参数：{}", method, result==null?"":result.toString());
 			SuccessResponse successResponse  = new SuccessResponse();
 			successResponse.setCode(SUCCESS);
-			successResponse.setResult(result);
+			if(result!=null){
+				successResponse.setResult(result);
+			}
 			return successResponse;
 		} catch (RuntimeException e) {
 			logger.error("请求处理返回运行时异常，errorMessage：{}", e.getMessage(),e);

@@ -15,8 +15,5 @@ public class SuccessResponse implements XvpResponse {
 	public void setResult(Object result) {
 		this.result = result;
 	}
-
-	
-	
 	
 }

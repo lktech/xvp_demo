@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Rop.api.ApiException;
 import com.Rop.api.request.XvpStoreCreateRequest;
-import com.Rop.api.response.XvpStoreCreateResponse;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.StoreCreateRequest;
-import com.lingke.xvp.demo.controller.response.StoreCreateResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 
 /**
@@ -27,12 +25,12 @@ public class StoreController {
 	@ResponseBody
 	public XvpResponse ctreatStore(@RequestBody StoreCreateRequest request) throws ApiException{
 		XvpStoreCreateRequest ropRequst = new XvpStoreCreateRequest();
-		ropRequst.setApp_id("test");
+		//TODO
+		ropRequst.setApp_id("");
 		ropRequst.setCustomer_service_phone(request.getCustomer_service_phone());
 		ropRequst.setOwner_real_name(request.getOwner_real_name());
 		ropRequst.setStore_name(request.getStore_name());
-		XvpStoreCreateResponse ropResponse =  ropClientAdapter.ropInvoke(ropRequst);
-		StoreCreateResponse response = new StoreCreateResponse();
-		return response;
+		ropClientAdapter.ropInvoke(ropRequst);
+		return null;
 	}
 }
