@@ -22,7 +22,7 @@ public class ActiveRecordGen {
 		File codeBase = new File(new File(PathKit.getRootClassPath())
 				.getParentFile().getParentFile(), "src/main/java");
 		String baseModelPkg = "com.lingke.xvp.demo.db.dao.base";
-		String modelPkg = "com.lingke.xvp.demo..db.dao";
+		String modelPkg = "com.lingke.xvp.demo.db.dao";
 		String baseModelDir = new File(codeBase, baseModelPkg.replaceAll("\\.",
 				"/")).getPath();
 		String modelDir = new File(codeBase, modelPkg.replaceAll("\\.", "/"))
@@ -40,7 +40,7 @@ public class ActiveRecordGen {
 		// // model 文件保存路径
 		// String modelDir = baseModelDir + "/..";
 		MysqlDataSource dataSource = new MysqlDataSource();
-		dataSource.setUrl("jdbc:mysql://rm-2zejri3r6l6wsqlu4o.mysql.rds.aliyuncs.com:3306/xiaovpu");
+		dataSource.setUrl("jdbc:mysql://rm-2zejri3r6l6wsqlu4o.mysql.rds.aliyuncs.com:3306/xvp_demo");
 		dataSource.setUser("xwp");
 		dataSource.setPassword("Ruixuesoft2401");
 		Generator gernerator = new Generator(dataSource, baseModelPkg, baseModelDir,
