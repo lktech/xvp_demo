@@ -1,6 +1,6 @@
 package com.lingke.xvp.demo.controller.request;
 
-public class StoreCreateRequest implements XvpRequest {
+public class StoreUpdateRequest implements XvpRequest {
 	private String store_name;
 	private String owner_real_name;
 	private String customer_service_phone;
