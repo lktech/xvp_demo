@@ -1,5 +1,7 @@
 package com.lingke.xvp.demo.controller.seller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +27,7 @@ import com.lingke.xvp.demo.controller.response.XvpResponse;
 public class StoreController {
 	@Autowired
 	private XvpRopClient ropClientAdapter;
-
+	private final Logger logger = LoggerFactory.getLogger(StoreController.class);
 	/**
 	 * 添加店铺信息
 	 * 
@@ -36,6 +38,7 @@ public class StoreController {
 	@RequestMapping(path = "/add", method = RequestMethod.POST)
 	@ResponseBody
 	public XvpResponse createStore(@RequestBody StoreCreateRequest request) throws ApiException {
+		logger.info("add调用，请求参数：{} ", request);
 		XvpStoreCreateRequest ropRequst = new XvpStoreCreateRequest();
 		ropRequst.setApp_id(ropClientAdapter.getAppId());
 		ropRequst.setCustomer_service_phone(request.getCustomer_service_phone());
@@ -55,6 +58,7 @@ public class StoreController {
 	@RequestMapping(path = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public XvpResponse updateStore(@RequestBody StoreUpdateRequest request) throws ApiException {
+		logger.info("update调用，请求参数：{} ", request);
 		XvpStoreUpdateRequest ropRequest = new XvpStoreUpdateRequest();
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		// TODO

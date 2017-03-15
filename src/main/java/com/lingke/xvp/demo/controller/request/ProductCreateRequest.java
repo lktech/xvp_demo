@@ -1,12 +1,14 @@
 package com.lingke.xvp.demo.controller.request;
 
+import java.util.List;
+
 public class ProductCreateRequest implements XvpRequest {
 	private String product_name;
 	private String pics;
 	private String product_detail;
 	private Integer pay_type;
 	private String product_desc;
-	private String sku;
+	private List<SkuAddRequest> sku;
 
 	public String getProduct_name() {
 		return product_name;
@@ -48,11 +50,11 @@ public class ProductCreateRequest implements XvpRequest {
 		this.product_desc = product_desc;
 	}
 
-	public String getSku() {
+	public List<SkuAddRequest> getSku() {
 		return sku;
 	}
 
-	public void setSku(String sku) {
+	public void setSku(List<SkuAddRequest> sku) {
 		this.sku = sku;
 	}
 

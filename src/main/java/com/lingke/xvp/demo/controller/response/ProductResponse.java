@@ -1,5 +1,7 @@
 package com.lingke.xvp.demo.controller.response;
 
+import java.util.List;
+
 public class ProductResponse implements XvpResponse {
 	private Long id;
 	private String product_name;
@@ -7,8 +9,7 @@ public class ProductResponse implements XvpResponse {
 	private String product_detail;
 	private Integer pay_type;
 	private String product_desc;
-	private Long logistics_fee;
-	private String sku;
+	private List<SkuGetResponse> sku;
 
 	public Long getId() {
 		return id;
@@ -58,19 +59,11 @@ public class ProductResponse implements XvpResponse {
 		this.product_desc = product_desc;
 	}
 
-	public Long getLogistics_fee() {
-		return logistics_fee;
-	}
-
-	public void setLogistics_fee(Long logistics_fee) {
-		this.logistics_fee = logistics_fee;
-	}
-
-	public String getSku() {
+	public List<SkuGetResponse> getSku() {
 		return sku;
 	}
 
-	public void setSku(String sku) {
+	public void setSku(List<SkuGetResponse> sku) {
 		this.sku = sku;
 	}
 

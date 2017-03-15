@@ -1,12 +1,14 @@
 package com.lingke.xvp.demo.controller.request;
 
+import java.util.List;
+
 public class ProductUpdateRequest implements XvpRequest {
 	private Long id;
 	private String pics;
 	private String product_detail;
 	private Integer pay_type;
 	private String product_desc;
-	private String sku;
+	private List<SkuUpdateRequest> sku;
 
 	public Long getId() {
 		return id;
@@ -48,11 +50,11 @@ public class ProductUpdateRequest implements XvpRequest {
 		this.product_desc = product_desc;
 	}
 
-	public String getSku() {
+	public List<SkuUpdateRequest> getSku() {
 		return sku;
 	}
 
-	public void setSku(String sku) {
+	public void setSku(List<SkuUpdateRequest> sku) {
 		this.sku = sku;
 	}
 
