@@ -1,7 +1,5 @@
 package com.lingke.xvp.demo.controller.seller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,13 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Rop.api.ApiException;
 import com.Rop.api.request.XvpStoreCreateRequest;
+import com.Rop.api.request.XvpStoreGetRequest;
 import com.Rop.api.request.XvpStoreUpdateRequest;
+import com.Rop.api.response.XvpStoreGetResponse;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.StoreCreateRequest;
 import com.lingke.xvp.demo.controller.request.StoreUpdateRequest;
-import com.lingke.xvp.demo.controller.response.ExceptionResponse;
-import com.lingke.xvp.demo.controller.response.SuccessResponse;
+import com.lingke.xvp.demo.controller.response.StoreResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
+import com.lingke.xvp.demo.utils.BeanCopyUtil;
 
 /**
  * Created by yuwb on 2017-03-13. 店铺相关业务处理
@@ -27,7 +27,6 @@ import com.lingke.xvp.demo.controller.response.XvpResponse;
 public class StoreController {
 	@Autowired
 	private XvpRopClient ropClientAdapter;
-	private final Logger logger = LoggerFactory.getLogger(StoreController.class);
 	/**
 	 * 添加店铺信息
 	 * 
@@ -37,14 +36,11 @@ public class StoreController {
 	 */
 	@RequestMapping(path = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public XvpResponse createStore(@RequestBody StoreCreateRequest request) throws ApiException {
-		logger.info("add调用，请求参数：{} ", request);
-		XvpStoreCreateRequest ropRequst = new XvpStoreCreateRequest();
-		ropRequst.setApp_id(ropClientAdapter.getAppId());
-		ropRequst.setCustomer_service_phone(request.getCustomer_service_phone());
-		ropRequst.setOwner_real_name(request.getOwner_real_name());
-		ropRequst.setStore_name(request.getStore_name());
-		ropClientAdapter.ropInvoke(ropRequst);
+	public XvpResponse createStore(@RequestBody StoreCreateRequest request) throws Exception {
+		XvpStoreCreateRequest ropRequest = BeanCopyUtil.copy(request, XvpStoreCreateRequest.class);
+		//TODO 
+		ropRequest.setApp_id(ropClientAdapter.getAppId());
+		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
 	}
 
@@ -57,16 +53,33 @@ public class StoreController {
 	 */
 	@RequestMapping(path = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public XvpResponse updateStore(@RequestBody StoreUpdateRequest request) throws ApiException {
-		logger.info("update调用，请求参数：{} ", request);
-		XvpStoreUpdateRequest ropRequest = new XvpStoreUpdateRequest();
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
+	public XvpResponse updateStore(@RequestBody StoreUpdateRequest request) throws Exception {
+		XvpStoreUpdateRequest ropRequest = BeanCopyUtil.copy(request, XvpStoreUpdateRequest.class);
 		// TODO
+		ropRequest.setApp_id(ropClientAdapter.getAppId());
 //		ropRequest.setStore_id(request.getStore_id());
-		ropRequest.setStore_name(request.getStore_name());
-		ropRequest.setOwner_real_name(request.getOwner_real_name());
-		ropRequest.setCustomer_service_phone(request.getCustomer_service_phone());
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
 	}
+	
+	/**
+	 * 获取店铺信息
+	 * 
+	 * @param request
+	 * @return
+	 * @throws ApiException
+	 */
+	@RequestMapping(path = "/get", method = RequestMethod.POST)
+	@ResponseBody
+	public XvpResponse getStore() throws Exception {
+		XvpStoreGetRequest ropRequest = new XvpStoreGetRequest();
+		// TODO
+		ropRequest.setApp_id(ropClientAdapter.getAppId());
+//		ropRequest.setStore_id(request.getStore_id());
+		XvpStoreGetResponse ropResponse= ropClientAdapter.ropInvoke(ropRequest);
+		StoreResponse response = BeanCopyUtil.copy(ropResponse.getStore(), StoreResponse.class);
+		return response;
+	}
+	
+	
 }

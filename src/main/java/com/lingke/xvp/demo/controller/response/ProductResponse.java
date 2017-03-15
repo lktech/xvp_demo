@@ -4,12 +4,12 @@ import java.util.List;
 
 public class ProductResponse implements XvpResponse {
 	private Long id;
-	private String product_name;
+	private String name;
 	private String pics;
 	private String product_detail;
 	private Integer pay_type;
 	private String product_desc;
-	private List<SkuGetResponse> sku;
+	private List<SkuResponse> sku;
 
 	public Long getId() {
 		return id;
@@ -19,12 +19,12 @@ public class ProductResponse implements XvpResponse {
 		this.id = id;
 	}
 
-	public String getProduct_name() {
-		return product_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPics() {
@@ -59,11 +59,11 @@ public class ProductResponse implements XvpResponse {
 		this.product_desc = product_desc;
 	}
 
-	public List<SkuGetResponse> getSku() {
+	public List<SkuResponse> getSku() {
 		return sku;
 	}
 
-	public void setSku(List<SkuGetResponse> sku) {
+	public void setSku(List<SkuResponse> sku) {
 		this.sku = sku;
 	}
 

@@ -3,19 +3,28 @@ package com.lingke.xvp.demo.controller.request;
 import java.util.List;
 
 public class ProductUpdateRequest implements XvpRequest {
-	private Long id;
+	private Long product_id;
+	private String name;
 	private String pics;
 	private String product_detail;
 	private Integer pay_type;
 	private String product_desc;
 	private List<SkuUpdateRequest> sku;
 
-	public Long getId() {
-		return id;
+	public Long getProduct_id() {
+		return product_id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setProduct_id(Long product_id) {
+		this.product_id = product_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPics() {

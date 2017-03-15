@@ -1,6 +1,6 @@
 package com.lingke.xvp.demo.controller.response;
 
-public class SkuGetResponse implements XvpResponse {
+public class SkuResponse implements XvpResponse {
 	private Long id;
 	private Long price;
 	private Long logistics_fee;

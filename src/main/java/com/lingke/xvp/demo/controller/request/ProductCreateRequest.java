@@ -3,19 +3,19 @@ package com.lingke.xvp.demo.controller.request;
 import java.util.List;
 
 public class ProductCreateRequest implements XvpRequest {
-	private String product_name;
+	private String name;
 	private String pics;
 	private String product_detail;
 	private Integer pay_type;
 	private String product_desc;
 	private List<SkuAddRequest> sku;
-
-	public String getProduct_name() {
-		return product_name;
+	
+	public String getName() {
+		return name;
 	}
 
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPics() {
