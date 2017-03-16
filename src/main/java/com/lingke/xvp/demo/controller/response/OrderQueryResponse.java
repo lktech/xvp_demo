@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.Rop.api.domain.OrderDelivery;
-import com.Rop.api.domain.XvpOrderItem;
-
 /**
  * @author gaoyh
  *
@@ -76,11 +73,11 @@ public class OrderQueryResponse implements XvpResponse {
 	/**
 	 * 订单项列表
 	 */
-	private List<XvpOrderItem> xvporderitems = new ArrayList<>();
+	private List<OrderQueryItemResponse> xvporderitems = new ArrayList<>();
 	/**
 	 * 订单项列表
 	 */
-	private List<OrderDelivery> orderdeliverys = new ArrayList<>();
+	private List<OrderQueryDeliveryResponse> orderdeliverys = new ArrayList<>();
 
 	/**
 	 * @return the order_id
@@ -310,30 +307,28 @@ public class OrderQueryResponse implements XvpResponse {
 	/**
 	 * @return the xvporderitems
 	 */
-	public List<XvpOrderItem> getXvporderitems() {
+	public List<OrderQueryItemResponse> getXvporderitems() {
 		return xvporderitems;
 	}
 
 	/**
-	 * @param xvporderitems
-	 *            the xvporderitems to set
+	 * @param xvporderitems the xvporderitems to set
 	 */
-	public void setXvporderitems(List<XvpOrderItem> xvporderitems) {
+	public void setXvporderitems(List<OrderQueryItemResponse> xvporderitems) {
 		this.xvporderitems = xvporderitems;
 	}
 
 	/**
 	 * @return the orderdeliverys
 	 */
-	public List<OrderDelivery> getOrderdeliverys() {
+	public List<OrderQueryDeliveryResponse> getOrderdeliverys() {
 		return orderdeliverys;
 	}
 
 	/**
-	 * @param orderdeliverys
-	 *            the orderdeliverys to set
+	 * @param orderdeliverys the orderdeliverys to set
 	 */
-	public void setOrderdeliverys(List<OrderDelivery> orderdeliverys) {
+	public void setOrderdeliverys(List<OrderQueryDeliveryResponse> orderdeliverys) {
 		this.orderdeliverys = orderdeliverys;
 	}
 
@@ -350,5 +345,4 @@ public class OrderQueryResponse implements XvpResponse {
 				+ ", confirm_receive_time=" + confirm_receive_time + ", xvporderitems=" + xvporderitems
 				+ ", orderdeliverys=" + orderdeliverys + "]";
 	}
-
 }

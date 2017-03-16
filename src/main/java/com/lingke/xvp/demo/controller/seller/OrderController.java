@@ -1,5 +1,8 @@
 package com.lingke.xvp.demo.controller.seller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -21,6 +24,8 @@ import com.lingke.xvp.demo.controller.request.OrderDeliveryRequest;
 import com.lingke.xvp.demo.controller.request.OrderDiscountRequest;
 import com.lingke.xvp.demo.controller.request.OrderGetRequest;
 import com.lingke.xvp.demo.controller.request.OrderQueryRequest;
+import com.lingke.xvp.demo.controller.response.OrderQueryDeliveryResponse;
+import com.lingke.xvp.demo.controller.response.OrderQueryItemResponse;
 import com.lingke.xvp.demo.controller.response.OrderQueryListResponse;
 import com.lingke.xvp.demo.controller.response.OrderQueryResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
@@ -138,10 +143,20 @@ public class OrderController {
 	private void copyXvpOrderToXvpResponse(XvpOrder xvpOrder, OrderQueryResponse response) {
 		BeanUtils.copyProperties(xvpOrder, response);
 		if (!CollectionUtils.isEmpty(xvpOrder.getOrderdeliverys())) {
-			response.getOrderdeliverys().addAll(xvpOrder.getOrderdeliverys());
+			List<OrderQueryDeliveryResponse> orderdeliverys = xvpOrder.getOrderdeliverys().stream().map(x -> {
+				OrderQueryDeliveryResponse orderQueryDeliveryResponse = new OrderQueryDeliveryResponse();
+				BeanUtils.copyProperties(x, orderQueryDeliveryResponse);
+				return orderQueryDeliveryResponse;
+			}).collect(Collectors.toList());
+			response.setOrderdeliverys(orderdeliverys);
 		}
 		if (!CollectionUtils.isEmpty(xvpOrder.getXvporderitems())) {
-			response.getXvporderitems().addAll(xvpOrder.getXvporderitems());
+			List<OrderQueryItemResponse> orderitems = xvpOrder.getXvporderitems().stream().map(x -> {
+				OrderQueryItemResponse orderQueryItemResponse = new OrderQueryItemResponse();
+				BeanUtils.copyProperties(x, orderQueryItemResponse);
+				return orderQueryItemResponse;
+			}).collect(Collectors.toList());
+			response.setXvporderitems(orderitems);
 		}
 	}
 
