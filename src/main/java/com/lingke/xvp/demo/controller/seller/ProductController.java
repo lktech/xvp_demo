@@ -1,6 +1,5 @@
 package com.lingke.xvp.demo.controller.seller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Rop.api.ApiException;
 import com.Rop.api.domain.Product;
-import com.Rop.api.domain.XvpSku;
 import com.Rop.api.request.XvpProductCreateRequest;
 import com.Rop.api.request.XvpProductDeleteRequest;
 import com.Rop.api.request.XvpProductGetRequest;
@@ -20,11 +18,9 @@ import com.Rop.api.request.XvpProductQueryRequest;
 import com.Rop.api.request.XvpProductUpdateRequest;
 import com.Rop.api.request.XvpSkuAddskuRequest;
 import com.Rop.api.request.XvpSkuDeleteskuRequest;
-import com.Rop.api.request.XvpSkuGetskuRequest;
 import com.Rop.api.response.XvpProductCreateResponse;
 import com.Rop.api.response.XvpProductGetResponse;
 import com.Rop.api.response.XvpProductQueryResponse;
-import com.Rop.api.response.XvpSkuGetskuResponse;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.ProductCreateRequest;
 import com.lingke.xvp.demo.controller.request.ProductDeleteRequest;
@@ -34,7 +30,6 @@ import com.lingke.xvp.demo.controller.request.SkuAddRequest;
 import com.lingke.xvp.demo.controller.request.SkuUpdateRequest;
 import com.lingke.xvp.demo.controller.response.ProductQueryResponse;
 import com.lingke.xvp.demo.controller.response.ProductResponse;
-import com.lingke.xvp.demo.controller.response.SkuResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.XvpConstants;
@@ -86,16 +81,12 @@ public class ProductController {
 		XvpProductGetRequest ropRequest = new XvpProductGetRequest();
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setProduct_id(request.getId());
+		//TODO
+		//ropRequest.setStore_id(arg0);
 		XvpProductGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		ProductResponse response= BeanCopyUtil.copy(ropResponse.getProduct(), ProductResponse.class);
-		
-		XvpSkuGetskuRequest ropSkuRequest = new XvpSkuGetskuRequest();
-		ropSkuRequest.setApp_id(ropClientAdapter.getAppId());
 		//TODO
-//		ropSkuRequest.setStore_id(arg0);
-		ropSkuRequest.setProduct_id(response.getId());
-		XvpSkuGetskuResponse ropSkuResponse = ropClientAdapter.ropInvoke(ropSkuRequest);
-		response.setSku( BeanCopyUtil.copyList(ropSkuResponse.getXvpskus(), SkuResponse.class));
+		//response.setSku( BeanCopyUtil.copyList(ropResponse.getProduct().getSkus(), SkuResponse.class));
 		return response;
 	}
 
@@ -166,17 +157,12 @@ public class ProductController {
 		// TODO
 		// ropRequest.setStore_id(arg0);
 		XvpProductQueryResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
-		List<ProductResponse> list = BeanCopyUtil.copyList(ropResponse.getProducts(), ProductResponse.class);
 		ProductQueryResponse response = new ProductQueryResponse();
-		for (ProductResponse product : list) {
-			XvpSkuGetskuRequest ropSkuRequest = new XvpSkuGetskuRequest();
-			ropSkuRequest.setApp_id(ropClientAdapter.getAppId());
+		for (Product product : ropResponse.getProducts()) {
+			ProductResponse prodcutResponse =  BeanCopyUtil.copy(product, ProductResponse.class);
 			//TODO
-//			ropSkuRequest.setStore_id(arg0);
-			ropSkuRequest.setProduct_id(product.getId());
-			XvpSkuGetskuResponse ropSkuResponse = ropClientAdapter.ropInvoke(ropSkuRequest);
-			product.setSku( BeanCopyUtil.copyList(ropSkuResponse.getXvpskus(), SkuResponse.class));
-			response.add(product);
+			//prodcutResponse.setSku(BeanCopyUtil.copyList(product.getSkus(), SkuResponse.class));
+			response.add(prodcutResponse);
 		}
 		return response;
 	}
