@@ -11,6 +11,7 @@ import com.Rop.api.ApiException;
 import com.Rop.api.request.XvpStoreCreateRequest;
 import com.Rop.api.request.XvpStoreGetRequest;
 import com.Rop.api.request.XvpStoreUpdateRequest;
+import com.Rop.api.response.XvpStoreCreateResponse;
 import com.Rop.api.response.XvpStoreGetResponse;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.StoreCreateRequest;
@@ -18,6 +19,7 @@ import com.lingke.xvp.demo.controller.request.StoreUpdateRequest;
 import com.lingke.xvp.demo.controller.response.StoreResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
+import com.lingke.xvp.demo.utils.SessionUtil;
 
 /**
  * Created by yuwb on 2017-03-13. 店铺相关业务处理
@@ -40,7 +42,8 @@ public class StoreController {
 		XvpStoreCreateRequest ropRequest = BeanCopyUtil.copy(request, XvpStoreCreateRequest.class);
 		//TODO 
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
-		ropClientAdapter.ropInvoke(ropRequest);
+		XvpStoreCreateResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
+		SessionUtil.setStoreId(ropResponse.getStore().getId());
 		return null;
 	}
 
@@ -78,6 +81,7 @@ public class StoreController {
 //		ropRequest.setStore_id(request.getStore_id());
 		XvpStoreGetResponse ropResponse= ropClientAdapter.ropInvoke(ropRequest);
 		StoreResponse response = BeanCopyUtil.copy(ropResponse.getStore(), StoreResponse.class);
+		SessionUtil.setStoreId(ropResponse.getStore().getId());
 		return response;
 	}
 	
