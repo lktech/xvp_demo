@@ -9,6 +9,7 @@ public class XvpConstants {
 	public final static String ERROR_CODE02 = "xvp_error_002";
 	public final static String ERROR_CODE03 = "xvp_error_003";
 	public final static String ERROR_MESSAGE03 = "请求处理发生未知失败";
-	public final static String SUCCESS = "SUCESS";
 	public final static String ERROR_MESSAGE04 = "session中没有找到店铺id";
+	public final static String SUCCESS = "SUCESS";
+	public final static String DEFAULT_PAY_TYPE = "ONLINE";
 }

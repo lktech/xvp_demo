@@ -55,7 +55,7 @@ public class OrderController {
 	public XvpResponse addOrder(@RequestBody OrderCreateRequest request) throws Exception{
 		XvpOrderCreateRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderCreateRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
-		ropRequest.setPay_type("ONLINE");
+		ropRequest.setPay_type(XvpConstants.DEFAULT_PAY_TYPE);
 		String buySkuListStr = JsonUtils.toJson(request.getBuy_sku_list());
 		ropRequest.setBuy_sku_list(buySkuListStr);
 		XvpOrderCreateResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
