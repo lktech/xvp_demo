@@ -3,6 +3,8 @@ package com.lingke.xvp.demo.utils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import com.lingke.xvp.demo.XvpConstants;
+
 public class SessionUtil {
 	public final static String SELLER_LOGIN_ID= "SELLER_LOGIN_ID";
 	public final static String SELLER_STORELOGIN_ID= "SELLER_STORELOGIN_ID";

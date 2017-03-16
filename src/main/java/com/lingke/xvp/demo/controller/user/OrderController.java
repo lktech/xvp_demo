@@ -23,6 +23,7 @@ import com.Rop.api.response.XvpOrderCreateResponse;
 import com.Rop.api.response.XvpOrderGetResponse;
 import com.Rop.api.response.XvpOrderQueryResponse;
 import com.Rop.api.response.XvpPayGetpayurlResponse;
+import com.lingke.xvp.demo.XvpConstants;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.OrderConfirmRequest;
 import com.lingke.xvp.demo.controller.request.OrderCreateRequest;
@@ -38,7 +39,6 @@ import com.lingke.xvp.demo.controller.response.OrderQueryResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
-import com.lingke.xvp.demo.utils.XvpConstants;
 
 import tech.nodex.tutils2.jackson.JsonUtils;
 /**

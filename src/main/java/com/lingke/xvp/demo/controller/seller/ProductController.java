@@ -21,6 +21,7 @@ import com.Rop.api.request.XvpSkuDeleteskuRequest;
 import com.Rop.api.response.XvpProductCreateResponse;
 import com.Rop.api.response.XvpProductGetResponse;
 import com.Rop.api.response.XvpProductQueryResponse;
+import com.lingke.xvp.demo.XvpConstants;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.ProductCreateRequest;
 import com.lingke.xvp.demo.controller.request.ProductDeleteRequest;
@@ -33,7 +34,6 @@ import com.lingke.xvp.demo.controller.response.ProductResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
-import com.lingke.xvp.demo.utils.XvpConstants;
 
 /**
  * Created by yuwb on 2017-03-13. 商品相关业务处理

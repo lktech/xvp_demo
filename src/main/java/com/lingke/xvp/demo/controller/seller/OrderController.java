@@ -19,6 +19,7 @@ import com.Rop.api.request.XvpOrderGetRequest;
 import com.Rop.api.request.XvpOrderQueryRequest;
 import com.Rop.api.response.XvpOrderGetResponse;
 import com.Rop.api.response.XvpOrderQueryResponse;
+import com.lingke.xvp.demo.XvpConstants;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.OrderDeliveryRequest;
 import com.lingke.xvp.demo.controller.request.OrderDiscountRequest;
@@ -30,7 +31,6 @@ import com.lingke.xvp.demo.controller.response.OrderQueryListResponse;
 import com.lingke.xvp.demo.controller.response.OrderQueryResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.utils.SessionUtil;
-import com.lingke.xvp.demo.utils.XvpConstants;
 
 /**
  * Created by yuwb on 2017-03-13. 订单相关业务处理

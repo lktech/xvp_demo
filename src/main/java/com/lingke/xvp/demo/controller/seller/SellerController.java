@@ -14,6 +14,7 @@ import com.Rop.api.request.XvpStoreQueryRequest;
 import com.Rop.api.response.XvpPhoneSendcodeResponse;
 import com.Rop.api.response.XvpPhoneVerfiycodeResponse;
 import com.Rop.api.response.XvpStoreQueryResponse;
+import com.lingke.xvp.demo.XvpConstants;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.SellerRegisterRequest;
 import com.lingke.xvp.demo.controller.request.SellerVerifyRequest;
@@ -21,7 +22,6 @@ import com.lingke.xvp.demo.controller.response.SellerVerifyResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.db.dao.Seller;
 import com.lingke.xvp.demo.utils.SessionUtil;
-import com.lingke.xvp.demo.utils.XvpConstants;
 
 /**
  * Created by yuwb on 2017-03-13. 卖家相关业务处理

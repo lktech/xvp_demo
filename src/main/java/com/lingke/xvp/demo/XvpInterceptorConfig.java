@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.lingke.xvp.demo.utils.SessionUtil;
-import com.lingke.xvp.demo.utils.XvpConstants;
 
 @Configuration
 public class XvpInterceptorConfig extends WebMvcConfigurerAdapter {

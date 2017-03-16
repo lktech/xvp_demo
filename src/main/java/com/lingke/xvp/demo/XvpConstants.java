@@ -1,4 +1,4 @@
-package com.lingke.xvp.demo.utils;
+package com.lingke.xvp.demo;
 
 public class XvpConstants {
 	public final static int PAGE_NO = 1;
