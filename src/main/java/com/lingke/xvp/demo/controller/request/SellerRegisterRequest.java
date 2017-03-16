@@ -4,7 +4,7 @@ public class SellerRegisterRequest implements XvpRequest {
 	private String phone;
 	private String password;
 	private String sn;
-	private String code;
+	private String verfiy_code;
 
 	public String getPhone() {
 		return phone;
@@ -30,17 +30,23 @@ public class SellerRegisterRequest implements XvpRequest {
 		this.sn = sn;
 	}
 
-	public String getCode() {
-		return code;
+	/**
+	 * @return the verfiy_code
+	 */
+	public String getVerfiy_code() {
+		return verfiy_code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	/**
+	 * @param verfiy_code the verfiy_code to set
+	 */
+	public void setVerfiy_code(String verfiy_code) {
+		this.verfiy_code = verfiy_code;
 	}
 
 	@Override
 	public String toString() {
-		return "SellerRegisterRequest [phone=" + phone + ", password=" + password + ", sn=" + sn + ", code=" + code
+		return "SellerRegisterRequest [phone=" + phone + ", password=" + password + ", sn=" + sn + ", verfiy_code=" + verfiy_code
 				+ "]";
 	}
 	
