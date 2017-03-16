@@ -10,14 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Rop.api.ApiException;
 import com.Rop.api.request.XvpPhoneSendcodeRequest;
 import com.Rop.api.request.XvpPhoneVerfiycodeRequest;
+import com.Rop.api.request.XvpStoreQueryRequest;
 import com.Rop.api.response.XvpPhoneSendcodeResponse;
 import com.Rop.api.response.XvpPhoneVerfiycodeResponse;
+import com.Rop.api.response.XvpStoreQueryResponse;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.SellerRegisterRequest;
 import com.lingke.xvp.demo.controller.request.SellerVerifyRequest;
 import com.lingke.xvp.demo.controller.response.SellerVerifyResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.db.dao.Seller;
+import com.lingke.xvp.demo.utils.SessionUtil;
+import com.lingke.xvp.demo.utils.XvpConstants;
 
 /**
  * Created by yuwb on 2017-03-13. 卖家相关业务处理
@@ -62,6 +66,15 @@ public class SellerController {
 		Seller seller = Seller.getSellerByPhoneAndPassword(request.getPhone(), request.getPassword());
 		if (seller == null) {
 			throw new RuntimeException("用户名或者密码错误");
+		}
+		SessionUtil.sellerLogin(seller.getId());
+		XvpStoreQueryRequest ropRequest = new XvpStoreQueryRequest();
+		ropRequest.setApp_id(ropClientAdapter.getAppId());
+		ropRequest.setPage_no(XvpConstants.PAGE_NO);
+		ropRequest.setPage_size(ropRequest.getPage_size());
+		XvpStoreQueryResponse ropResponse= ropClientAdapter.ropInvoke(ropRequest);
+		if(ropResponse.getStores()!=null&&ropResponse.getStores().size()>0){
+			SessionUtil.setStoreId(ropResponse.getStores().get(0).getId());
 		}
 		return null;
 	}
