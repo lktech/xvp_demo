@@ -1,8 +1,7 @@
 package com.lingke.xvp.demo.controller.seller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,10 +26,9 @@ import com.lingke.xvp.demo.db.dao.Seller;
 public class SellerController {
 	@Autowired
 	private XvpRopClient ropClientAdapter;
-	private final Logger logger = LoggerFactory.getLogger(SellerController.class);
 
 	@RequestMapping(value = "/verify", method = RequestMethod.POST)
-	public XvpResponse verify(SellerVerifyRequest request) throws Exception {
+	public XvpResponse verify(@RequestBody SellerVerifyRequest request) throws Exception {
 		Seller seller = Seller.getSellerByPhone(request.getPhone());
 		if (seller != null) {
 			throw new RuntimeException("手机号已经被注册");
@@ -55,7 +53,7 @@ public class SellerController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public XvpResponse register(SellerRegisterRequest request) throws Exception {
+	public XvpResponse register(@RequestBody SellerRegisterRequest request) throws Exception {
 		if (!checkCode(request.getCode(), request.getSn())) {
 			throw new RuntimeException("验证码输入错误");
 		}
@@ -64,7 +62,7 @@ public class SellerController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public XvpResponse login(SellerRegisterRequest request) throws Exception {
+	public XvpResponse login(@RequestBody SellerRegisterRequest request) throws Exception {
 		Seller seller = Seller.getSellerByPhoneAndPassword(request.getPhone(), request.getPassword());
 		if (seller == null) {
 			throw new RuntimeException("用户名或者密码错误");
@@ -73,7 +71,7 @@ public class SellerController {
 	}
 
 	@RequestMapping(value = "/reset", method = RequestMethod.POST)
-	public XvpResponse reset(SellerRegisterRequest request) throws Exception {
+	public XvpResponse reset(@RequestBody SellerRegisterRequest request) throws Exception {
 		Seller seller = Seller.getSellerByPhone(request.getPhone());
 		if (seller == null) {
 			throw new RuntimeException("手机号输入错误");
