@@ -30,12 +30,8 @@ public class ProductController {
 		XvpProductGetRequest ropRequest = new XvpProductGetRequest();
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setProduct_id(request.getId());
-		//TODO
-		//ropRequest.setStore_id(arg0);
 		XvpProductGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		ProductResponse response= BeanCopyUtil.copy(ropResponse.getProduct(), ProductResponse.class);
-		//TODO
-		//response.setSku( BeanCopyUtil.copyList(ropResponse.getProduct().getSkus(), SkuResponse.class));
 		return response;
 	}
 	
