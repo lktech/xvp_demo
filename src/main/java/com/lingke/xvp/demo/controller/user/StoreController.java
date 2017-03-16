@@ -19,6 +19,7 @@ import com.lingke.xvp.demo.controller.response.ProductResponse;
 import com.lingke.xvp.demo.controller.response.StoreMainResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
+import com.lingke.xvp.demo.utils.SessionUtil;
 
 /**
  * Created by yuwb on 2017-03-13. 店铺相关业务处理
@@ -41,6 +42,7 @@ public class StoreController {
 		XvpProductQueryResponse ropProductResponse = ropClientAdapter.ropInvoke(ropProductRequest);
 		List<ProductResponse> products = BeanCopyUtil.copyList(ropProductResponse.getProducts(), ProductResponse.class);
 		response.setProducts(products);
+		SessionUtil.userSetStoreId(String.valueOf(request.getStore_id()));
 		return response;
 	}
 }

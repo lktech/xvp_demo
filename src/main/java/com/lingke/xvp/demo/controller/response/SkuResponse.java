@@ -1,50 +1,34 @@
 package com.lingke.xvp.demo.controller.response;
 
 public class SkuResponse implements XvpResponse {
-	private Long id;
-	private Long price;
-	private Long logistics_fee;
-	private Long stock;
+	private String id;
+	private String price;
+	private String stock;
 	private String sku_str;
-
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-
-	public Long getPrice() {
+	public String getPrice() {
 		return price;
 	}
-
-	public void setPrice(Long price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
-
-	public Long getStock() {
+	public String getStock() {
 		return stock;
 	}
-
-	public void setStock(Long stock) {
+	public void setStock(String stock) {
 		this.stock = stock;
 	}
-
 	public String getSku_str() {
 		return sku_str;
 	}
-
 	public void setSku_str(String sku_str) {
 		this.sku_str = sku_str;
 	}
 
-	public Long getLogistics_fee() {
-		return logistics_fee;
-	}
-
-	public void setLogistics_fee(Long logistics_fee) {
-		this.logistics_fee = logistics_fee;
-	}
-
+	
 }

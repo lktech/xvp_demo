@@ -8,6 +8,7 @@ public class ProductCreateRequest implements XvpRequest {
 	private String product_detail;
 	private Integer pay_type;
 	private String product_desc;
+	private Long logistics_fee;
 	private List<SkuAddRequest> sku;
 	
 	public String getName() {
@@ -40,6 +41,14 @@ public class ProductCreateRequest implements XvpRequest {
 
 	public void setPay_type(Integer pay_type) {
 		this.pay_type = pay_type;
+	}
+
+	public Long getLogistics_fee() {
+		return logistics_fee;
+	}
+
+	public void setLogistics_fee(Long logistics_fee) {
+		this.logistics_fee = logistics_fee;
 	}
 
 	public String getProduct_desc() {

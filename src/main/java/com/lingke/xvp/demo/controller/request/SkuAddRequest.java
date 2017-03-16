@@ -2,7 +2,6 @@ package com.lingke.xvp.demo.controller.request;
 
 public class SkuAddRequest implements XvpRequest {
 	private Long price;
-	private Long logistics_fee;
 	private Long stock;
 	private String sku_str;
 
@@ -12,14 +11,6 @@ public class SkuAddRequest implements XvpRequest {
 
 	public void setPrice(Long price) {
 		this.price = price;
-	}
-
-	public Long getLogistics_fee() {
-		return logistics_fee;
-	}
-
-	public void setLogistics_fee(Long logistics_fee) {
-		this.logistics_fee = logistics_fee;
 	}
 
 	public Long getStock() {

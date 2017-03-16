@@ -73,7 +73,7 @@ public class SellerController {
 		ropRequest.setPage_size(ropRequest.getPage_size());
 		XvpStoreQueryResponse ropResponse= ropClientAdapter.ropInvoke(ropRequest);
 		if(ropResponse.getStores()!=null&&ropResponse.getStores().size()>0){
-			SessionUtil.setStoreId(ropResponse.getStores().get(0).getId());
+			SessionUtil.sellerSetStoreId(ropResponse.getStores().get(0).getId());
 		}
 		return null;
 	}

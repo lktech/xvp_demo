@@ -86,7 +86,8 @@ public class OrderController {
 		XvpOrderQueryRequest ropRequest = new XvpOrderQueryRequest();
 		BeanUtils.copyProperties(request, ropRequest);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
-		ropRequest.setStore_id(Long.valueOf(SessionUtil.getStoreId()));
+		ropRequest.setStore_id(Long.valueOf(SessionUtil.userGetStoreId()));
+		ropRequest.setUser_id(request.getUser_id());
 		ropRequest.setPage_no(XvpConstants.PAGE_NO);
 		ropRequest.setPage_size(XvpConstants.PAGE_SIZE);
 		XvpOrderQueryResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);

@@ -42,7 +42,7 @@ public class StoreController {
 		XvpStoreCreateRequest ropRequest = BeanCopyUtil.copy(request, XvpStoreCreateRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpStoreCreateResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
-		SessionUtil.setStoreId(ropResponse.getStore().getId());
+		SessionUtil.sellerSetStoreId(ropResponse.getStore().getId());
 		return null;
 	}
 
@@ -58,7 +58,7 @@ public class StoreController {
 	public XvpResponse updateStore(@RequestBody StoreUpdateRequest request) throws Exception {
 		XvpStoreUpdateRequest ropRequest = BeanCopyUtil.copy(request, XvpStoreUpdateRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
-		ropRequest.setStore_id(Long.parseLong(SessionUtil.getStoreId()));
+		ropRequest.setStore_id(Long.parseLong(SessionUtil.sellerGetStoreId()));
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
 	}
@@ -75,10 +75,9 @@ public class StoreController {
 	public XvpResponse getStore() throws Exception {
 		XvpStoreGetRequest ropRequest = new XvpStoreGetRequest();
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
-		ropRequest.setStore_id(Long.parseLong(SessionUtil.getStoreId()));
+		ropRequest.setStore_id(Long.parseLong(SessionUtil.sellerGetStoreId()));
 		XvpStoreGetResponse ropResponse= ropClientAdapter.ropInvoke(ropRequest);
 		StoreResponse response = BeanCopyUtil.copy(ropResponse.getStore(), StoreResponse.class);
-		SessionUtil.setStoreId(ropResponse.getStore().getId());
 		return response;
 	}
 	

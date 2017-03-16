@@ -2,15 +2,17 @@ package com.lingke.xvp.demo.controller.request;
 
 import java.util.List;
 
+
 public class ProductUpdateRequest implements XvpRequest {
 	private Long product_id;
 	private String name;
 	private String pics;
 	private String product_detail;
 	private Integer pay_type;
+	private Long logistics_fee;
 	private String product_desc;
-	private List<SkuUpdateRequest> sku;
-
+	private List<SkuUpdateRequest>  sku;
+	
 	public Long getProduct_id() {
 		return product_id;
 	}
@@ -59,6 +61,14 @@ public class ProductUpdateRequest implements XvpRequest {
 		this.product_desc = product_desc;
 	}
 
+	public Long getLogistics_fee() {
+		return logistics_fee;
+	}
+
+	public void setLogistics_fee(Long logistics_fee) {
+		this.logistics_fee = logistics_fee;
+	}
+
 	public List<SkuUpdateRequest> getSku() {
 		return sku;
 	}
@@ -66,5 +76,7 @@ public class ProductUpdateRequest implements XvpRequest {
 	public void setSku(List<SkuUpdateRequest> sku) {
 		this.sku = sku;
 	}
+	
+	
 
 }
