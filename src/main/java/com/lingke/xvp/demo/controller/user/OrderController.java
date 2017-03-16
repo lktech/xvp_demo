@@ -33,7 +33,7 @@ public class OrderController {
 		XvpOrderCreateRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderCreateRequest.class);
 		// TODO
 		ropRequest.setApp_id("REMOVE");
-		ropRequest.setPay_type("WEIXIN");
+		ropRequest.setPay_type("ONLINE");
 		String buySkuListStr = JsonUtils.toJson(request.getBuy_sku_list());
 		ropRequest.setBuy_sku_list(buySkuListStr);
 		XvpOrderCreateResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);

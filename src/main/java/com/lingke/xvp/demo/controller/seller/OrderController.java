@@ -24,6 +24,7 @@ import com.lingke.xvp.demo.controller.request.OrderQueryRequest;
 import com.lingke.xvp.demo.controller.response.OrderQueryListResponse;
 import com.lingke.xvp.demo.controller.response.OrderQueryResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
+import com.lingke.xvp.demo.utils.XvpConstants;
 
 /**
  * Created by yuwb on 2017-03-13. 订单相关业务处理
@@ -49,10 +50,9 @@ public class OrderController {
 		BeanUtils.copyProperties(request, ropRequest);
 		// TODO
 		ropRequest.setApp_id("329509F6-B7B8-4A9E-8817-D2EDCBE5559D");
-		ropRequest.setUser_id("1c527151a3e44009949616e316f757d0");
 		ropRequest.setStore_id(620L);
-		ropRequest.setPage_no(1);
-		ropRequest.setPage_size(10000);
+		ropRequest.setPage_no(XvpConstants.PAGE_NO);
+		ropRequest.setPage_size(XvpConstants.PAGE_SIZE);
 		XvpOrderQueryResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		OrderQueryListResponse list = new OrderQueryListResponse();
 		for (XvpOrder xvpOrder : ropResponse.getXvporders()) {
