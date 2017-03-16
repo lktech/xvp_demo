@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tech.nodex.tutils2.jackson.JsonUtils;
+
 import com.Rop.api.ApiException;
 import com.Rop.api.domain.XvpOrder;
 import com.Rop.api.request.XvpOrderAcceptgoodsRequest;
@@ -39,8 +41,6 @@ import com.lingke.xvp.demo.controller.response.OrderQueryResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
-
-import tech.nodex.tutils2.jackson.JsonUtils;
 /**
  * Created by yuwb on 2017-03-13. 订单相关业务处理
  */
