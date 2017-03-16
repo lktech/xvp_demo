@@ -16,7 +16,11 @@ public class SessionUtil {
 	public static void setStoreId(String value){
 		RequestContextHolder.getRequestAttributes().setAttribute(STORELOGIN_ID, value, RequestAttributes.SCOPE_SESSION);
 	}
-	public static Object getStoreId(){
-		return RequestContextHolder.getRequestAttributes().getAttribute(STORELOGIN_ID, RequestAttributes.SCOPE_SESSION)	;	
+	public static String getStoreId(){
+		Object ob = RequestContextHolder.getRequestAttributes().getAttribute(STORELOGIN_ID, RequestAttributes.SCOPE_SESSION);	
+		if(ob==null){
+			throw new RuntimeException(XvpConstants.ERROR_MESSAGE04);
+		}
+		return ob.toString();
 	}
 }
