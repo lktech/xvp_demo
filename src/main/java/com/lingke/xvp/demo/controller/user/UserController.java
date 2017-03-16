@@ -13,12 +13,15 @@ import com.Rop.api.request.XvpUserSetdefaultaddressRequest;
 import com.Rop.api.request.XvpUserUpdateaddressRequest;
 import com.Rop.api.response.XvpUserAddaddressResponse;
 import com.Rop.api.response.XvpUserGetdefaultaddressResponse;
+import com.alibaba.druid.util.StringUtils;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.UserAddressGetRequest;
 import com.lingke.xvp.demo.controller.request.UserAddressSetRequest;
+import com.lingke.xvp.demo.controller.request.UserLoginRequest;
 import com.lingke.xvp.demo.controller.response.UserAddressResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
+import com.lingke.xvp.demo.utils.SessionUtil;
 /**
  * Created by yuwb on 2017-03-13. 用户相关业务处理
  */
@@ -55,6 +58,15 @@ public class UserController {
 		ropRequest.setId(addresssId);
 		ropRequest.setXvp_uid(request.getXvp_uid());
 		ropClientAdapter.ropInvoke(ropRequest);
+		return null;
+	}
+	
+	@RequestMapping(path="/login",method=RequestMethod.POST)
+	@ResponseBody
+	public XvpResponse setDefaultAddress(@RequestBody UserLoginRequest request) throws Exception{
+		if(!StringUtils.isEmpty(request.getXvp_uid())){
+			SessionUtil.userLogin(request.getXvp_uid());
+		}
 		return null;
 	}
 }

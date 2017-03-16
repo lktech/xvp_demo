@@ -15,24 +15,42 @@ import com.lingke.xvp.demo.utils.SessionUtil;
 public class XvpInterceptorConfig extends WebMvcConfigurerAdapter {
 	
     public void addInterceptors(InterceptorRegistry registry) {
-        InterceptorRegistration addInterceptor = registry.addInterceptor(new SecurityInterceptor());
+        InterceptorRegistration sellerInterceptor = registry.addInterceptor(new SellerInterceptor());
         // 拦截配置
-        addInterceptor.addPathPatterns("/seller/**");
+        sellerInterceptor.addPathPatterns("/seller/**");
         // 排除配置
-        addInterceptor.excludePathPatterns("/seller/seller/login");
-        addInterceptor.excludePathPatterns("/seller/seller/reset");
-        addInterceptor.excludePathPatterns("/seller/seller/register");
+        sellerInterceptor.excludePathPatterns("/seller/seller/login");
+        sellerInterceptor.excludePathPatterns("/seller/seller/reset");
+        sellerInterceptor.excludePathPatterns("/seller/seller/register");
+        
+        InterceptorRegistration userInterceptor = registry.addInterceptor(new UserInterceptor());
+        // 拦截配置
+        userInterceptor.addPathPatterns("/user/**");
+        // 排除配置
+        userInterceptor.excludePathPatterns("/user/user/login");
 
     }
 
-    private class SecurityInterceptor extends HandlerInterceptorAdapter {
+    private class SellerInterceptor extends HandlerInterceptorAdapter {
+		@Override
+		public boolean preHandle(HttpServletRequest request,
+				HttpServletResponse response, Object handler) throws Exception {
+			if (SessionUtil.checkSellerLogin()) {
+				return true;
+			}
+			response.getWriter().append(XvpConstants.SELLER_NO_LOGIN_RESP);
+			return false;
+		}
+    }
+    
+    private class UserInterceptor extends HandlerInterceptorAdapter {
         @Override
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
                 throws Exception {
-        	if(SessionUtil.checkSellerLogin()){
+        	if(SessionUtil.checkUserLogin()){
         		return true;
         	}
-            response.getWriter().append(XvpConstants.SELLER_NO_LOGIN_RESP);
+            response.getWriter().append(XvpConstants.USER_NO_LOGIN_RESP);
             return false;
         }
     }
