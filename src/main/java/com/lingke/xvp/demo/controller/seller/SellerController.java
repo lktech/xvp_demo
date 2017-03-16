@@ -44,8 +44,7 @@ public class SellerController {
 		}
 		XvpPhoneSendcodeRequest ropRequest = new XvpPhoneSendcodeRequest();
 		BeanUtils.copyProperties(request, ropRequest);
-		// TODO
-		ropRequest.setApp_id("329509F6-B7B8-4A9E-8817-D2EDCBE5559D");
+		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpPhoneSendcodeResponse xvpUserCreateResponse = ropClientAdapter.ropInvoke(ropRequest);
 		SellerVerifyResponse sellerVerifyResponse = new SellerVerifyResponse();
 		sellerVerifyResponse.setSn(xvpUserCreateResponse.getPhoneresult().getSn());
@@ -107,8 +106,7 @@ public class SellerController {
 	private Boolean checkCode(SellerRegisterRequest request) throws ApiException {
 		XvpPhoneVerfiycodeRequest ropRequest = new XvpPhoneVerfiycodeRequest();
 		BeanUtils.copyProperties(request, ropRequest);
-		// TODO
-		ropRequest.setApp_id("329509F6-B7B8-4A9E-8817-D2EDCBE5559D");
+		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpPhoneVerfiycodeResponse response = ropClientAdapter.ropInvoke(ropRequest);
 		return Boolean.valueOf(response.getPhoneresult().getFlag());
 	}

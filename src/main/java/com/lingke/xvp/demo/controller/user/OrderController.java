@@ -37,6 +37,7 @@ import com.lingke.xvp.demo.controller.response.OrderQueryListResponse;
 import com.lingke.xvp.demo.controller.response.OrderQueryResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
+import com.lingke.xvp.demo.utils.SessionUtil;
 import com.lingke.xvp.demo.utils.XvpConstants;
 
 import tech.nodex.tutils2.jackson.JsonUtils;
@@ -53,8 +54,7 @@ public class OrderController {
 	@ResponseBody
 	public XvpResponse addOrder(@RequestBody OrderCreateRequest request) throws Exception{
 		XvpOrderCreateRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderCreateRequest.class);
-		// TODO
-		ropRequest.setApp_id("REMOVE");
+		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setPay_type("ONLINE");
 		String buySkuListStr = JsonUtils.toJson(request.getBuy_sku_list());
 		ropRequest.setBuy_sku_list(buySkuListStr);
@@ -85,9 +85,8 @@ public class OrderController {
 	public XvpResponse query(@RequestBody OrderQueryRequest request) throws ApiException {
 		XvpOrderQueryRequest ropRequest = new XvpOrderQueryRequest();
 		BeanUtils.copyProperties(request, ropRequest);
-		// TODO
-		ropRequest.setApp_id("329509F6-B7B8-4A9E-8817-D2EDCBE5559D");
-		ropRequest.setStore_id(620L);
+		ropRequest.setApp_id(ropClientAdapter.getAppId());
+		ropRequest.setStore_id(Long.valueOf(SessionUtil.getStoreId()));
 		ropRequest.setPage_no(XvpConstants.PAGE_NO);
 		ropRequest.setPage_size(XvpConstants.PAGE_SIZE);
 		XvpOrderQueryResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
@@ -113,8 +112,7 @@ public class OrderController {
 	public XvpResponse get(@RequestBody OrderGetRequest request) throws ApiException {
 		XvpOrderGetRequest ropRequest = new XvpOrderGetRequest();
 		BeanUtils.copyProperties(request, ropRequest);
-		// TODO
-		ropRequest.setApp_id("329509F6-B7B8-4A9E-8817-D2EDCBE5559D");
+		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpOrderGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		OrderQueryResponse response = new OrderQueryResponse();
 		copyXvpOrderToXvpResponse(ropResponse.getXvporder(), response);
@@ -133,8 +131,7 @@ public class OrderController {
 	public XvpResponse confirm(@RequestBody OrderConfirmRequest request) throws ApiException {
 		XvpOrderAcceptgoodsRequest ropRequest = new XvpOrderAcceptgoodsRequest();
 		BeanUtils.copyProperties(request, ropRequest);
-		// TODO
-		ropRequest.setApp_id("329509F6-B7B8-4A9E-8817-D2EDCBE5559D");
+		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
 	}
