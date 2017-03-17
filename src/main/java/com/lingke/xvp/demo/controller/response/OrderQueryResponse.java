@@ -11,7 +11,7 @@ public class OrderQueryResponse implements XvpResponse {
 	/**
 	 * 订单ID
 	 */
-	private String order_id;
+	private String orderNum;
 	/**
 	 * 支付类型, 默认 ONLINE: 在线支付 POINTS: 积分 INSTALLMENTS: 分期付
 	 */
@@ -32,7 +32,7 @@ public class OrderQueryResponse implements XvpResponse {
 	 * 最终支付的金额 final_amount = items_total_fee + logistic_fee -
 	 * seller_discount_fee
 	 */
-	private String pay_amount;
+	private String pay;
 	/**
 	 * 用户的备注
 	 */
@@ -44,7 +44,8 @@ public class OrderQueryResponse implements XvpResponse {
 	/**
 	 * 订单状态 DFK：待付款 DFH：待发货 DSH：待收货 YSH： 已收货 YGB： 已关闭
 	 */
-	private String order_status;
+	private String orderStatus;
+
 	/**
 	 * 物流配送地址
 	 */
@@ -72,22 +73,22 @@ public class OrderQueryResponse implements XvpResponse {
 	/**
 	 * 订单项列表
 	 */
-	private List<OrderQueryItemResponse> xvporderitems = new ArrayList<>();
+	private List<OrderQueryItemResponse> goods = new ArrayList<>();
 	/**
 	 * 订单项列表
 	 */
 	private List<OrderQueryDeliveryResponse> orderdeliverys = new ArrayList<>();
 	/**
-	 * @return the order_id
+	 * @return the orderNum
 	 */
-	public String getOrder_id() {
-		return order_id;
+	public String getOrderNum() {
+		return orderNum;
 	}
 	/**
-	 * @param order_id the order_id to set
+	 * @param orderNum the orderNum to set
 	 */
-	public void setOrder_id(String order_id) {
-		this.order_id = order_id;
+	public void setOrderNum(String orderNum) {
+		this.orderNum = orderNum;
 	}
 	/**
 	 * @return the pay_type
@@ -138,16 +139,16 @@ public class OrderQueryResponse implements XvpResponse {
 		this.logistic_fee = logistic_fee;
 	}
 	/**
-	 * @return the pay_amount
+	 * @return the pay
 	 */
-	public String getPay_amount() {
-		return pay_amount;
+	public String getPay() {
+		return pay;
 	}
 	/**
-	 * @param pay_amount the pay_amount to set
+	 * @param pay the pay to set
 	 */
-	public void setPay_amount(String pay_amount) {
-		this.pay_amount = pay_amount;
+	public void setPay(String pay) {
+		this.pay = pay;
 	}
 	/**
 	 * @return the user_remark
@@ -174,16 +175,16 @@ public class OrderQueryResponse implements XvpResponse {
 		this.seller_remark = seller_remark;
 	}
 	/**
-	 * @return the order_status
+	 * @return the orderStatus
 	 */
-	public String getOrder_status() {
-		return order_status;
+	public String getOrderStatus() {
+		return orderStatus;
 	}
 	/**
-	 * @param order_status the order_status to set
+	 * @param orderStatus the orderStatus to set
 	 */
-	public void setOrder_status(String order_status) {
-		this.order_status = order_status;
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 	/**
 	 * @return the address
@@ -197,7 +198,30 @@ public class OrderQueryResponse implements XvpResponse {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+	/**
+	 * @return the address_name
+	 */
+	public String getAddress_name() {
+		return address_name;
+	}
+	/**
+	 * @param address_name the address_name to set
+	 */
+	public void setAddress_name(String address_name) {
+		this.address_name = address_name;
+	}
+	/**
+	 * @return the address_phone
+	 */
+	public String getAddress_phone() {
+		return address_phone;
+	}
+	/**
+	 * @param address_phone the address_phone to set
+	 */
+	public void setAddress_phone(String address_phone) {
+		this.address_phone = address_phone;
+	}
 	/**
 	 * @return the create_time
 	 */
@@ -235,16 +259,16 @@ public class OrderQueryResponse implements XvpResponse {
 		this.confirm_receive_time = confirm_receive_time;
 	}
 	/**
-	 * @return the xvporderitems
+	 * @return the goods
 	 */
-	public List<OrderQueryItemResponse> getXvporderitems() {
-		return xvporderitems;
+	public List<OrderQueryItemResponse> getGoods() {
+		return goods;
 	}
 	/**
-	 * @param xvporderitems the xvporderitems to set
+	 * @param goods the goods to set
 	 */
-	public void setXvporderitems(List<OrderQueryItemResponse> xvporderitems) {
-		this.xvporderitems = xvporderitems;
+	public void setGoods(List<OrderQueryItemResponse> goods) {
+		this.goods = goods;
 	}
 	/**
 	 * @return the orderdeliverys
@@ -257,44 +281,6 @@ public class OrderQueryResponse implements XvpResponse {
 	 */
 	public void setOrderdeliverys(List<OrderQueryDeliveryResponse> orderdeliverys) {
 		this.orderdeliverys = orderdeliverys;
-	}
-	
-	/**
-	 * @return the address_name
-	 */
-	public String getAddress_name() {
-		return address_name;
-	}
-	/**
-	 * @param address_name the address_name to set
-	 */
-	public void setAddress_name(String address_name) {
-		this.address_name = address_name;
-	}
-	/**
-	 * @return the address_phone
-	 */
-	public String getAddress_phone() {
-		return address_phone;
-	}
-	/**
-	 * @param address_phone the address_phone to set
-	 */
-	public void setAddress_phone(String address_phone) {
-		this.address_phone = address_phone;
-	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "OrderQueryResponse [order_id=" + order_id + ", pay_type=" + pay_type + ", items_total_fee="
-				+ items_total_fee + ", seller_discount_fee=" + seller_discount_fee + ", logistic_fee=" + logistic_fee
-				+ ", pay_amount=" + pay_amount + ", user_remark=" + user_remark + ", seller_remark=" + seller_remark
-				+ ", order_status=" + order_status + ", address=" + address + ", address_name=" + address_name
-				+ ", address_phone=" + address_phone + ", create_time=" + create_time + ", pay_time=" + pay_time
-				+ ", confirm_receive_time=" + confirm_receive_time + ", xvporderitems=" + xvporderitems
-				+ ", orderdeliverys=" + orderdeliverys + "]";
 	}
 
 }

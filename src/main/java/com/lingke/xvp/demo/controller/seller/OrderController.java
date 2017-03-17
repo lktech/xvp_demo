@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Rop.api.domain.XvpOrder;
+import com.Rop.api.domain.XvpOrderItem;
 import com.Rop.api.request.XvpOrderDeliverRequest;
 import com.Rop.api.request.XvpOrderDiscountRequest;
 import com.Rop.api.request.XvpOrderGetRequest;
@@ -126,12 +127,24 @@ public class OrderController {
 	 */
 	private OrderQueryResponse copyXvpOrderToXvpResponse(XvpOrder xvpOrder) throws Exception {
 		OrderQueryResponse response = BeanCopyUtil.copy(xvpOrder, OrderQueryResponse.class);
+		response.setOrderNum(xvpOrder.getOrder_id());
+		response.setOrderStatus(xvpOrder.getOrder_status());
+		response.setPay(xvpOrder.getPay_amount());
 		List<OrderQueryDeliveryResponse> orderdeliverys = BeanCopyUtil.copyList(xvpOrder.getOrderdeliverys(),
 				OrderQueryDeliveryResponse.class);
 		response.setOrderdeliverys(orderdeliverys);
-		List<OrderQueryItemResponse> xvporderitems = BeanCopyUtil.copyList(xvpOrder.getOrderdeliverys(),
+		List<OrderQueryItemResponse> xvporderitems = BeanCopyUtil.copyList(xvpOrder.getXvporderitems(),
 				OrderQueryItemResponse.class);
-		response.setXvporderitems(xvporderitems);
+		for (int i = 0; i < xvporderitems.size(); i++) {
+			XvpOrderItem xvpOrderItem = xvpOrder.getXvporderitems().get(i);
+			OrderQueryItemResponse orderQueryItemResponse = xvporderitems.get(i);
+			orderQueryItemResponse.setId(xvpOrderItem.getId());
+			orderQueryItemResponse.setGoodsName(xvpOrderItem.getProduct_name());
+			orderQueryItemResponse.setGoodsUrl(xvpOrderItem.getThumbnail());
+			orderQueryItemResponse.setSku(xvpOrderItem.getSku_str());
+			orderQueryItemResponse.setNum(xvpOrderItem.getItem_count());
+		}
+		response.setGoods(xvporderitems);
 		return response;
 	}
 
