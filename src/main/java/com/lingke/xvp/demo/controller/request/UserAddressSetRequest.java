@@ -3,8 +3,6 @@ package com.lingke.xvp.demo.controller.request;
 
 public class UserAddressSetRequest implements XvpRequest {
 	private Long id;
-
-	private String  xvp_uid;
 	
 	private String name;
 
@@ -29,15 +27,6 @@ public class UserAddressSetRequest implements XvpRequest {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getXvp_uid() {
-		return xvp_uid;
-	}
-
-	public void setXvp_uid(String xvp_uid) {
-		this.xvp_uid = xvp_uid;
-	}
-
 	public String getName() {
 		return name;
 	}

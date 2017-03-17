@@ -3,29 +3,11 @@ package com.lingke.xvp.demo.controller.request;
 import java.util.List;
 
 public class OrderCreateRequest implements XvpRequest {
-	private Long store_id;
-	private Long user_id;
 	private Long logistic_flg;
 	private Long logistics_fee;
 	private Long pay_amount;
 	private Long addressee_id;
 	private List<OrderItemRequest> buy_sku_list;
-
-	public Long getStore_id() {
-		return store_id;
-	}
-
-	public void setStore_id(Long store_id) {
-		this.store_id = store_id;
-	}
-
-	public Long getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(Long user_id) {
-		this.user_id = user_id;
-	}
 
 	public Long getLogistic_flg() {
 		return logistic_flg;

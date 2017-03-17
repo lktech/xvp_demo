@@ -15,7 +15,6 @@ import com.Rop.api.response.XvpUserAddaddressResponse;
 import com.Rop.api.response.XvpUserGetdefaultaddressResponse;
 import com.alibaba.druid.util.StringUtils;
 import com.lingke.xvp.demo.XvpRopClient;
-import com.lingke.xvp.demo.controller.request.UserAddressGetRequest;
 import com.lingke.xvp.demo.controller.request.UserAddressSetRequest;
 import com.lingke.xvp.demo.controller.request.UserLoginRequest;
 import com.lingke.xvp.demo.controller.response.UserAddressResponse;
@@ -32,9 +31,9 @@ public class UserController {
 	private XvpRopClient ropClientAdapter;
 	@RequestMapping(path="/address/default",method=RequestMethod.POST)
 	@ResponseBody
-	public XvpResponse getDefaultAddress(@RequestBody UserAddressGetRequest request) throws Exception{
+	public XvpResponse getDefaultAddress() throws Exception{
 		XvpUserGetdefaultaddressRequest ropRequest = new XvpUserGetdefaultaddressRequest();
-		ropRequest.setXvp_uid(request.getXvp_uid());
+		ropRequest.setXvp_uid(SessionUtil.userGetUserId());
 		XvpUserGetdefaultaddressResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		UserAddressResponse response = BeanCopyUtil.copy(ropResponse.getAddressee(), UserAddressResponse.class);
 		return response;
@@ -46,17 +45,19 @@ public class UserController {
 		Long addresssId = null;
 		if(request.getId()!=null){
 			XvpUserUpdateaddressRequest ropRequest = BeanCopyUtil.copy(request, XvpUserUpdateaddressRequest.class);
+			ropRequest.setXvp_uid(SessionUtil.userGetUserId());
 			ropClientAdapter.ropInvoke(ropRequest);
 			addresssId = request.getId();
 		}else{
 			XvpUserAddaddressRequest ropRequest = BeanCopyUtil.copy(request, XvpUserAddaddressRequest.class);
+			ropRequest.setXvp_uid(SessionUtil.userGetUserId());
 			XvpUserAddaddressResponse  ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 			addresssId = Long.parseLong(ropResponse.getAddressee().getId());
 		}
 		
 		XvpUserSetdefaultaddressRequest ropRequest = new XvpUserSetdefaultaddressRequest();
 		ropRequest.setId(addresssId);
-		ropRequest.setXvp_uid(request.getXvp_uid());
+		ropRequest.setXvp_uid(SessionUtil.userGetUserId());
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
 	}

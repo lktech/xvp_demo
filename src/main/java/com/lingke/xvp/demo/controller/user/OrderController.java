@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tech.nodex.tutils2.jackson.JsonUtils;
+
 import com.Rop.api.domain.XvpOrder;
 import com.Rop.api.request.XvpOrderAcceptgoodsRequest;
 import com.Rop.api.request.XvpOrderCreateRequest;
@@ -36,8 +38,6 @@ import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
 
-import tech.nodex.tutils2.jackson.JsonUtils;
-
 /**
  * Created by yuwb on 2017-03-13. 订单相关业务处理
  */
@@ -53,6 +53,8 @@ public class OrderController {
 		XvpOrderCreateRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderCreateRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setPay_type(XvpConstants.DEFAULT_PAY_TYPE);
+		ropRequest.setUser_id(SessionUtil.userGetUserId());
+		ropRequest.setStore_id(Long.parseLong(SessionUtil.userGetStoreId()));
 		String buySkuListStr = JsonUtils.toJson(request.getBuy_sku_list());
 		ropRequest.setBuy_sku_list(buySkuListStr);
 		XvpOrderCreateResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
@@ -83,7 +85,7 @@ public class OrderController {
 		XvpOrderQueryRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderQueryRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.userGetStoreId()));
-		ropRequest.setUser_id(request.getUser_id());
+		ropRequest.setUser_id(SessionUtil.userGetUserId());
 		ropRequest.setPage_no(XvpConstants.PAGE_NO);
 		ropRequest.setPage_size(XvpConstants.PAGE_SIZE);
 		XvpOrderQueryResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);

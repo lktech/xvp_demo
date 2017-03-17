@@ -8,11 +8,6 @@ import java.util.List;
  */
 public class OrderDeliveryRequest implements XvpRequest {
 	/**
-	 * id 主键
-	 */
-	public Long id;
-	
-	/**
 	 * order id
 	 */	
 	public String order_id;
@@ -42,20 +37,6 @@ public class OrderDeliveryRequest implements XvpRequest {
 	 * 包裹包含的订单商品的id列表
 	 */
 	public List<String> order_item_id_list;
-
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	/**
 	 * @return the order_id
