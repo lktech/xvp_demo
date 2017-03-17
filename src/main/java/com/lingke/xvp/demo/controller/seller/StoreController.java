@@ -1,11 +1,17 @@
 package com.lingke.xvp.demo.controller.seller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import tech.nodex.tutils2.jackson.JsonUtils;
 
 import com.Rop.api.ApiException;
 import com.Rop.api.request.XvpStoreCreateRequest;
@@ -14,6 +20,7 @@ import com.Rop.api.request.XvpStoreUpdateRequest;
 import com.Rop.api.response.XvpStoreCreateResponse;
 import com.Rop.api.response.XvpStoreGetResponse;
 import com.lingke.xvp.demo.XvpRopClient;
+import com.lingke.xvp.demo.controller.request.ExtendFieldRequest;
 import com.lingke.xvp.demo.controller.request.StoreCreateRequest;
 import com.lingke.xvp.demo.controller.request.StoreUpdateRequest;
 import com.lingke.xvp.demo.controller.response.StoreResponse;
@@ -41,11 +48,39 @@ public class StoreController {
 	public XvpResponse createStore(@RequestBody StoreCreateRequest request) throws Exception {
 		XvpStoreCreateRequest ropRequest = BeanCopyUtil.copy(request, XvpStoreCreateRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
+		String extendFields = getExtendField(request.getRegion_code(),request.getDetail_address(),request.getQq());
+		ropRequest.setExtend_fields(extendFields);
 		XvpStoreCreateResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		SessionUtil.sellerSetStoreId(ropResponse.getStore().getId());
 		return null;
 	}
 
+	private String getExtendField(String region_code,String detail_address,String qq){
+		List<ExtendFieldRequest> extendFields = new ArrayList<ExtendFieldRequest>();
+		if(!StringUtils.isEmpty(region_code)){
+			ExtendFieldRequest extendField = new ExtendFieldRequest();
+			extendField.setColumnName("region_code");
+			extendField.setColumnValue(region_code);
+			extendFields.add(extendField);
+		}
+		if(!StringUtils.isEmpty(detail_address)){
+			ExtendFieldRequest extendField = new ExtendFieldRequest();
+			extendField.setColumnName("detail_address");
+			extendField.setColumnValue(detail_address);
+			extendFields.add(extendField);
+		}
+		if(!StringUtils.isEmpty(qq)){
+			ExtendFieldRequest extendField = new ExtendFieldRequest();
+			extendField.setColumnName("qq");
+			extendField.setColumnValue(qq);
+			extendFields.add(extendField);
+		}
+		return JsonUtils.toJson(extendFields);
+	}
+	
+	private void copyRopExtendFieldToResponse(XvpStoreGetResponse ropResponse,StoreResponse response){
+		//todo
+	}
 	/**
 	 * 修改店铺信息
 	 * 
@@ -59,6 +94,8 @@ public class StoreController {
 		XvpStoreUpdateRequest ropRequest = BeanCopyUtil.copy(request, XvpStoreUpdateRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.parseLong(SessionUtil.sellerGetStoreId()));
+		String extendFields = getExtendField(request.getRegion_code(),request.getDetail_address(),request.getQq());
+		ropRequest.setExtend_fields(extendFields);
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
 	}
@@ -78,6 +115,7 @@ public class StoreController {
 		ropRequest.setStore_id(Long.parseLong(SessionUtil.sellerGetStoreId()));
 		XvpStoreGetResponse ropResponse= ropClientAdapter.ropInvoke(ropRequest);
 		StoreResponse response = BeanCopyUtil.copy(ropResponse.getStore(), StoreResponse.class);
+		copyRopExtendFieldToResponse(ropResponse,response);
 		return response;
 	}
 	
