@@ -18,12 +18,12 @@ public class OrderQueryItemResponse implements XvpResponse {
 	/**
 	 * 商品Sku id
 	 */
-	public Long sku_id;
+	public String sku_id;
 
 	/**
 	 * 商品名称
 	 */
-	public String product_name;
+	public String goodsName;
 
 	/**
 	 * 价格
@@ -33,12 +33,12 @@ public class OrderQueryItemResponse implements XvpResponse {
 	/**
 	 * sku串 比如: 175 纯棉,180 非纯棉
 	 */
-	public String sku_str;
+	public String sku;
 
 	/**
 	 * 购买数量
 	 */
-	public String item_count;
+	public String num;
 	/**
 	 * 物流id
 	 */
@@ -47,6 +47,10 @@ public class OrderQueryItemResponse implements XvpResponse {
 	 * 创建时间
 	 */
 	public String create_time;
+	/**
+	 * 缩略图
+	 */
+	private String goodsUrl;
 	/**
 	 * @return the id
 	 */
@@ -74,26 +78,26 @@ public class OrderQueryItemResponse implements XvpResponse {
 	/**
 	 * @return the sku_id
 	 */
-	public Long getSku_id() {
+	public String getSku_id() {
 		return sku_id;
 	}
 	/**
 	 * @param sku_id the sku_id to set
 	 */
-	public void setSku_id(Long sku_id) {
+	public void setSku_id(String sku_id) {
 		this.sku_id = sku_id;
 	}
 	/**
-	 * @return the product_name
+	 * @return the goodsName
 	 */
-	public String getProduct_name() {
-		return product_name;
+	public String getGoodsName() {
+		return goodsName;
 	}
 	/**
-	 * @param product_name the product_name to set
+	 * @param goodsName the goodsName to set
 	 */
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
 	}
 	/**
 	 * @return the price
@@ -108,28 +112,28 @@ public class OrderQueryItemResponse implements XvpResponse {
 		this.price = price;
 	}
 	/**
-	 * @return the sku_str
+	 * @return the sku
 	 */
-	public String getSku_str() {
-		return sku_str;
+	public String getSku() {
+		return sku;
 	}
 	/**
-	 * @param sku_str the sku_str to set
+	 * @param sku the sku to set
 	 */
-	public void setSku_str(String sku_str) {
-		this.sku_str = sku_str;
+	public void setSku(String sku) {
+		this.sku = sku;
 	}
 	/**
-	 * @return the item_count
+	 * @return the num
 	 */
-	public String getItem_count() {
-		return item_count;
+	public String getNum() {
+		return num;
 	}
 	/**
-	 * @param item_count the item_count to set
+	 * @param num the num to set
 	 */
-	public void setItem_count(String item_count) {
-		this.item_count = item_count;
+	public void setNum(String num) {
+		this.num = num;
 	}
 	/**
 	 * @return the delivery_id
@@ -155,14 +159,26 @@ public class OrderQueryItemResponse implements XvpResponse {
 	public void setCreate_time(String create_time) {
 		this.create_time = create_time;
 	}
+	/**
+	 * @return the goodsUrl
+	 */
+	public String getGoodsUrl() {
+		return goodsUrl;
+	}
+	/**
+	 * @param goodsUrl the goodsUrl to set
+	 */
+	public void setGoodsUrl(String goodsUrl) {
+		this.goodsUrl = goodsUrl;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "OrderQueryItemResponse [id=" + id + ", product_id=" + product_id + ", sku_id=" + sku_id
-				+ ", product_name=" + product_name + ", price=" + price + ", sku_str=" + sku_str + ", item_count="
-				+ item_count + ", delivery_id=" + delivery_id + ", create_time=" + create_time + "]";
+		return "OrderQueryItemResponse [id=" + id + ", product_id=" + product_id + ", sku_id=" + sku_id + ", goodsName="
+				+ goodsName + ", price=" + price + ", sku=" + sku + ", num=" + num + ", delivery_id=" + delivery_id
+				+ ", create_time=" + create_time + ", goodsUrl=" + goodsUrl + "]";
 	}
 	
 }
