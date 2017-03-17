@@ -25,8 +25,8 @@ public class XvpAspect {
 	public Object doAround(ProceedingJoinPoint joinPoint) {
 		try {
 			String method = joinPoint.getSignature().toShortString();
-			logger.info("调用接口开始：{}，请求参数：{}", method,
-					joinPoint.getArgs()[0].toString());
+			logger.info("调用接口开始：{}，请求参数：{}", method,joinPoint.getArgs()!=null?
+					joinPoint.getArgs()[0].toString():null);
 			Object result = joinPoint.proceed();
 			logger.info("调用接口结束：{}，响应参数：{}", method, result==null?"":result.toString());
 			SuccessResponse successResponse  = new SuccessResponse();
