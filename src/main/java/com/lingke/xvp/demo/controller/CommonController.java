@@ -4,20 +4,17 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Rop.api.ApiException;
 import com.Rop.api.RopResponse;
 import com.Rop.api.domain.Area;
 import com.Rop.api.request.XvpCommonGetcityareasRequest;
 import com.Rop.api.request.XvpCommonGetcountyareasRequest;
 import com.Rop.api.request.XvpCommonGetprovinceareasRequest;
-import com.Rop.api.request.XvpPhoneVerfiycodeRequest;
 import com.Rop.api.response.XvpCommonGetcityareasResponse;
 import com.Rop.api.response.XvpCommonGetcountyareasResponse;
 import com.Rop.api.response.XvpCommonGetprovinceareasResponse;
