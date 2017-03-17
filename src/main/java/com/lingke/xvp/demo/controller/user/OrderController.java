@@ -26,7 +26,6 @@ import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.OrderConfirmRequest;
 import com.lingke.xvp.demo.controller.request.OrderCreateRequest;
 import com.lingke.xvp.demo.controller.request.OrderGetRequest;
-import com.lingke.xvp.demo.controller.request.OrderPayUrlRequest;
 import com.lingke.xvp.demo.controller.request.OrderQueryRequest;
 import com.lingke.xvp.demo.controller.response.OrderCreateResponse;
 import com.lingke.xvp.demo.controller.response.OrderPayUrlResponse;
@@ -64,7 +63,7 @@ public class OrderController {
 	}
 
 	@RequestMapping(path = "/payurl", method = RequestMethod.POST)
-	public XvpResponse payurl(@RequestBody OrderPayUrlRequest request) throws Exception {
+	public XvpResponse payurl() throws Exception {
 		XvpPayGetpayurlRequest ropRequest = new XvpPayGetpayurlRequest();
 		XvpPayGetpayurlResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		OrderPayUrlResponse response = new OrderPayUrlResponse();
