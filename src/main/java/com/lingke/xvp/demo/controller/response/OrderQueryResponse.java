@@ -1,7 +1,6 @@
 package com.lingke.xvp.demo.controller.response;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,20 +19,20 @@ public class OrderQueryResponse implements XvpResponse {
 	/**
 	 * 订单去除运费和优惠的商品金额
 	 */
-	private Long items_total_fee;
+	private String items_total_fee;
 	/**
 	 * 优惠金额
 	 */
-	private Long seller_discount_fee;
+	private String seller_discount_fee;
 	/**
 	 * 运费金额
 	 */
-	private Long logistic_fee;
+	private String logistic_fee;
 	/**
 	 * 最终支付的金额 final_amount = items_total_fee + logistic_fee -
 	 * seller_discount_fee
 	 */
-	private Long pay_amount;
+	private String pay_amount;
 	/**
 	 * 用户的备注
 	 */
@@ -61,15 +60,15 @@ public class OrderQueryResponse implements XvpResponse {
 	/**
 	 * 创建时间
 	 */
-	private Date create_time;
+	private String create_time;
 	/**
 	 * 支付时间
 	 */
-	private Date pay_time;
+	private String pay_time;
 	/**
 	 * 最后确认收货时间
 	 */
-	private Date confirm_receive_time;
+	private String confirm_receive_time;
 	/**
 	 * 订单项列表
 	 */
@@ -78,260 +77,210 @@ public class OrderQueryResponse implements XvpResponse {
 	 * 订单项列表
 	 */
 	private List<OrderQueryDeliveryResponse> orderdeliverys = new ArrayList<>();
-
 	/**
 	 * @return the order_id
 	 */
 	public String getOrder_id() {
 		return order_id;
 	}
-
 	/**
-	 * @param order_id
-	 *            the order_id to set
+	 * @param order_id the order_id to set
 	 */
 	public void setOrder_id(String order_id) {
 		this.order_id = order_id;
 	}
-
 	/**
 	 * @return the pay_type
 	 */
 	public String getPay_type() {
 		return pay_type;
 	}
-
 	/**
-	 * @param pay_type
-	 *            the pay_type to set
+	 * @param pay_type the pay_type to set
 	 */
 	public void setPay_type(String pay_type) {
 		this.pay_type = pay_type;
 	}
-
 	/**
 	 * @return the items_total_fee
 	 */
-	public Long getItems_total_fee() {
+	public String getItems_total_fee() {
 		return items_total_fee;
 	}
-
 	/**
-	 * @param items_total_fee
-	 *            the items_total_fee to set
+	 * @param items_total_fee the items_total_fee to set
 	 */
-	public void setItems_total_fee(Long items_total_fee) {
+	public void setItems_total_fee(String items_total_fee) {
 		this.items_total_fee = items_total_fee;
 	}
-
 	/**
 	 * @return the seller_discount_fee
 	 */
-	public Long getSeller_discount_fee() {
+	public String getSeller_discount_fee() {
 		return seller_discount_fee;
 	}
-
 	/**
-	 * @param seller_discount_fee
-	 *            the seller_discount_fee to set
+	 * @param seller_discount_fee the seller_discount_fee to set
 	 */
-	public void setSeller_discount_fee(Long seller_discount_fee) {
+	public void setSeller_discount_fee(String seller_discount_fee) {
 		this.seller_discount_fee = seller_discount_fee;
 	}
-
 	/**
 	 * @return the logistic_fee
 	 */
-	public Long getLogistic_fee() {
+	public String getLogistic_fee() {
 		return logistic_fee;
 	}
-
 	/**
-	 * @param logistic_fee
-	 *            the logistic_fee to set
+	 * @param logistic_fee the logistic_fee to set
 	 */
-	public void setLogistic_fee(Long logistic_fee) {
+	public void setLogistic_fee(String logistic_fee) {
 		this.logistic_fee = logistic_fee;
 	}
-
 	/**
 	 * @return the pay_amount
 	 */
-	public Long getPay_amount() {
+	public String getPay_amount() {
 		return pay_amount;
 	}
-
 	/**
-	 * @param pay_amount
-	 *            the pay_amount to set
+	 * @param pay_amount the pay_amount to set
 	 */
-	public void setPay_amount(Long pay_amount) {
+	public void setPay_amount(String pay_amount) {
 		this.pay_amount = pay_amount;
 	}
-
 	/**
 	 * @return the user_remark
 	 */
 	public String getUser_remark() {
 		return user_remark;
 	}
-
 	/**
-	 * @param user_remark
-	 *            the user_remark to set
+	 * @param user_remark the user_remark to set
 	 */
 	public void setUser_remark(String user_remark) {
 		this.user_remark = user_remark;
 	}
-
 	/**
 	 * @return the seller_remark
 	 */
 	public String getSeller_remark() {
 		return seller_remark;
 	}
-
 	/**
-	 * @param seller_remark
-	 *            the seller_remark to set
+	 * @param seller_remark the seller_remark to set
 	 */
 	public void setSeller_remark(String seller_remark) {
 		this.seller_remark = seller_remark;
 	}
-
 	/**
 	 * @return the order_status
 	 */
 	public String getOrder_status() {
 		return order_status;
 	}
-
 	/**
-	 * @param order_status
-	 *            the order_status to set
+	 * @param order_status the order_status to set
 	 */
 	public void setOrder_status(String order_status) {
 		this.order_status = order_status;
 	}
-
 	/**
 	 * @return the address
 	 */
 	public String getAddress() {
 		return address;
 	}
-
 	/**
-	 * @param address
-	 *            the address to set
+	 * @param address the address to set
 	 */
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 	/**
 	 * @return the logistic_user
 	 */
 	public String getLogistic_user() {
 		return logistic_user;
 	}
-
 	/**
-	 * @param logistic_user
-	 *            the logistic_user to set
+	 * @param logistic_user the logistic_user to set
 	 */
 	public void setLogistic_user(String logistic_user) {
 		this.logistic_user = logistic_user;
 	}
-
 	/**
 	 * @return the logistic_phone
 	 */
 	public String getLogistic_phone() {
 		return logistic_phone;
 	}
-
 	/**
-	 * @param logistic_phone
-	 *            the logistic_phone to set
+	 * @param logistic_phone the logistic_phone to set
 	 */
 	public void setLogistic_phone(String logistic_phone) {
 		this.logistic_phone = logistic_phone;
 	}
-
 	/**
 	 * @return the create_time
 	 */
-	public Date getCreate_time() {
+	public String getCreate_time() {
 		return create_time;
 	}
-
 	/**
-	 * @param create_time
-	 *            the create_time to set
+	 * @param create_time the create_time to set
 	 */
-	public void setCreate_time(Date create_time) {
+	public void setCreate_time(String create_time) {
 		this.create_time = create_time;
 	}
-
 	/**
 	 * @return the pay_time
 	 */
-	public Date getPay_time() {
+	public String getPay_time() {
 		return pay_time;
 	}
-
 	/**
-	 * @param pay_time
-	 *            the pay_time to set
+	 * @param pay_time the pay_time to set
 	 */
-	public void setPay_time(Date pay_time) {
+	public void setPay_time(String pay_time) {
 		this.pay_time = pay_time;
 	}
-
 	/**
 	 * @return the confirm_receive_time
 	 */
-	public Date getConfirm_receive_time() {
+	public String getConfirm_receive_time() {
 		return confirm_receive_time;
 	}
-
 	/**
-	 * @param confirm_receive_time
-	 *            the confirm_receive_time to set
+	 * @param confirm_receive_time the confirm_receive_time to set
 	 */
-	public void setConfirm_receive_time(Date confirm_receive_time) {
+	public void setConfirm_receive_time(String confirm_receive_time) {
 		this.confirm_receive_time = confirm_receive_time;
 	}
-
 	/**
 	 * @return the xvporderitems
 	 */
 	public List<OrderQueryItemResponse> getXvporderitems() {
 		return xvporderitems;
 	}
-
 	/**
 	 * @param xvporderitems the xvporderitems to set
 	 */
 	public void setXvporderitems(List<OrderQueryItemResponse> xvporderitems) {
 		this.xvporderitems = xvporderitems;
 	}
-
 	/**
 	 * @return the orderdeliverys
 	 */
 	public List<OrderQueryDeliveryResponse> getOrderdeliverys() {
 		return orderdeliverys;
 	}
-
 	/**
 	 * @param orderdeliverys the orderdeliverys to set
 	 */
 	public void setOrderdeliverys(List<OrderQueryDeliveryResponse> orderdeliverys) {
 		this.orderdeliverys = orderdeliverys;
 	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -345,4 +294,5 @@ public class OrderQueryResponse implements XvpResponse {
 				+ ", confirm_receive_time=" + confirm_receive_time + ", xvporderitems=" + xvporderitems
 				+ ", orderdeliverys=" + orderdeliverys + "]";
 	}
+
 }

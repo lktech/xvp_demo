@@ -1,7 +1,5 @@
 package com.lingke.xvp.demo.controller.response;
 
-import java.util.Date;
-
 /**
  * @author gaoyh
  *
@@ -10,7 +8,7 @@ public class OrderQueryDeliveryResponse implements XvpResponse {
 	/**
 	 * id 主键
 	 */
-	public Long id;
+	public String id;
 	
 	/**
 	 * 快递公司编码
@@ -29,24 +27,24 @@ public class OrderQueryDeliveryResponse implements XvpResponse {
 	/**
 	 * 是否需要物流, 0 不要物流 1 需要物流
 	 */
-	public Integer need_logistics_flg;
+	public String need_logistics_flg;
 
 	/**
 	 * 创建时间
 	 */
-	public Date create_time;
+	public String create_time;
 
 	/**
 	 * @return the id
 	 */
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -95,28 +93,28 @@ public class OrderQueryDeliveryResponse implements XvpResponse {
 	/**
 	 * @return the need_logistics_flg
 	 */
-	public Integer getNeed_logistics_flg() {
+	public String getNeed_logistics_flg() {
 		return need_logistics_flg;
 	}
 
 	/**
 	 * @param need_logistics_flg the need_logistics_flg to set
 	 */
-	public void setNeed_logistics_flg(Integer need_logistics_flg) {
+	public void setNeed_logistics_flg(String need_logistics_flg) {
 		this.need_logistics_flg = need_logistics_flg;
 	}
 
 	/**
 	 * @return the create_time
 	 */
-	public Date getCreate_time() {
+	public String getCreate_time() {
 		return create_time;
 	}
 
 	/**
 	 * @param create_time the create_time to set
 	 */
-	public void setCreate_time(Date create_time) {
+	public void setCreate_time(String create_time) {
 		this.create_time = create_time;
 	}
 
@@ -129,5 +127,6 @@ public class OrderQueryDeliveryResponse implements XvpResponse {
 				+ ", logistics_company_name=" + logistics_company_name + ", logistics_num=" + logistics_num
 				+ ", need_logistics_flg=" + need_logistics_flg + ", create_time=" + create_time + "]";
 	}
+
 	
 }
