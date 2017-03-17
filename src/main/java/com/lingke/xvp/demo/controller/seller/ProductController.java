@@ -67,7 +67,7 @@ public class ProductController {
 
 		for (SkuAddRequest skuRequest : request.getSku()) {
 			XvpSkuAddskuRequest ropSkuRequest = BeanCopyUtil.copy(skuRequest, XvpSkuAddskuRequest.class);
-			// TODO 
+			// TODO
 			ropSkuRequest.setApp_id(ropClientAdapter.getAppId());
 			ropSkuRequest.setProduct_id(Long.valueOf(productCreateResponse.getProduct().getId()));
 			ropClientAdapter.ropInvoke(ropSkuRequest);
