@@ -17,6 +17,7 @@ import com.Rop.api.domain.Area;
 import com.Rop.api.request.XvpCommonGetcityareasRequest;
 import com.Rop.api.request.XvpCommonGetcountyareasRequest;
 import com.Rop.api.request.XvpCommonGetprovinceareasRequest;
+import com.Rop.api.request.XvpPhoneVerfiycodeRequest;
 import com.Rop.api.response.XvpCommonGetcityareasResponse;
 import com.Rop.api.response.XvpCommonGetcountyareasResponse;
 import com.Rop.api.response.XvpCommonGetprovinceareasResponse;
@@ -25,6 +26,7 @@ import com.lingke.xvp.demo.controller.request.CommonRequest;
 import com.lingke.xvp.demo.controller.response.CommonListResponse;
 import com.lingke.xvp.demo.controller.response.CommonResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
+import com.lingke.xvp.demo.utils.BeanCopyUtil;
 
 /**
  * Created by yuwb on 2017-03-13. 通用类相关业务处理
@@ -41,11 +43,10 @@ public class CommonController {
 	 * @param request
 	 *            前台参数
 	 * @return
-	 * @throws ApiException
-	 *             Api异常
+	 * @throws Exception 
 	 */
 	@RequestMapping(path = "/getprovinceareas", method = RequestMethod.POST)
-	public XvpResponse getprovinceareas(@RequestBody CommonRequest commonRequest) throws ApiException {
+	public XvpResponse getprovinceareas(@RequestBody CommonRequest commonRequest) throws Exception {
 		XvpCommonGetprovinceareasRequest request = new XvpCommonGetprovinceareasRequest();
 		XvpCommonGetprovinceareasResponse ropResponse = ropClientAdapter.ropInvoke(request);
 		return convertRopRespToXvpResp(ropResponse);
@@ -57,13 +58,11 @@ public class CommonController {
 	 * @param request
 	 *            前台参数
 	 * @return
-	 * @throws ApiException
-	 *             Api异常
+	 * @throws Exception 
 	 */
 	@RequestMapping(path = "/getcityareas", method = RequestMethod.POST)
-	public XvpResponse getcityareas(@RequestBody CommonRequest commonRequest) throws ApiException {
-		XvpCommonGetcityareasRequest request = new XvpCommonGetcityareasRequest();
-		BeanUtils.copyProperties(commonRequest, request);
+	public XvpResponse getcityareas(@RequestBody CommonRequest commonRequest) throws Exception {
+		XvpCommonGetcityareasRequest request = BeanCopyUtil.copy(commonRequest, XvpCommonGetcityareasRequest.class);
 		XvpCommonGetcityareasResponse ropResponse = ropClientAdapter.ropInvoke(request);
 		return convertRopRespToXvpResp(ropResponse);
 	}
@@ -74,13 +73,11 @@ public class CommonController {
 	 * @param request
 	 *            前台参数
 	 * @return
-	 * @throws ApiException
-	 *             Api异常
+	 * @throws Exception 
 	 */
 	@RequestMapping(path = "/getcountyareas", method = RequestMethod.POST)
-	public XvpResponse getcountyareas(@RequestBody CommonRequest commonRequest) throws ApiException {
-		XvpCommonGetcountyareasRequest request = new XvpCommonGetcountyareasRequest();
-		BeanUtils.copyProperties(commonRequest, request);
+	public XvpResponse getcountyareas(@RequestBody CommonRequest commonRequest) throws Exception {
+		XvpCommonGetcountyareasRequest request = BeanCopyUtil.copy(commonRequest, XvpCommonGetcountyareasRequest.class);
 		XvpCommonGetcountyareasResponse ropResponse = ropClientAdapter.ropInvoke(request);
 		return convertRopRespToXvpResp(ropResponse);
 	}
@@ -91,9 +88,10 @@ public class CommonController {
 	 * @param ropResponse
 	 *            rop返回结果
 	 * @return
+	 * @throws Exception 
 	 */
 	@SuppressWarnings("unchecked")
-	private CommonListResponse convertRopRespToXvpResp(RopResponse ropResponse) {
+	private CommonListResponse convertRopRespToXvpResp(RopResponse ropResponse) throws Exception {
 		CommonListResponse listResponse = new CommonListResponse();
 		List<Area> areas = new ArrayList<>();
 		try {
@@ -104,8 +102,7 @@ public class CommonController {
 		}
 		CommonResponse response = null;
 		for (Area area : areas) {
-			response = new CommonResponse();
-			BeanUtils.copyProperties(area, response);
+			response = BeanCopyUtil.copy(area, CommonResponse.class);
 			listResponse.add(response);
 		}
 		return listResponse;

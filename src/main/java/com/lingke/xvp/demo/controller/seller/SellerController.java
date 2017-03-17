@@ -1,13 +1,11 @@
 package com.lingke.xvp.demo.controller.seller;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Rop.api.ApiException;
 import com.Rop.api.request.XvpPhoneSendcodeRequest;
 import com.Rop.api.request.XvpPhoneVerfiycodeRequest;
 import com.Rop.api.request.XvpStoreQueryRequest;
@@ -21,6 +19,7 @@ import com.lingke.xvp.demo.controller.request.SellerVerifyRequest;
 import com.lingke.xvp.demo.controller.response.SellerVerifyResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.db.dao.Seller;
+import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
 
 /**
@@ -42,8 +41,7 @@ public class SellerController {
 		if (seller != null) {
 			throw new RuntimeException("手机号已经被注册");
 		}
-		XvpPhoneSendcodeRequest ropRequest = new XvpPhoneSendcodeRequest();
-		BeanUtils.copyProperties(request, ropRequest);
+		XvpPhoneSendcodeRequest ropRequest = BeanCopyUtil.copy(request, XvpPhoneSendcodeRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpPhoneSendcodeResponse xvpUserCreateResponse = ropClientAdapter.ropInvoke(ropRequest);
 		SellerVerifyResponse sellerVerifyResponse = new SellerVerifyResponse();
@@ -70,7 +68,7 @@ public class SellerController {
 		XvpStoreQueryRequest ropRequest = new XvpStoreQueryRequest();
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setPage_no(XvpConstants.PAGE_NO);
-		ropRequest.setPage_size(ropRequest.getPage_size());
+		ropRequest.setPage_size(XvpConstants.PAGE_SIZE);
 		XvpStoreQueryResponse ropResponse= ropClientAdapter.ropInvoke(ropRequest);
 		if(ropResponse.getStores()!=null&&ropResponse.getStores().size()>0){
 			SessionUtil.sellerSetStoreId(ropResponse.getStores().get(0).getId());
@@ -101,11 +99,10 @@ public class SellerController {
 	 * @param request
 	 *            用户输入信息
 	 * @return
-	 * @throws ApiException 
+	 * @throws Exception 
 	 */
-	private Boolean checkCode(SellerRegisterRequest request) throws ApiException {
-		XvpPhoneVerfiycodeRequest ropRequest = new XvpPhoneVerfiycodeRequest();
-		BeanUtils.copyProperties(request, ropRequest);
+	private Boolean checkCode(SellerRegisterRequest request) throws Exception {
+		XvpPhoneVerfiycodeRequest ropRequest = BeanCopyUtil.copy(request, XvpPhoneVerfiycodeRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpPhoneVerfiycodeResponse response = ropClientAdapter.ropInvoke(ropRequest);
 		return Boolean.valueOf(response.getPhoneresult().getFlag());

@@ -1,17 +1,13 @@
 package com.lingke.xvp.demo.controller.seller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Rop.api.ApiException;
 import com.Rop.api.domain.XvpOrder;
 import com.Rop.api.request.XvpOrderDeliverRequest;
 import com.Rop.api.request.XvpOrderDiscountRequest;
@@ -30,6 +26,7 @@ import com.lingke.xvp.demo.controller.response.OrderQueryItemResponse;
 import com.lingke.xvp.demo.controller.response.OrderQueryListResponse;
 import com.lingke.xvp.demo.controller.response.OrderQueryResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
+import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
 
 /**
@@ -47,13 +44,11 @@ public class OrderController {
 	 * @param request
 	 *            前台参数
 	 * @return
-	 * @throws ApiException
-	 *             Api异常
+	 * @throws Exception
 	 */
 	@RequestMapping(path = "/query", method = RequestMethod.POST)
-	public XvpResponse query(@RequestBody OrderQueryRequest request) throws ApiException {
-		XvpOrderQueryRequest ropRequest = new XvpOrderQueryRequest();
-		BeanUtils.copyProperties(request, ropRequest);
+	public XvpResponse query(@RequestBody OrderQueryRequest request) throws Exception {
+		XvpOrderQueryRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderQueryRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
 		ropRequest.setPage_no(XvpConstants.PAGE_NO);
@@ -74,13 +69,12 @@ public class OrderController {
 	 * @param request
 	 *            前台参数
 	 * @return
-	 * @throws ApiException
-	 *             Api异常
+	 * @throws Exception
+	 *             异常
 	 */
 	@RequestMapping(path = "/get", method = RequestMethod.POST)
-	public XvpResponse get(@RequestBody OrderGetRequest request) throws ApiException {
-		XvpOrderGetRequest ropRequest = new XvpOrderGetRequest();
-		BeanUtils.copyProperties(request, ropRequest);
+	public XvpResponse get(@RequestBody OrderGetRequest request) throws Exception {
+		XvpOrderGetRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderGetRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpOrderGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		OrderQueryResponse response = new OrderQueryResponse();
@@ -94,13 +88,11 @@ public class OrderController {
 	 * @param request
 	 *            前台参数
 	 * @return
-	 * @throws ApiException
-	 *             Api异常
+	 * @throws Exception
 	 */
 	@RequestMapping(path = "/delivery", method = RequestMethod.POST)
-	public XvpResponse delivery(@RequestBody OrderDeliveryRequest request) throws ApiException {
-		XvpOrderDeliverRequest ropRequest = new XvpOrderDeliverRequest();
-		BeanUtils.copyProperties(request, ropRequest);
+	public XvpResponse delivery(@RequestBody OrderDeliveryRequest request) throws Exception {
+		XvpOrderDeliverRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderDeliverRequest.class);
 		ropRequest.setLogistic_flg(request.getNeed_logistics_flg());
 		StringBuilder itemIds = new StringBuilder();
 		request.getOrder_item_id_list().forEach(x -> itemIds.append(x).append(","));
@@ -116,13 +108,11 @@ public class OrderController {
 	 * @param request
 	 *            前台参数
 	 * @return
-	 * @throws ApiException
-	 *             Api异常
+	 * @throws Exception
 	 */
 	@RequestMapping(path = "/discount", method = RequestMethod.POST)
-	public XvpResponse discount(@RequestBody OrderDiscountRequest request) throws ApiException {
-		XvpOrderDiscountRequest ropRequest = new XvpOrderDiscountRequest();
-		BeanUtils.copyProperties(request, ropRequest);
+	public XvpResponse discount(@RequestBody OrderDiscountRequest request) throws Exception {
+		XvpOrderDiscountRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderDiscountRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
@@ -136,25 +126,16 @@ public class OrderController {
 	 * 
 	 * @param response
 	 *            response
+	 * @throws Exception
 	 */
-	private void copyXvpOrderToXvpResponse(XvpOrder xvpOrder, OrderQueryResponse response) {
-		BeanUtils.copyProperties(xvpOrder, response);
-		if (!CollectionUtils.isEmpty(xvpOrder.getOrderdeliverys())) {
-			List<OrderQueryDeliveryResponse> orderdeliverys = xvpOrder.getOrderdeliverys().stream().map(x -> {
-				OrderQueryDeliveryResponse orderQueryDeliveryResponse = new OrderQueryDeliveryResponse();
-				BeanUtils.copyProperties(x, orderQueryDeliveryResponse);
-				return orderQueryDeliveryResponse;
-			}).collect(Collectors.toList());
-			response.setOrderdeliverys(orderdeliverys);
-		}
-		if (!CollectionUtils.isEmpty(xvpOrder.getXvporderitems())) {
-			List<OrderQueryItemResponse> orderitems = xvpOrder.getXvporderitems().stream().map(x -> {
-				OrderQueryItemResponse orderQueryItemResponse = new OrderQueryItemResponse();
-				BeanUtils.copyProperties(x, orderQueryItemResponse);
-				return orderQueryItemResponse;
-			}).collect(Collectors.toList());
-			response.setXvporderitems(orderitems);
-		}
+	private void copyXvpOrderToXvpResponse(XvpOrder xvpOrder, OrderQueryResponse response) throws Exception {
+		response = BeanCopyUtil.copy(xvpOrder, OrderQueryResponse.class);
+		List<OrderQueryDeliveryResponse> orderdeliverys = BeanCopyUtil.copyList(xvpOrder.getOrderdeliverys(),
+				OrderQueryDeliveryResponse.class);
+		response.setOrderdeliverys(orderdeliverys);
+		List<OrderQueryItemResponse> xvporderitems = BeanCopyUtil.copyList(xvpOrder.getOrderdeliverys(),
+				OrderQueryItemResponse.class);
+		response.setXvporderitems(xvporderitems);
 	}
 
 }

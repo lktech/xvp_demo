@@ -52,11 +52,11 @@ public class OrderQueryResponse implements XvpResponse {
 	/**
 	 * 收货人
 	 */
-	private String logistic_user;
+	private String address_name;
 	/**
 	 * 收货人联系电话
 	 */
-	private String logistic_phone;
+	private String address_phone;
 	/**
 	 * 创建时间
 	 */
@@ -197,30 +197,7 @@ public class OrderQueryResponse implements XvpResponse {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	/**
-	 * @return the logistic_user
-	 */
-	public String getLogistic_user() {
-		return logistic_user;
-	}
-	/**
-	 * @param logistic_user the logistic_user to set
-	 */
-	public void setLogistic_user(String logistic_user) {
-		this.logistic_user = logistic_user;
-	}
-	/**
-	 * @return the logistic_phone
-	 */
-	public String getLogistic_phone() {
-		return logistic_phone;
-	}
-	/**
-	 * @param logistic_phone the logistic_phone to set
-	 */
-	public void setLogistic_phone(String logistic_phone) {
-		this.logistic_phone = logistic_phone;
-	}
+	
 	/**
 	 * @return the create_time
 	 */
@@ -281,6 +258,31 @@ public class OrderQueryResponse implements XvpResponse {
 	public void setOrderdeliverys(List<OrderQueryDeliveryResponse> orderdeliverys) {
 		this.orderdeliverys = orderdeliverys;
 	}
+	
+	/**
+	 * @return the address_name
+	 */
+	public String getAddress_name() {
+		return address_name;
+	}
+	/**
+	 * @param address_name the address_name to set
+	 */
+	public void setAddress_name(String address_name) {
+		this.address_name = address_name;
+	}
+	/**
+	 * @return the address_phone
+	 */
+	public String getAddress_phone() {
+		return address_phone;
+	}
+	/**
+	 * @param address_phone the address_phone to set
+	 */
+	public void setAddress_phone(String address_phone) {
+		this.address_phone = address_phone;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -289,8 +291,8 @@ public class OrderQueryResponse implements XvpResponse {
 		return "OrderQueryResponse [order_id=" + order_id + ", pay_type=" + pay_type + ", items_total_fee="
 				+ items_total_fee + ", seller_discount_fee=" + seller_discount_fee + ", logistic_fee=" + logistic_fee
 				+ ", pay_amount=" + pay_amount + ", user_remark=" + user_remark + ", seller_remark=" + seller_remark
-				+ ", order_status=" + order_status + ", address=" + address + ", logistic_user=" + logistic_user
-				+ ", logistic_phone=" + logistic_phone + ", create_time=" + create_time + ", pay_time=" + pay_time
+				+ ", order_status=" + order_status + ", address=" + address + ", address_name=" + address_name
+				+ ", address_phone=" + address_phone + ", create_time=" + create_time + ", pay_time=" + pay_time
 				+ ", confirm_receive_time=" + confirm_receive_time + ", xvporderitems=" + xvporderitems
 				+ ", orderdeliverys=" + orderdeliverys + "]";
 	}
