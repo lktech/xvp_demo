@@ -56,8 +56,7 @@ public class OrderController {
 		XvpOrderQueryResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		OrderQueryListResponse list = new OrderQueryListResponse();
 		for (XvpOrder xvpOrder : ropResponse.getXvporders()) {
-			OrderQueryResponse response = new OrderQueryResponse();
-			copyXvpOrderToXvpResponse(xvpOrder, response);
+			OrderQueryResponse response = copyXvpOrderToXvpResponse(xvpOrder);
 			list.add(response);
 		}
 		return list;
@@ -77,8 +76,7 @@ public class OrderController {
 		XvpOrderGetRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderGetRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpOrderGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
-		OrderQueryResponse response = new OrderQueryResponse();
-		copyXvpOrderToXvpResponse(ropResponse.getXvporder(), response);
+		OrderQueryResponse response = copyXvpOrderToXvpResponse(ropResponse.getXvporder());
 		return response;
 	}
 
@@ -123,19 +121,18 @@ public class OrderController {
 	 * 
 	 * @param xvpOrder
 	 *            xvpOrder
-	 * 
-	 * @param response
-	 *            response
+	 * @return
 	 * @throws Exception
 	 */
-	private void copyXvpOrderToXvpResponse(XvpOrder xvpOrder, OrderQueryResponse response) throws Exception {
-		response = BeanCopyUtil.copy(xvpOrder, OrderQueryResponse.class);
+	private OrderQueryResponse copyXvpOrderToXvpResponse(XvpOrder xvpOrder) throws Exception {
+		OrderQueryResponse response = BeanCopyUtil.copy(xvpOrder, OrderQueryResponse.class);
 		List<OrderQueryDeliveryResponse> orderdeliverys = BeanCopyUtil.copyList(xvpOrder.getOrderdeliverys(),
 				OrderQueryDeliveryResponse.class);
 		response.setOrderdeliverys(orderdeliverys);
 		List<OrderQueryItemResponse> xvporderitems = BeanCopyUtil.copyList(xvpOrder.getOrderdeliverys(),
 				OrderQueryItemResponse.class);
 		response.setXvporderitems(xvporderitems);
+		return response;
 	}
 
 }

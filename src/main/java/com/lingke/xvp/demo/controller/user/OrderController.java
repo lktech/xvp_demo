@@ -37,6 +37,7 @@ import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
 
 import tech.nodex.tutils2.jackson.JsonUtils;
+
 /**
  * Created by yuwb on 2017-03-13. 订单相关业务处理
  */
@@ -46,9 +47,9 @@ public class OrderController {
 	@Autowired
 	private XvpRopClient ropClientAdapter;
 
-	@RequestMapping(path="/add",method=RequestMethod.POST)
+	@RequestMapping(path = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public XvpResponse addOrder(@RequestBody OrderCreateRequest request) throws Exception{
+	public XvpResponse addOrder(@RequestBody OrderCreateRequest request) throws Exception {
 		XvpOrderCreateRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderCreateRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setPay_type(XvpConstants.DEFAULT_PAY_TYPE);
@@ -59,22 +60,23 @@ public class OrderController {
 		response.setOrder_id(ropResponse.getXvporder().getOrder_id());
 		return response;
 	}
-	
-	@RequestMapping(path="/payurl",method=RequestMethod.POST)
-	public XvpResponse payurl(@RequestBody OrderPayUrlRequest request) throws Exception{
+
+	@RequestMapping(path = "/payurl", method = RequestMethod.POST)
+	public XvpResponse payurl(@RequestBody OrderPayUrlRequest request) throws Exception {
 		XvpPayGetpayurlRequest ropRequest = new XvpPayGetpayurlRequest();
 		XvpPayGetpayurlResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		OrderPayUrlResponse response = new OrderPayUrlResponse();
 		response.setUrl(ropResponse.getUrl().getPay_url());
 		return response;
 	}
+
 	/**
 	 * 订单管理查询
 	 * 
 	 * @param request
 	 *            前台参数
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@RequestMapping(path = "/query", method = RequestMethod.POST)
 	public XvpResponse query(@RequestBody OrderQueryRequest request) throws Exception {
@@ -87,8 +89,7 @@ public class OrderController {
 		XvpOrderQueryResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		OrderQueryListResponse list = new OrderQueryListResponse();
 		for (XvpOrder xvpOrder : ropResponse.getXvporders()) {
-			OrderQueryResponse response = new OrderQueryResponse();
-			copyXvpOrderToXvpResponse(xvpOrder, response);
+			OrderQueryResponse response = copyXvpOrderToXvpResponse(xvpOrder);
 			list.add(response);
 		}
 		return list;
@@ -100,24 +101,24 @@ public class OrderController {
 	 * @param request
 	 *            前台参数
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@RequestMapping(path = "/get", method = RequestMethod.POST)
 	public XvpResponse get(@RequestBody OrderGetRequest request) throws Exception {
 		XvpOrderGetRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderGetRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpOrderGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
-		OrderQueryResponse response = new OrderQueryResponse();
-		copyXvpOrderToXvpResponse(ropResponse.getXvporder(), response);
+		OrderQueryResponse response = copyXvpOrderToXvpResponse(ropResponse.getXvporder());
 		return response;
 	}
+
 	/**
 	 * 买家确认收货
 	 * 
 	 * @param request
 	 *            前台参数
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@RequestMapping(path = "/confirm", method = RequestMethod.POST)
 	public XvpResponse confirm(@RequestBody OrderConfirmRequest request) throws Exception {
@@ -126,23 +127,23 @@ public class OrderController {
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
 	}
+
 	/**
 	 * 从XvpOrder复制到XvpResponse
 	 * 
 	 * @param xvpOrder
 	 *            xvpOrder
-	 * 
-	 * @param response
-	 *            response
+	 * @return
 	 * @throws Exception
 	 */
-	private void copyXvpOrderToXvpResponse(XvpOrder xvpOrder, OrderQueryResponse response) throws Exception {
-		response = BeanCopyUtil.copy(xvpOrder, OrderQueryResponse.class);
+	private OrderQueryResponse copyXvpOrderToXvpResponse(XvpOrder xvpOrder) throws Exception {
+		OrderQueryResponse response = BeanCopyUtil.copy(xvpOrder, OrderQueryResponse.class);
 		List<OrderQueryDeliveryResponse> orderdeliverys = BeanCopyUtil.copyList(xvpOrder.getOrderdeliverys(),
 				OrderQueryDeliveryResponse.class);
 		response.setOrderdeliverys(orderdeliverys);
 		List<OrderQueryItemResponse> xvporderitems = BeanCopyUtil.copyList(xvpOrder.getOrderdeliverys(),
 				OrderQueryItemResponse.class);
 		response.setXvporderitems(xvporderitems);
+		return response;
 	}
 }
