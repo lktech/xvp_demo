@@ -52,7 +52,7 @@ public class ProductController {
 	 */
 	@RequestMapping(path = "/sku/get", method = RequestMethod.POST)
 	public XvpResponse getProductSku(@RequestBody ProductSkuGetRequest request) throws Exception {
-		XvpSkuGetskuRequest ropRequest = new XvpSkuGetskuRequest();
+		XvpSkuGetskuRequest ropRequest = BeanCopyUtil.copy(request, XvpSkuGetskuRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.userGetStoreId()));
 		XvpSkuGetskuResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
