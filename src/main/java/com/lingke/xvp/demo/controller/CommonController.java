@@ -98,6 +98,7 @@ public class CommonController {
 			throw new RuntimeException("获取行政区划出错", e);
 		}
 		CommonResponse response = null;
+		
 		for (Area area : areas) {
 			response = BeanCopyUtil.copy(area, CommonResponse.class);
 			listResponse.add(response);
