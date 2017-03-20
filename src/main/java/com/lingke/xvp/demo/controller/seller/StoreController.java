@@ -1,5 +1,6 @@
 package com.lingke.xvp.demo.controller.seller;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tech.nodex.tutils2.jackson.JsonUtils;
-
 import com.Rop.api.ApiException;
+import com.Rop.api.domain.ExtendField;
 import com.Rop.api.request.XvpStoreCreateRequest;
 import com.Rop.api.request.XvpStoreGetRequest;
 import com.Rop.api.request.XvpStoreUpdateRequest;
@@ -27,6 +27,8 @@ import com.lingke.xvp.demo.controller.response.StoreResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
+
+import tech.nodex.tutils2.jackson.JsonUtils;
 
 /**
  * Created by yuwb on 2017-03-13. 店铺相关业务处理
@@ -78,8 +80,12 @@ public class StoreController {
 		return JsonUtils.toJson(extendFields);
 	}
 	
-	private void copyRopExtendFieldToResponse(XvpStoreGetResponse ropResponse,StoreResponse response){
-		//todo
+	private void copyRopExtendFieldToResponse(XvpStoreGetResponse ropResponse,StoreResponse response) throws Exception{
+		for(ExtendField extendField : ropResponse.getStore().getExtendfields()){
+			Field declaredField = response.getClass().getDeclaredField(extendField.getColumn_name());
+			declaredField.setAccessible(true);
+			declaredField.set(response, extendField.getColumn_value());
+		}
 	}
 	/**
 	 * 修改店铺信息
