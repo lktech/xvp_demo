@@ -43,7 +43,7 @@ public class CommonController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(path = "/getprovinceareas", method = RequestMethod.POST)
-	public XvpResponse getprovinceareas(@RequestBody CommonRequest commonRequest) throws Exception {
+	public XvpResponse getprovinceareas(CommonRequest commonRequest) throws Exception {
 		XvpCommonGetprovinceareasRequest request = new XvpCommonGetprovinceareasRequest();
 		XvpCommonGetprovinceareasResponse ropResponse = ropClientAdapter.ropInvoke(request);
 		return convertRopRespToXvpResp(ropResponse);
