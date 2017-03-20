@@ -37,10 +37,6 @@ public class SellerController {
 
 	@RequestMapping(value = "/verify", method = RequestMethod.POST)
 	public XvpResponse verify(@RequestBody SellerVerifyRequest request) throws Exception {
-		Seller seller = Seller.getSellerByPhone(request.getPhone());
-		if (seller != null) {
-			throw new RuntimeException("手机号已经被注册");
-		}
 		XvpPhoneSendcodeRequest ropRequest = BeanCopyUtil.copy(request, XvpPhoneSendcodeRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpPhoneSendcodeResponse xvpUserCreateResponse = ropClientAdapter.ropInvoke(ropRequest);
@@ -51,6 +47,10 @@ public class SellerController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public XvpResponse register(@RequestBody SellerRegisterRequest request) throws Exception {
+		Seller seller = Seller.getSellerByPhone(request.getPhone());
+		if (seller != null) {
+			throw new RuntimeException("手机号已经被注册");
+		}
 		if (!checkCode(request)) {
 			throw new RuntimeException("验证码输入错误");
 		}
