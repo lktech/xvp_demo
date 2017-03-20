@@ -13,6 +13,7 @@ import com.Rop.api.request.XvpProductQueryRequest;
 import com.Rop.api.request.XvpStoreGetRequest;
 import com.Rop.api.response.XvpProductQueryResponse;
 import com.Rop.api.response.XvpStoreGetResponse;
+import com.lingke.xvp.demo.XvpConstants;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.StoreMainRequest;
 import com.lingke.xvp.demo.controller.response.ProductResponse;
@@ -39,6 +40,8 @@ public class StoreController {
 		XvpProductQueryRequest ropProductRequest= new XvpProductQueryRequest();
 		ropProductRequest.setApp_id(ropClientAdapter.getAppId());
 		ropProductRequest.setStore_id(request.getStore_id());
+		ropProductRequest.setPage_no(XvpConstants.PAGE_NO);
+		ropProductRequest.setPage_size(XvpConstants.PAGE_SIZE);
 		XvpProductQueryResponse ropProductResponse = ropClientAdapter.ropInvoke(ropProductRequest);
 		List<ProductResponse> products = BeanCopyUtil.copyList(ropProductResponse.getProducts(), ProductResponse.class);
 		response.setProducts(products);
