@@ -73,6 +73,9 @@ public class BeanCopyUtil {
 					return Integer.parseInt(value.toString());
 				}
 			}
+			if(value instanceof List){
+				return null;
+			}
 			return value;
 		}
 	}
