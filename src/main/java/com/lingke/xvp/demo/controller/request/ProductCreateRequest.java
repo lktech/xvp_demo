@@ -9,6 +9,7 @@ public class ProductCreateRequest implements XvpRequest {
 	private Integer pay_type;
 	private String product_desc;
 	private Long logistics_fee;
+	private Long virtual_flg;
 	private List<SkuAddRequest> sku;
 	
 	public String getName() {
@@ -65,6 +66,14 @@ public class ProductCreateRequest implements XvpRequest {
 
 	public void setSku(List<SkuAddRequest> sku) {
 		this.sku = sku;
+	}
+
+	public Long getVirtual_flg() {
+		return virtual_flg;
+	}
+
+	public void setVirtual_flg(Long virtual_flg) {
+		this.virtual_flg = virtual_flg;
 	}
 
 }

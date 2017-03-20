@@ -63,6 +63,7 @@ public class ProductController {
 		XvpProductCreateRequest ropRequest = BeanCopyUtil.copy(request, XvpProductCreateRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.parseLong(SessionUtil.sellerGetStoreId()));
+		ropRequest.setVirtual_flg(0);
 		XvpProductCreateResponse productCreateResponse = ropClientAdapter.ropInvoke(ropRequest);
 
 		for (SkuAddRequest skuRequest : request.getSku()) {
@@ -123,6 +124,7 @@ public class ProductController {
 		XvpProductUpdateRequest ropRequest = BeanCopyUtil.copy(request, XvpProductUpdateRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.parseLong(SessionUtil.sellerGetStoreId()));
+		ropRequest.setVirtual_flg(0);
 		ropClientAdapter.ropInvoke(ropRequest);
 
 		List<SkuUpdateRequest> sku_list = request.getSku();
