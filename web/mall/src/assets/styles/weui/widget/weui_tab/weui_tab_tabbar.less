@@ -6,33 +6,26 @@
 @import "tabbar";
 
 .weui_tab {
-    position: relative;
-    height: 100%;
+  position: relative;
+  //height: 100%;//bob
+  min-height: 100%;
 }
 
-.weui_tab_bd {
-    box-sizing: border-box;
-    height: 100%;
-    padding-bottom: 55px;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+//.weui_tab_bd {
+//  box-sizing: border-box;
+//  padding-top: 46px;//bob
+//  padding-bottom: 55px;
+//  overflow: auto;
+//  -webkit-overflow-scrolling: touch;
+//}
+.view-box{//bob 新增样式
+  padding-top: 46px;
+  padding-bottom: 55px;
 }
-
 .weui_tab_bd_item {
-    display: none;
+  display: none;
 }
 
 .weui_tab_bd_item_active {
-    display: block;
-}
-
-.weui_tabbar_icon {
-    position: relative;
-}
-.weui_tabbar_icon > sup {
-    position: absolute;
-    top: -8px;
-    left: 100%;
-    transform: translateX(-50%);
-    z-index: 101;
-}
+  display: block;
+} 

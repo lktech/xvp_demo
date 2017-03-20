@@ -27,7 +27,7 @@ gulp.task('webpack',['clean'], function(cb) {
     webpack(config, cb)
 });
 
-/** 
+/**
  *  压缩css文件
  */
 gulp.task('style',function() {

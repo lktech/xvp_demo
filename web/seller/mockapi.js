@@ -1,63 +1,158 @@
-
-
-//商品详情 页面初始化
-Mock.mock(basepath + "/product/detail",'post',{
-    "success": true,
+//机器人列表 获取机器人列表
+Mock.mock(basepath + "/seller/product/query",'post',{
+    "code": 'SUCESS',
     "msg": null,
-    "obj":{
-        "goods":{
-            id:1,
-            type: "PRODUCT",
-            title: '小米V领短袖T恤 男款小米V领短袖T恤 男款小米V领短袖T恤 男款',
-            price: 8880,
-            hideOldPrice:false,
-            oldPrice: 10000,
-            minPrice: 6660,
-            maxPrice: 12000,
-            pic: '//img13.360buyimg.com/da/jfs/t3643/10/649102478/43997/d9929403/58107467Nae4e4c32.jpg',
-            postageType:1,
-            postage:1200,
-            stock:11
-        },
-        "storeInfo":{
-            "id":1,
-            "name":"吴亮的店铺",
-            "logo":"//img13.360buyimg.com/da/jfs/t3643/10/649102478/43997/d9929403/58107467Nae4e4c32.jpg"
-        },
-        content:{
-            "title":"应季水果",
-            "detail":'<img src="//img13.360buyimg.com/da/jfs/t3643/10/649102478/43997/d9929403/58107467Nae4e4c32.jpg"><h3>这个是商品的介绍</h3><p>无论走到哪里，都应该记住，过去都是假的，回忆是一条没有尽头的路，一切以往的春天都不复存在，就连那最坚韧而又狂乱的爱情归根结底也不过是一种转瞬即逝的现实。</p><img src="//img13.360buyimg.com/da/jfs/t3643/10/649102478/43997/d9929403/58107467Nae4e4c32.jpg"><h3>这个是商品的介绍</h3><p>无论走到哪里，都应该记住，过去都是假的，回忆是一条没有尽头的路，一切以往的春天都不复存在，就连那最坚韧而又狂乱的爱情归根结底也不过是一种转瞬即逝的现实。</p>'
-        },
-        sku:[{"id":1,"name":"红色 XLL"},{"id":2,"name":"黑色 XL"},{"id":3,"name":"灰色 L"}]
+    "result":[{
+        'id':'1',
+        'name':'sdsadsa',
+        'pics':'',
+        'product_detail':'sadasdsad',
+        'logistics_fee':'1',
+        'stock':'12',
+        'price':'3'
+    },{
+        'id':'1',
+        'name':'sdsadsa',
+        'pics':'',
+        'product_detail':'sadasdsad',
+        'logistics_fee':'1',
+        'stock':'12',
+        'price':'3'
+    },{
+        'id':'1',
+        'name':'sdsadsa',
+        'pics':'',
+        'product_detail':'sadasdsad',
+        'logistics_fee':'1',
+        'stock':'12',
+        'price':'3'
+    }]
+});
 
-    }
+Mock.mock(basepath + "/seller/order/query",'post',{
+    "code": 'SUCESS',
+    "msg": null,
+    // "result":[{
+    //         'order_id':'1',
+    //         'pay_type':'微信支付',
+    //         'items_total_fee':'32',
+
+    //         'seller_discount_fee':'2',
+    //         'logistic_fee':'10',
+    //         'pay_amount':  '40'
+    //         'user_remark':'用户的备注',
+    //         'seller_remark':'卖家的备注',
+    //         'order_status':,'DFK'          //DFK：待付款 DFH：待发货 DSH：待收货 YSH： 已收货,
+    //         'address':'物流配送地址',
+    //         'logistic_user':'收货人',
+    //         'logistic_phone':'收货人联系电话',
+    //         'create_time':'',                     //创建时间      
+    //         'pay_time':'',                       //支付时间,
+    //         'confirm_receive_time':'最后确认收货时间',
+    //         'xvporderitems':[{
+    //             'id':'111',
+    //             'product_id':'111',
+    //             'sku_id':'1111',
+    //             'product_name':'商品',
+    //             'price':'3',
+    //             'sku_str':'L',
+    //             'item_count':'3',
+    //             'delivery_id':'4',
+    //             'create_time':'1'
+    //         }],        
+    //         'orderdeliverys':[{
+    //             'id':'value',
+    //             'logistics_company_code':'快递公司编码',
+    //             'logistics_company_name':'快递公司名称',
+    //             'logistics_num':  '运单号',
+    //             'need_logistics_flg':'是否需要物流', 0 不要物流 1 需要物流,
+    //              'create_time':'value'
+    //          }]                
+    //     }]
+    'result':[{
+        orderNum: "2394847HGGR",
+        orderStatus: "DFH",
+        pay: 3000,
+        goods: [
+            {
+                id: "123",
+                goodsName: "26度果园 芒果攀枝花果树熟芒果8kg芒果攀枝花果树熟芒果8kg",
+                goodsUrl: "http://tupian.enterdesk.com/2012/1115/gha/3/enterdesk%20%289%29.jpg",
+                sku: "3kg",
+                price: 1000,
+                num: 3
+            },
+            {
+                id: "456",
+                goodsName: "26度果园 芒果攀枝花果树熟芒果8kg芒果攀枝花果树熟芒果8kg",
+                goodsUrl: "http://tupian.enterdesk.com/2012/1115/gha/3/enterdesk%20%289%29.jpg",
+                sku: "2kg",
+                price: 1000,
+                num: 3
+            }, {
+                id: "789",
+                goodsName: "芒果攀枝花果树熟芒果8kg芒果攀枝花果树熟芒果8kg",
+                goodsUrl: "http://tupian.enterdesk.com/2012/1115/gha/3/enterdesk%20%289%29.jpg",
+                sku: "无",
+                price: 2000,
+                num: 2
+            }
+        ],
+        'orderdeliverys':[{
+            'id':'value',
+            'logistics_company_code':'快递公司编码',
+            'logistics_company_name':'快递公司名称',
+            'logistics_num':  '运单号',
+            'need_logistics_flg':'是否需要物流', //0 不要物流 1 需要物流,
+             'create_time':'value'
+         }] 
+    }]
 });
 
 
-//商品详情 sku信息
-Mock.mock(basepath + "/product/sku",'post',{
-    "success": true,
+Mock.mock(basepath + "/seller/order/get",'post',{
+    "code": 'SUCESS',
     "msg": null,
-    "obj":{
-        "price":888,
-        "stock":5
+    "result":{
+        'order_id':'1111',
+        'pay_type':'value',
+        'items_total_fee':'订单去除运费和优惠的商品金额',
+        'seller_discount_fee':'1',
+        'logistic_fee':'1',
+        'pay_amount':  '1',
+        'user_remark':'用户的备注',
+        'seller_remark':'卖家的备注',
+        'order_status':'DFH', //DFK：待付款 DFH：待发货 DSH：待收货 YSH： 已收货
+        'address':'物流配送地址物流配送地址物流配送地址物流配送地址物流配送地址',
+        'address_name':'收货人',
+        'address_phone':'收货人联系电话',
+        'create_time':'创建时间',
+        'pay_time':'支付时间',
+        'confirm_receive_time':'最后确认收货时间',
+        'xvporderitems':[{
+            'id':'value',
+            'product_id':'value',
+            'sku_id':'value',
+            'product_name':'sadsadas',
+            'price':'1',
+            'sku_str':'value',
+            'item_count':'1',
+            'delivery_id':'物流ID',
+            'create_time':'vlue',
+            'goodsUrl':'http://tupian.enterdesk.com/2012/1115/gha/3/enterdesk%20%289%29.jpg'
+        }],                 
+        'orderdeliverys':[{
+            'id':'value',
+            'logistics_company_code':'快递公司编码',
+            'logistics_company_name':'快递公司名称',
+            'logistics_num':  '运单号',
+            'need_logistics_flg':'是否需要物流',    //0 不要物流 1 需要物流,
+             'create_time':'value'
+        }]                
     }
+});
+Mock.mock(basepath + "/seller/order/delivery",'post',{
+    "code": 'SUCESS',
+    
 });
 
-//商品详情 购买
-Mock.mock(basepath + "/product/buy",'post',{
-    "success": true,
-    "msg": null,
-    "obj":{
-        "id":111
-    }
-});
-
-//商品详情 加入购物车
-Mock.mock(basepath + "/product/setcart",'post',{
-    "success": true,
-    "msg": null,
-    "obj":{
-        "id":111
-    }
-});

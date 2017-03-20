@@ -26,9 +26,6 @@ exports.refund_state = {
  * @author bob
  */
 exports.productType = {
-    "actual": "ACTUAL",//实物商品
-    "virtual": "VIRTUAL",//虚拟商品
-
     "normal": "PRODUCT",//普通商品
     "fenxiao": "FX", //分销商品
     "fenqi": "FQ", //分期商品
@@ -69,12 +66,12 @@ exports.ticketType = {
  * @author zhaoze
  */
 exports.orderStatus={
-    dqr: 1,//待确认
-    dfk: 2,//待付款
-    dfh: 3,//待发货
-    dsh: 4,//待收货
-    ok: 5,//完成交易
-    close: 6//订单关闭（用户关闭/订单超时）
+    dqr: 'DQR',//待确认
+    dfk: 'DFK',//待付款
+    dfh: 'DFH',//待发货
+    dsh: 'DSH',//待收货
+    ok: 'YSH',//完成交易
+    close: 'YGB'//订单关闭（用户关闭/订单超时）
 }
 
 
@@ -86,7 +83,7 @@ exports.orderStatus={
  */
 exports.postageType={
     baoyou: 0,//包邮
-    fixed: "FIXED",//固定运费
-    template: "TEMPLATE",//运费模板
+    normal: 1,//正常运费
+    area: 2,//按地区
     other: 3//其他
 }

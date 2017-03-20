@@ -1,9 +1,10 @@
 @import 'var.less';
 @import '1px.less';
-body,html{height: 100%;width: 100%;-webkit-text-size-adjust:none;-webkit-touch-callout: none;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);padding:0;margin:0;font-size: @fts-normal !important;}
-body{width:100%;min-width:320px;word-break: break-word;background: @color-bg;color:@color3;}
+@import '../components/loading.less';
+html,body{height:100%;width: 100%;-webkit-text-size-adjust:none;-webkit-touch-callout: none;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);padding:0;margin:0;font-size: @fts-normal !important;}
+html{overflow-x:hidden;}
+body{font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;line-height: @line-height;min-width:320px;word-break: break-word;background: @color-bg;color:@color3;}
 *{border:0;margin:0;padding:0;}
-*,*:before,*:after {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
 ul{margin:0;padding:0;list-style:none;}
 ol{margin:0 0 0 20px;padding:0;}
 audio,canvas,video,embed {max-width:100%;display:inline-block;}
@@ -15,12 +16,18 @@ h1{color: @color0;font-size: @fts-big;}
 h2{color: @color0;font-size: @fts-normal;}
 h3{color: @color0;font-size: @fts-small;}
 h4{color: @color0;font-size: @fts-smaller;}
-p{margin:0 0 @px20;}
+p{margin:0;}
 .body-noscroll{overflow-y: hidden;}
 .clearfix:after {visibility:hidden;display:block;font-size:0;content:" ";clear: both;height:0; }
 .txt-ofl{white-space:nowrap;overflow:hidden;-o-text-overflow:ellipsis;text-overflow:ellipsis;}
 .text-center{text-align: center;}
 .text-right{text-align: right;}
+.float-left{
+    float: left;
+}
+.float-right{
+    float: right;
+}
 .vux-center-v, .vux-center-h, .vux-center{display: flex;}
 .vux-center-v, .vux-center{align-items: center;}
 .vux-center-h, .vux-center {justify-content: center;}
@@ -43,6 +50,7 @@ p{margin:0 0 @px20;}
 .clr-red{color:@color-red !important;}
 .clr-white{color:@color-white !important;}
 .clr-dark{color:@color0 !important;}
+.clr-primary{color:@color-theme !important;}
 .line-height{line-height: @line-height;}
 .fontbg{background: rgba(0, 0, 0, 0.7);display: inline-block; border-radius: 20px;padding: 5px 10px;color:@color-white;}
 .label-white{color:@color9;}
@@ -51,14 +59,15 @@ p{margin:0 0 @px20;}
 .cell-wrap-title-dark{color:@color0;}
 .border-t,.border-b,.border-l,.border-r{position: relative;}
 .border-t:before{content: " ";position: absolute;left: 0;top: 0;width: 200%; height: 1px; border-top: 1px solid @color-gray;color: @color-gray;-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: scale(0.5);transform: scale(0.5);}
-.border-b:after{content: " ";position: absolute;left: 0;bottom: 0;width: 200%; height: 1px; border-bottom: 1px solid @color-gray;color: @color-gray;-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: scale(0.5);transform: scale(0.5);}
+.border-b:after{content: " ";position: absolute;left: 0;bottom: -1px;width: 200%; height: 1px; border-bottom: 1px solid @color-gray;color: @color-gray;-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: scale(0.5);transform: scale(0.5);}
 .border-l:after{content: " ";position: absolute;left: 0;top: 0;height: 200%; width: 1px; border-left: 1px solid @color-gray;color: @color-gray;-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: scale(0.5);transform: scale(0.5);}
 .border-r:before{content: " ";position: absolute;right: 0;top: 0;height: 200%; width: 1px; border-right: 1px solid @color-gray;color: @color-gray;-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: scale(0.5);transform: scale(0.5);}
 .vux-tap-active{tap-highlight-color:transparent}
 .vux-tap-active:active{background-color:@color-gray;}
 .tabbar-wrap{padding-bottom: @tabbar-height + @px20;}
 .tabbar-wrap2{padding-bottom: @btn-heigth;}
-.footer-fixed{position: fixed;left: 0;bottom:0;width: 100%;min-height: @tabbar-height;padding: @distance;z-index: 100;background: @color-bg;-webkit-transform:translateZ(0);}
+.footer-fixed{position: fixed;left: 0;bottom:0;width: 100%;min-height: @tabbar-height;/*padding: @distance;*/z-index: 100;background: @color-bg;-webkit-transform:translateZ(0);}
+.footer-fixed .weui_btn { display: block !important; line-height: 49px !important;}
 .btn-sendmsg{position: fixed;left: 0;bottom:0;width: 100%;height: 49px;line-height: 49px;z-index: 100;background: @color-white;text-align: right;font-size: @fts-big;color: @color6;padding: 0 @px10;}
 .btn-sendmsg:after{content: " ";position: absolute;left: 10px;right:20px;top: 10px;height: 56px; width:160%;border-radius:@btn-radius*2;border: 1px solid @color-gray;color: @color-gray;-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: scale(0.5);transform: scale(0.5);}
 .wrap-pd{padding: 0px @px10;}
@@ -70,132 +79,84 @@ p{margin:0 0 @px20;}
 .wrap-detail img{width:100%;}
 .wrap-detail>h3{font-size: @fts-normal;padding: 0px @px10;margin:@px10 0px @px5;text-align: center;color:@color6;}
 .wrap-detail>p{padding: 0px @px10;margin-bottom:@px10;}
-.vux-reddot,.vux-reddot-border,.vux-reddot-s {
-  position: relative;
-}
-.icon{background-size: 36px auto;}
-.icon-add{background: url("../../images/icon-add.png") no-repeat scroll center center;}
-.icon-aerfa{background: url("../../images/icon-aerfa.png") no-repeat scroll center center;}
-.icon-beta{background: url("../../images/icon-beta.png") no-repeat scroll center center;}
-.icon-delateme{background: url("../../images/icon-delateme.png") no-repeat scroll center center;}
-.icon-gama{background: url("../../images/icon-gama.png") no-repeat scroll center center;}
-.icon-groupsell{background: url("../../images/icon-groupsell.png") no-repeat scroll center center;}
-.icon-groupsend{background: url("../../images/icon-groupsend.png") no-repeat scroll center center;}
-.icon-message{background: url("../../images/icon-message.png") no-repeat scroll center center;}
-.icon-position{background: url("../../images/icon-position.png") no-repeat scroll center center;}
-.icon-rocket{background: url("../../images/icon-rocket.png") no-repeat scroll center center;}
-.icon-rss{background: url("../../images/icon-rss.png") no-repeat scroll center center;}
-.icon-search{background: url("../../images/icon-search.png") no-repeat scroll center center;}
-.icon-set{background: url("../../images/icon-set.png") no-repeat scroll center center;}
-.icon-try{background: url("../../images/icon-try.png") no-repeat scroll center center;}
-.icon-weather{background: url("../../images/icon-weather.png") no-repeat scroll center center;}
-.icon-list{background: url("../../images/icon-list.png") no-repeat scroll center center;}
-.icon-notice{background: url("../../images/icon-notice.png") no-repeat scroll center center;}
-.icon-groupadd{background: url("../../images/icon-groupadd.png") no-repeat scroll center center;}
-
-.vux-reddot:after,.vux-reddot-border:after,.vux-reddot-s:after {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 8px;
-  height: 8px;
-  background-color: @color-red;
-  border-radius: 100%;
-  right: -3px;
-  top: -3px;
-  background-clip: padding-box;
-}
-
-.vux-reddot-border:before {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 8px;
-  height: 8px;
-  background-color: #fff;
-  border-radius: 5px;
-  right: -4px;
-  top: -4px;
-  background-clip: padding-box;
-  padding: 1px;
-}
-
-.vux-reddot-s:after {
-  width: 6px;
-  height: 6px;
-  top: -5px;
-  right: -5px;
-}
 
 .bg-height{background-repeat: no-repeat; background-position: 0 0;background-size: 100% auto;}
 .bg-width{background-repeat: no-repeat; background-position: 0 0;background-size: auto 100%;}
 .distance{margin-bottom: @distance;}
 
+
+/**
+==================插件框架===============================
+*/
+
+.weui_actionsheet {
+    transform: translate(0, 100%);
+}
+
 /**
 * vue-router transition
 */
-.vux-pop-out-transition,
-.vux-pop-in-transition {
-  width: 100%;
-  animation-duration: 0.3s;
-  animation-fill-mode: both;
-  backface-visibility: hidden;
+.router-view {
+    width: 100%;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    backface-visibility: hidden;
 }
-.vux-pop-out-enter,
-.vux-pop-out-leave,
-.vux-pop-in-enter,
-.vux-pop-in-leave {
-  will-change: transform;
-  height: 100%;
-  position: absolute;
-  left: 0;
+.vux-pop-out-enter-active,
+.vux-pop-out-leave-active,
+.vux-pop-in-enter-active,
+.vux-pop-in-leave-active {
+    will-change: transform;
+    height: 100%;
+    position: absolute;
+    left: 0;
 }
-.vux-pop-out-enter {
-  animation-name: popInLeft;
+.vux-pop-out-enter-active {
+    animation-name: popInLeft;
 }
-.vux-pop-out-leave {
-  animation-name: popOutRight;
+.vux-pop-out-leave-active {
+    animation-name: popOutRight;
 }
-.vux-pop-in-enter {
-  perspective: 1000;
-  animation-name: popInRight;
+.vux-pop-in-enter-active {
+    perspective: 1000;
+    animation-name: popInRight;
 }
-.vux-pop-in-leave {
-  animation-name: popOutLeft;
+.vux-pop-in-leave-active {
+    animation-name: popOutLeft;
 }
 @keyframes popInLeft {
-  from {
-    transform: translate3d(-100%, 0, 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
+    from {
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
 }
 @keyframes popOutLeft {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-100%, 0, 0);
-  }
+    from {
+        opacity: 1;
+    }
+    to {
+        transform: translate3d(-100%, 0, 0);
+    }
 }
 @keyframes popInRight {
-  from {
-    transform: translate3d(100%, 0, 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
+    from {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
 @keyframes popOutRight {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(100%, 0, 0);
-  }
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+    }
 }
 
-.weui_actionsheet {
-  transform: translate(0, 100%);
-}

@@ -1,10 +1,14 @@
 <template>
-    <div>
+    <div class="wq-list">
         <c-top-back></c-top-back>
-        <c-tab :list="[{key:0,value:'全部'},{key:1,value:'待付款'},{key:2,value:'待发货'},{key:3,value:'已发货'},{key:4,value:'已完成'}]"
-               active="0"
-               active-color='#f05b0b' @on-change="tabChange"></c-tab>
-        <c-order :order-data="orderData" :odr="odr"></c-order>
+        <c-tab>
+            <c-tab-item @on-item-click='orderList' selected>全部</c-tab-item>
+            <c-tab-item @on-item-click='orderList("DFK")'>待付款</c-tab-item>
+            <c-tab-item @on-item-click='orderList("DFH")'>待发货</c-tab-item>
+            <c-tab-item @on-item-click='orderList("DSH")'>已发货</c-tab-item>
+            <c-tab-item @on-item-click='orderList("YWC")'>已完成</c-tab-item>
+        </c-tab>
+        <c-order :order-data="orderData" type="primary" :order-status="odr"  @fukuan="fukuan"  @qrsh="qrsh"  @look="look" @fahuo="fahuo"></c-order>
         <c-scroll-load @on-load="load" :url='url'><!-- 列表滚动加载--></c-scroll-load>
     </div>
 </template>
@@ -24,13 +28,15 @@
                     ok: constants.orderStatus.ok,//完成交易
                     close: constants.orderStatus.close//订单关闭（用户关闭/订单超时）
                 },
-                url: basepath + "/order",
+                url: basepath + "/mall/order/order_list",
+                status:''
             }
         },
-        ready(){
-            utils.MenuShare();
+        mounted: function () {
+            this.$nextTick(function () {
             //所有订单列表
-            this.orderList(0);
+                this.orderList();
+           })
         },
         methods: {
             load(data) {
@@ -38,33 +44,44 @@
                     this.list = data;
                 }
             },
-            tabChange(id){
-                //tab标签
-                switch (id) {
-                    case 0:
-                        this.orderList("id", 0);
-                        break;
-                    case 1:
-                        this.orderList("id", 1);
-                        break;
-                    case 2:
-                        this.orderList("id", 2);
-                        break;
-                    case 3:
-                        this.orderList("id", 3);
-                        break;
-                    case 4:
-                        this.orderList("id", 4);
-                        break;
-                }
+            look(id){
+                utils.go({path:'detail',query:{'id':id}},this.$router);
             },
-            //订单列表
-            orderList(id, status){
+            fahuo(id){
+                utils.go({path:'logistics',query:{'id':id}},this.$router,true);
+            },
+            fukuan(id){
+                utils.go("http://m.sit.xiaovpu.com/wap/order/xvp_cashier.html?orderId="+id+'&appId=xvp',this.$router);
+            },
+            qrsh(id){
                 let that = this;
                 utils.ajax({
-                    url: basepath + "/order", data: {}, success: function (data) {
-                        if (data.success) {
-                            that.orderData = data.obj;
+                    url: basepath + "/user/order/confirm",
+                    dataType: 'json',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        order_id: id,
+                    }),
+                    success: function (data) {
+                        if (data.code="SUCESS") {
+                            that.orderList(that.status);
+                        }else{
+                            that.$vux.alert.show(data.message);
+                        }
+                    }
+                });
+            },
+            //订单列表
+            orderList(id){
+                let that = this;
+                that.status=id?id:'';
+                utils.ajax({
+                    url:"/user/order/query", type:'post', data: JSON.stringify({order_status:id?id:''}), success: function (data) {
+                        if (data.code=="SUCESS") {
+                            that.orderData = data.result;
+                        }else{
+                            that.orderData = [];
+                            that.$vux.alert.show(data.message);
                         }
                     }
                 });
@@ -73,12 +90,17 @@
         },
 
         components: {
-            "cTab": require('../../components/tab.vue'),
-            "cOrder": require('../../components/order.vue'),
-            "cTopBack": require('../../components/top-back.vue'),
+            "cTab": require('../../components/tab/tab.vue'),
+            "cTabItem": require('../../components/tab/tab-item.vue'),
+            "cOrder": require('../../components/x-order/x-order.vue'),
+            "cTopBack": require('../../components/x-top-back/x-top-back.vue'),
             // 滚动加载
-            "cScrollLoad": require('../../components/scroll-load.vue'),
+            "cScrollLoad": require('../../components/x-scroll-load/x-scroll-load.vue'),
         }
     }
 </script>
-
+<style>
+    .wq-list button{
+        width:auto !important; display:inline-block !important;
+    }
+</style>

@@ -21,6 +21,7 @@ var plugins = [
         $: 'jquery'
     })
 ];
+//var entry = ['babel-polyfill','./src/main'],
 var entry = ['./src/main'],
     cdnPrefix = "",
     buildPath = "/dist/",
@@ -60,12 +61,10 @@ module.exports = {
         },{
             test: /\.(jpg|png|gif)$/,
             loader: "file-loader?name=images/[hash].[ext]"
-        }, {
-            test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-            loader: "url-loader?limit=10000&minetype=application/font-woff"
-        }, {
-            test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-            loader: "file-loader"
+        },
+        {
+            test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+            loader: 'file'
         }, {
             test: /\.json$/,
             loader: 'json'
@@ -80,10 +79,11 @@ module.exports = {
     },
     resolve: {
         // require时省略的扩展名，如：require('module') 不需要module.js
-        extension: ['', '.js', '.less'],
+        extension: ['', '.js', '.less','.vue'],
         //别名
         alias: {
-            filter: path.join(__dirname, 'src/filters')
+            filter: path.join(__dirname, 'src/filters'),
+            'vue$': 'vue/dist/vue.js'
         }
     },
     plugins: plugins,

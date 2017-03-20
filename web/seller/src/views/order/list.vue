@@ -1,10 +1,14 @@
 <template>
-    <div>
+    <div class="wq-list">
         <c-top-back></c-top-back>
-        <c-tab :list="[{key:0,value:'全部'},{key:1,value:'待付款'},{key:2,value:'待发货'},{key:3,value:'已发货'},{key:4,value:'已完成'}]"
-               active="0"
-               active-color='#f05b0b' @on-change="tabChange"></c-tab>
-        <c-order :order-data="orderData" :odr="odr" @look="look"></c-order>
+        <c-tab>
+            <c-tab-item @on-item-click='orderList' selected>全部</c-tab-item>
+            <c-tab-item @on-item-click='orderList("DFK")'>待付款</c-tab-item>
+            <c-tab-item @on-item-click='orderList("DFH")'>待发货</c-tab-item>
+            <c-tab-item @on-item-click='orderList("DSH")'>已发货</c-tab-item>
+            <c-tab-item @on-item-click='orderList("YWC")'>已完成</c-tab-item>
+        </c-tab>
+        <c-order :order-data="orderData" type="primary" :order-status="odr"  @look="look" @fahuo="fahuo"></c-order>
         <c-scroll-load @on-load="load" :url='url'><!-- 列表滚动加载--></c-scroll-load>
     </div>
 </template>
@@ -17,19 +21,16 @@
                 orderData: [],
                 //订单状态
                 odr: {
-                    /*dqr: constants.orderStatus.dqr,//待确认
-                    dfk: constants.orderStatus.dfk,//待付款
                     dfh: constants.orderStatus.dfh,//待发货
-                    dsh: constants.orderStatus.dsh,//待收货
-                    ok: constants.orderStatus.ok,//完成交易
-                    close: constants.orderStatus.close//订单关闭（用户关闭/订单超时）*/
                 },
                 url: basepath + "/mall/order/order_list",
             }
         },
-        ready(){
+        mounted: function () {
+            this.$nextTick(function () {
             //所有订单列表
-            this.orderList();
+                this.orderList();
+           })
         },
         methods: {
             load(data) {
@@ -38,7 +39,10 @@
                 }
             },
             look(id){
-                utils.go({name:'oddetail',query:{'id':id}},this.$router);
+                utils.go({path:'detail',query:{'id':id}},this.$router);
+            },
+            fahuo(id){
+                utils.go({path:'logistics',query:{'id':id}},this.$router,true);
             },
             tabChange(id){
                 //tab标签
@@ -64,9 +68,9 @@
             orderList(id){
                 let that = this;
                 utils.ajax({
-                    url: basepath + "/mall/order/order_list", data: id?JSON.stringify({orderStatus:id}):{}, success: function (data) {
-                        if (data.success) {
-                            that.orderData = data.obj.list;
+                    url:"/seller/order/query", type:'post', data: JSON.stringify({order_status:id}), success: function (data) {
+                        if (data.code=="SUCESS") {
+                            that.orderData = data.result;
                         }else{
                             that.orderData = [];
                             that.$vux.alert.show(data.msg);
@@ -78,12 +82,17 @@
         },
 
         components: {
-            "cTab": require('../../components/tab.vue'),
-            "cOrder": require('../../components/order.vue'),
-            "cTopBack": require('../../components/top-back.vue'),
+            "cTab": require('../../components/tab/tab.vue'),
+            "cTabItem": require('../../components/tab/tab-item.vue'),
+            "cOrder": require('../../components/x-order/x-order.vue'),
+            "cTopBack": require('../../components/x-top-back/x-top-back.vue'),
             // 滚动加载
-            "cScrollLoad": require('../../components/scroll-load.vue'),
+            "cScrollLoad": require('../../components/x-scroll-load/x-scroll-load.vue'),
         }
     }
 </script>
-
+<style>
+    .wq-list button{
+        width:auto !important; display:inline-block !important;
+    }
+</style>

@@ -2,14 +2,14 @@
 <div>
     <div>
         <c-group>
-            <c-input title="手机号" placeholder="请输入手机号" @validate="validate" :value.sync="formData.phone" name="phone" is-type="mobile" :max='11'></c-input>
-            <c-input title="密码" type="password" placeholder="请输入密码" @validate="validate" :value.sync="formData.password" name="password" :max='20' is-type="notnull"></c-input>
+            <c-input title="手机号" placeholder="请输入手机号" @on-change="validate" v-model="formData.phone" name="phone" is-type="china-mobile" :max='11'></c-input>
+            <c-input title="密码" type="password" placeholder="请输入密码" @on-change="validate" name="password" required v-model="formData.password" :max='20'></c-input>
         </c-group>
-        <div class="wrap-pd">
-            <c-button :type="color" :disabled='disabled' text="登录" @click="login" size="block"></c-button>
+        <div class="wrap-pd" style="margin-top:10px">
+            <c-button :disabled="disabled" :type="color" text="登录" @click.native="login" size="block"></c-button>
         </div>
         <div class="wrap-pd" style='margin-top:10px;'>
-          <c-button type="default" text="注册" :link="{name:'register'}" size="block"></c-button>
+          <c-button text="注册" size="block" link="register"></c-button>
         </div>
         <div style="color:#5ABA5A; margin-top:10px; font-size:14px; margin-left:10px" @click="forget">忘记密码</div>
     </div>
@@ -33,20 +33,22 @@
               disabled:true
             }
         },
-        ready(){
-            utils.loadingHide();
-            this.login1('1');
+        mounted: function () {
+            this.$nextTick(function () {
+              utils.loadingHide();
+              //this.login1('1');
+            })
         },
         methods:{
           validate(obj){
               if(obj.name=='phone'){
-                  this.phone_status=obj.status;                   
+                  this.phone_status=obj.valid;                   
               }
               if(obj.name=='password'){
-                  this.pass_status=obj.status;                   
+                  this.pass_status=obj.valid;                
               }
               if(this.phone_status && this.pass_status){
-                this.color='org';
+                this.color='primary';
                 this.disabled=false;
               }else{
                 this.color='default';
@@ -57,7 +59,7 @@
             if(!this.disabled){
               let that=this;
               utils.ajax({
-                  url: basepath + "/mall/auth",
+                  url: basepath + "/seller/seller/login",
                   dataType: 'json',
                   type: 'POST',
                   data:JSON.stringify({
@@ -65,16 +67,11 @@
                     'password':md5(that.formData.password)
                   }),
                   success: function(data){
-                      if(data.success){
+                      if(data.code=="SUCESS"){
                           utils.header();
                           that.login1();
                       }else{
-                        if(data.msg.indexOf('用户或密码名不正确')!=-1){
                           that.$vux.alert.show('用户名或密码不正确');
-                        }
-                        if(data.msg.indexOf('授权失败')!=-1){
-                          utils.go({name:'storeAddInfo'},that.$router);
-                        }
                       }
                   }
               });
@@ -87,8 +84,7 @@
                 dataType: 'json',
                 type: 'POST',
                 success: function(data){
-                    if(data.success){
-                        
+                    if(data.code=="SUCESS"){
                         utils.go({name:'store'},that.$router);
                     }else{
                       if(!q){
@@ -99,16 +95,16 @@
             });
           },
           forget(){
-            utils.go({name:'forget'},this.$router);
+            utils.go({path:'forget'},this.$router);
           }
         },
         components:{
-            "cGroup":require('../../components/group.vue'),
-            "cTopBack":require('../../components/top-back.vue'),
-            "cInput":require('../../components/x-input.vue'),
-            "cButton":require('../../components/button.vue'),
-            "cButtonSend":require('../../components/button-send.vue'),
-            "cMsg": require("../../components/msg.vue")
+            "cGroup":require('../../components/group/group.vue'),
+            "cTopBack":require('../../components/x-top-back/x-top-back.vue'),
+            "cInput":require('../../components/input/input.vue'),
+            "cButton":require('../../components/button/button.vue'),
+            "cButtonSend":require('../../components/x-button-send/x-button-send.vue'),
+            "cMsg": require("../../components/x-messages/x-messages.vue")
         }
     }
 </script>
