@@ -3,26 +3,28 @@ package com.lingke.xvp.demo.controller.request;
 import java.util.List;
 
 public class OrderCreateRequest implements XvpRequest {
-	private Long logistic_flg;
-	private Long logistics_fee;
+	private Integer logistic_flg;
+	private Long logistic_fee;
 	private Long pay_amount;
 	private Long addressee_id;
 	private List<OrderItemRequest> buy_sku_list;
 
-	public Long getLogistic_flg() {
+
+	public Integer getLogistic_flg() {
 		return logistic_flg;
 	}
 
-	public void setLogistic_flg(Long logistic_flg) {
+	public void setLogistic_flg(Integer logistic_flg) {
 		this.logistic_flg = logistic_flg;
 	}
 
-	public Long getLogistics_fee() {
-		return logistics_fee;
+
+	public Long getLogistic_fee() {
+		return logistic_fee;
 	}
 
-	public void setLogistics_fee(Long logistics_fee) {
-		this.logistics_fee = logistics_fee;
+	public void setLogistic_fee(Long logistic_fee) {
+		this.logistic_fee = logistic_fee;
 	}
 
 	public Long getPay_amount() {
