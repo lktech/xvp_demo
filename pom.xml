@@ -55,4 +55,20 @@
 			<scope>system</scope>
 		</dependency>
 	</dependencies>
+	  
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<includeSystemScope>true</includeSystemScope>
+					<mainClass>com.lingke.xvp.demo.XvpApp</mainClass>
+					<executable>true</executable>
+					<addResources>true</addResources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+  
 </project>
