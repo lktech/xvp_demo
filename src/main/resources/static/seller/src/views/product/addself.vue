@@ -15,12 +15,6 @@
               </c-uploadmul>
           </c-cell-wrap>
           <c-cell-wrap>
-              <c-input title="商品描述" @on-change="validate" placeholder="请输入商品描述" name="describe" :max="500" v-model="formData.describe" ></c-input>
-              <c-uploadmul title='添加图片' :list="img_list2" @upload="upload3" name="upload3" :max="9">
-                <span slot="after-title" class="placeholder">请添加商品详情图</span> 
-              </c-uploadmul>
-          </c-cell-wrap>
-          <c-cell-wrap>
               <c-cell title="付款方式" value='微信支付'></c-cell>
               <c-input title="运费" @on-change="validate" placeholder="¥0.00" name="freight" v-model="formData.freight" :max="10" :is-type="money"></c-input>
           </c-cell-wrap>
@@ -90,14 +84,10 @@
       },
       methods: {
           upload1(src){
-            console.log(src);
-            alert(1)
+            
           },
           upload2(src){
-            alert(2)
-          },
-          upload3(src){
-            alert(3)
+            
           },
           validate(obj){
             if(obj.name=='name'){

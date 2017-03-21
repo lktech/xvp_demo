@@ -79,13 +79,13 @@ export default {
       this.$nextTick(function () {
       	let that = this;
       	var uploading = false;
-      	alert("1~~~",that.name)
+      	console.log("1~~~",that.name)
       		xvUpload.init({
       			ids:[that.name],
       			type:1,
       			success:function(data){
       				console.log(data);
-      				alert("2~~~",that.name)
+      				console.log("2~~~",that.name)
       				that.newList.push(data.url);
       			},
       			error:function(data){
