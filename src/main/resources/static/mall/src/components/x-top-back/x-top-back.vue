@@ -50,7 +50,7 @@ export default {
 
 <style lang="less">
 	@import '../../assets/styles/components/rui/top-back.less';
-    .active{
+    .all_top .active{
         margin-left:10px;
     }
 </style>

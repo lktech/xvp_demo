@@ -82,6 +82,9 @@ public class StoreController {
 	}
 	
 	private void copyRopExtendFieldToResponse(XvpStoreGetResponse ropResponse,StoreResponse response) throws Exception{
+		if( ropResponse.getStore().getExtendfields()==null|| ropResponse.getStore().getExtendfields().size()==0){
+			return ;
+		}
 		for(ExtendField extendField : ropResponse.getStore().getExtendfields()){
 			Field declaredField = response.getClass().getDeclaredField(extendField.getColumn_name());
 			declaredField.setAccessible(true);
@@ -119,7 +122,11 @@ public class StoreController {
 	public XvpResponse getStore() throws Exception {
 		XvpStoreGetRequest ropRequest = new XvpStoreGetRequest();
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
-		ropRequest.setStore_id(Long.parseLong(SessionUtil.sellerGetStoreId()));
+		String storeId= SessionUtil.sellerGetStoreId();
+		if(StringUtils.isEmpty(storeId)){
+			return null;
+		}
+		ropRequest.setStore_id(Long.parseLong(storeId));
 		XvpStoreGetResponse ropResponse= ropClientAdapter.ropInvoke(ropRequest);
 		StoreResponse response = BeanCopyUtil.copy(ropResponse.getStore(), StoreResponse.class);
 		copyRopExtendFieldToResponse(ropResponse,response);

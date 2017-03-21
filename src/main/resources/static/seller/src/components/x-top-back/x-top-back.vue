@@ -1,7 +1,7 @@
 <template>
   <div class="all_top border-b" v-bind:class="{'margin':mar}">
 		<div class="top_forward" v-show="!hide"  @click="onClick"></div>
-		<div class="top_logo" v-bind:class="{ wq_active: hide }" @click="onClick">
+		<div class="top_logo" v-bind:class="{ active: hide }" @click="onClick">
 			<img :src="src" alt="">
 		</div>
 	</div>
@@ -50,7 +50,7 @@ export default {
 
 <style lang="less">
 	@import '../../assets/styles/components/rui/top-back.less';
-    .wq_active{
+    .all_top .active{
         margin-left:10px;
     }
 </style>

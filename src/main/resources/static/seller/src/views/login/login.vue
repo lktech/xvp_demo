@@ -67,6 +67,7 @@
                     'password':md5(that.formData.password)
                   },
                   success: function(data){
+                      console.log(data)
                       if(data.code=="SUCESS"){
                           //utils.header();
                           that.login1();
@@ -77,7 +78,7 @@
               });
             }
           },
-          login1(q){
+          login1(){
             let that=this;
             utils.ajax({
                 url: basepath + "/seller/store/get",
