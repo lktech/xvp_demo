@@ -8,7 +8,7 @@
         </encoder>
     </appender>
     <appender name="ailyFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>/data/logs/xvp_openapi/server.log</File>
+        <File>/data/logs/xvp_demo/server.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
             <FileNamePattern>server.log.%d{yyyy-MM-dd}</FileNamePattern>
