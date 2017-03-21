@@ -88,7 +88,7 @@
                 url: basepath + "/mall/content/base64_upload",
                 dataType: 'json',
                 type: 'POST',
-                data:JSON.stringify({'base64ImgStr':src}),
+                data:{'base64ImgStr':src},
                 success: function(data){
                     if(data.success){
                         that.img_list.push(data.result.url);
@@ -104,7 +104,7 @@
                 url: basepath + "/mall/content/base64_upload",
                 dataType: 'json',
                 type: 'POST',
-                data:JSON.stringify({'base64ImgStr':src}),
+                data:{'base64ImgStr':src},
                 success: function(data){
                     if(data.success){
                         that.img_list1.push(data.result.url);
@@ -215,7 +215,7 @@
                   url: basepath + "/seller/product/update",
                   dataType: 'json',
                   type: 'POST',
-                  data:JSON.stringify(hold_obj),
+                  data:hold_obj,
                   success: function(data){
                       if(data.code=="SUCESS"){
                           var link=that.$router._currentTransition.from.name;
@@ -284,7 +284,7 @@
               url: basepath + "/seller/product/get",
               dataType: 'json',
               type: 'POST',
-              data:JSON.stringify({
+              data:{
                 "id":this.$route.query.id
               }),
               success: function(data){

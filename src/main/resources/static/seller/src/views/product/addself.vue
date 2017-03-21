@@ -196,7 +196,7 @@
                   url: basepath + "/seller/product/add",
                   dataType: 'json',
                   type: 'POST',
-                  data:JSON.stringify(hold_obj),
+                  data:hold_obj,
                   success: function(data){
                       if(data.code=="SUCESS"){
                           var link=that.$router._currentTransition.from.name;

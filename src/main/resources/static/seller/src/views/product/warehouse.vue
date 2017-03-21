@@ -71,9 +71,9 @@
               onConfirm() {
                 utils.ajax({
                   url: basepath + "/seller/product/delete",
-                  data: JSON.stringify({
+                  data: {
                     'id': that.selectId,
-                  }),
+                  },
                   success: function(data) {
                     if(data.code=="SUCESS") {
                       for(var i=0;i<that.goods.length;i++){

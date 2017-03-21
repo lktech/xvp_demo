@@ -90,9 +90,9 @@
                     url: "/seller/order/get",
                     dataType: 'json',
                     type: 'POST',
-                    data: JSON.stringify({
+                    data: {
                         orderId: that.$route.query.id
-                    }),
+                    },
                     success: function (data) {
                         if (data.code=="SUCESS") {
                             that.json=data.result;
@@ -118,10 +118,10 @@
                         url: basepath + "/seller/order/discount",
                         dataType: 'json',
                         type: 'POST',
-                        data: JSON.stringify({
+                        data: {
                             order_id: that.$route.query.id,
                             discount_amount:that.discount*100
-                        }),
+                        },
                         success: function (data) {
                             if (data.code="SUCESS") {
                                 that.$vux.alert.show({content:'更新成功',onHide :function(){

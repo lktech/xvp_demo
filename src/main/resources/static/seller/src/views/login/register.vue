@@ -75,14 +75,14 @@
                     url: basepath + "/seller/seller/check",
                     dataType: 'json',
                     type: 'POST',
-                    data:JSON.stringify({'phone':that.formData.phone}),
+                    data:{'phone':that.formData.phone},
                     success: function(data){
                         if(data.result.flag=="no"){
                             utils.ajax({
                                 url: basepath + "/seller/seller/verify",
                                 dataType: 'json',
                                 type: 'POST',
-                                data:JSON.stringify({'phone':that.formData.phone}),
+                                data:{'phone':that.formData.phone},
                                 success: function(data){
                                     if(data.code=="SUCESS"){
                                         that.formData.sn=data.result.sn;
@@ -126,12 +126,12 @@
                         url: basepath + "/mall/seller/register",
                         dataType: 'json',
                         type: 'POST',
-                        data:JSON.stringify({
+                        data:{
                           'phone':that.formData.phone,
                           'code':that.formData.code,
                           'password':md5(that.formData.password),
                           'sn':that.formData.sn
-                        }),
+                        },
                         success: function(data){
                             if(data.code=="SUCESS"){
                                 that.success=true;

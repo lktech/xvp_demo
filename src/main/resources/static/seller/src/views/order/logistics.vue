@@ -81,12 +81,12 @@
                         url: basepath + "/seller/order/delivery",
                         dataType: 'json',
                         type: 'POST',
-                        data: JSON.stringify({
+                        data: {
                             order_id: that.$route.query.id,
                             logistics_company_name:that.company,
                             logistics_num:that.num,
                             need_logistics_flg:that.logistics_Status
-                        }),
+                        },
                         success: function (data) {
                             if (data.code="SUCESS") {
                                 that.$vux.alert.show({content:'发货成功',onHide :function(){

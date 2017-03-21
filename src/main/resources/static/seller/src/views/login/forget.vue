@@ -80,7 +80,7 @@
                     url: basepath + "/seller/seller/verify",
                     dataType: 'json',
                     type: 'POST',
-                    data:JSON.stringify({'phone':that.formData.phone}),
+                    data:{'phone':that.formData.phone},
                     success: function(data){
                         if(data.code=="SUCESS"){
                             that.formData.sn=data.result.sn;
@@ -121,12 +121,12 @@
                       url: basepath + "/seller/seller/reset",
                       dataType: 'json',
                       type: 'POST',
-                      data:JSON.stringify({
+                      data:{
                         'phone':that.formData.phone,
                         'code':that.formData.code,
                         'password':md5(that.formData.password),
                         'sn':that.formData.sn
-                      }),
+                      },
                       success: function(data){
                           if(data.code=="SUCESS"){
                               that.success=true;

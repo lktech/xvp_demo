@@ -62,10 +62,10 @@
                   url: basepath + "/seller/seller/login",
                   dataType: 'json',
                   type: 'POST',
-                  data:JSON.stringify({
+                  data:{
                     'phone':that.formData.phone,
                     'password':md5(that.formData.password)
-                  }),
+                  },
                   success: function(data){
                       if(data.code=="SUCESS"){
                           //utils.header();

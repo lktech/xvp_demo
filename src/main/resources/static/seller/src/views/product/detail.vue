@@ -47,7 +47,7 @@
             let that = this;
             utils.ajax({
                 url: basepath + "/mall/product/detail",
-                data:JSON.stringify({"shelf_product_id":that.$route.params.id}),
+                data:{"shelf_product_id":that.$route.params.id},
                 success: function(data){
                     if(data.success){
                         that.goods = data.obj.product;
