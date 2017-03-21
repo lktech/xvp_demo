@@ -65,14 +65,7 @@ public class SellerController {
 			throw new RuntimeException("用户名或者密码错误");
 		}
 		SessionUtil.sellerLogin(seller.getId());
-		XvpStoreQueryRequest ropRequest = new XvpStoreQueryRequest();
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
-		ropRequest.setPage_no(XvpConstants.PAGE_NO);
-		ropRequest.setPage_size(XvpConstants.PAGE_SIZE);
-		XvpStoreQueryResponse ropResponse= ropClientAdapter.ropInvoke(ropRequest);
-		if(ropResponse.getStores()!=null&&ropResponse.getStores().size()>0){
-			SessionUtil.sellerSetStoreId(ropResponse.getStores().get(0).getId());
-		}
+		SessionUtil.sellerSetStoreId(seller.getStoreId().toString());
 		return null;
 	}
 
