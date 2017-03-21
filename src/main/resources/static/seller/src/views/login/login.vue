@@ -67,6 +67,7 @@
                     'password':md5(that.formData.password)
                   },
                   success: function(data){
+                      console.log(data)
                       if(data.code=="SUCESS"){
                           //utils.header();
                           that.login1();
