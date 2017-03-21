@@ -55,7 +55,7 @@
               success: function(data){
                   if(data.code=="SUCESS"){
                       document.setTitle(data.result.store_name);
-                      that.entranceData[3].link='http://m.fvt.xiaovpu.com/wap/order/index.html?#!/home/'+data.obj.page_id+'?xv=enter';
+                      that.entranceData[3].link='http://101.201.76.184:8098/mall/index.html?#!/home/home/'+data.obj.page_id+'?xv=enter';
                   }
               }
           });
