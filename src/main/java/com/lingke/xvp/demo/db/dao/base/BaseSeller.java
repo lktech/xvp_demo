@@ -49,12 +49,12 @@ public abstract class BaseSeller<M extends BaseSeller<M>> extends Model<M> imple
 		return get("update_time");
 	}
 
-	public void setStoreId(java.lang.Long storeId) {
-		set("store_id", storeId);
+	public void setXvpStoreId(java.lang.Long xvpStoreId) {
+		set("xvp_store_id", xvpStoreId);
 	}
 
-	public java.lang.Long getStoreId() {
-		return get("store_id");
+	public java.lang.Long getXvpStoreId() {
+		return get("xvp_store_id");
 	}
 
 }
