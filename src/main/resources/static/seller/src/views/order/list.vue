@@ -23,7 +23,7 @@
                 odr: {
                     dfh: constants.orderStatus.dfh,//待发货
                 },
-                url: basepath + "/mall/order/order_list",
+                url: basepath + "/seller/order/query",
             }
         },
         mounted: function () {

@@ -123,7 +123,7 @@
                     }
                     let that=this;
                     utils.ajax({
-                        url: basepath + "/mall/seller/register",
+                        url: basepath + "/seller/seller/register",
                         dataType: 'json',
                         type: 'POST',
                         data:{

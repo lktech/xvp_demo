@@ -286,7 +286,7 @@
               type: 'POST',
               data:{
                 "id":this.$route.query.id
-              }),
+              },
               success: function(data){
                   if(data.code=="SUCESS"){
                     that.formData.name=data.result.name;
