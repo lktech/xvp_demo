@@ -4,13 +4,13 @@
       <div>
           <c-cell-wrap>
               <c-input title="商品名称" @on-change="validate" placeholder="请输入商品名称" required name="name" :max="20" v-model="formData.name"></c-input>
-              <c-uploadmul title='添加图片' :list.sync="img_list" @upload="upload" :max="1">
+              <c-uploadmul title='添加图片' :list="img_list1" @upload="upload1" name="upload1"  :max="1">
                 <span slot="after-title" class="placeholder">请添加商品封面图</span> 
               </c-uploadmul>
           </c-cell-wrap>
           <c-cell-wrap>
               <c-input title="商品描述" @on-change="validate" placeholder="请输入商品描述" name="describe" :max="500" v-model="formData.describe" ></c-input>
-              <c-uploadmul title='添加图片' :list.sync="img_list1" @upload="upload1" :max="9">
+              <c-uploadmul title='添加图片' :list="img_list2" @upload="upload1" name="upload2"  :max="9">
                 <span slot="after-title" class="placeholder">请添加商品详情图</span> 
               </c-uploadmul>
           </c-cell-wrap>
@@ -66,8 +66,8 @@
             },
             color:'primary',
             disabled:false,
-            img_list:[],
             img_list1:[],
+            img_list2:[],
             product_id:'',
             money: function (value) {
               return {
@@ -82,37 +82,11 @@
         }
       },
       methods: {
-          upload(src){
-            let that = this;
-            utils.ajax({
-                url: basepath + "/mall/content/base64_upload",
-                dataType: 'json',
-                type: 'POST',
-                data:{'base64ImgStr':src},
-                success: function(data){
-                    if(data.success){
-                        that.img_list.push(data.result.url);
-                    }else{
-                        that.$vux.alert.show('上传失败');
-                    }
-                }
-            });
-          },
           upload1(src){
-            let that = this;
-            utils.ajax({
-                url: basepath + "/mall/content/base64_upload",
-                dataType: 'json',
-                type: 'POST',
-                data:{'base64ImgStr':src},
-                success: function(data){
-                    if(data.success){
-                        that.img_list1.push(data.result.url);
-                    }else{
-                        that.$vux.alert.show('上传失败');
-                    }
-                }
-            });
+            this.img_list1=src;
+          },
+          upload2(src){
+            this.img_list2=src;
           },
           validate(obj){
             if(obj.name=='name'){

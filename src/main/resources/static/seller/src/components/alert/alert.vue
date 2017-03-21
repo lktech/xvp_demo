@@ -67,9 +67,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-@import '../../assets/styles/components/transition.less';
-@import '../../assets/styles/components/weui/widget/weui_tips/weui_mask.less';
-@import '../../assets/styles/components/weui/widget/weui_tips/weui_dialog.less';
-</style>

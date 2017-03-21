@@ -128,7 +128,7 @@
                         type: 'POST',
                         data:{
                           'phone':that.formData.phone,
-                          'code':that.formData.code,
+                          'verify_code':that.formData.code,
                           'password':md5(that.formData.password),
                           'sn':that.formData.sn
                         },
