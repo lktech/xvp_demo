@@ -25,6 +25,7 @@ import com.lingke.xvp.demo.controller.request.StoreCreateRequest;
 import com.lingke.xvp.demo.controller.request.StoreUpdateRequest;
 import com.lingke.xvp.demo.controller.response.StoreResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
+import com.lingke.xvp.demo.db.dao.Seller;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
 
@@ -54,9 +55,9 @@ public class StoreController {
 		ropRequest.setExtend_fields(extendFields);
 		XvpStoreCreateResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		SessionUtil.sellerSetStoreId(ropResponse.getStore().getId());
+		Seller.updateSellerStoreId();
 		return null;
 	}
-
 	private String getExtendField(String region_code,String detail_address,String qq){
 		List<ExtendFieldRequest> extendFields = new ArrayList<ExtendFieldRequest>();
 		if(!StringUtils.isEmpty(region_code)){

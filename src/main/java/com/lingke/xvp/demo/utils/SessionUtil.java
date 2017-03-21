@@ -17,8 +17,12 @@ public class SessionUtil {
 	}
 
 	public static boolean checkSellerLogin() {
-		return RequestContextHolder.getRequestAttributes().getAttribute(
-				SELLER_LOGIN_ID, RequestAttributes.SCOPE_SESSION) != null;
+		return getSellerLoginId() != null;
+	}
+
+	public static Long getSellerLoginId() {
+		return (Long)RequestContextHolder.getRequestAttributes().getAttribute(
+				SELLER_LOGIN_ID, RequestAttributes.SCOPE_SESSION);
 	}
 
 	public static void sellerSetStoreId(String value) {

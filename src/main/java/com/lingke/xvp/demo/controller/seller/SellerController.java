@@ -14,10 +14,8 @@ import com.Rop.api.response.XvpPhoneVerfiycodeResponse;
 import com.Rop.api.response.XvpStoreQueryResponse;
 import com.lingke.xvp.demo.XvpConstants;
 import com.lingke.xvp.demo.XvpRopClient;
-import com.lingke.xvp.demo.controller.request.SellerCheckRequest;
 import com.lingke.xvp.demo.controller.request.SellerRegisterRequest;
 import com.lingke.xvp.demo.controller.request.SellerVerifyRequest;
-import com.lingke.xvp.demo.controller.response.SellerCheckResponse;
 import com.lingke.xvp.demo.controller.response.SellerVerifyResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.db.dao.Seller;
@@ -45,13 +43,6 @@ public class SellerController {
 		SellerVerifyResponse sellerVerifyResponse = new SellerVerifyResponse();
 		sellerVerifyResponse.setSn(xvpUserCreateResponse.getPhoneresult().getSn());
 		return sellerVerifyResponse;
-	}
-
-	@RequestMapping(value = "/check", method = RequestMethod.POST)
-	public XvpResponse check(@RequestBody SellerCheckRequest request) throws Exception {
-		SellerCheckResponse response = new SellerCheckResponse();
-		response.setFlag("no");
-		return response;
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
