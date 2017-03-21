@@ -157,7 +157,7 @@ Mock.mock(basepath + "/seller/order/delivery",'post',{
 });
 
 Mock.mock(basepath + "/seller/seller/login",'post',{
-    "code": 'm',
+    "code": 'SUCESS',
     
 });
 

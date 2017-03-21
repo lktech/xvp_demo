@@ -78,7 +78,7 @@
               });
             }
           },
-          login1(q){
+          login1(){
             let that=this;
             utils.ajax({
                 url: basepath + "/seller/store/get",
