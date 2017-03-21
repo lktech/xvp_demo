@@ -20,6 +20,7 @@ public class XvpInterceptorConfig extends WebMvcConfigurerAdapter {
         sellerInterceptor.addPathPatterns("/seller/**");
         // 排除配置
         sellerInterceptor.excludePathPatterns("/seller/seller/login");
+        sellerInterceptor.excludePathPatterns("/seller/seller/check");
         sellerInterceptor.excludePathPatterns("/seller/seller/reset");
         sellerInterceptor.excludePathPatterns("/seller/seller/register");
         sellerInterceptor.excludePathPatterns("/seller/seller/verify");
