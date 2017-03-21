@@ -18,6 +18,8 @@
 		url:"/binaryStreamUpload"
 	};
 	
+	var processFunc = [],successFunc = [],errorFunc = []
+	
 	//API
 	var api = {
 		init: function(opts){
@@ -28,11 +30,13 @@
 			}
 			if(options.ids && options.ids.length > 0){
 				for(var i=0;i<options.ids.length;i++){
-					dobind(options.ids[i]);
+					var id = options.ids[i];
+					processFunc[id] = options.process;
+					successFunc[id] = options.success;
+					errorFunc[id] = options.error;
+					dobind(id);
 				}	
 				
-			}else{
-				options.error({"status":false,"id":id,"message":"请配置ids"});
 			}
 			
 			return this;
@@ -46,13 +50,13 @@
 				var file = ele.files[0];
 				if(file){
 					if(ele.getAttribute("upld")){
-						options.error({"status":false,"id":id,"message":"正在上传中，客官莫急！"});
+						errorFunc[id]({"status":false,"id":id,"message":"正在上传中，客官莫急！"});
 					}else{
 						validate(id,file);
 					}
 				}
 			}else{
-				options.error({"status":false,"id":id,"message":"浏览器版本过低，请升级"});
+				errorFunc[id]({"status":false,"id":id,"message":"浏览器版本过低，请升级"});
 			}
 			
 		}
@@ -78,13 +82,13 @@
 				if (data.success) {
 					upload(id,file,data.uid,total);
 				}else{
-					options.error({"status":false,"id":id,"message":"验证失败"});
+					errorFunc[id]({"status":false,"id":id,"message":"验证失败"});
 					clearInput(id);
 				}
 				
 			},
 			error: function (data) {
-				options.error({"status":false,"id":id,"message":"验证失败"});
+				errorFunc[id]({"status":false,"id":id,"message":"验证失败"});
 				clearInput(id);
 			}
 		});
@@ -118,23 +122,23 @@
 				data:fmData,
 				success: function (data) {
 					if (data.success){
-						options.process({"id":id,"percent":(i+1)/total});
+						processFunc[id]({"id":id,"percent":(i+1)/total});
 						if(i+1 == total){
 							var result = {"id":id,"url":data.idata};
-							options.success(result);
+							successFunc[id](result);
 							clearInput(id);
 						}
 						
 					}else{
 						breakFlag = true;
-						options.error({"status":false,"id":id,"message":"上传失败"});
+						errorFunc[id]({"status":false,"id":id,"message":"上传失败"});
 						clearInput(id);
 					}
 					
 				},
 				error: function (o, xhr, property) {
 					breakFlag = true;
-					options.error({"status":false,"id":id,"message":"上传失败"});
+					errorFunc[id]({"status":false,"id":id,"message":"上传失败"});
 					clearInput(id);
 				}
 			});
