@@ -19,7 +19,7 @@
     </div>
     <div v-else>
        <c-msg status="1" msg="新密码设置成功" desc="请保存好你的新密码">
-           <c-button slot="btn" type="primary" :link="login" size="block" text="返回登录页面"></c-button>
+           <c-button slot="btn" type="primary" link="login" size="block" text="返回登录页面"></c-button>
        </c-msg>
     </div>
 </div>
