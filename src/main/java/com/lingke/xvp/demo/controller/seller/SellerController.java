@@ -77,7 +77,7 @@ public class SellerController {
 			throw new RuntimeException("用户名或者密码错误");
 		}
 		SessionUtil.sellerLogin(seller.getId());
-		SessionUtil.sellerSetStoreId(seller.getStoreId().toString());
+		SessionUtil.sellerSetStoreId(seller.getXvpStoreId().toString());
 		return null;
 	}
 
