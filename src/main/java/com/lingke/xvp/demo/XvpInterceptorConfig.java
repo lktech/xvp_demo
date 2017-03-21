@@ -23,7 +23,8 @@ public class XvpInterceptorConfig extends WebMvcConfigurerAdapter {
         sellerInterceptor.excludePathPatterns("/seller/seller/reset");
         sellerInterceptor.excludePathPatterns("/seller/seller/register");
         sellerInterceptor.excludePathPatterns("/seller/seller/verify");
-        
+        sellerInterceptor.excludePathPatterns("/seller/seller/index.html");
+        sellerInterceptor.excludePathPatterns("/seller/seller/index.html/**");
         InterceptorRegistration userInterceptor = registry.addInterceptor(new UserInterceptor());
         // 拦截配置
         userInterceptor.addPathPatterns("/user/**");
