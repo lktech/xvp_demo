@@ -68,7 +68,7 @@
                   }),
                   success: function(data){
                       if(data.code=="SUCESS"){
-                          utils.header();
+                          //utils.header();
                           that.login1();
                       }else{
                           that.$vux.alert.show('用户名或密码不正确');
@@ -80,16 +80,14 @@
           login1(q){
             let that=this;
             utils.ajax({
-                url: basepath + "/mall/auth",
+                url: basepath + "/seller/store/get",
                 dataType: 'json',
                 type: 'POST',
                 success: function(data){
                     if(data.code=="SUCESS"){
-                        utils.go({name:'store'},that.$router);
+                        utils.go({path:'/store/store'},that.$router);
                     }else{
-                      if(!q){
-                        utils.go({name:'storeAddInfo'},that.$router);
-                      } 
+                        utils.go({path:'/store/addinfo'},that.$router);
                     }
                 }
             });

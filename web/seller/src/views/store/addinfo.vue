@@ -58,6 +58,7 @@
                         success: function(data){
                             if(data.code=="SUCESS"){
                                 //that.login1();
+                                utils.go({path:'/store/store'},that.$router);
                             }else{
                                 that.$vux.alert.show(data.message);
                             }
@@ -93,22 +94,22 @@
                 }
                 
             },
-            login1(){
-              let that=this;
-              utils.ajax({
-                  url: basepath + "/mall/auth",
-                  dataType: 'json',
-                  type: 'POST',
-                  success: function(data){
-                      if(data.success){
-                          utils.header();
-                          utils.go({name:'store'},that.$router);
-                      }else{
-                        that.$vux.alert.show('授权失败');
-                      }
-                  }
-              });
-            }
+            // login1(){
+            //   let that=this;
+            //   utils.ajax({
+            //       url: basepath + "/mall/auth",
+            //       dataType: 'json',
+            //       type: 'POST',
+            //       success: function(data){
+            //           if(data.success){
+            //               utils.header();
+            //               utils.go({name:'store'},that.$router);
+            //           }else{
+            //             that.$vux.alert.show('授权失败');
+            //           }
+            //       }
+            //   });
+            // }
             
         },
         mounted: function () {
