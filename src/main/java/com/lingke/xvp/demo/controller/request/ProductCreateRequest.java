@@ -6,7 +6,7 @@ public class ProductCreateRequest implements XvpRequest {
 	private String name;
 	private String pics;
 	private String product_detail;
-	private Integer pay_type;
+	private String pay_type;
 	private String product_desc;
 	private Long logistics_fee;
 	private Long virtual_flg;
@@ -36,11 +36,11 @@ public class ProductCreateRequest implements XvpRequest {
 		this.product_detail = product_detail;
 	}
 
-	public Integer getPay_type() {
+	public String getPay_type() {
 		return pay_type;
 	}
 
-	public void setPay_type(Integer pay_type) {
+	public void setPay_type(String pay_type) {
 		this.pay_type = pay_type;
 	}
 
