@@ -48,13 +48,13 @@
                         url: basepath + "/seller/store/add",
                         dataType: 'json',
                         type: 'POST',
-                        data:JSON.stringify({
+                        data:{
                             'store_name':that.formData.name,
                             'customer_service_phone':that.formData.phone,
                             'qq':that.formData.QQ,
                             'detail_address':that.formData.address,
                             'region_code':that.formData.addr_code[2]
-                        }),
+                        },
                         success: function(data){
                             if(data.code=="SUCESS"){
                                 //that.login1();
