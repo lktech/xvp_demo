@@ -157,13 +157,11 @@
                 for(var i=0;i<hold_sku_obj.length;i++){
                   hold_sku_obj[i].price=hold_sku_obj[i].price*100;
                   stock+=hold_sku_obj[i].stock*1;
-                  hold_sku_obj[i].logistics_fee=this.formData.freight;
                 }
               }else{
                 hold_sku_obj=[{
                   price:this.formData.price?this.formData.price*100:0,
                   stock:this.formData.stock?this.formData.stock*1:stock*1,
-                  logistics_fee:this.formData.freight,
                   sku_str:this.formData.name
                 }]
               }
@@ -173,7 +171,9 @@
                 //商品名称 
                 "product_detail": this.formData.describe,
                 //商品详情  
-                "pay_type":'微信支付',
+                "pay_type":0,
+
+                'logistics_fee':this.formData.freight?this.formData.freight*1:0,
                 //付款方式
 
                 "sku": hold_sku_obj,
