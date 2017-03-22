@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.5,maximum-scale=0.5,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="email=no" name="format-detection" />
+	<meta name="keywords" content="分片上传test" />
+	<meta name="description" content="分片上传test"/>
+	<meta http-equiv="Cache-Control" content="no-cache">
+    <title></title>
+    <style type="text/css">
+	.block{margin-top:50px;padding-left:30px;font-size:20px;}
+	#process{color:red;}
+	</style>
+</head>
+<body>
+	<h2>文件分片上传测试页，详情打客服</h2>
+	<div class="block">
+		<input class="test" type="file" id="test"/>
+   </div>
+   <div><img id="img" src=""/></div>
+ 
+ 
+</body>
+<script type="text/javascript" src="xvupload.js"></script>
+<script type="text/javascript">
+var uploading = false;
+	xvUpload.init({
+		eleid:"test",
+		type:1,
+		process:function(p){
+			console.log("page-process",p);
+		},
+		success:function(data){
+			console.log("page-success",data);
+			alert("上传成功")
+			document.getElementById("img").setAttribute("src",data.url);
+		},
+		error:function(data){
+			alert(data.message);
+			console.log("page-error",data);
+		}
+	});
+
+
+</script>
+ 
+</html>

@@ -1,0 +1,89 @@
+@import "../../base/fn";
+
+.weui_cell {
+    // onepx
+    position: relative;
+    &:before {
+        .setTopLine(@weuiCellBorderColor);
+        left: @weuiCellGapH;
+    }
+    &:first-child {
+        &:before {
+            display: none;
+        }
+    }
+}
+
+.weui_cells {
+    margin-bottom: 0 !important;
+    background-color: @weuiCellBg;
+    line-height: @weuiCellLineHeight;
+    font-size: @weuiCellFontSize; //cellä¸­é—´æœ‰æ•ˆé«˜åº¦23pxï¼Œè·Ÿå®¢æˆ·ç«¯é»˜è®¤å›¾æ ‡å°ºå¯¸ä¸€è‡?
+
+    overflow: hidden; //å› ä¸ºæ¯ä¸ªcellçš„borderä½¿ç”¨beforeå…ƒç´ leftæžçš„ï¼Œieä¸‹ä¼ªå…ƒç´ çš„containing blockä¼°è®¡è·Ÿæ ‡å‡†ä¸åŒï¼Œåœ¨cellä¸Šç”¨ohä¸ç”Ÿæ•?
+
+    // onepx
+    position: relative;
+    &:before {
+        .setTopLine(@weuiCellBorderColor);
+    }
+    &:after {
+        .setBottomLine(@weuiCellBorderColor);
+    }
+}
+
+.weui_cells_title {
+    margin-top: .77em; // 15px - è¡Œé«˜
+    margin-bottom: .3em; // 8px - è¡Œé«˜
+    padding-left: @weuiCellGapH;
+    padding-right: @weuiCellGapH;
+    color: @globalTextColor;
+    font-size: @weuiCellTipsFontSize;
+
+    & + .weui_cells {
+        margin-top: 0;
+    }
+}
+
+.weui_cells_tips {
+    margin-top: .3em; // 8px - è¡Œé«˜
+    color: @globalTextColor;
+    padding-left: @weuiCellGapH;
+    padding-right: @weuiCellGapH;
+    font-size: @weuiCellTipsFontSize;
+}
+
+.weui_cell {
+    padding: @weuiCellGapV @weuiCellGapH;
+    position: relative; //è¿™ä¸ªæ˜¯ä¸ºäº†å…¼å®¹cellså®¹å™¨onepxæ–¹æ¡ˆè¢«beforeæŒ¡ä½è€Œåšçš?
+    display: flex;
+    align-items: center;
+    p{margin: 0;}
+    .weui_cell_hd>img{height: 20px;width: 20px;margin-right: @px5;vertical-align:sub;}
+    .placeholder{
+        color:@color9;
+    }
+}
+
+.weui_cell_ft {
+    text-align: right;
+    color: @color9;
+}
+
+.weui_cell_primary {
+    flex: 1;
+}
+.weui_cell_ft.with_arrow:after {
+    content: " ";
+    display: inline-block;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    height: 10px;
+    width: 10px;
+    border-width: 2px 2px 0 0;
+    border-color: @color-gray;
+    border-style: solid;
+    position: relative;
+    top: -1px;
+    margin-left: @px10;
+}

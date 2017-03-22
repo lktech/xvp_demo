@@ -1,0 +1,31 @@
+/**
+* @vux Copy weui_tab.less and Remove navbar
+*/
+
+@import "../../base/fn";
+@import "tabbar";
+
+.weui_tab {
+  position: relative;
+  //height: 100%;//bob
+  min-height: 100%;
+}
+
+//.weui_tab_bd {
+//  box-sizing: border-box;
+//  padding-top: 46px;//bob
+//  padding-bottom: 55px;
+//  overflow: auto;
+//  -webkit-overflow-scrolling: touch;
+//}
+.view-box{//bob 新增样式
+  padding-top: 46px;
+  padding-bottom: 55px;
+}
+.weui_tab_bd_item {
+  display: none;
+}
+
+.weui_tab_bd_item_active {
+  display: block;
+} 

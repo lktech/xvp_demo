@@ -1,0 +1,53 @@
+component:
+  upload
+
+about:
+  全屏popup
+
+author:
+  ice-yy
+
+data() {
+    return {
+        headcapture: '更改头像',     可选参数，头像旁边的文字，默认   更改名称
+        arrow: true,                可选参数，右边的箭头图标
+        sourceUrl: 'http://img5.imgtn.bdimg.com/it/u=1029306801,2926495364&fm=21&gp=0.jpg',    图片地址
+        isuploading: false,         默认false  如果加载中，会提示加载中
+    }
+},
+
+备注：加载中的时候，组件会提示加载中的圈圈
+
+methods:
+   // 更新头像
+     onchange: function(baseval) {
+        let that = this;
+        $.ajax({
+        url: basepath + "/app/robot/updateAvatar",
+        dataType: 'json',
+        type: 'post',
+        data: {
+           base64Data:baseval
+        },
+         success: function(data) {
+            if(data.success) {
+                
+            } 
+            else {
+              that.$vux.toast.show({
+                text: data.msg,
+                type: 'text'
+
+              });
+            }
+        }
+        });
+    },
+
+   示例：
+   <template>
+    <div>
+        <c-upload :arrow='arrow' :imglink='sourceUrl' @upload='onchange' :isuploading='isuploading'>
+            
+        </c-upload>
+</template>

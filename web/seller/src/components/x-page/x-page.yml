@@ -1,0 +1,52 @@
+component:
+  page
+
+about:
+  分页组件
+
+author:
+  qian
+
+props:
+  totalPage:
+    参数定义: 总页数
+    是否必填: 是
+    可选项: 无
+    默认值: 无
+    备注: Number
+  pageNumber:
+    参数定义: 当前页
+    是否必填: 否
+    可选项: 无
+    默认值: 1
+    备注: Number
+  pageSize:
+      参数定义: 每页显示多少条
+      是否必填: 否
+      可选项: 无
+      默认值: 50
+      备注: Number
+   
+  usedNext: 
+       参数定义: 上一页（<）
+      是否必填: 否
+      可选项: 无
+      默认值: true
+      备注: 无  
+  usedPrev: 
+       参数定义: 下一页（>）
+      是否必填: 否
+      可选项: 无
+      默认值: true
+      备注: 无 
+  
+
+  事件：
+  this.$emit('on-page',this.pageNumber);//返回请求的页码
+  实例：
+  <x-page 
+  ：pageNumber=1                
+  :page-size=10 
+  :totalPage=10 
+  @on-page="page">
+  </x-page>

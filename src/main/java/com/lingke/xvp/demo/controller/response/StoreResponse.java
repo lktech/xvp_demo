@@ -3,6 +3,7 @@ package com.lingke.xvp.demo.controller.response;
 
 
 public class StoreResponse implements XvpResponse {
+	private String id;
 	private String store_name;
 	private String owner_real_name;
 	private String customer_service_phone;
@@ -10,6 +11,15 @@ public class StoreResponse implements XvpResponse {
 	private String detail_address;
 	private String qq;
 	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getStore_name() {
 		return store_name;
 	}

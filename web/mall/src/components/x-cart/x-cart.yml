@@ -1,0 +1,58 @@
+component:
+  x-cart
+
+about:
+  购物车全选删除，结算，增加减按钮
+
+author:
+  ice
+
+data:function(){
+  return{
+    shop:'测试店铺1',          // 店铺名
+    list: [{
+        name: '26度果园 芒果攀枝花果树26度果园 芒果攀枝花果树攀枝花果树攀枝花果树攀枝花果树攀枝花果树',  //商品名字
+        formats: '规格',                  // 第二行文字
+        formatsel: '大号',              //format后的文字
+        checked: true,                  //全选控制按钮
+        price: 546600,                 // 价格
+        id: 1,                        // 商品id
+        count: 1,   // 数量
+        sourceUrl: '//img.alicdn.com/bao/uploaded/i3/TB1gjXtNpXXXXXhXpXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg ',  // 商品图片
+        link:'https://www.baidu.com/',   // 商品链接
+        num:5   // 最大值，限购数量
+
+    }]
+    
+    如果数据格式是以上这种，则不用用format   
+    如果数据格式不一样，则需要用
+    :format='{"id":"id","name":"nam","formats":"formats","formatsel":"formatsel","checked":"checked","price":"price","count":"count","sourceUrl":"sourceUrl","num":"num"}'
+
+
+  }
+}
+
+
+
+methods: {
+    hander(checkList, surplusList, clicktype) {
+        console.log(checkList);     // 选中的，要删除的
+        console.log(surplusList);   // 去结算的
+        if(clicktype == 'delete') {
+            this.list = surplusList;
+    
+        } else {
+            alert("结算");
+        }
+    },
+},
+
+   示例：
+<div>
+    <x-cart :list="list" @hander='hander' :shop='shop' :format='{"id":"id","name":"nam","format":"format","formatsel":"formatsel","checked":"checked","price":"price","count":"count","sourceUrl":"sourceUrl","num":"num"}' ></x-cart>
+    <!-- 购物车清空提示 -->
+    <x-data-null msg='您的购物车已清空' v-if='list.length==0'>
+      <r-button text='返回首页' size='block' type='primary' link='https://www.baidu.com'></r-button>
+    </x-data-null>
+</div>
+   

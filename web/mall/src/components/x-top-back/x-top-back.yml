@@ -1,0 +1,44 @@
+component:
+  top-back
+
+about:
+  顶部back组件
+
+author:
+  bob
+
+props:
+  hide:
+    参数定义: 是否显示返回箭头   [Boolean]
+    是否必填: 否
+    可选项: 无
+    默认值: 显示
+    备注: 无
+  link:
+    参数定义: 跳转页面地址   [String]
+    是否必填: 否
+    可选项: 无
+    默认值: back
+    备注: 无
+  Call:
+    参数定义: 点击跳转是否需要回调函数   [Boolean]
+    是否必填: 否
+    可选项: 无
+    默认值: 无
+    备注: 需要回调传true,@on-change接受触发事件
+  logo:
+    参数定义: logo   [String]
+    是否必填: 是
+    可选项: 无
+    默认值: url
+    备注: 无
+  mar:
+    参数定义: 是否去掉下边距   [Boolean]
+    是否必填: 是
+    可选项: 无
+    默认值: 有边距
+    备注: 无
+
+
+
+    <x-top-back logo="图片url" ></x-top-back>

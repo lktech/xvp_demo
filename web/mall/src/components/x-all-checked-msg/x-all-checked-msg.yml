@@ -1,0 +1,61 @@
+component:
+  all-checked-msg
+
+about:
+  全选组件
+
+author:
+  ice-yy
+
+data() {
+  return {
+    btntext            // btntext是底部蓝色按钮内的文字
+    checketext        // 全选文字   默认‘全选’
+    list: []         // 列表数据
+  }
+},
+
+如果数据格式是
+list:[{
+    id:
+    type:
+    time:
+    headUrl:
+    nike:
+    msg:
+    file:
+}]
+
+id 列表信息的id
+
+type 消息类型，1为普通消息文本;3为图片；34为声音文件；62为video
+
+time 消息时间
+
+headUrl 头像
+
+nike 昵称
+
+msg 消息内容
+
+file 为type=3时的图片地址
+
+
+这种，就不需要用format={}这个方法了，如果数据格式的字段不符合list这种，则需要用:format="{'id':'id','type':'msgtype','time':'createtime','headUrl':'groupenduimg','nike':'fromname','msg':'content','file':'filepath'}" 进行转换
+
+
+methods: {
+    submit(data) {
+      console.log(data);
+    },
+},
+
+   示例：
+  
+  <x-all-checked-msg 
+    :list='list2' :format="{'id':'id','type':'msgtype','time':'createtime','headUrl':'groupenduimg','nike':'fromname','msg':'content','file':'filepath'}" @submit="submit">
+  </x-all-checked-msg>
+       
+       
+
+备注：
