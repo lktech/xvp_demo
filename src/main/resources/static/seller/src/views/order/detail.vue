@@ -91,7 +91,7 @@
                     dataType: 'json',
                     type: 'POST',
                     data: {
-                        orderId: that.$route.query.id
+                        order_id: that.$route.query.id
                     },
                     success: function (data) {
                         if (data.code=="SUCESS") {

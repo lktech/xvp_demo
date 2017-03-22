@@ -151,6 +151,7 @@
           },
           hold(){
             if(!this.disabled){
+              alert(1);
               let hold_sku_obj=this.formData.specifica_list;
               let stock=0;
               if(this.status.specifications){

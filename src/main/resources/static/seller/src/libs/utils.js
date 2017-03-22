@@ -207,6 +207,9 @@ exports.ajax = function (obj) {
         success: function (data) {
             exports.loadingHide();
             if (data.code) {
+                if(data.code=='auth_seller_error'){
+                    utils.go({path:'/login/login'},this.$router);
+                }
                 if (obj.success) {
                     obj.success(data);
                 }
