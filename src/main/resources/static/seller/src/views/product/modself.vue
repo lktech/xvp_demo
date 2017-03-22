@@ -27,7 +27,7 @@
             <c-cell-wrap title="规格设置" desc="删除" desc-color='red' v-for="(item, index) in formData.specifica_list"  @desc="descClick(index)" >
                   <c-input title="价格" @on-change="validate" placeholder="请输入价格" required :name="order('Yprice',index)" v-model="item.price" :max="10" is-type="money"></c-input>
                   <c-input title="库存" @on-change="validate" placeholder="请输入库存" required :name="order('Ystock',index)" v-model="item.stock" :max="10" is-type="number"  ></c-input>
-                  <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" :name="order('Yvalue',index)"  :max="50" v-model="item.value" ></c-input>
+                  <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" :name="order('Yvalue',index)"  :max="50" v-model="item.sku_str" ></c-input>
             </c-cell-wrap>
           </div>
           <div class="wrap-pd" style='margin-top:10px;'>
@@ -54,6 +54,7 @@
               price:'',
               rule_id:'',
               specifica_list:[{stock:'',price:'',sku_str:''}],
+              freight:''
             },
             status:{
               name_status:true,
@@ -150,7 +151,6 @@
                 for(var i=0;i<hold_sku_obj.length;i++){
                   hold_sku_obj[i].price=hold_sku_obj[i].price*100;
                   stock+=hold_sku_obj[i].stock*1;
-                  hold_sku_obj[i].logistics_fee=this.formData.freight;
                 }
                 this.formData.price='';
                 this.formData.stock='';
@@ -158,7 +158,6 @@
                 hold_sku_obj=[{
                   price:this.formData.price?this.formData.price*100:0,
                   stock:this.formData.stock?this.formData.stock*1:stock*1,
-                  logistics_fee:this.formData.freight,
                   sku_str:this.formData.name
                 }]
               }
@@ -167,22 +166,17 @@
                 //商品名称 
                 "product_detail": this.formData.describe,
                 //商品详情  
-                "pay_type":'微信支付',
+                "pay_type":0,
+
+                'logistics_fee':this.formData.freight?this.formData.freight*1:0,
                 //付款方式
 
-                "sku": hold_sku_obj
+                "sku": hold_sku_obj,
 
+                "pics":JSON.stringify(this.img_list1),
+
+                "product_desc":JSON.stringify(this.img_list2)
               };
-              let obj_pics=[];
-              for(var i=0;i<this.img_list1.length;i++){
-                obj_pics.push({'url':this.img_list1[i]});
-              }
-              let obj_pics_detail=[];
-              for(var i=0;i<this.img_list2.length;i++){
-                obj_pics_detail.push({'url':this.img_list2[i]});
-              }
-              hold_obj.pics=JSON.stringify(obj_pics);
-              hold_obj.product_desc=JSON.stringify(obj_pics_detail);
 
               let that=this;
               utils.ajax({
@@ -192,8 +186,7 @@
                   data:hold_obj,
                   success: function(data){
                       if(data.code=="SUCESS"){
-                          var link=that.$router._currentTransition.from.name;
-                          utils.go({name:link},that.$router,true);
+                          utils.go({path:'/store/store'},that.$router,true);
                       }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
 
@@ -268,6 +261,7 @@
               success: function(data){
                   if(data.code=="SUCESS"){
                     that.formData.name=data.result.name;
+                    that.formData.freight=that.converter(data.result.logistics_fee/100);
                     that.formData.describe=data.result.product_detail?data.result.product_detail:'';
 
                     for(var ii=0; ii<JSON.parse(data.result.pics).length;ii++){

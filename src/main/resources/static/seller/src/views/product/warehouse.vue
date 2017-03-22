@@ -36,8 +36,6 @@
             datatype:'json',
             success: function(data) {
               if(data.code=="SUCESS") {
-                that.goods = data.result;
-                that.goods.pics=JSON.parse(that.goods.pics)[0];
                 let stock='';
                 let price='';
                 $.each(data.result,function(k,o){
@@ -47,13 +45,13 @@
                               $(res.result,function(i,v){
                                 stock+=v.stock;
                               })
-                              that.goods.stock+=res.result[0].price;
+                              price+=res.result[0].price;
 
                               that.goods.push({
-                                name:data.result.name,
-                                price:res.result[0].price,
+                                name:o.name,
+                                price:price,
                                 stock:stock,
-                                pics:JSON.parse(.pics)[0]
+                                pics:JSON.parse(o.pics)[0]
                               })
                           }else if(res.code=='auth_seller_error'){
                               utils.wang(that,utils,res.message);
