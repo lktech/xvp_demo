@@ -70,6 +70,7 @@
             img_list1:[],
             img_list2:[],
             product_id:'',
+            sku_id:'',
             money: function (value) {
               return {
                 valid: value.search(/^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/) > -1
@@ -158,7 +159,8 @@
                 hold_sku_obj=[{
                   price:this.formData.price?this.formData.price*100:0,
                   stock:this.formData.stock?this.formData.stock*1:stock*1,
-                  sku_str:this.formData.name
+                  sku_str:this.formData.name,
+                  id:that.sku_id
                 }]
               }
               var hold_obj={
@@ -308,6 +310,7 @@
                                 that.status.specifications=false;
                                 that.formData.price=that.converter(res.result[0].price/100+'');
                                 that.formData.stock=res.result[0].stock+'';
+                                that.sku_id=res.result[0].id;
                               }
                             }else if(res.code=='auth_seller_error'){
                                 utils.wang(that,utils,res.message);

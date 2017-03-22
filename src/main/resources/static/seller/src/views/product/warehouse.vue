@@ -36,22 +36,37 @@
             datatype:'json',
             success: function(data) {
               if(data.code=="SUCESS") {
-                let stock='';
-                let price='';
                 $.each(data.result,function(k,o){
                   utils.ajax({
                       url:"/seller/product/sku/get", type:'post', data: {product_id:o.id}, success: function (res) {
                           if (res.code=="SUCESS") {
-                              $(res.result,function(i,v){
-                                stock+=v.stock;
-                              })
-                              price+=res.result[0].price;
 
+                              var max=res.result[0].price*1;
+                              var min=res.result[0].price*1;
+                              var len=res.result.length;
+                              var _stock=0;
+                              var _price='';
+
+                              $.each(res.result,function(i,v){
+                                _stock+=v.stock*1;
+                                if(v.price*1 > max){
+                                  max = v.price*1;
+                                }
+                                if(v.price*1 < min){
+                                  min = v.price*1;
+                                }
+                              })
+
+                              if(min!=max){
+                                _price='¥'+utils.formatPrice(min)+' ~ ¥'+utils.formatPrice(max)
+                              }else{
+                                _price='¥'+utils.formatPrice(min)
+                              }
                               that.goods.push({
                                 id:o.id,
                                 name:o.name,
-                                price:price,
-                                stock:stock,
+                                price:_price,
+                                stock:_stock,
                                 pics:JSON.parse(o.pics)[0]
                               })
                           }else if(res.code=='auth_seller_error'){
