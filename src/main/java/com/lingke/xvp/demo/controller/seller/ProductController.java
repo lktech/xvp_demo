@@ -68,10 +68,17 @@ public class ProductController {
 
 		for (SkuAddRequest skuRequest : request.getSku()) {
 			XvpSkuAddskuRequest ropSkuRequest = BeanCopyUtil.copy(skuRequest, XvpSkuAddskuRequest.class);
-			// TODO
 			ropSkuRequest.setApp_id(ropClientAdapter.getAppId());
 			ropSkuRequest.setProduct_id(Long.valueOf(productCreateResponse.getProduct().getId()));
-			ropClientAdapter.ropInvoke(ropSkuRequest);
+			try {
+				ropClientAdapter.ropInvoke(ropSkuRequest);
+			} catch (Exception e) {
+				XvpProductDeleteRequest xvpProductDeleteRequest = new XvpProductDeleteRequest();
+				xvpProductDeleteRequest.setApp_id(ropClientAdapter.getAppId());
+				xvpProductDeleteRequest.setProduct_id(Long.valueOf(productCreateResponse.getProduct().getId()));
+				ropClientAdapter.ropInvoke(ropRequest);
+				throw e;
+			}
 		}
 		return null;
 	}
