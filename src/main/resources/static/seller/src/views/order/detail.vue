@@ -102,7 +102,10 @@
                             if(data.result.order_status!='DFK'){
                                 that.readonly=true;
                             }
-                        }else{
+                        }else if(data.code=='auth_seller_error'){
+                                utils.wang(that,utils,data.message);
+
+                            }else{
                                 that.$vux.alert.show(data.msg);
                         }
                     }
@@ -127,6 +130,9 @@
                                 that.$vux.alert.show({content:'更新成功',onHide :function(){
                                   utils.go({path:'order'},that.$router,true);
                                 }});
+                            }else if(data.code=='auth_seller_error'){
+                                utils.wang(that,utils,data.message);
+
                             }else{
                                 that.$vux.alert.show('更新失败');
                             }

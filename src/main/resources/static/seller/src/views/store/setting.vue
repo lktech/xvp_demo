@@ -125,9 +125,13 @@
 
                             that.res.formData.addr_code=[province,city,data.result.region_code];
 
+                        }else if(data.code=='auth_seller_error'){
+                            utils.wang(that,utils,data.message);
+
                         }else{
                             that.$vux.alert.show(data.message);
                         }
+
                     }
                 });
 
