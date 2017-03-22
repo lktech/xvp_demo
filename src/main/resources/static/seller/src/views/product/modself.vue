@@ -176,7 +176,7 @@
                 "pics":JSON.stringify(this.img_list1),
 
                 "product_desc":JSON.stringify(this.img_list2),
-                'id':this.$route.query.id
+                'product_id':this.$route.query.id
               };
 
               let that=this;
