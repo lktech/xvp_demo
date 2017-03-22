@@ -71,10 +71,7 @@
                     url:"/seller/order/query", type:'post', data: {order_status:id}, success: function (data) {
                         if (data.code=="SUCESS") {
                             that.orderData = data.result;
-                        }else if(data.code=='auth_seller_error'){
-                                utils.wang(that,utils,data.message);
-
-                            }else{
+                        }else{
                             that.orderData = [];
                             that.$vux.alert.show(data.msg);
                         }

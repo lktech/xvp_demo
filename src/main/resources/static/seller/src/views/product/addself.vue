@@ -201,8 +201,7 @@
                   data:hold_obj,
                   success: function(data){
                       if(data.code=="SUCESS"){
-                          var link=that.$router._currentTransition.from.name;
-                          utils.go({name:link},that.$router,true);
+                          utils.go({path:'/store/store'},that.$router,true);
                       }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
 
