@@ -4,7 +4,7 @@
         <c-group>
             <c-input title="手机号" placeholder="请输入手机号" @on-change="validate" required v-model="formData.phone" name="phone" :max='11' is-type="china-mobile"></c-input>
             <c-input title="验证码" placeholder="请输入验证码" @on-change="validate" required v-model="formData.code" name="code" :max="6" class="weui_vcode">
-                <c-button slot="right" type="primary" :validate="phone_status" @click.native="send_out">获取验证码</c-button>
+                <c-button-send slot="right" type="primary" :validate="phone_status" @on-send="send_out">获取验证码</c-button-send>
             </c-input>
         </c-group>
         <c-group>
