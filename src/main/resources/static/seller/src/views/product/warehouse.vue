@@ -37,7 +37,10 @@
             success: function(data) {
               if(data.code=="SUCESS") {
                 that.goods = data.result;
-              } else {
+              }else if(data.code=='auth_seller_error'){
+                                utils.wang(that,utils,data.message);
+
+                            } else {
                 that.$vux.alert.show(data.message);
               }
             }
@@ -85,7 +88,10 @@
                         text: '删除成功',
                         type: 'success'
                       });
-                    } else {
+                    }else if(data.code=='auth_seller_error'){
+                                utils.wang(that,utils,data.message);
+
+                            } else {
                       that.$vux.alert.show(data.msg);
                     }
                   },

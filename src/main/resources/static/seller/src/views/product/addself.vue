@@ -203,7 +203,10 @@
                       if(data.code=="SUCESS"){
                           var link=that.$router._currentTransition.from.name;
                           utils.go({name:link},that.$router,true);
-                      }else{
+                      }else if(data.code=='auth_seller_error'){
+                                utils.wang(that,utils,data.message);
+
+                            }else{
                           that.$vux.alert.show('添加商品失败');
                       }
                   }

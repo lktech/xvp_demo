@@ -59,6 +59,9 @@
                             if(data.code=="SUCESS"){
                                 //that.login1();
                                 utils.go({path:'/store/store'},that.$router);
+                            }else if(data.code=='auth_seller_error'){
+                                utils.wang(that,utils,data.message);
+
                             }else{
                                 that.$vux.alert.show(data.message);
                             }
