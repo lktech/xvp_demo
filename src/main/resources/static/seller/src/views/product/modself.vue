@@ -174,12 +174,12 @@
 
               };
               let obj_pics=[];
-              for(var i=0;i<this.img_list.length;i++){
-                obj_pics.push({'url':this.img_list[i]});
+              for(var i=0;i<this.img_list1.length;i++){
+                obj_pics.push({'url':this.img_list1[i]});
               }
               let obj_pics_detail=[];
-              for(var i=0;i<this.img_list1.length;i++){
-                obj_pics_detail.push({'url':this.img_list1[i]});
+              for(var i=0;i<this.img_list2.length;i++){
+                obj_pics_detail.push({'url':this.img_list2[i]});
               }
               hold_obj.pics=JSON.stringify(obj_pics);
               hold_obj.product_desc=JSON.stringify(obj_pics_detail);
@@ -257,12 +257,13 @@
       },
       mounted: function () {
         this.$nextTick(function () { 
+          let that = this;
           utils.ajax({
               url: basepath + "/seller/product/get",
               dataType: 'json',
               type: 'POST',
               data:{
-                "id":this.$route.query.id
+                "id":that.$route.query.id
               },
               success: function(data){
                   if(data.code=="SUCESS"){
@@ -270,35 +271,57 @@
                     that.formData.describe=data.result.product_detail?data.result.product_detail:'';
 
                     for(var ii=0; ii<JSON.parse(data.result.pics).length;ii++){
-                      that.img_list.push(JSON.parse(data.result.pics)[ii].url);
+                      that.img_list1.push(JSON.parse(data.result.pics)[ii]);
                     }
                     
                     if(data.result.product_desc){
                       if(JSON.parse(data.result.product_desc).length){
                         for(var iii=0; iii<JSON.parse(data.result.product_desc).length;iii++){
-                          that.img_list1.push(JSON.parse(data.result.product_desc)[iii].url);
+                          that.img_list2.push(JSON.parse(data.result.product_desc)[iii]);
                         }
                       }
                     }
 
-                    if(data.result.sku.length>1){
-                      that.status.specifications=true;
-                      that.formData.specifica_list=data.result.sku;
-                      for(var i=0;i<that.formData.specifica_list.length;i++){
-                        that.formData.specifica_list[i].price=that.converter(that.formData.specifica_list[i].price/100+'');
-                      }
-                    }else{
-                      that.status.specifications=false;
-                      that.formData.price=that.converter(data.result.sku[0].price/100+'');
-                      that.formData.stock=data.result.sku[0].stock+'';
-                    }
+                    // if(data.result.sku.length>1){
+                    //   that.status.specifications=true;
+                    //   that.formData.specifica_list=data.result.sku;
+                    //   for(var i=0;i<that.formData.specifica_list.length;i++){
+                    //     that.formData.specifica_list[i].price=that.converter(that.formData.specifica_list[i].price/100+'');
+                    //   }
+                    // }else{
+                    //   that.status.specifications=false;
+                    //   that.formData.price=that.converter(data.result.sku[0].price/100+'');
+                    //   that.formData.stock=data.result.sku[0].stock+'';
+                    // }
                     
-                    if(that.status.specifications){
-                        for(var i=1; i<that.formData.specifica_list.length;i++){
-                          that.status.specifica_list_status.push({stock:true,price:true,value:true});
-                        }
-                    }
+                    // if(that.status.specifications){
+                    //     for(var i=1; i<that.formData.specifica_list.length;i++){
+                    //       that.status.specifica_list_status.push({stock:true,price:true,value:true});
+                    //     }
+                    // }
                     that.product_id=data.result.id;
+                    utils.ajax({
+                        url:"/seller/product/sku/get", type:'post', data: {product_id:data.result.id}, success: function (res) {
+                            if (res.code=="SUCESS") {
+                              if(res.result.length>1){
+                                that.status.specifications=true;
+                                that.formData.specifica_list=res.result;
+                                for(var i=0;i<that.formData.specifica_list.length;i++){
+                                  that.formData.specifica_list[i].price=that.converter(that.formData.specifica_list[i].price/100+'');
+                                }
+                              }else{
+                                that.status.specifications=false;
+                                that.formData.price=that.converter(res.result[0].price/100+'');
+                                that.formData.stock=res.result[0].stock+'';
+                              }
+                            }else if(res.code=='auth_seller_error'){
+                                utils.wang(that,utils,res.message);
+
+                            }else{
+                                that.$vux.alert.show(res.message);
+                            }
+                        }
+                    });
                   }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
 

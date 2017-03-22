@@ -38,21 +38,32 @@
               if(data.code=="SUCESS") {
                 that.goods = data.result;
                 that.goods.pics=JSON.parse(that.goods.pics)[0];
-                utils.ajax({
-                    url:"/seller/product/sku/get", type:'post', data: {product_id:data.result.id}, success: function (res) {
-                        if (res.code=="SUCESS") {
-                            $(res.result,function(i,v){
-                              that.goods.stock+=v.stock;
-                            })
-                            that.goods.stock+=res.result[0].price;
-                        }else if(res.code=='auth_seller_error'){
-                            utils.wang(that,utils,res.message);
+                let stock='';
+                let price='';
+                $.each(data.result,function(k,o){
+                  utils.ajax({
+                      url:"/seller/product/sku/get", type:'post', data: {product_id:data.result.id}, success: function (res) {
+                          if (res.code=="SUCESS") {
+                              $(res.result,function(i,v){
+                                stock+=v.stock;
+                              })
+                              that.goods.stock+=res.result[0].price;
 
-                        }else{
-                            that.$vux.alert.show(res.message);
-                        }
-                    }
-                });
+                              that.goods.push({
+                                name:data.result.name,
+                                price:res.result[0].price,
+                                stock:stock,
+                                pics:JSON.parse(.pics)[0]
+                              })
+                          }else if(res.code=='auth_seller_error'){
+                              utils.wang(that,utils,res.message);
+
+                          }else{
+                              that.$vux.alert.show(res.message);
+                          }
+                      }
+                  });
+                })
               }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
 
