@@ -34,31 +34,18 @@
       },
       mounted: function () {
         this.$nextTick(function () {
-          let that=this;
+          // let that=this;
           // utils.ajax({
-          //     url: basepath + "/mall/auth",
+          //     url: basepath + "/seller/store/get",
           //     dataType: 'json',
           //     type: 'POST',
-          //     async:false,
           //     success: function(data){
-          //         if(!data.success){
-          //           utils.go({path:'login'},that.$router);
-          //         }else{
-          //           utils.header();
+          //         if(data.code=="SUCESS"){
+          //             document.setTitle(data.result.store_name);
+          //             //that.entranceData[3].link='http://101.201.76.184:8098/mall/index.html?#!/home/home/'+data.result.page_id+'?xv=enter';
           //         }
           //     }
           // });
-          utils.ajax({
-              url: basepath + "/seller/store/get",
-              dataType: 'json',
-              type: 'POST',
-              success: function(data){
-                  if(data.code=="SUCESS"){
-                      document.setTitle(data.result.store_name);
-                      //that.entranceData[3].link='http://101.201.76.184:8098/mall/index.html?#!/home/home/'+data.result.page_id+'?xv=enter';
-                  }
-              }
-          });
          })
         },
       methods: {},

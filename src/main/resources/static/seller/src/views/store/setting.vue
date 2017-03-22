@@ -94,7 +94,7 @@
                         url: basepath + "/seller/store/update",
                         dataType: 'json',
                         type: 'POST',
-                        data:JSON.stringify({
+                        data:{
                             //'logo':that.res.formData.logo,
                             'store_name':that.res.formData.name,
                             'customer_service_phone':that.res.formData.phone,
@@ -104,10 +104,10 @@
                             //'invoice_flag':that.res.formData.inv_type=='不可开发票'?0:1,
                             //'time':that.res.formData.time*1,
                             //'inv_selected':that.res.formData.inv_type=='可开发票'?that.res.inv_selected:[]
-                        }),
+                        },
                         success: function(data){
                             if(data.code=="SUCESS"){
-                                utils.go({path:'store'},that.$router,true);
+                                utils.go({path:'/store/store'},that.$router,true);
                             }else{
                                 that.$vux.alert.show('店铺设置失败');
                             }
