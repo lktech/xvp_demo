@@ -42,7 +42,6 @@
 
         methods:{
             preserve(){
-                alert(1)
                 if(!this.disabled){
                     let that = this;
                     utils.ajax({
@@ -115,8 +114,7 @@
         },
         mounted: function () {
             this.$nextTick(function () {
-                utils.loadingHide();
-                alert(2)
+
            })
         },
         components:{

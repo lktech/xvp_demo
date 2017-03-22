@@ -151,7 +151,6 @@
           },
           hold(){
             if(!this.disabled){
-              alert(1);
               let hold_sku_obj=this.formData.specifica_list;
               let stock=0;
               if(this.status.specifications){
@@ -177,19 +176,22 @@
                 "pay_type":'微信支付',
                 //付款方式
 
-                "sku": hold_sku_obj
+                "sku": hold_sku_obj,
 
+                "pics":this.img_list1,
+
+                "product_desc":this.img_list2
               };
-              let obj_pics=[];
-              for(var i=0;i<this.img_list.length;i++){
-                obj_pics.push({'url':this.img_list[i]});
-              }
-              let obj_pics_detail=[];
-              for(var i=0;i<this.img_list1.length;i++){
-                obj_pics_detail.push({'url':this.img_list1[i]});
-              }
-              hold_obj.pics=JSON.stringify(obj_pics);
-              hold_obj.product_desc=JSON.stringify(obj_pics_detail);
+              // let obj_pics=[];
+              // for(var i=0;i<this.img_list.length;i++){
+              //   obj_pics.push({'url':this.img_list[i]});
+              // }
+              // let obj_pics_detail=[];
+              // for(var i=0;i<this.img_list1.length;i++){
+              //   obj_pics_detail.push({'url':this.img_list1[i]});
+              // }
+              //hold_obj.pics=JSON.stringify(obj_pics);
+              //hold_obj.product_desc=JSON.stringify(obj_pics_detail);
               
               let that=this;
               utils.ajax({
