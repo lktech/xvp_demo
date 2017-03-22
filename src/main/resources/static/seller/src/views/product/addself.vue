@@ -178,9 +178,9 @@
 
                 "sku": hold_sku_obj,
 
-                "pics":this.img_list1,
+                "pics":JSON.stringify(this.img_list1),
 
-                "product_desc":this.img_list2
+                "product_desc":JSON.stringify(this.img_list2)
               };
               // let obj_pics=[];
               // for(var i=0;i<this.img_list.length;i++){

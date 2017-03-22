@@ -267,16 +267,16 @@
               success: function(data){
                   if(data.code=="SUCESS"){
                     that.formData.name=data.result.name;
-                    that.formData.describe=data.result.des?data.result.des:'';
+                    that.formData.describe=data.result.product_detail?data.result.product_detail:'';
 
                     for(var ii=0; ii<JSON.parse(data.result.pics).length;ii++){
                       that.img_list.push(JSON.parse(data.result.pics)[ii].url);
                     }
                     
-                    if(data.result.pics_detail){
-                      if(JSON.parse(data.result.pics_detail).length){
-                        for(var iii=0; iii<JSON.parse(data.result.pics_detail).length;iii++){
-                          that.img_list1.push(JSON.parse(data.result.pics_detail)[iii].url);
+                    if(data.result.product_desc){
+                      if(JSON.parse(data.result.product_desc).length){
+                        for(var iii=0; iii<JSON.parse(data.result.product_desc).length;iii++){
+                          that.img_list1.push(JSON.parse(data.result.product_desc)[iii].url);
                         }
                       }
                     }

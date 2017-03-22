@@ -34,18 +34,18 @@
       },
       mounted: function () {
         this.$nextTick(function () {
-          // let that=this;
-          // utils.ajax({
-          //     url: basepath + "/seller/store/get",
-          //     dataType: 'json',
-          //     type: 'POST',
-          //     success: function(data){
-          //         if(data.code=="SUCESS"){
-          //             document.setTitle(data.result.store_name);
-          //             //that.entranceData[3].link='http://101.201.76.184:8098/mall/index.html?#!/home/home/'+data.result.page_id+'?xv=enter';
-          //         }
-          //     }
-          // });
+          let that=this;
+          utils.ajax({
+              url: basepath + "/seller/store/get",
+              dataType: 'json',
+              type: 'POST',
+              success: function(data){
+                  if(data.code=="SUCESS"){
+                      $('title').text(data.result.store_name);
+                      that.entranceData[3].link='http://101.201.76.184:8098/mall/index.html?#!/home/home?id='+data.result.id+'&xv=enter';
+                  }
+              }
+          });
 
          })
         },

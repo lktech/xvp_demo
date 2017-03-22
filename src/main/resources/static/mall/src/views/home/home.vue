@@ -50,11 +50,11 @@
       mounted: function () {
         this.$nextTick(function () {
 
-            utils.setSession('pageId',this.$route.params.id);
+            utils.setSession('pageId',this.$route.query.id);
             let that = this;
             utils.ajax({
               url: basepath + "/user/store/main",
-              data:JSON.stringify({'store_id':that.$route.params.id*1}),
+              data:JSON.stringify({'store_id':that.$route.query.id*1}),
               async:false,
               success: function(data) {
                 if(data.code=="SUCESS") {
@@ -88,7 +88,7 @@
                   that.component = that.component1; // 组件
 
                   sessionStorage.setItem('title_',that.baseinfo.title);
-                  sessionStorage.setItem('link_','http://m.fvt.xiaovpu.com/wap/order/index.html#!/home/'+that.$route.params.id+'?xv=enter');
+                  sessionStorage.setItem('link_','http://m.fvt.xiaovpu.com/wap/order/index.html#!/home/'+that.$route.query.id+'?xv=enter');
                   sessionStorage.setItem('logo_',that.baseinfo.logo);
                 } else {
                   that.$vux.alert.show(data.msg);
@@ -109,7 +109,7 @@
           }
         },
         click(id){
-          utils.go({path:'/product/detail',query:{store_id:this.$route.params.id,product_id:id}},this.$router,true);
+          utils.go({path:'/product/detail',query:{store_id:this.$route.query.id,product_id:id}},this.$router,true);
         }
       },
       components: {
