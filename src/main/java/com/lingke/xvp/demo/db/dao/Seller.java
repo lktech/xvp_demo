@@ -35,6 +35,6 @@ public class Seller extends BaseSeller<Seller> {
 		return Db.update("update seller set password=? where phone =?", password, phone) > 0;
 	}
 	public static Boolean updateSellerStoreId() {
-		return Db.update("update seller set store_id=? where id =?",SessionUtil.sellerGetStoreId(),SessionUtil.getSellerLoginId()) > 0;
+		return Db.update("update seller set xvp_store_id=? where id =?",SessionUtil.sellerGetStoreId(),SessionUtil.getSellerLoginId()) > 0;
 	}
 }
