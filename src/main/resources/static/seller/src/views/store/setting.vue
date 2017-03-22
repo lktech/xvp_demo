@@ -14,12 +14,12 @@
              <c-input title="QQ号码" @on-change="validate" placeholder="请输入QQ号码(选填)" name="QQ" v-model="res.formData.QQ"></c-input>
          </c-group>
          <!--<c-group>
-             <c-cell title="订单超时" is-link :value='res.formData.order_time' @click="order_time"></c-cell>
-             <c-cell title="发票设置" is-link :value='res.formData.inv_type' @click='open_set'></c-cell>
+             <c-cell title="订单超时" is-link :value='res.formData.order_time' @click.native="order_time"></c-cell>
+             <c-cell title="发票设置" is-link :value='res.formData.inv_type' @click.native='open_set'></c-cell>
          </c-group>
          <c-addr title="订单超时" @get-addressid="getTimeId"  @address-add="cancel" :show.sync="res.timeStatus" :address="res.time" type="default" size='block' :mstyle=true btn-txt="取消"></c-addr>-->
          <div class="wrap-pd"  style="margin-top:10px">
-             <c-button text="保存" :type="res.color" :disabled="res.disabled" @click="preserve" size="block"></c-button>
+             <c-button text="保存" :type="res.color" :disabled="res.disabled" @click.native="preserve" size="block"></c-button>
          </div>
     </div>
 
@@ -33,11 +33,11 @@
                 <c-checklist :options="res.inv_list" v-model="res.inv_default" :required=false @on-change="inv_change"></c-checklist>
             </c-group>
             <c-group v-if="res.inv_type_status">
-                <c-cell title="发票类目" is-link :value='res.inv_type' @click="inv_category_type"></c-cell>
+                <c-cell title="发票类目" is-link :value='res.inv_type' @click.native="inv_category_type"></c-cell>
             </c-group>
         </div>
         <div class="wrap-pd">
-            <c-button text="确定" :type="res.color1" :disabled="res.disabled1" @click="preserve1" size="block"></c-button>
+            <c-button text="确定" :type="res.color1" :disabled="res.disabled1" @click.native="preserve1" size="block"></c-button>
         </div>
     </div>-->
     
