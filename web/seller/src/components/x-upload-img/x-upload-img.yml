@@ -1,0 +1,38 @@
+component:
+  uploadmul
+
+about:
+  多图片上传组件
+
+author:
+  bob
+
+props:
+  title:
+    参数定义: 显示的标题   [String]    传了title则有 ，若没传，则会调用x-input组件，也就是一行有key value 输入框被禁用
+    是否必填: 否
+    可选项: 无
+    默认值: 无
+    备注: 无
+  list:
+      参数定义: 图片数组  [Array]
+      是否必填: 是
+      可选项: 无
+      默认值: 无
+      备注: 无
+  max:
+      参数定义: 最多上传几张图片  [Number]
+      是否必填: 否
+      可选项: 无
+      默认值: 101
+      备注: 无
+
+
+that.$emit('upload',base64);  //向调用者发送emit,参数是图片的base64编码
+
+示例：
+   <c-uploadmul :list="['url1','url2']" @upload="upload" :max="3"></c-uploadmul>
+   
+    <c-uploadmul :list="uploadList" @upload="upload" :max="5" title="图片举证" placeholder="13">
+        <span slot="after-title" class="placeholder">请上传举证照片</span>   // 图片举证后面的文字 
+    </c-uploadmul>

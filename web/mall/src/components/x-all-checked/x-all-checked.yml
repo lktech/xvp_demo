@@ -1,0 +1,64 @@
+component:
+  allchecked
+
+about:
+  全选组件
+
+author:
+  ice-yy
+
+data() {
+  return {
+    btntext            // btntext是底部蓝色按钮内的文字
+    checketext        // 全选文字   默认‘全选’
+    list: []         // 列表数据
+    islink         // 列表右边有箭头
+  }
+},
+            
+format='{"id":"id","title":"name","value":"value"}' 可以将数据格式用这个方法转换，只需要填上相应的字段即可     
+// id是列表的id 
+// title 是第一行文本 16px
+// inlineDesc 是第二行文本 14px
+// time  groupname 是第三行文本 12px
+// value 是列表右边文字  
+
+
+如果数据格式是
+list:[{
+    id:
+    title:
+    value:
+    inlineDesc:
+    time:
+}]
+这种，就不需要用format={}这个方法了，如果数据格式的字段不符合list这种，则需要用format='{"id":"id","title":"name","value":"value"，"inlineDesc":"inlineDesc","time":"time"}'进行转换
+
+
+methods: {
+    submit(data) {  
+      console.log(data);
+               得到的是一个  Object {ids: Array[2], list: Array[2]}
+    }
+},
+
+   示例：
+  
+  <r-group>
+    <x-all-checked 
+        :list='list' 
+        btntext='确定' 
+        islink
+        :format='{"id":"id","title":"name","value":"name","inlineDesc":"robotid","time":"createTime"}' 
+        @submit="submit">
+    </x-all-checked>
+  </r-group>
+       
+       
+
+   备注：
+   islink：Boollean
+   btntext: String,
+   checketext: String,
+   list: [Array],   
+   format: Object，

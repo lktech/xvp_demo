@@ -1,0 +1,31 @@
+icon: '&#xe640;'
+extra: |
+  <p class="tip">当前组件使用`svg`实现模糊效果。如果在手机上渲染过慢，可以尝试直接使用css3的`blur filter`。</p>
+tags:
+  en:
+    - image
+    - blur
+  zh-CN:
+    - 图片
+    - 模糊
+    - 高斯模糊
+props:
+  blur-amount:
+    type: Number
+    default: 10
+    en: blur amount of the effect
+    zh-CN: 模糊程度
+  url:
+    type: String
+    default: ''
+    en: url of the image
+    zh-CN: 图片地址
+  height:
+    type: Number
+    default: 200
+    en: height of the container
+    zh-CN: 容器高度
+slots:
+  default:
+    en: content of the container, above the blur image
+    zh-CN: 容器内容，显示在模糊内容上面

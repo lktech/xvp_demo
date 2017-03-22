@@ -1,0 +1,65 @@
+
+一、改动
+
+1、picker组件
+  将import改为require形式，解决scroller.js获取不到样式的问题
+
+2、icon-loading动画
+  将icon-loading动画放到main.less
+
+3、页面跳转动画
+  将vue-router transition放到main.less
+
+4、actionsheet组件
+  处理@import后加载样式组件初始化显示状态的问题，将weui_actionsheet放到main.less
+
+5、header组件
+  将组件返回默认文案“back”改为“返回”
+
+6、inline-calendar组件
+   将日历中的英文改为中文（inline-calendar.vue、props.js）
+
+7、datetime组件
+   完成、取消按钮汉化（datetime.vue、datetimepicker.js）
+
+8、button组件
+  新增属性：size、noradius、inline、link(button.vue、widget/weui_button/weui_button.less、variable/weui_button.less @btn-radius)
+
+9、timeline组件
+  加入样式 p h4 .recent
+
+10、textarea
+    weui_form_common.less(.weui_textarea，增加resize: none !important; min-height: 24px;)
+
+11、number组件
+    .vux-number-selector svg  由绿色改为color-theme
+
+12、dialog组件
+    variable.less:@dialog-button-text-primary-color
+    confirm.vue 去掉less引用（引入的dialog已有样式）
+    weui_dialog.less:@weuiDialogLinkColor
+
+
+二、无demo页的组件
+
+    box、group-title（在swiper demo中有应用）、inline-desc（在cell等多个组件中有应用）
+
+三、丢弃的组件
+
+    dev-tip、check-icon、close、color-picker、countdown、countup、form-preview、fullpage、grid、
+
+    inline-x-number、number-roller、orientation、popover、qrcode、range、shake、sticky、video、view-box、
+
+    wechat-emotion、x-circle、x-img、x-progress、
+
+四、问题
+
+1、input组件
+  demo中的使用icon代替title，未起作用，也未找到相关代码
+
+2、clocker
+  自定义模板时天数最大两位数
+
+    未做demo的组件：
+    已做到 toast
+
