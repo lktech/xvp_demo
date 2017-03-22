@@ -1,6 +1,7 @@
 package com.lingke.xvp.demo.controller.seller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -77,7 +78,9 @@ public class SellerController {
 			throw new RuntimeException("用户名或者密码错误");
 		}
 		SessionUtil.sellerLogin(seller.getId());
-		SessionUtil.sellerSetStoreId(seller.getXvpStoreId().toString());
+		if(!StringUtils.isEmpty(seller.getXvpStoreId())){
+			SessionUtil.sellerSetStoreId(seller.getXvpStoreId().toString());
+		}
 		return null;
 	}
 
