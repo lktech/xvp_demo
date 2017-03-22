@@ -40,7 +40,7 @@
                 let price='';
                 $.each(data.result,function(k,o){
                   utils.ajax({
-                      url:"/seller/product/sku/get", type:'post', data: {product_id:data.result.id}, success: function (res) {
+                      url:"/seller/product/sku/get", type:'post', data: {product_id:o.id}, success: function (res) {
                           if (res.code=="SUCESS") {
                               $(res.result,function(i,v){
                                 stock+=v.stock;
@@ -48,6 +48,7 @@
                               price+=res.result[0].price;
 
                               that.goods.push({
+                                id:o.id,
                                 name:o.name,
                                 price:price,
                                 stock:stock,

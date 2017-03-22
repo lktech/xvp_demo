@@ -43,7 +43,10 @@
                   if(data.code=="SUCESS"){
                       $('title').text(data.result.store_name);
                       that.entranceData[3].link='http://101.201.76.184:8098/mall/index.html?#!/home/home?id='+data.result.id+'&xv=enter';
-                  }
+                  }else if(res.code=='auth_seller_error'){
+                              utils.wang(that,utils,res.message);
+
+                          }
               }
           });
 

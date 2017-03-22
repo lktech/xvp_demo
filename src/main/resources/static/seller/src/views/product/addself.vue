@@ -173,7 +173,7 @@
                 //商品详情  
                 "pay_type":0,
 
-                'logistics_fee':this.formData.freight?this.formData.freight*1:0,
+                'logistics_fee':this.formData.freight?this.formData.freight*100:0,
                 //付款方式
 
                 "sku": hold_sku_obj,

@@ -175,7 +175,8 @@
 
                 "pics":JSON.stringify(this.img_list1),
 
-                "product_desc":JSON.stringify(this.img_list2)
+                "product_desc":JSON.stringify(this.img_list2),
+                'id':this.$route.query.id
               };
 
               let that=this;
@@ -261,7 +262,7 @@
               success: function(data){
                   if(data.code=="SUCESS"){
                     that.formData.name=data.result.name;
-                    that.formData.freight=that.converter(data.result.logistics_fee/100);
+                    that.formData.freight=that.converter(data.result.logistics_fee/100+'');
                     that.formData.describe=data.result.product_detail?data.result.product_detail:'';
 
                     for(var ii=0; ii<JSON.parse(data.result.pics).length;ii++){
