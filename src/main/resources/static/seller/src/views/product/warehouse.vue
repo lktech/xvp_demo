@@ -67,7 +67,7 @@
                                 name:o.name,
                                 price:_price,
                                 stock:_stock,
-                                pics:JSON.parse(o.pics)[0]
+                                pics:o.pics
                               })
                           }else if(res.code=='auth_seller_error'){
                               utils.wang(that,utils,res.message);

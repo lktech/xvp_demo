@@ -65,7 +65,6 @@
                         if(data.code=='SUCESS'){
                             that.goods=data.result;
                             that.goods.logistics_fee=that.goods.logistics_fee;
-                            that.goods.pics=JSON.parse(that.goods.pics)[0];
                             that.goods.product_desc=JSON.parse(that.goods.product_desc);
                             utils.ajax({
                                 url: basepath + "/user/product/sku/get",

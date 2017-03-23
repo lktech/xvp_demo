@@ -179,7 +179,7 @@
 
                 "sku": hold_sku_obj,
 
-                "pics":JSON.stringify(this.img_list1),
+                "pics":this.img_list1[0],
 
                 "product_desc":JSON.stringify(this.img_list2),
                 'product_id':this.$route.query.id
@@ -271,9 +271,8 @@
                     that.formData.freight=that.converter(data.result.logistics_fee/100+'');
                     that.formData.describe=data.result.product_detail?data.result.product_detail:'';
 
-                    for(var ii=0; ii<JSON.parse(data.result.pics).length;ii++){
-                      that.img_list1.push(JSON.parse(data.result.pics)[ii]);
-                    }
+
+                      that.img_list1.push(data.result.pics);
                     
                     if(data.result.product_desc){
                       if(JSON.parse(data.result.product_desc).length){

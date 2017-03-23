@@ -18,7 +18,8 @@
                               :details='item.properties?"规格："+item.properties:"规格：无"'
                               :from='item.price/100'
                               :imglink="item.pic"
-                              :colororg='true'>
+                              :colororg='true'
+                              :cheng="true">
                 </c-panel-list>
             </c-panel-img>
         </div>

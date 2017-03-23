@@ -14,7 +14,7 @@
             </div>
         </c-cell-wrap>
         <c-panel-img listname="商品列表">
-            <c-panel-list v-for='item in json.xvporderitems'
+            <c-panel-list v-for='item in json.goods'
                           :id='item.id'
                           :others='item.item_count'
                           :title='item.product_name'
@@ -28,11 +28,11 @@
         <c-group>
             <c-cell title="优惠" v-if="readonly" :value="json.seller_discount_fee | formatPriceCNY"></c-cell>
             <c-input title="优惠" v-else placeholder="可输入优惠金额" v-model="discount"></c-input>
-            <c-cell title="运费" :value="json.logistic_fee|formatPriceCNY"></c-cell>
-            <c-cell title="实付金额" :value="json.pay_amount|formatPriceCNY"></c-cell>
+            <c-cell title="运费" :value="json.logistic_fee | formatPriceCNY"></c-cell>
+            <c-cell title="实付金额" :value="json.pay | formatPriceCNY"></c-cell>
         </c-group>
         <c-cell-wrap style="padding:10px;">
-            订单编号：{{json.order_id}}<br/>
+            订单编号：{{json.orderNum}}<br/>
             创建时间：{{json.create_time}}<br/>
             <div v-if="json.orderStatus==odr.close">订单超时：{{json.timeOut}}</div>
             <div v-if="json.orderStatus==odr.dfh">付款时间：{{json.payTime}}</div>

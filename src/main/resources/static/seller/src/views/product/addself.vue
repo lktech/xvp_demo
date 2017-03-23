@@ -182,7 +182,7 @@
 
                 "sku": hold_sku_obj,
 
-                "pics":JSON.stringify(this.img_list1),
+                "pics":this.img_list1[0],
 
                 "product_desc":JSON.stringify(this.img_list2)
               };
