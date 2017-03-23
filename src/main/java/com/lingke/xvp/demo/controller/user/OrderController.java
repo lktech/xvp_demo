@@ -64,7 +64,7 @@ public class OrderController {
 	}
 
 	@RequestMapping(path = "/payurl", method = RequestMethod.POST)
-	public XvpResponse payurl(OrderGetRequest request) throws Exception {
+	public XvpResponse payurl(@RequestBody OrderGetRequest request) throws Exception {
 		XvpPayGetpayurlRequest ropRequest = new XvpPayGetpayurlRequest();
 		XvpPayGetpayurlResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		OrderPayUrlResponse response = new OrderPayUrlResponse();
