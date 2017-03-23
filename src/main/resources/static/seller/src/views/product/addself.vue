@@ -27,7 +27,7 @@
             <c-cell-wrap title="规格设置" desc="删除" desc-color='red' v-for="(item, index) in formData.specifica_list"  @desc="descClick(index)" >
                   <c-input title="价格" @on-change="validate" placeholder="请输入价格" required :name="order('Yprice',index)" v-model="item.price" :max="10" is-type="money"></c-input>
                   <c-input title="库存" @on-change="validate" placeholder="请输入库存" required :name="order('Ystock',index)" v-model="item.stock" :max="10" is-type="number"  ></c-input>
-                  <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" :name="order('Yvalue',index)"  :max="50" v-model="item.sku_str" ></c-input>
+                  <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" required :name="order('Yvalue',index)"  :max="50" v-model="item.sku_str" ></c-input>
             </c-cell-wrap>
           </div>
           <div class="wrap-pd" style='margin-top:10px;'>
@@ -107,6 +107,10 @@
               var i=obj.name.split('_')[1];
               this.status.specifica_list_status[i].stock=obj.valid;
             }
+            if(obj.name.indexOf('Yvalue')!=-1){
+              var i=obj.name.split('_')[1];
+              this.status.specifica_list_status[i].value=obj.valid;
+            }
             this.judge();
             
           },
@@ -125,7 +129,7 @@
             }
             var num=0;
             for(var i=0;i<this.status.specifica_list_status.length;i++){
-              if(this.status.specifica_list_status[i].stock && this.status.specifica_list_status[i].price){
+              if(this.status.specifica_list_status[i].stock && this.status.specifica_list_status[i].price && this.status.specifica_list_status[i].value){
                 num++;
               }
             }
@@ -219,7 +223,7 @@
             if(this.status.specifications){
               var num=0;
               for(var i=0;i<this.status.specifica_list_status.length;i++){
-                if(this.status.specifica_list_status[i].stock && this.status.specifica_list_status[i].price){
+                if(this.status.specifica_list_status[i].stock && this.status.specifica_list_status[i].price && this.status.specifica_list_status[i].value){
                   num++;
                 }
               }
