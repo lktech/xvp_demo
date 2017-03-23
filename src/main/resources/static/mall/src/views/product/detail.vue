@@ -184,7 +184,7 @@
                         ],
                         'logistics_fee':this.goods.logistics_fee,
                         'discount':0,
-                        'logistic_flg':this.goods.logistic_flg
+                        'logistic_flg':1
                     };
                     utils.setSession("buy_info",buy_info);
                     utils.go({path:"/order/add"},this.$router);
