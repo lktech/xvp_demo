@@ -76,7 +76,7 @@ public class ProductController {
 				XvpProductDeleteRequest xvpProductDeleteRequest = new XvpProductDeleteRequest();
 				xvpProductDeleteRequest.setApp_id(ropClientAdapter.getAppId());
 				xvpProductDeleteRequest.setProduct_id(Long.valueOf(productCreateResponse.getProduct().getId()));
-				ropClientAdapter.ropInvoke(ropRequest);
+				ropClientAdapter.ropInvoke(xvpProductDeleteRequest);
 				throw e;
 			}
 		}
