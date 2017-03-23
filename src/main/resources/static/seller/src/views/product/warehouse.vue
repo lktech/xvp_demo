@@ -58,9 +58,9 @@
                               })
 
                               if(min!=max){
-                                _price=utils.formatPriceCNY(min)+' ~ '+utils.formatPriceCNY(max)
+                                _price='¥'+utils.formatPrice(min)+' ~ ¥'+utils.formatPrice(max)
                               }else{
-                                _price=utils.formatPriceCNY(min)
+                                _price='¥'+utils.formatPrice(min)
                               }
                               that.goods.push({
                                 id:o.id,
