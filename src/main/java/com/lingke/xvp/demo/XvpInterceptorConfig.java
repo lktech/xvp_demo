@@ -31,6 +31,7 @@ public class XvpInterceptorConfig extends WebMvcConfigurerAdapter {
         userInterceptor.addPathPatterns("/user/**");
         // 排除配置
         userInterceptor.excludePathPatterns("/user/user/login");
+        userInterceptor.excludePathPatterns("/user/user/getIsvInfo");
 
     }
 
