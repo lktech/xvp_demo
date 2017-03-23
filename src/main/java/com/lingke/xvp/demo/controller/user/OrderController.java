@@ -68,7 +68,7 @@ public class OrderController {
 		XvpPayGetpayurlRequest ropRequest = new XvpPayGetpayurlRequest();
 		XvpPayGetpayurlResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		OrderPayUrlResponse response = new OrderPayUrlResponse();
-		response.setUrl(ropResponse.getUrl().getPay_url() + "?app_id=" + ropClientAdapter.getAppId() + "&order_id="
+		response.setUrl(ropResponse.getUrl().getPay_url() + "?appId=" + ropClientAdapter.getAppId() + "&orderId="
 				+ request.getOrder_id());
 		return response;
 	}
