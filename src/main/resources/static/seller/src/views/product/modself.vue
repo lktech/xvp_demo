@@ -160,7 +160,7 @@
                   price:this.formData.price?this.formData.price*100:0,
                   stock:this.formData.stock?this.formData.stock*1:stock*1,
                   sku_str:this.formData.name,
-                  id:that.sku_id
+                  id:this.sku_id
                 }]
               }
               var hold_obj={
@@ -278,24 +278,8 @@
                         }
                       }
                     }
-
-                    // if(data.result.sku.length>1){
-                    //   that.status.specifications=true;
-                    //   that.formData.specifica_list=data.result.sku;
-                    //   for(var i=0;i<that.formData.specifica_list.length;i++){
-                    //     that.formData.specifica_list[i].price=that.converter(that.formData.specifica_list[i].price/100+'');
-                    //   }
-                    // }else{
-                    //   that.status.specifications=false;
-                    //   that.formData.price=that.converter(data.result.sku[0].price/100+'');
-                    //   that.formData.stock=data.result.sku[0].stock+'';
-                    // }
                     
-                    // if(that.status.specifications){
-                    //     for(var i=1; i<that.formData.specifica_list.length;i++){
-                    //       that.status.specifica_list_status.push({stock:true,price:true,value:true});
-                    //     }
-                    // }
+                    
                     that.product_id=data.result.id;
                     utils.ajax({
                         url:"/seller/product/sku/get", type:'post', data: {product_id:data.result.id}, success: function (res) {
@@ -311,6 +295,12 @@
                                 that.formData.price=that.converter(res.result[0].price/100+'');
                                 that.formData.stock=res.result[0].stock+'';
                                 that.sku_id=res.result[0].id;
+                              }
+
+                              if(that.status.specifications){
+                                  for(var i=1; i<that.formData.specifica_list.length;i++){
+                                    that.status.specifica_list_status.push({stock:true,price:true,value:true});
+                                  }
                               }
                             }else if(res.code=='auth_seller_error'){
                                 utils.wang(that,utils,res.message);
