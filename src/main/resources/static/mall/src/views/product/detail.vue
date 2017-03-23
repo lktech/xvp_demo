@@ -203,7 +203,7 @@
                 this.submitType = "buy";
             },
             link_home(){
-                utils.go({path:'home',query:{id:this.$route.query.store_id}},this.$router,true);
+                utils.go({path:'/home/home',query:{id:this.$route.query.store_id}},this.$router,true);
             }
             
         },
