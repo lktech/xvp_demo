@@ -22,11 +22,12 @@
                           :from='item.price | formatPrice'
                           type="org"
                           :imglink="item.goodsUrl"
-                          :colororg='true'>
+                          :colororg='true'
+                          :cheng="true">
             </c-panel-list>
         </c-panel-img>
         <c-group>
-            <c-cell title="优惠" v-if="readonly" :value="json.seller_discount_fee | formatPriceCNY"></c-cell>
+            <c-cell v-if="json.orderStatus!='DFK'"  :value="json.seller_discount_fee | formatPriceCNY"></c-cell>
             <c-input title="优惠" v-else placeholder="可输入优惠金额" v-model="discount"></c-input>
             <c-cell title="运费" :value="json.logistic_fee | formatPriceCNY"></c-cell>
             <c-cell title="实付金额" :value="json.pay | formatPriceCNY"></c-cell>
@@ -35,17 +36,17 @@
             订单编号：{{json.orderNum}}<br/>
             创建时间：{{json.create_time}}<br/>
             <div v-if="json.orderStatus==odr.close">订单超时：{{json.timeOut}}</div>
-            <div v-if="json.orderStatus==odr.dfh">付款时间：{{json.payTime}}</div>
-            <div v-if="json.orderStatus==odr.dsh">发货时间：{{json.fhTime}}</div>
-            <div v-if="json.orderStatus==odr.ok">收货时间：{{json.shTime}}</div>
+            <div v-if="json.orderStatus==odr.dfh">付款时间：{{json.pay_time}}</div>
+            <div v-if="json.orderStatus==odr.dsh">发货时间：{{json.fh_time}}</div>
+            <div v-if="json.orderStatus==odr.ok">收货时间：{{json.sh_time}}</div>
         </c-cell-wrap>
-        <div class="wrap-pd">
+        <div class="wrap-pd" style="margin-top:10px">
             <c-flexbox>
                 <c-flexbox-item>
                     <div class="flex-demo">
-                        <c-button v-if="orderStatus=='DFK'" type="primary" @click.native="updateOrder" size="block"
+                        <c-button v-if="json.orderStatus=='DFK'" type="primary" @click.native="updateOrder" size="block"
                                   text="更新订单"></c-button>
-                        <c-button v-if="orderStatus=='DFH'" type="primary" @click.native="updateOrder1" size="block"
+                        <c-button v-if="json.orderStatus=='DFH'" type="primary" @click.native="updateOrder1" size="block"
                                   text="发货"></c-button>
                     </div>
                 </c-flexbox-item>
@@ -76,9 +77,8 @@
                     close: constants.orderStatus.close//订单关闭（用户关闭/订单超时）
                 },
                 discount:"",//优惠金额
-                step:1,
+                step:0,
                 readonly:false,
-                orderStatus:'',
                 discount1:''
             }
         },
@@ -98,9 +98,14 @@
                             that.json=data.result;
                             utils.loadingHide();
                            // that.discount1=data.result.discountInfo;
-                            that.orderStatus=data.result.order_status;
-                            if(data.result.order_status!='DFK'){
-                                that.readonly=true;
+                            if(data.result.orderStatus=='DFH'){
+                                that.step=1;
+                            }
+                            if(data.result.orderStatus=='DSH'){
+                                that.step=2;
+                            }
+                            if(data.result.orderStatus=='YSH'){
+                                that.step=1;
                             }
                         }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
@@ -126,9 +131,9 @@
                             discount_amount:that.discount*100
                         },
                         success: function (data) {
-                            if (data.code="SUCESS") {
+                            if (data.code=="SUCESS") {
                                 that.$vux.alert.show({content:'更新成功',onHide :function(){
-                                  utils.go({path:'order'},that.$router,true);
+                                  utils.go({path:'/order/list'},that.$router,true);
                                 }});
                             }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
@@ -139,7 +144,9 @@
                         }
                     });
                 }else{
-                    this.$vux.alert.show('您输入的优惠金额大于实付金额');
+                    this.$vux.alert.show({content:'您输入的优惠金额大于实付金额',onHide :function(){
+                                  return false
+                                }});
                 }
                 
 

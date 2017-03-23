@@ -14,7 +14,7 @@
             </div>
         </c-cell-wrap>
         <c-panel-img listname="商品列表">
-            <c-panel-list v-for='item in json.xvporderitems'
+            <c-panel-list v-for='item in json.goods'
                           :id='item.id'
                           :others='item.item_count'
                           :title='item.product_name'
@@ -22,29 +22,30 @@
                           :from='item.price | formatPrice'
                           type="org"
                           :imglink="item.goodsUrl"
-                          :colororg='true'>
+                          :colororg='true'
+                          :cheng="true">
             </c-panel-list>
         </c-panel-img>
         <c-group>
             <c-cell title="优惠" :value="json.seller_discount_fee | formatPriceCNY"></c-cell>
             <c-cell title="运费" :value="json.logistic_fee | formatPriceCNY"></c-cell>
-            <c-cell title="实付金额" :value="json.pay_amount | formatPriceCNY"></c-cell>
+            <c-cell title="实付金额" :value="json.pay | formatPriceCNY"></c-cell>
         </c-group>
         <c-cell-wrap style="padding:10px;">
-            订单编号：{{json.order_id}}<br/>
+            订单编号：{{json.orderNum}}<br/>
             创建时间：{{json.create_time}}<br/>
             <div v-if="json.orderStatus==odr.close">订单超时：{{json.timeOut}}</div>
-            <div v-if="json.orderStatus==odr.dfh">付款时间：{{json.payTime}}</div>
-            <div v-if="json.orderStatus==odr.dsh">发货时间：{{json.fhTime}}</div>
-            <div v-if="json.orderStatus==odr.ok">收货时间：{{json.shTime}}</div>
+            <div v-if="json.orderStatus==odr.dfh">付款时间：{{json.pay_time}}</div>
+            <div v-if="json.orderStatus==odr.dsh">发货时间：{{json.fh_time}}</div>
+            <div v-if="json.orderStatus==odr.ok">收货时间：{{json.sh_time}}</div>
         </c-cell-wrap>
-        <div class="wrap-pd">
+        <div class="wrap-pd" style="margin-top:10px">
             <c-flexbox>
                 <c-flexbox-item>
                     <div class="flex-demo">
-                        <c-button v-if="orderStatus=='DFK'" type="primary" @click.native="updateOrder" size="block"
+                        <c-button v-if="json.orderStatus=='DFK'" type="primary" @click.native="updateOrder" size="block"
                                   text="微信支付"></c-button>
-                        <c-button v-if="orderStatus=='DSH'" type="primary" @click.native="qrsh" size="block"
+                        <c-button v-if="json.orderStatus=='DSH'" type="primary" @click.native="qrsh" size="block"
                                   text="确认收货"></c-button>
                     </div>
                 </c-flexbox-item>
@@ -75,7 +76,7 @@
                     close: constants.orderStatus.close//订单关闭（用户关闭/订单超时）
                 },
                 discount:"",//优惠金额
-                step:1,
+                step:0,
                 orderStatus:'',
                 discount1:''
             }
@@ -109,7 +110,7 @@
                         order_id: that.$route.query.id,
                     },
                     success: function (data) {
-                        if (data.code="SUCESS") {
+                        if (data.code=="SUCESS") {
                             that.into();
                         }else{
                             that.$vux.alert.show(data.message);
@@ -124,14 +125,23 @@
                     dataType: 'json',
                     type: 'POST',
                     data: {
-                        orderId: that.$route.query.id
+                        order_id: that.$route.query.id
                     },
                     success: function (data) {
                         if (data.code=="SUCESS") {
                             that.json=data.result;
                             utils.loadingHide();
                            // that.discount1=data.result.discountInfo;
-                            that.orderStatus=data.result.order_status;
+
+                            if(data.result.orderStatus=='DFH'){
+                                that.step=1;
+                            }
+                            if(data.result.orderStatus=='DSH'){
+                                that.step=2;
+                            }
+                            if(data.result.orderStatus=='YSH'){
+                                that.step=1;
+                            }
                         }else{
                                 that.$vux.alert.show(data.message);
                         }

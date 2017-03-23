@@ -88,7 +88,7 @@
                             need_logistics_flg:that.logistics_Status
                         },
                         success: function (data) {
-                            if (data.code="SUCESS") {
+                            if (data.code=="SUCESS") {
                                 that.$vux.alert.show({content:'发货成功',onHide :function(){
                                   utils.go({path:'list'},that.$router,true);
                                 }});

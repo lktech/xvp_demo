@@ -71,7 +71,7 @@
                         order_id: id,
                     },
                     success: function (data) {
-                        if (data.code="SUCESS") {
+                        if (data.code=="SUCESS") {
                             that.orderList(that.status);
                         }else{
                             that.$vux.alert.show(data.message);
