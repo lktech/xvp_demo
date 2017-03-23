@@ -104,7 +104,7 @@
                     }
                     console.log(obj.buy_sku_list);
                     utils.ajax({
-                        url: basepath + "/user/order/add", data: JSON.stringify(obj), success: function (data) {
+                        url: basepath + "/user/order/add", data: obj, success: function (data) {
                             if (data.code=="SUCESS") {
                                 that.order_id=data.result.order_id;
                                 location.href="http://m.sit.xiaovpu.com/wap/order/xvp_cashier.html?orderId="+that.order_id+'&appId=xvp';

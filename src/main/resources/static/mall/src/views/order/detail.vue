@@ -97,9 +97,9 @@
                     url: basepath + "/user/order/confirm",
                     dataType: 'json',
                     type: 'POST',
-                    data: JSON.stringify({
+                    data: {
                         order_id: id,
-                    }),
+                    },
                     success: function (data) {
                         if (data.code="SUCESS") {
                             that.into();
@@ -115,9 +115,9 @@
                     url: "/user/order/get",
                     dataType: 'json',
                     type: 'POST',
-                    data: JSON.stringify({
+                    data: {
                         orderId: that.$route.query.id
-                    }),
+                    },
                     success: function (data) {
                         if (data.code=="SUCESS") {
                             that.json=data.result;

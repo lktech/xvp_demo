@@ -51,7 +51,7 @@
                         url: basepath + "/user/user/address/set",
                         dataType: 'json',
                         type: 'POST',
-                        data:JSON.stringify({
+                        data:{
                             'name':that.formData.name,
                             'phone':that.formData.phone,
                             'post_code':that.formData.post_code,
@@ -60,7 +60,7 @@
                             'city':that.formData.addr_code[1],
                             'county':that.formData.addr_code[2],
                             'str':that.addr_text[0]+that.addr_text[1]+that.addr_text[2]+that.formData.address
-                        }),
+                        },
                         success: function(data){
                             if(data.code=="SUCESS"){
                                     utils.go({path:'/order/add',query:{id:data.result.id}},that.$router,true);

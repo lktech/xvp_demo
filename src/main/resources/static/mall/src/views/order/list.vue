@@ -59,9 +59,9 @@
                     url: basepath + "/user/order/confirm",
                     dataType: 'json',
                     type: 'POST',
-                    data: JSON.stringify({
+                    data: {
                         order_id: id,
-                    }),
+                    },
                     success: function (data) {
                         if (data.code="SUCESS") {
                             that.orderList(that.status);
@@ -76,7 +76,7 @@
                 let that = this;
                 that.status=id?id:'';
                 utils.ajax({
-                    url:"/user/order/query", type:'post', data: JSON.stringify({order_status:id?id:''}), success: function (data) {
+                    url:"/user/order/query", type:'post', data: {order_status:id?id:''}, success: function (data) {
                         if (data.code=="SUCESS") {
                             that.orderData = data.result;
                         }else{

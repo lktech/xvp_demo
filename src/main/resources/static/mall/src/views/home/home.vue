@@ -49,52 +49,34 @@
       },
       mounted: function () {
         this.$nextTick(function () {
+          let that = this ;
+          $xvp.login({
+              app_key : '329509F6-B7B8-4A9E-8817-D2EDCBE5559D',
+              isv_url:'http://sit-open.xiaovpu.com/isv/',
+              success : function(xvp_uid){
 
-            utils.setSession('pageId',this.$route.query.id);
-            let that = this;
-            utils.ajax({
-              url: basepath + "/user/store/main",
-              data:JSON.stringify({'store_id':that.$route.query.id*1}),
-              async:false,
-              success: function(data) {
-                if(data.code=="SUCESS") {
-                  that.firstloading = true;
-                  that.baseinfo.title = data.result.store_name; //店铺名称
-                  that.component1=data.result.products;
-                  $.each(that.component1,function(i,v){
-                      utils.ajax({
-                        url: basepath + "/user/product/sku/get",
-                        data:JSON.stringify({'product_id':v.id}),
-                        async:false,
-                        success: function(res) {
-                          if(res.code=="SUCESS") {
+                utils.ajax({
+                  url: basepath + "/user/user/login",
+                  data:{'xvp_uid':xvp_uid},
+                  async:false,
+                  success: function(res) {
+                    if(res.code=="SUCESS") {  
+                      that.init();
 
-                            var min=res.result[0].price;
-                            var len=res.result.length;
+                    } else {
+                      that.$vux.alert.show(res.message);
+                    }
+                  },
+                });
 
-                            for(var ii=1; ii<len; ii++){
-                              if(res.result[ii].price < min){
-                                min = res.result[ii].price;
-                              }
-                            }
-                            that.component1[i].price = min;
 
-                          } else {
-                            that.$vux.alert.show(res.msg);
-                          }
-                        },
-                      });
-                  })
-                  that.component = that.component1; // 组件
+                  
 
-                  sessionStorage.setItem('title_',that.baseinfo.title);
-                  sessionStorage.setItem('link_','http://m.fvt.xiaovpu.com/wap/order/index.html#!/home/'+that.$route.query.id+'?xv=enter');
-                  sessionStorage.setItem('logo_',that.baseinfo.logo);
-                } else {
-                  that.$vux.alert.show(data.msg);
-                }
-              },
-            });
+
+              }
+          });
+
+            
 
          // utils.MenuShare();
         
@@ -110,6 +92,53 @@
         },
         click(id){
           utils.go({path:'/product/detail',query:{store_id:this.$route.query.id,product_id:id}},this.$router,true);
+        },
+        init(){
+          utils.setSession('pageId',this.$route.query.id);
+          let that = this;
+          utils.ajax({
+            url: basepath + "/user/store/main",
+            data:{'store_id':that.$route.query.id*1},
+            async:false,
+            success: function(data) {
+              if(data.code=="SUCESS") {
+                that.firstloading = true;
+                that.baseinfo.title = data.result.store_name; //店铺名称
+                that.component1=data.result.products;
+                $.each(that.component1,function(i,v){
+                    utils.ajax({
+                      url: basepath + "/user/product/sku/get",
+                      data:{'product_id':v.id},
+                      async:false,
+                      success: function(res) {
+                        if(res.code=="SUCESS") {
+
+                          var min=res.result[0].price;
+                          var len=res.result.length;
+
+                          for(var ii=1; ii<len; ii++){
+                            if(res.result[ii].price < min){
+                              min = res.result[ii].price;
+                            }
+                          }
+                          that.component1[i].price = min;
+
+                        } else {
+                          that.$vux.alert.show(res.message);
+                        }
+                      },
+                    });
+                })
+                that.component = that.component1; // 组件
+
+                sessionStorage.setItem('title_',that.baseinfo.title);
+                sessionStorage.setItem('link_','http://m.fvt.xiaovpu.com/wap/order/index.html#!/home/'+that.$route.query.id+'?xv=enter');
+                sessionStorage.setItem('logo_',that.baseinfo.logo);
+              } else {
+                that.$vux.alert.show(data.message);
+              }
+            },
+          });
         }
       },
       components: {

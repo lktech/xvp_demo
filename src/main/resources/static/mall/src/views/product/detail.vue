@@ -60,7 +60,7 @@
                 utils.ajax({
                     url: basepath + "/user/product/get",
                     async:false,
-                    data:JSON.stringify({"shelf_product_id":that.$route.params.id}),
+                    data:{"shelf_product_id":that.$route.params.id},
                     success: function(data){
                         if(data.code=='SUCESS'){
                             that.goods=data.result;
@@ -68,7 +68,7 @@
                             utils.ajax({
                                 url: basepath + "/user/product/sku/get",
                                 async:false,
-                                data:JSON.stringify({"shelf_product_id":data.result.id}),
+                                data:{"shelf_product_id":data.result.id},
                                 success: function(res){
                                     if(res.code=='SUCESS'){
                                         var max=res.result[0].price;
@@ -118,7 +118,7 @@
 
                 // utils.ajax({
                 //   url: "/mall/wxconfig/get",
-                //   data:JSON.stringify({'url':window.location.href}),
+                //   data:{'url':window.location.href}),
                 //   success: function(data) {
                 //     if(data.success) {
                 //       wx.config({
