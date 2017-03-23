@@ -4,7 +4,7 @@
     <div v-if='goods.length > 0'>
       <!-- 商品列表 -->
       <c-panel-img>
-        <c-panel-list :id='item.id' :title='item.name' :price='item.price' :righttips='item.stock' :imglink='item.pics' v-for='item in goods' @handing='handing'></c-panel-list>
+        <c-panel-list :id='item.id' :title='item.name' :price="item.price" :maxPrice='item.maxPrice' :minPrice='item.minPrice' :righttips='item.stock' :imglink='item.pics' v-for='item in goods' @handing='handing'></c-panel-list>
       </c-panel-img>
     </div>
     <c-data-null msg='暂无商品信息' v-else></c-data-null>
@@ -41,31 +41,27 @@
                       url:"/seller/product/sku/get", type:'post', data: {product_id:o.id}, success: function (res) {
                           if (res.code=="SUCESS") {
 
-                              var max=res.result[0].price*1;
-                              var min=res.result[0].price*1;
+                              var min=res.result[0].price;
+                              var max=min;
                               var len=res.result.length;
                               var _stock=0;
-                              var _price='';
 
                               $.each(res.result,function(i,v){
                                 _stock+=v.stock*1;
-                                if(v.price*1 > max){
+                                if(v.price > max){
                                   max = v.price*1;
                                 }
-                                if(v.price*1 < min){
-                                  min = v.price*1;
+                                if(v.price < min){
+                                  min = v.price;
                                 }
                               })
 
-                              if(min!=max){
-                                _price='¥'+utils.formatPrice(min)+' ~ ¥'+utils.formatPrice(max)
-                              }else{
-                                _price='¥'+utils.formatPrice(min)
-                              }
                               that.goods.push({
                                 id:o.id,
                                 name:o.name,
-                                price:_price,
+                                maxPrice:max,
+                                minPrice:min,
+                                price:min,
                                 stock:_stock,
                                 pics:o.pics
                               })
@@ -100,9 +96,9 @@
           let that = this;
           if(key == 'menu1') { // 查看商品
             utils.go({
-              path: 'detail',
-              params: {
-                id: that.selectId
+              path: '/product/detail',
+              query: {
+                product_id: that.selectId
               }
             }, that.$router);
           } else if(key == 'menu2') { // 编辑商品

@@ -92,6 +92,13 @@ exports.routes = [
                 component: function(resolve){
                     require(['./views/product/warehouse.vue'],resolve);
                 }
+            },
+            {
+                path:'detail',
+                name:'detail',
+                component: function(resolve){
+                    require(['./views/product/detail.vue'],resolve);
+                }
             }
         ]
     },

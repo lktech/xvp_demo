@@ -263,6 +263,3 @@
       }
   }
 </script>
-<style lang="less">
-  .num{float:right;}
-</style>
