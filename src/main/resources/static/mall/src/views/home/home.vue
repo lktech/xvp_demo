@@ -50,33 +50,42 @@
       mounted: function () {
         this.$nextTick(function () {
           let that = this ;
-          $xvp.login({
-              app_key : '329509F6-B7B8-4A9E-8817-D2EDCBE5559D',
-              isv_url:'http://sit-open.xiaovpu.com/isv/',
-              success : function(xvp_uid){
 
-                utils.ajax({
-                  url: basepath + "/user/user/login",
-                  data:{'xvp_uid':xvp_uid},
-                  async:false,
-                  success: function(res) {
-                    if(res.code=="SUCESS") {  
-                      that.init();
 
-                    } else {
-                      that.$vux.alert.show(res.message);
+          utils.ajax({
+            url: basepath + "user/user/getIsvInfo",
+            async:false,
+            success: function(data) {
+              if(data.code=="SUCESS") {  
+
+                $xvp.login({
+                    app_key : data.result.appId,
+                    isv_url: data.result.isvUrl,
+                    success : function(xvp_uid){
+
+                      utils.ajax({
+                        url: basepath + "/user/user/login",
+                        data:{'xvp_uid':xvp_uid},
+                        async:false,
+                        success: function(res) {
+                          if(res.code=="SUCESS") {  
+                            that.init();
+
+                          } else {
+                            that.$vux.alert.show(res.message);
+                          }
+                        },
+                      });
                     }
-                  },
                 });
 
-
-                  
-
-
+              } else {
+                that.$vux.alert.show(data.message);
               }
+            },
           });
 
-            
+
 
          // utils.MenuShare();
         

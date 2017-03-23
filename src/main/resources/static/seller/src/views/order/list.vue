@@ -24,6 +24,7 @@
                     dfh: constants.orderStatus.dfh,//待发货
                 },
                 url: basepath + "/seller/order/query",
+                order_item_id_list:{}
             }
         },
         mounted: function () {
@@ -42,6 +43,7 @@
                 utils.go({path:'detail',query:{'id':id}},this.$router);
             },
             fahuo(id){
+               utils.setSession("order_item_id_list",this.order_item_id_list[id]); 
                 utils.go({path:'logistics',query:{'id':id}},this.$router,true);
             },
             tabChange(id){
@@ -71,6 +73,13 @@
                     url:"/seller/order/query", type:'post', data: {order_status:id}, success: function (data) {
                         if (data.code=="SUCESS") {
                             that.orderData = data.result;
+                            $.each(that.orderData,function(k,o){
+                                var arr=[];
+                                $.each(o.goods,function(i,v){
+                                    arr.push(v.id);
+                                })
+                                that.order_item_id_list[o.orderNum]=arr;
+                            })
                         }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
 

@@ -79,7 +79,8 @@
                 discount:"",//优惠金额
                 step:0,
                 readonly:false,
-                discount1:''
+                discount1:'',
+                order_item_id_list:[]
             }
         },
         computed: {},
@@ -108,6 +109,10 @@
                             if(data.result.orderStatus=='YSH'){
                                 that.step=1;
                             }
+                            $.each(data.result.goods,function(i,v){
+                                that.order_item_id_list.push(v.id);
+                            })
+                            utils.setSession("order_item_id_list",that.order_item_id_list);
                         }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
 

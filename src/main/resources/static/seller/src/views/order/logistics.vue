@@ -85,7 +85,8 @@
                             order_id: that.$route.query.id,
                             logistics_company_name:that.company,
                             logistics_num:that.num,
-                            need_logistics_flg:that.logistics_Status
+                            need_logistics_flg:that.logistics_Status,
+                            order_item_id_list:utils.getSession("order_item_id_list")?JSON.parse(utils.getSession("order_item_id_list")):[]
                         },
                         success: function (data) {
                             if (data.code=="SUCESS") {
