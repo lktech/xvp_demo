@@ -60,15 +60,16 @@
                 utils.ajax({
                     url: basepath + "/user/product/get",
                     async:false,
-                    data:{"shelf_product_id":that.$route.params.id},
+                    data:{"id":that.$route.query.product_id},
                     success: function(data){
                         if(data.code=='SUCESS'){
                             that.goods=data.result;
                             that.goods.logistics_fee=that.goods.logistics_fee;
+                            that.goods.pics=JSON.parse(that.goods.pics)[0];
                             utils.ajax({
                                 url: basepath + "/user/product/sku/get",
                                 async:false,
-                                data:{"shelf_product_id":data.result.id},
+                                data:{"product_id":data.result.id},
                                 success: function(res){
                                     if(res.code=='SUCESS'){
                                         var max=res.result[0].price;
@@ -101,7 +102,7 @@
                                         })
                                         
                                     }else{
-                                        that.$vux.alert.show(res.msg);
+                                        that.$vux.alert.show(res.message);
                                     }
                                 }
                                 
@@ -109,7 +110,7 @@
 
                             that.dataReady = true;
                         }else{
-                            that.$vux.alert.show(data.msg);
+                            that.$vux.alert.show(data.message);
                         }
                     }
                     
@@ -144,7 +145,7 @@
                 //         });
                 //       })
                 //     } else {
-                //       that.$vux.alert.show(data.msg);
+                //       that.$vux.alert.show(data.message);
                 //     }
                 //   },
                 // });

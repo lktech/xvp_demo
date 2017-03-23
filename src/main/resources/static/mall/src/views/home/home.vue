@@ -112,7 +112,7 @@
                       async:false,
                       success: function(res) {
                         if(res.code=="SUCESS") {
-
+                          v.pics=JSON.parse(v.pics)[0];
                           var min=res.result[0].price;
                           var len=res.result.length;
 
