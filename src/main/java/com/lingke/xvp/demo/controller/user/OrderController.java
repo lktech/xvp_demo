@@ -64,11 +64,12 @@ public class OrderController {
 	}
 
 	@RequestMapping(path = "/payurl", method = RequestMethod.POST)
-	public XvpResponse payurl() throws Exception {
+	public XvpResponse payurl(OrderGetRequest request) throws Exception {
 		XvpPayGetpayurlRequest ropRequest = new XvpPayGetpayurlRequest();
 		XvpPayGetpayurlResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		OrderPayUrlResponse response = new OrderPayUrlResponse();
-		response.setUrl(ropResponse.getUrl().getPay_url());
+		response.setUrl(ropResponse.getUrl().getPay_url() + "?appId=" + ropClientAdapter.getAppId() + "&orderId="
+				+ request.getOrder_id());
 		return response;
 	}
 
