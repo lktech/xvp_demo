@@ -16,7 +16,7 @@
         <c-panel-img listname="商品列表">
             <c-panel-list v-for='item in json.goods'
                           :id='item.id'
-                          :others='item.item_count'
+                          :others='item.num'
                           :title='item.product_name'
                           :details='item.sku_str?"规格："+item.sku:"规格：无"'
                           :from='item.price | formatPrice'

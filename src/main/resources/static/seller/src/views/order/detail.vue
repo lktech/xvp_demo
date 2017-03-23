@@ -16,7 +16,7 @@
         <c-panel-img listname="商品列表">
             <c-panel-list v-for='item in json.goods'
                           :id='item.id'
-                          :others='item.item_count'
+                          :others='item.num'
                           :title='item.product_name'
                           :details='item.sku_str?"规格："+item.sku:"规格：无"'
                           :from='item.price | formatPrice'
@@ -27,7 +27,7 @@
             </c-panel-list>
         </c-panel-img>
         <c-group>
-            <c-cell v-if="json.orderStatus!='DFK'"  :value="json.seller_discount_fee | formatPriceCNY"></c-cell>
+            <c-cell v-if="json.orderStatus!='DFK'" title="优惠" :value="json.seller_discount_fee | formatPriceCNY"></c-cell>
             <c-input title="优惠" v-else placeholder="可输入优惠金额" v-model="discount"></c-input>
             <c-cell title="运费" :value="json.logistic_fee | formatPriceCNY"></c-cell>
             <c-cell title="实付金额" :value="json.pay | formatPriceCNY"></c-cell>
@@ -97,6 +97,7 @@
                         if (data.code=="SUCESS") {
                             that.json=data.result;
                             utils.loadingHide();
+                            that.discount=data.result.seller_discount_fee/100+'';
                            // that.discount1=data.result.discountInfo;
                             if(data.result.orderStatus=='DFH'){
                                 that.step=1;
