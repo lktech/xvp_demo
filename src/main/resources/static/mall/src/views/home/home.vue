@@ -53,7 +53,7 @@
 
 
           utils.ajax({
-            url: basepath + "user/user/getIsvInfo",
+            url: basepath + "/user/user/getIsvInfo",
             async:false,
             success: function(data) {
               if(data.code=="SUCESS") {  
