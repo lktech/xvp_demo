@@ -7,7 +7,7 @@
           <c-product :title="goods.name" :des="goods.logistics_fee | formatPriceCNY" :price="goods.price" :pic="goods.pics"></c-product>
         </c-product-wrap>
         <c-cell-wrap>
-            <c-cell :title="storeInfo.name" value="进入店铺" is-link @click="link_home">
+            <c-cell :title="storeInfo.name" value="进入店铺" is-link @click.native="link_home">
                 <img class="wq-img" slot="icon" src='http://static.taggole.com/sithbrobot/poster/1489997146660.jpg'/>
             </c-cell>
         </c-cell-wrap>
@@ -203,7 +203,7 @@
                 this.submitType = "buy";
             },
             link_home(){
-                utils.go({path:'home',params:{id:this.pageId}},this.$router,true);
+                utils.go({path:'home',query:{id:this.$route.query.store_id}},this.$router,true);
             }
             
         },

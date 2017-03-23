@@ -6,7 +6,7 @@
         </c-group>
         <c-group v-else>
             <c-address-info :id="addressData.id" :name="addressData.name" :phone="addressData.phone" :arrows="true"
-                            :address="addressData.address"></c-address-info>
+                            :address="addressData.str"></c-address-info>
         </c-group>
         <!--商品列表-->
         <div>
@@ -95,7 +95,7 @@
 
                     let obj = {
                         logistic_flg:that.json.logistic_flg,
-                        logistics_fee:that.json.logistics_fee,
+                        logistic_fee:that.json.logistics_fee*1,
                         pay_amount:that.totalMoney,
                         addressee_id:that.addr_id,
                         buy_sku_list:that.arr
