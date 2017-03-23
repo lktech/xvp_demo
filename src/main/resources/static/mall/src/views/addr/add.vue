@@ -63,9 +63,9 @@
                         },
                         success: function(data){
                             if(data.code=="SUCESS"){
-                                    utils.go({path:'/order/add',query:{id:data.result.id}},that.$router,true);
+                                    utils.go({path:'/order/add',that.$router,true);
                             }else{
-                                that.$vux.alert.show(data.msg);
+                                that.$vux.alert.show(data.message);
                             }
                         },
                         message:'正在保存'

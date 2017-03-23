@@ -125,7 +125,7 @@
                            // that.discount1=data.result.discountInfo;
                             that.orderStatus=data.result.order_status;
                         }else{
-                                that.$vux.alert.show(data.msg);
+                                that.$vux.alert.show(data.message);
                         }
                     }
                 });

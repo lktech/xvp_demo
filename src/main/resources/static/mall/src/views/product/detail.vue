@@ -15,7 +15,7 @@
         <c-title title="商品详情"></c-title>
         <div class="wrap-detail">
             <p>{{goods.product_detail}}</p>
-            <p v-for='i in goods.product_desc'><img v-bind:src="i.url" alt="" style="width:100%; height:auto;"></p>
+            <p v-for='i in goods.product_desc'><img v-bind:src="i" alt="" style="width:100%; height:auto;"></p>
         </div>
 
         <c-sku v-model="sku.status" :disabled="sku.disabled" :title="goods.name" :img="goods.pics" :price="goods.price" :text="sku.buttonTxt" :sku='skuList' @submit="submit"></c-sku>
@@ -66,6 +66,7 @@
                             that.goods=data.result;
                             that.goods.logistics_fee=that.goods.logistics_fee;
                             that.goods.pics=JSON.parse(that.goods.pics)[0];
+                            that.goods.product_desc=JSON.parse(that.goods.product_desc);
                             utils.ajax({
                                 url: basepath + "/user/product/sku/get",
                                 async:false,
