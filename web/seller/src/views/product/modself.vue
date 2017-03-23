@@ -24,15 +24,15 @@
                 <c-input title="库存" @on-change="validate" placeholder="请输入库存" required name="stock" v-model="formData.stock" :max="10" :is-type="number"  ></c-input>
           </c-cell-wrap>
           <div v-else>
-            <c-cell-wrap title="规格设置" desc="删除" desc-color='red' v-for="(item, index) in formData.specifica_list"  @desc="descClick(index)" >
+            <c-cell-wrap title="规格设置" v-for="(item, index) in formData.specifica_list" >
                   <c-input title="价格" @on-change="validate" placeholder="请输入价格" required :name="order('Yprice',index)" v-model="item.price" :max="10" is-type="money"></c-input>
                   <c-input title="库存" @on-change="validate" placeholder="请输入库存" required :name="order('Ystock',index)" v-model="item.stock" :max="10" is-type="number"  ></c-input>
-                  <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" :name="order('Yvalue',index)"  :max="50" v-model="item.value" ></c-input>
+                  <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" required :name="order('Yvalue',index)"  :max="50" v-model="item.sku_str" ></c-input>
             </c-cell-wrap>
           </div>
-          <div class="wrap-pd" style='margin-top:10px;'>
+         <!-- <div class="wrap-pd" style='margin-top:10px;'>
             <c-button type="primary" text="添加商品型号" @click.native="add_specifica" size="block"></c-button>
-          </div>
+          </div>-->
           <div class="wrap-pd" style='margin-top:10px;'>
             <c-button :type="color" text="确定" @click.native="hold" :disabled="disabled" size="block"></c-button>
           </div>
@@ -54,6 +54,7 @@
               price:'',
               rule_id:'',
               specifica_list:[{stock:'',price:'',sku_str:''}],
+              freight:''
             },
             status:{
               name_status:true,
@@ -69,6 +70,7 @@
             img_list1:[],
             img_list2:[],
             product_id:'',
+            sku_id:'',
             money: function (value) {
               return {
                 valid: value.search(/^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/) > -1
@@ -106,30 +108,34 @@
               var i=obj.name.split('_')[1];
               this.status.specifica_list_status[i].stock=obj.valid;
             }
+            if(obj.name.indexOf('Yvalue')!=-1){
+              var i=obj.name.split('_')[1];
+              this.status.specifica_list_status[i].value=obj.valid;
+            }
             this.judge();
             
           },
-          descClick(i){
-            this.formData.specifica_list.splice(i,1);
-            this.status.specifica_list_status.splice(i,1);
-            if(!this.formData.specifica_list.length){
-              this.status.specifications=false;
-              //this.formData.price='';
-            }
-            var num=0;
-            for(var i=0;i<this.status.specifica_list_status.length;i++){
-              if(this.status.specifica_list_status[i].stock && this.status.specifica_list_status[i].price){
-                num++;
-              }
-            }
-            if(this.status.name_status && this.status.specifica_list_status.length==num){
-              this.disabled=false;
-              this.color='primary';
-            }else{
-              this.disabled=true;
-              this.color='default';
-            }
-          },
+          // descClick(i){
+          //   this.formData.specifica_list.splice(i,1);
+          //   this.status.specifica_list_status.splice(i,1);
+          //   if(!this.formData.specifica_list.length){
+          //     this.status.specifications=false;
+          //     //this.formData.price='';
+          //   }
+          //   var num=0;
+          //   for(var i=0;i<this.status.specifica_list_status.length;i++){
+          //     if(this.status.specifica_list_status[i].stock && this.status.specifica_list_status[i].price && this.status.specifica_list_status[i].value){
+          //       num++;
+          //     }
+          //   }
+          //   if(this.status.name_status && this.status.specifica_list_status.length==num){
+          //     this.disabled=false;
+          //     this.color='primary';
+          //   }else{
+          //     this.disabled=true;
+          //     this.color='default';
+          //   }
+          // },
           add_specifica(){
             this.disabled=true;
             this.color='default';
@@ -150,7 +156,6 @@
                 for(var i=0;i<hold_sku_obj.length;i++){
                   hold_sku_obj[i].price=hold_sku_obj[i].price*100;
                   stock+=hold_sku_obj[i].stock*1;
-                  hold_sku_obj[i].logistics_fee=this.formData.freight;
                 }
                 this.formData.price='';
                 this.formData.stock='';
@@ -158,8 +163,8 @@
                 hold_sku_obj=[{
                   price:this.formData.price?this.formData.price*100:0,
                   stock:this.formData.stock?this.formData.stock*1:stock*1,
-                  logistics_fee:this.formData.freight,
-                  sku_str:this.formData.name
+                  sku_str:this.formData.name,
+                  id:this.sku_id
                 }]
               }
               var hold_obj={
@@ -167,22 +172,18 @@
                 //商品名称 
                 "product_detail": this.formData.describe,
                 //商品详情  
-                "pay_type":'微信支付',
+                "pay_type":0,
+
+                'logistics_fee':this.formData.freight?this.formData.freight*1:0,
                 //付款方式
 
-                "sku": hold_sku_obj
+                "sku": hold_sku_obj,
 
+                "pics":this.img_list1[0],
+
+                "product_desc":JSON.stringify(this.img_list2),
+                'product_id':this.$route.query.id
               };
-              let obj_pics=[];
-              for(var i=0;i<this.img_list.length;i++){
-                obj_pics.push({'url':this.img_list[i]});
-              }
-              let obj_pics_detail=[];
-              for(var i=0;i<this.img_list1.length;i++){
-                obj_pics_detail.push({'url':this.img_list1[i]});
-              }
-              hold_obj.pics=JSON.stringify(obj_pics);
-              hold_obj.product_desc=JSON.stringify(obj_pics_detail);
 
               let that=this;
               utils.ajax({
@@ -192,9 +193,11 @@
                   data:hold_obj,
                   success: function(data){
                       if(data.code=="SUCESS"){
-                          var link=that.$router._currentTransition.from.name;
-                          utils.go({name:link},that.$router,true);
-                      }else{
+                          utils.go({path:'/store/store'},that.$router,true);
+                      }else if(data.code=='auth_seller_error'){
+                                utils.wang(that,utils,data.message);
+
+                            }else{
                           that.$vux.alert.show('编辑商品失败');
                           if(that.status.specifications){
                             for(var i=0;i<that.formData.specifica_list.length;i++){
@@ -213,7 +216,7 @@
             if(this.status.specifications){
               var num=0;
               for(var i=0;i<this.status.specifica_list_status.length;i++){
-                if(this.status.specifica_list_status[i].stock && this.status.specifica_list_status[i].price){
+                if(this.status.specifica_list_status[i].stock && this.status.specifica_list_status[i].price && this.status.specifica_list_status[i].value){
                   num++;
                 }
               }
@@ -254,49 +257,66 @@
       },
       mounted: function () {
         this.$nextTick(function () { 
+          let that = this;
           utils.ajax({
               url: basepath + "/seller/product/get",
               dataType: 'json',
               type: 'POST',
               data:{
-                "id":this.$route.query.id
+                "id":that.$route.query.id
               },
               success: function(data){
                   if(data.code=="SUCESS"){
                     that.formData.name=data.result.name;
-                    that.formData.describe=data.result.des?data.result.des:'';
+                    that.formData.freight=that.converter(data.result.logistics_fee/100+'');
+                    that.formData.describe=data.result.product_detail?data.result.product_detail:'';
 
-                    for(var ii=0; ii<JSON.parse(data.result.pics).length;ii++){
-                      that.img_list.push(JSON.parse(data.result.pics)[ii].url);
-                    }
+
+                      that.img_list1.push(data.result.pics);
                     
-                    if(data.result.pics_detail){
-                      if(JSON.parse(data.result.pics_detail).length){
-                        for(var iii=0; iii<JSON.parse(data.result.pics_detail).length;iii++){
-                          that.img_list1.push(JSON.parse(data.result.pics_detail)[iii].url);
+                    if(data.result.product_desc){
+                      if(JSON.parse(data.result.product_desc).length){
+                        for(var iii=0; iii<JSON.parse(data.result.product_desc).length;iii++){
+                          that.img_list2.push(JSON.parse(data.result.product_desc)[iii]);
                         }
                       }
                     }
-
-                    if(data.result.sku.length>1){
-                      that.status.specifications=true;
-                      that.formData.specifica_list=data.result.sku;
-                      for(var i=0;i<that.formData.specifica_list.length;i++){
-                        that.formData.specifica_list[i].price=that.converter(that.formData.specifica_list[i].price/100+'');
-                      }
-                    }else{
-                      that.status.specifications=false;
-                      that.formData.price=that.converter(data.result.sku[0].price/100+'');
-                      that.formData.stock=data.result.sku[0].stock+'';
-                    }
                     
-                    if(that.status.specifications){
-                        for(var i=1; i<that.formData.specifica_list.length;i++){
-                          that.status.specifica_list_status.push({stock:true,price:true,value:true});
-                        }
-                    }
+                    
                     that.product_id=data.result.id;
-                  }else{
+                    utils.ajax({
+                        url:"/seller/product/sku/get", type:'post', data: {product_id:data.result.id}, success: function (res) {
+                            if (res.code=="SUCESS") {
+                              if(res.result.length>1){
+                                that.status.specifications=true;
+                                that.formData.specifica_list=res.result;
+                                for(var i=0;i<that.formData.specifica_list.length;i++){
+                                  that.formData.specifica_list[i].price=that.converter(that.formData.specifica_list[i].price/100+'');
+                                }
+                              }else{
+                                that.status.specifications=false;
+                                that.formData.price=that.converter(res.result[0].price/100+'');
+                                that.formData.stock=res.result[0].stock+'';
+                                that.sku_id=res.result[0].id;
+                              }
+
+                              if(that.status.specifications){
+                                  for(var i=1; i<that.formData.specifica_list.length;i++){
+                                    that.status.specifica_list_status.push({stock:true,price:true,value:true});
+                                  }
+                              }
+                            }else if(res.code=='auth_seller_error'){
+                                utils.wang(that,utils,res.message);
+
+                            }else{
+                                that.$vux.alert.show(res.message);
+                            }
+                        }
+                    });
+                  }else if(data.code=='auth_seller_error'){
+                                utils.wang(that,utils,data.message);
+
+                            }else{
                       that.$vux.alert.show('获取商品信息失败');
                   }
               }
@@ -310,6 +330,4 @@
       }
   }
 </script>
-<style lang="less">
-  .num{float:right;}
-</style>
+

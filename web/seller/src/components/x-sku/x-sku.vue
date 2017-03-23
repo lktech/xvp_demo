@@ -21,11 +21,12 @@
 				</div>
 				<div class="weui_media_box">
 					<div class="num">
-						<r-number v-model="selectNUm" :fillable="fillable" :max="max" :min="min" title="数量"></r-number>
+						<r-number v-model="selectNUm" :fillable="fillable" :max="max1" :min="min" title="数量"></r-number>
+						<p>剩余库存:{{skustock}}件</p>
 					</div>
 				</div>
 				<div class="weui_media_box">
-					<r-button :type="disabled?'disabled':'primary'" :disabled="disabled" @click.native="submit" :text="text"></r-button>
+					<r-button :type="disabled1?'disabled1':'primary'" :disabled="disabled1" @click.native="submit" :text="text1"></r-button>
 				</div>
 
 			</div>
@@ -42,7 +43,11 @@
 				skuprice:null,
 				actId:-1,
 				actName:"",
-				selectNUm:this.num
+				selectNUm:this.num,
+				skustock:0,
+				text1:this.text,
+				disabled1:this.disabled,
+				max1:this.max
 			}
 		},
 		props: {
@@ -104,19 +109,33 @@
 				default:false
 			}
 		},
-		mounted () {
-			this.$nextTick(() => {
-
+		mounted: function () {
+            this.$nextTick(function () {
+            	var that = this;
+				$.each(that.sku,function(i,v){
+					that.skustock+=v.stock*1;
+				})
+				this.max1 = that.skustock;
 			});
 		},
 		methods: {
 			submit(){
-				this.$emit("submit",{"num":this.selectNUm,"sku":{"id":this.actId,"name":this.actName,"price":this.skuprice}});
+				this.$emit("submit",{"num":this.selectNUm,"sku":{"id":this.actId,"name":this.actName,"price":this.skuprice,'stock':this.skustock}});
 			},
 			selectSku(item){
 				this.actId = item.id;
 				this.actName = item.name;
 				this.skuprice = item.price;
+				this.skustock = item.stock;
+				this.selectNUm = 1;
+				if(this.skustock*1 <= 0){
+					this.text1="已售罄";
+					this.disabled1=true;
+				}else{
+					this.max1=this.skustock*1;
+					this.text1=this.text;
+					this.disabled1=false;
+				}
 			},
 			fixIos(zIndex) {
 				if(this.$tabbar && /iphone/i.test(navigator.userAgent)) {

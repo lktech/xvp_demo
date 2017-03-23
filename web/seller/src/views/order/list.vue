@@ -6,7 +6,7 @@
             <c-tab-item @on-item-click='orderList("DFK")'>待付款</c-tab-item>
             <c-tab-item @on-item-click='orderList("DFH")'>待发货</c-tab-item>
             <c-tab-item @on-item-click='orderList("DSH")'>已发货</c-tab-item>
-            <c-tab-item @on-item-click='orderList("YWC")'>已完成</c-tab-item>
+            <c-tab-item @on-item-click='orderList("YSH")'>已完成</c-tab-item>
         </c-tab>
         <c-order :order-data="orderData" type="primary" :order-status="odr"  @look="look" @fahuo="fahuo"></c-order>
         <c-scroll-load @on-load="load" :url='url'><!-- 列表滚动加载--></c-scroll-load>
@@ -24,6 +24,7 @@
                     dfh: constants.orderStatus.dfh,//待发货
                 },
                 url: basepath + "/seller/order/query",
+                order_item_id_list:{}
             }
         },
         mounted: function () {
@@ -42,6 +43,7 @@
                 utils.go({path:'detail',query:{'id':id}},this.$router);
             },
             fahuo(id){
+               utils.setSession("order_item_id_list",this.order_item_id_list[id]); 
                 utils.go({path:'logistics',query:{'id':id}},this.$router,true);
             },
             tabChange(id){
@@ -71,9 +73,19 @@
                     url:"/seller/order/query", type:'post', data: {order_status:id}, success: function (data) {
                         if (data.code=="SUCESS") {
                             that.orderData = data.result;
-                        }else{
+                            $.each(that.orderData,function(k,o){
+                                var arr=[];
+                                $.each(o.goods,function(i,v){
+                                    arr.push(v.id);
+                                })
+                                that.order_item_id_list[o.orderNum]=arr;
+                            })
+                        }else if(data.code=='auth_seller_error'){
+                                utils.wang(that,utils,data.message);
+
+                            }else{
                             that.orderData = [];
-                            that.$vux.alert.show(data.msg);
+                            that.$vux.alert.show(data.message);
                         }
                     }
                 });

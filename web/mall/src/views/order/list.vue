@@ -6,7 +6,7 @@
             <c-tab-item @on-item-click='orderList("DFK")'>待付款</c-tab-item>
             <c-tab-item @on-item-click='orderList("DFH")'>待发货</c-tab-item>
             <c-tab-item @on-item-click='orderList("DSH")'>已发货</c-tab-item>
-            <c-tab-item @on-item-click='orderList("YWC")'>已完成</c-tab-item>
+            <c-tab-item @on-item-click='orderList("YSH")'>已完成</c-tab-item>
         </c-tab>
         <c-order :order-data="orderData" type="primary" :order-status="odr"  @fukuan="fukuan"  @qrsh="qrsh"  @look="look" @fahuo="fahuo"></c-order>
         <c-scroll-load @on-load="load" :url='url'><!-- 列表滚动加载--></c-scroll-load>
@@ -51,7 +51,15 @@
                 utils.go({path:'logistics',query:{'id':id}},this.$router,true);
             },
             fukuan(id){
-                utils.go("http://m.sit.xiaovpu.com/wap/order/xvp_cashier.html?orderId="+id+'&appId=xvp',this.$router);
+                utils.ajax({
+                    url: basepath + "/user/order/payurl", data: {order_id:id}, success: function (res) {
+                        if (res.code=="SUCESS") {
+                            location.href=res.result.url;
+                        }else{
+                            that.$vux.alert.show(res.message);
+                        }
+                    }
+                });
             },
             qrsh(id){
                 let that = this;
@@ -59,11 +67,11 @@
                     url: basepath + "/user/order/confirm",
                     dataType: 'json',
                     type: 'POST',
-                    data: JSON.stringify({
+                    data: {
                         order_id: id,
-                    }),
+                    },
                     success: function (data) {
-                        if (data.code="SUCESS") {
+                        if (data.code=="SUCESS") {
                             that.orderList(that.status);
                         }else{
                             that.$vux.alert.show(data.message);
@@ -76,7 +84,7 @@
                 let that = this;
                 that.status=id?id:'';
                 utils.ajax({
-                    url:"/user/order/query", type:'post', data: JSON.stringify({order_status:id?id:''}), success: function (data) {
+                    url:"/user/order/query", type:'post', data: {order_status:id?id:''}, success: function (data) {
                         if (data.code=="SUCESS") {
                             that.orderData = data.result;
                         }else{

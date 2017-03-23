@@ -6,7 +6,7 @@
         </c-group>
         <c-group v-else>
             <c-address-info :id="addressData.id" :name="addressData.name" :phone="addressData.phone" :arrows="true"
-                            :address="addressData.address"></c-address-info>
+                            :address="addressData.str"></c-address-info>
         </c-group>
         <!--商品列表-->
         <div>
@@ -18,7 +18,8 @@
                               :details='item.properties?"规格："+item.properties:"规格：无"'
                               :from='item.price/100'
                               :imglink="item.pic"
-                              :colororg='true'>
+                              :colororg='true'
+                              :cheng="true">
                 </c-panel-list>
             </c-panel-img>
         </div>
@@ -56,9 +57,6 @@
         mounted: function () {
             this.$nextTick(function () {
                 //utils.MenuShare();
-                if(this.$route.query.add){
-                    this.addr_id=this.$route.query.add
-                }
 
                 this.json = JSON.parse(utils.getSession("buy_info"));//商品数据列表
                 let that = this;
@@ -79,6 +77,7 @@
                                 that.addressStatus=true;
                                 that.disabled=false;
                                 that.color='primary';
+                                that.addr_id=data.result.id;
                             }
                         }else{
                             that.$vux.alert.show(data.message);
@@ -97,19 +96,25 @@
 
                     let obj = {
                         logistic_flg:that.json.logistic_flg,
-                        logistics_fee:that.json.logistics_fee,
+                        logistic_fee:that.json.logistics_fee*1,
                         pay_amount:that.totalMoney,
                         addressee_id:that.addr_id,
                         buy_sku_list:that.arr
                     }
-                    console.log(obj.buy_sku_list);
                     utils.ajax({
-                        url: basepath + "/user/order/add", data: JSON.stringify(obj), success: function (data) {
+                        url: basepath + "/user/order/add", data: obj, success: function (data) {
                             if (data.code=="SUCESS") {
-                                that.order_id=data.result.order_id;
-                                location.href="http://m.sit.xiaovpu.com/wap/order/xvp_cashier.html?orderId="+that.order_id+'&appId=xvp';
+                                utils.ajax({
+                                    url: basepath + "/user/order/payurl", data: {order_id:data.result.order_id}, success: function (res) {
+                                        if (res.code=="SUCESS") {
+                                            location.href=res.result.url;
+                                        }else{
+                                            that.$vux.alert.show(res.message);
+                                        }
+                                    }
+                                });
                             }else{
-                                that.$vux.alert.show(data.msg);
+                                that.$vux.alert.show(data.message);
                             }
                         }
                     });

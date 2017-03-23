@@ -7,7 +7,7 @@
           <c-product :title="goods.name" :des="goods.logistics_fee | formatPriceCNY" :price="goods.price" :pic="goods.pics"></c-product>
         </c-product-wrap>
         <c-cell-wrap>
-            <c-cell :title="storeInfo.name" value="进入店铺" is-link @click="link_home">
+            <c-cell :title="storeInfo.name" value="进入店铺" is-link @click.native="link_home">
                 <img class="wq-img" slot="icon" src='http://static.taggole.com/sithbrobot/poster/1489997146660.jpg'/>
             </c-cell>
         </c-cell-wrap>
@@ -15,7 +15,7 @@
         <c-title title="商品详情"></c-title>
         <div class="wrap-detail">
             <p>{{goods.product_detail}}</p>
-            <p v-for='i in goods.product_desc'><img v-bind:src="i.url" alt="" style="width:100%; height:auto;"></p>
+            <p v-for='i in goods.product_desc'><img v-bind:src="i" alt="" style="width:100%; height:auto;"></p>
         </div>
 
         <c-sku v-model="sku.status" :disabled="sku.disabled" :title="goods.name" :img="goods.pics" :price="goods.price" :text="sku.buttonTxt" :sku='skuList' @submit="submit"></c-sku>
@@ -60,15 +60,16 @@
                 utils.ajax({
                     url: basepath + "/user/product/get",
                     async:false,
-                    data:JSON.stringify({"shelf_product_id":that.$route.params.id}),
+                    data:{"id":that.$route.query.product_id},
                     success: function(data){
                         if(data.code=='SUCESS'){
                             that.goods=data.result;
                             that.goods.logistics_fee=that.goods.logistics_fee;
+                            that.goods.product_desc=JSON.parse(that.goods.product_desc);
                             utils.ajax({
                                 url: basepath + "/user/product/sku/get",
                                 async:false,
-                                data:JSON.stringify({"shelf_product_id":data.result.id}),
+                                data:{"product_id":data.result.id},
                                 success: function(res){
                                     if(res.code=='SUCESS'){
                                         var max=res.result[0].price;
@@ -101,7 +102,7 @@
                                         })
                                         
                                     }else{
-                                        that.$vux.alert.show(res.msg);
+                                        that.$vux.alert.show(res.message);
                                     }
                                 }
                                 
@@ -109,7 +110,7 @@
 
                             that.dataReady = true;
                         }else{
-                            that.$vux.alert.show(data.msg);
+                            that.$vux.alert.show(data.message);
                         }
                     }
                     
@@ -118,7 +119,7 @@
 
                 // utils.ajax({
                 //   url: "/mall/wxconfig/get",
-                //   data:JSON.stringify({'url':window.location.href}),
+                //   data:{'url':window.location.href}),
                 //   success: function(data) {
                 //     if(data.success) {
                 //       wx.config({
@@ -144,7 +145,7 @@
                 //         });
                 //       })
                 //     } else {
-                //       that.$vux.alert.show(data.msg);
+                //       that.$vux.alert.show(data.message);
                 //     }
                 //   },
                 // });
@@ -182,7 +183,7 @@
                         ],
                         'logistics_fee':this.goods.logistics_fee,
                         'discount':0,
-                        'logistic_flg':this.goods.logistic_flg
+                        'logistic_flg':1
                     };
                     utils.setSession("buy_info",buy_info);
                     utils.go({path:"/order/add"},this.$router);
@@ -201,7 +202,7 @@
                 this.submitType = "buy";
             },
             link_home(){
-                utils.go({path:'home',params:{id:this.pageId}},this.$router,true);
+                utils.go({path:'/home/home',query:{id:this.$route.query.store_id}},this.$router,true);
             }
             
         },

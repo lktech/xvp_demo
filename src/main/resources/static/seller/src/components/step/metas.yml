@@ -1,8 +1,0 @@
-icon: '&#xe65e;'
-items: 
-  - step
-  - step-item
-step:
-  props: 
-step-item:
-  props:

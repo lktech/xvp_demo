@@ -27,7 +27,7 @@
             <c-cell-wrap title="规格设置" desc="删除" desc-color='red' v-for="(item, index) in formData.specifica_list"  @desc="descClick(index)" >
                   <c-input title="价格" @on-change="validate" placeholder="请输入价格" required :name="order('Yprice',index)" v-model="item.price" :max="10" is-type="money"></c-input>
                   <c-input title="库存" @on-change="validate" placeholder="请输入库存" required :name="order('Ystock',index)" v-model="item.stock" :max="10" is-type="number"  ></c-input>
-                  <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" :name="order('Yvalue',index)"  :max="50" v-model="item.value" ></c-input>
+                  <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" required :name="order('Yvalue',index)"  :max="50" v-model="item.sku_str" ></c-input>
             </c-cell-wrap>
           </div>
           <div class="wrap-pd" style='margin-top:10px;'>
@@ -107,6 +107,10 @@
               var i=obj.name.split('_')[1];
               this.status.specifica_list_status[i].stock=obj.valid;
             }
+            if(obj.name.indexOf('Yvalue')!=-1){
+              var i=obj.name.split('_')[1];
+              this.status.specifica_list_status[i].value=obj.valid;
+            }
             this.judge();
             
           },
@@ -125,7 +129,7 @@
             }
             var num=0;
             for(var i=0;i<this.status.specifica_list_status.length;i++){
-              if(this.status.specifica_list_status[i].stock && this.status.specifica_list_status[i].price){
+              if(this.status.specifica_list_status[i].stock && this.status.specifica_list_status[i].price && this.status.specifica_list_status[i].value){
                 num++;
               }
             }
@@ -151,20 +155,17 @@
           },
           hold(){
             if(!this.disabled){
-              alert(1);
               let hold_sku_obj=this.formData.specifica_list;
               let stock=0;
               if(this.status.specifications){
                 for(var i=0;i<hold_sku_obj.length;i++){
                   hold_sku_obj[i].price=hold_sku_obj[i].price*100;
                   stock+=hold_sku_obj[i].stock*1;
-                  hold_sku_obj[i].logistics_fee=this.formData.freight;
                 }
               }else{
                 hold_sku_obj=[{
                   price:this.formData.price?this.formData.price*100:0,
                   stock:this.formData.stock?this.formData.stock*1:stock*1,
-                  logistics_fee:this.formData.freight,
                   sku_str:this.formData.name
                 }]
               }
@@ -174,22 +175,27 @@
                 //商品名称 
                 "product_detail": this.formData.describe,
                 //商品详情  
-                "pay_type":'微信支付',
+                "pay_type":0,
+
+                'logistics_fee':this.formData.freight?this.formData.freight*100:0,
                 //付款方式
 
-                "sku": hold_sku_obj
+                "sku": hold_sku_obj,
 
+                "pics":this.img_list1[0],
+
+                "product_desc":JSON.stringify(this.img_list2)
               };
-              let obj_pics=[];
-              for(var i=0;i<this.img_list.length;i++){
-                obj_pics.push({'url':this.img_list[i]});
-              }
-              let obj_pics_detail=[];
-              for(var i=0;i<this.img_list1.length;i++){
-                obj_pics_detail.push({'url':this.img_list1[i]});
-              }
-              hold_obj.pics=JSON.stringify(obj_pics);
-              hold_obj.product_desc=JSON.stringify(obj_pics_detail);
+              // let obj_pics=[];
+              // for(var i=0;i<this.img_list.length;i++){
+              //   obj_pics.push({'url':this.img_list[i]});
+              // }
+              // let obj_pics_detail=[];
+              // for(var i=0;i<this.img_list1.length;i++){
+              //   obj_pics_detail.push({'url':this.img_list1[i]});
+              // }
+              //hold_obj.pics=JSON.stringify(obj_pics);
+              //hold_obj.product_desc=JSON.stringify(obj_pics_detail);
               
               let that=this;
               utils.ajax({
@@ -199,9 +205,11 @@
                   data:hold_obj,
                   success: function(data){
                       if(data.code=="SUCESS"){
-                          var link=that.$router._currentTransition.from.name;
-                          utils.go({name:link},that.$router,true);
-                      }else{
+                          utils.go({path:'/store/store'},that.$router,true);
+                      }else if(data.code=='auth_seller_error'){
+                                utils.wang(that,utils,data.message);
+
+                            }else{
                           that.$vux.alert.show('添加商品失败');
                       }
                   }
@@ -215,7 +223,7 @@
             if(this.status.specifications){
               var num=0;
               for(var i=0;i<this.status.specifica_list_status.length;i++){
-                if(this.status.specifica_list_status[i].stock && this.status.specifica_list_status[i].price){
+                if(this.status.specifica_list_status[i].stock && this.status.specifica_list_status[i].price && this.status.specifica_list_status[i].value){
                   num++;
                 }
               }
@@ -255,6 +263,3 @@
       }
   }
 </script>
-<style lang="less">
-  .num{float:right;}
-</style>

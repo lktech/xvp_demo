@@ -4,7 +4,7 @@
     <div v-if='goods.length > 0'>
       <!-- 商品列表 -->
       <c-panel-img>
-        <c-panel-list :id='item.id' :title='item.name' :price='item.price' :righttips='item.stock' :imglink='item.pics' v-for='item in goods' @handing='handing'></c-panel-list>
+        <c-panel-list :id='item.id' :title='item.name' :price="item.price" :maxPrice='item.maxPrice' :minPrice='item.minPrice' :righttips='item.stock' :imglink='item.pics' v-for='item in goods' @handing='handing'></c-panel-list>
       </c-panel-img>
     </div>
     <c-data-null msg='暂无商品信息' v-else></c-data-null>
@@ -36,8 +36,48 @@
             datatype:'json',
             success: function(data) {
               if(data.code=="SUCESS") {
-                that.goods = data.result;
-              } else {
+                $.each(data.result,function(k,o){
+                  utils.ajax({
+                      url:"/seller/product/sku/get", type:'post', data: {product_id:o.id}, success: function (res) {
+                          if (res.code=="SUCESS") {
+
+                              var min=res.result[0].price;
+                              var max=min;
+                              var len=res.result.length;
+                              var _stock=0;
+
+                              $.each(res.result,function(i,v){
+                                _stock+=v.stock*1;
+                                if(v.price > max){
+                                  max = v.price*1;
+                                }
+                                if(v.price < min){
+                                  min = v.price;
+                                }
+                              })
+
+                              that.goods.push({
+                                id:o.id,
+                                name:o.name,
+                                maxPrice:max,
+                                minPrice:min,
+                                price:min,
+                                stock:_stock,
+                                pics:o.pics
+                              })
+                          }else if(res.code=='auth_seller_error'){
+                              utils.wang(that,utils,res.message);
+
+                          }else{
+                              that.$vux.alert.show(res.message);
+                          }
+                      }
+                  });
+                })
+              }else if(data.code=='auth_seller_error'){
+                                utils.wang(that,utils,data.message);
+
+                            } else {
                 that.$vux.alert.show(data.message);
               }
             }
@@ -56,9 +96,9 @@
           let that = this;
           if(key == 'menu1') { // 查看商品
             utils.go({
-              path: 'detail',
-              params: {
-                id: that.selectId
+              path: '/product/detail',
+              query: {
+                product_id: that.selectId
               }
             }, that.$router);
           } else if(key == 'menu2') { // 编辑商品
@@ -85,7 +125,10 @@
                         text: '删除成功',
                         type: 'success'
                       });
-                    } else {
+                    }else if(data.code=='auth_seller_error'){
+                                utils.wang(that,utils,data.message);
+
+                            } else {
                       that.$vux.alert.show(data.msg);
                     }
                   },

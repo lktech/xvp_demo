@@ -1,6 +1,7 @@
 'use strict'
 import store from '../vuex/store'
 
+
 /**
  * @about  默认图
  * @param 无
@@ -179,6 +180,7 @@ exports.formatPrice = function (s) {
  * @return 无
  * @author bob
  */
+ var that = this;
 exports.ajax = function (obj) {
     if (!obj.url) {
         return;
@@ -207,9 +209,6 @@ exports.ajax = function (obj) {
         success: function (data) {
             exports.loadingHide();
             if (data.code) {
-                if(data.code=='auth_seller_error'){
-                    utils.go({path:'/login/login'},this.$router);
-                }
                 if (obj.success) {
                     obj.success(data);
                 }
@@ -506,3 +505,11 @@ exports.fmtDate = function(date, format) {
             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 }
+
+
+exports.wang = function( t , u , m){
+    t.$vux.alert.show({content:m,onHide :function(){
+        u.go({path:'/login/login'},t.$router);
+    }});
+}
+

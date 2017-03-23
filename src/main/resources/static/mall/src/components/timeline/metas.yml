@@ -1,4 +1,0 @@
-icon: '&#xe656;'
-import_code: "import { Timeline, TimelineItem } from 'vux'"
-extra: |
-  待补充
