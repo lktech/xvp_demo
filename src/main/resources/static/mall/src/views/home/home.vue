@@ -91,7 +91,7 @@
           }
         },
         click(id){
-          utils.go({path:'/product/detail',query:{store_id:this.$route.query.id,product_id:id}},this.$router,true);
+          utils.go({path:'/product/detail',query:{store_id:this.$route.query.id,product_id:id}},this.$router);
         },
         init(){
           utils.setSession('pageId',this.$route.query.id);

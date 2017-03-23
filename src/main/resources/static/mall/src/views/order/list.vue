@@ -51,7 +51,15 @@
                 utils.go({path:'logistics',query:{'id':id}},this.$router,true);
             },
             fukuan(id){
-                utils.go("http://m.sit.xiaovpu.com/wap/order/xvp_cashier.html?orderId="+id+'&appId=xvp',this.$router);
+                utils.ajax({
+                    url: basepath + "/user/order/payurl", data: {order_id:id}, success: function (res) {
+                        if (res.code=="SUCESS") {
+                            location.href=res.result.url;
+                        }else{
+                            that.$vux.alert.show(res.message);
+                        }
+                    }
+                });
             },
             qrsh(id){
                 let that = this;

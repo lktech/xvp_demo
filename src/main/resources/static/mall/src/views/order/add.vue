@@ -103,7 +103,15 @@
                     utils.ajax({
                         url: basepath + "/user/order/add", data: obj, success: function (data) {
                             if (data.code=="SUCESS") {
-                                location.href="http://m.sit.xiaovpu.com/wap/order/xvp_cashier.html?orderId="+data.result.order_id;+'&appId=xvp';
+                                utils.ajax({
+                                    url: basepath + "/user/order/payurl", data: {order_id:data.result.order_id}, success: function (res) {
+                                        if (res.code=="SUCESS") {
+                                            location.href=res.result.url;
+                                        }else{
+                                            that.$vux.alert.show(res.message);
+                                        }
+                                    }
+                                });
                             }else{
                                 that.$vux.alert.show(data.message);
                             }

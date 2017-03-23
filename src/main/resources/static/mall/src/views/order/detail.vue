@@ -89,16 +89,24 @@
         methods: {
             //更新订单
             updateOrder(){
-                utils.go("http://m.sit.xiaovpu.com/wap/order/xvp_cashier.html?orderId="+this.$route.query.id+'&appId=xvp',this.$router);
+                utils.ajax({
+                    url: basepath + "/user/order/payurl", data: {order_id:that.$route.query.id}, success: function (res) {
+                        if (res.code=="SUCESS") {
+                            location.href=res.result.url;
+                        }else{
+                            that.$vux.alert.show(res.message);
+                        }
+                    }
+                });
             },
-            qrsh(id){
+            qrsh(){
                 let that = this;
                 utils.ajax({
                     url: basepath + "/user/order/confirm",
                     dataType: 'json',
                     type: 'POST',
                     data: {
-                        order_id: id,
+                        order_id: that.$route.query.id,
                     },
                     success: function (data) {
                         if (data.code="SUCESS") {
