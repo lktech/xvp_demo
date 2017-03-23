@@ -1,6 +1,8 @@
 package com.lingke.xvp.demo.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -44,8 +46,7 @@ public class BeanCopyUtil {
 		copier.copy(from, to, xvpConverter);
 	}
 
-	public static <T, Y> List<T> copyList(List<Y> from, Class<T> c)
-			throws Exception {
+	public static <T, Y> List<T> copyList(List<Y> from, Class<T> c) throws Exception {
 		if (from == null || from.size() == 0) {
 			return null;
 		}
@@ -73,7 +74,12 @@ public class BeanCopyUtil {
 					return Integer.parseInt(value.toString());
 				}
 			}
-			if(value instanceof List){
+			if ("setUpdate_time".equals(context) || "setCreate_time".equals(context)
+					|| "setConfirm_receive_time".equals(context) || "setPay_time".equals(context)) {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				return sdf.format(new Date(Long.valueOf(value.toString())));
+			}
+			if (value instanceof List) {
 				return null;
 			}
 			return value;
