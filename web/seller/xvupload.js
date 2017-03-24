@@ -6,6 +6,7 @@
 	//默认配置
 	var options = {
 		ids:null,
+		start:function(){},//开始上传
 		process:function(){},//每一次上传成功后实时回调，返回当前进度
 		success:function(){},//上传成功
 		error:function(){},//上传失败
@@ -18,7 +19,7 @@
 		url:"/binaryStreamUpload"
 	};
 	
-	var processFunc = [],successFunc = [],errorFunc = []
+	var startFunc = [],processFunc = [],successFunc = [],errorFunc = []
 	
 	//API
 	var api = {
@@ -31,6 +32,7 @@
 			if(options.ids && options.ids.length > 0){
 				for(var i=0;i<options.ids.length;i++){
 					var id = options.ids[i];
+					startFunc[id] = options.start;
 					processFunc[id] = options.process;
 					successFunc[id] = options.success;
 					errorFunc[id] = options.error;
@@ -68,6 +70,7 @@
 		try{
 			total = Math.ceil(file.size/options.blockSize);
 		}catch(e){}
+		startFunc[id]();
 		ajax({
 			url: options.uploadUrl + interfaces.vldUrl,
 			dataType: 'json',

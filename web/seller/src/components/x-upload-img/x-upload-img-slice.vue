@@ -82,8 +82,12 @@ export default {
       		xvUpload.init({
       			ids:[that.name],
       			type:1,
-      			process:function(p){
+      			start:function(){
+      				alert(2)
       				utils.loadingShow('上传中');
+      			},
+      			process:function(p){
+      				
       			},
       			success:function(data){
       				utils.loadingHide();
