@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Rop.api.request.XvpPhoneSendcodeRequest;
 import com.Rop.api.request.XvpPhoneVerfiycodeRequest;
-import com.Rop.api.request.XvpStoreQueryRequest;
 import com.Rop.api.response.XvpPhoneSendcodeResponse;
 import com.Rop.api.response.XvpPhoneVerfiycodeResponse;
-import com.Rop.api.response.XvpStoreQueryResponse;
-import com.lingke.xvp.demo.XvpConstants;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.SellerCheckRequest;
 import com.lingke.xvp.demo.controller.request.SellerRegisterRequest;
@@ -58,6 +55,24 @@ public class SellerController {
 		}
 		return response;
 	}
+	
+	@RequestMapping(value = "/login/check", method = RequestMethod.POST)
+	public XvpResponse loginCheck() throws Exception {
+		SellerCheckResponse response = new SellerCheckResponse();
+		if (SessionUtil.checkSellerLogin()) {
+			response.setFlag("yes");
+		}else{
+			response.setFlag("no");
+		}
+		return response;
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public XvpResponse logout() throws Exception {
+		SessionUtil.sellerLogout();
+		return null;
+	}
+	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public XvpResponse register(@RequestBody SellerRegisterRequest request) throws Exception {
 		Seller seller = Seller.getSellerByPhone(request.getPhone());
