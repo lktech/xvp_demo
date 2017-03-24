@@ -82,7 +82,11 @@ export default {
       		xvUpload.init({
       			ids:[that.name],
       			type:1,
+      			process:function(p){
+      				utils.loadingShow('上传中');
+      			},
       			success:function(data){
+      				utils.loadingHide();
       				that.newList.push(data.url);
       			},
       			error:function(data){
