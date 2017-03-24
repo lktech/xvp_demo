@@ -83,7 +83,6 @@ export default {
       			ids:[that.name],
       			type:1,
       			start:function(){
-      				alert(2)
       				utils.loadingShow('上传中');
       			},
       			process:function(p){

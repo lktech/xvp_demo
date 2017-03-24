@@ -2,7 +2,7 @@
 <div class="tabbar-wrap2">
     <div v-if="!res.inv_set">
          <c-top-back></c-top-back>
-         <c-banner-info :title="res.formData.name" @upload='upload' :upload-type='true' :logo.sync="res.formData.logo" banner='http://demo.open.xiaovpu.com/seller/dist/images/banner.png'>
+         <c-banner-info :title="res.formData.name" @upload='upload' :upload-type='true' :logo.sync="res.formData.logo" banner='http://img1.xiaovpu.com/3028216099602841.png'>
          </c-banner-info>
          <c-group>
              <c-input title="店铺名称" @on-change="validate" placeholder="请输入店铺名称" name="name"required  v-model="res.formData.name" ></c-input>
@@ -31,7 +31,7 @@
             return {
                 res:{
                     formData:{               //填写的数据
-                        logo:'http://demo.open.xiaovpu.com/seller/dist/images/logo.png',
+                        logo:'http://okxm1ge1z.bkt.clouddn.com/c64c93ad-01a6-440f-9acd-7dabc0408cdb.png',
                         phone:'',             //手机号
                         name:'',              //姓名                           
                         QQ:'',             //邮编

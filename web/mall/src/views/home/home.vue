@@ -38,7 +38,7 @@
           mar: true, //去掉边距
           firstloading: true, // 首次加载
           baseinfo: {
-            logo:'http://pm2.fvt.xiaovpu.com/wap/order/seller/images/logo.png',
+            logo:'http://okxm1ge1z.bkt.clouddn.com/c64c93ad-01a6-440f-9acd-7dabc0408cdb.png',
             title:''
           }, //店铺基本信息
           component: [], // 商品列表的判断
