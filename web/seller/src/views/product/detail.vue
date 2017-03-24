@@ -18,7 +18,7 @@
             <p v-for='i in goods.product_desc'><img v-bind:src="i" alt="" style="width:100%; height:auto;"></p>
         </div>
 
-        <c-sku v-model="sku.status" @submit="submit" :actId="actId" :disabled="sku.disabled" :title="goods.name" :img="goods.pics" :price="goods.price" :text="sku.buttonTxt" :sku='skuList' ></c-sku>
+        <c-sku v-model="sku.status" @submit="submit" :disabled="sku.disabled" :title="goods.name" :img="goods.pics" :price="goods.price" :text="sku.buttonTxt" :sku='skuList' ></c-sku>
         <c-button text="立即购买" size="block" @click.native="barClick" type="primary" style="position:fixed; bottom:0"></c-button>
     </div>
 
@@ -50,7 +50,6 @@
                 pageId:'',
                 invoiceTypes:[],
                 logistic_flg:1,
-                actId:-1,
 
             }
         },
@@ -102,7 +101,7 @@
                                             })
                                         })
                                         
-                                        that.actId=that.skuList[0].id;
+
                                     }else{
                                         that.$vux.alert.show(res.message);
                                     }
@@ -175,7 +174,7 @@
                 this.submitType = "buy";
             },
             submit(){
-                that.$vux.alert.show('无法购买自己店铺的商品。');
+                this.$vux.alert.show('无法购买自己店铺的商品。');
             }
             
         },

@@ -41,7 +41,7 @@
 			return {
 				show:false,
 				skuprice:null,
-				actId:-1,
+				actId:this.sku[0].id,
 				actName:"",
 				selectNUm:this.num,
 				skustock:0,
