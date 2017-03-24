@@ -23,7 +23,7 @@ var plugins = [
 ];
 //var entry = ['babel-polyfill','./src/main'],
 var entry = ['./src/main'],
-    cdnPrefix = "/seller",
+    cdnPrefix = "/",
     buildPath = "/dist/",
     publishPath = cdnPrefix + buildPath;
 //生产环境js压缩和图片cdn

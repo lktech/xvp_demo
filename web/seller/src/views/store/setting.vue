@@ -2,8 +2,8 @@
 <div class="tabbar-wrap2">
     <div v-if="!res.inv_set">
          <c-top-back></c-top-back>
-         <c-banner-info :title="res.formData.name" :logo.sync="res.formData.logo" banner='http://pm2.fvt.xiaovpu.com/wap/order/seller/images/banner.png'>
-        </c-banner-info>
+         <c-banner-info :title="res.formData.name" :upload-type='false' :logo.sync="res.formData.logo" banner='/src/assets/images/banner.png'>
+         </c-banner-info>
          <c-group>
              <c-input title="店铺名称" @on-change="validate" placeholder="请输入店铺名称" name="name"required  v-model="res.formData.name" ></c-input>
              <c-city title="地址" v-model="res.formData.addr_code" @on-hide="logHide" placeholder="您所在的省市县" :list="res.addressData"></c-city>
@@ -31,7 +31,7 @@
             return {
                 res:{
                     formData:{               //填写的数据
-                        logo:'http://pm2.fvt.xiaovpu.com/wap/order/seller/images/logo.png',
+                        logo:'/src/assets/images/logo.png',
                         phone:'',             //手机号
                         name:'',              //姓名                           
                         QQ:'',             //邮编
@@ -101,12 +101,11 @@
                    } 
                 }
                 
-            },
+            }
             
         },
         mounted: function () {
             this.$nextTick(function () {
-
                 let that = this;
                 utils.ajax({
                     url: basepath + "/seller/store/get",

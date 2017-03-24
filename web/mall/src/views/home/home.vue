@@ -20,11 +20,11 @@
     </div>
     <r-tabbar style='height:50px;'>
       <r-tabbar-item selected>
-        <img slot="icon"  src="http://static.taggole.com/hbrobot/poster/1489739579290.jpg">
+        <img slot="icon"  src="http://static.taggole.com/sithbrobot/poster/1490339048405.jpg">
         <span slot="label">首页</span>
       </r-tabbar-item>
       <r-tabbar-item link="/order/list">
-        <img slot="icon" src="http://static.taggole.com/hbrobot/poster/1489739656143.jpg">
+        <img slot="icon" src="http://static.taggole.com/sithbrobot/poster/1490339019315.jpg">
         <span slot="label">我的</span>
       </r-tabbar-item>
     </r-tabbar>
