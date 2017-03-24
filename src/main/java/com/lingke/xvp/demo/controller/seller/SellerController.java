@@ -92,6 +92,7 @@ public class SellerController {
 		if (seller == null) {
 			throw new RuntimeException("用户名或者密码错误");
 		}
+		SessionUtil.sellerLogout();
 		SessionUtil.sellerLogin(seller.getId());
 		if(!StringUtils.isEmpty(seller.getXvpStoreId())){
 			SessionUtil.sellerSetStoreId(seller.getXvpStoreId().toString());
