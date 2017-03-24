@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.cglib.core.Converter;
+import org.springframework.util.StringUtils;
 
 public class BeanCopyUtil {
 	private static final Map<String, BeanCopier> cache = new ConcurrentHashMap<>();
@@ -76,8 +77,11 @@ public class BeanCopyUtil {
 			}
 			if ("setUpdate_time".equals(context) || "setCreate_time".equals(context)
 					|| "setConfirm_receive_time".equals(context) || "setPay_time".equals(context)) {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				return sdf.format(new Date(Long.valueOf(value.toString())));
+				if(!StringUtils.isEmpty(value)){
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					return sdf.format(new Date(Long.valueOf(value.toString())));
+				}
+				return "";
 			}
 			if (value instanceof List) {
 				return null;
