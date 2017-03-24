@@ -9,7 +9,7 @@
             <c-tab-item @on-item-click='orderList("YSH")'>已完成</c-tab-item>
         </c-tab>
         <c-order :order-data="orderData" type="primary" :order-status="odr"  @look="look" @fahuo="fahuo"></c-order>
-        <c-scroll-load @on-load="load" :url='url'><!-- 列表滚动加载--></c-scroll-load>
+       <!-- <c-scroll-load @on-load="load" :url='url'><!-- 列表滚动加载--></c-scroll-load>-->
     </div>
 </template>
 <script>
@@ -83,7 +83,7 @@
                         }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
 
-                            }else{
+                        }else{
                             that.orderData = [];
                             that.$vux.alert.show(data.message);
                         }

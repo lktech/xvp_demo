@@ -25,8 +25,8 @@
           </c-cell-wrap>
           <div v-else>
             <c-cell-wrap title="规格设置" v-for="(item, index) in formData.specifica_list" >
-                  <c-input title="价格" @on-change="validate" placeholder="请输入价格" required :name="order('Yprice',index)" v-model="item.price" :max="10" is-type="money"></c-input>
-                  <c-input title="库存" @on-change="validate" placeholder="请输入库存" required :name="order('Ystock',index)" v-model="item.stock" :max="10" is-type="number"  ></c-input>
+                  <c-input title="价格" @on-change="validate" placeholder="请输入价格" required :name="order('Yprice',index)" v-model="item.price" :max="10" :is-type="money"></c-input>
+                  <c-input title="库存" @on-change="validate" placeholder="请输入库存" required :name="order('Ystock',index)" v-model="item.stock" :max="10" :is-type="number"  ></c-input>
                   <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" required :name="order('Yvalue',index)"  :max="50" v-model="item.sku_str" ></c-input>
             </c-cell-wrap>
           </div>

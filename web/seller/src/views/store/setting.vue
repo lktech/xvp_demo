@@ -2,7 +2,7 @@
 <div class="tabbar-wrap2">
     <div v-if="!res.inv_set">
          <c-top-back></c-top-back>
-         <c-banner-info :title="res.formData.name" :upload-type='false' :logo.sync="res.formData.logo" banner='/src/assets/images/banner.png'>
+         <c-banner-info :title="res.formData.name" @upload='upload' :upload-type='true' :logo.sync="res.formData.logo" banner='http://demo.open.xiaovpu.com/seller/src/assets/images/banner.png'>
          </c-banner-info>
          <c-group>
              <c-input title="店铺名称" @on-change="validate" placeholder="请输入店铺名称" name="name"required  v-model="res.formData.name" ></c-input>
@@ -31,7 +31,7 @@
             return {
                 res:{
                     formData:{               //填写的数据
-                        logo:'/src/assets/images/logo.png',
+                        logo:'http://demo.open.xiaovpu.com/seller/src/assets/images/logo.png',
                         phone:'',             //手机号
                         name:'',              //姓名                           
                         QQ:'',             //邮编
@@ -58,6 +58,7 @@
                         dataType: 'json',
                         type: 'POST',
                         data:{
+                            "logo":that.res.formData.logo,
                             'store_name':that.res.formData.name,
                             'customer_service_phone':that.res.formData.phone,
                             'qq':that.res.formData.QQ,
@@ -101,6 +102,9 @@
                    } 
                 }
                 
+            },
+            upload(url){
+                this.res.formData.logo=url;
             }
             
         },
@@ -141,7 +145,7 @@
             "cTopBack":require('../../components/x-top-back/x-top-back.vue'),
             "cInput":require('../../components/input/input.vue'),
             "cButton":require('../../components/button/button.vue'),
-            "cBannerInfo":require('../../components/x-banner/x-banner-info.vue'),
+            "cBannerInfo":require('../../components/x-banner/x-banner-info-slice.vue'),
             "cCity":require('../../components/address/address.vue'),
             "cCell": require('../../components/cell/cell.vue'),
             "cSwitch": require('../../components/switch/switch.vue'),
