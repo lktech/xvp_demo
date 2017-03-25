@@ -33,16 +33,18 @@ exports.formatPrice = function (price) {
  * @author zhaoze
  */
 exports.orderStatus = function (value) {
-    if (value == 1) {
-        return "等待买家付款";
-    } else if (value == 2) {
+    if (value == 'DQR') {
         return "订单待确认";
-    } else if (value == 3) {
+    } else if (value == 'DFK') {
+        return "等待买家付款";
+    } else if (value == 'DFH') {
         return "等待卖家发货";
-    } else if (value == 4) {
+    } else if (value == 'DSH') {
         return "卖家已经发货";
-    } else if (value == 5) {
-        return "订单已关闭";
+    } else if (value == 'YSH') {
+        return "完成交易";
+    } else if (value == 'YGB') {
+        return "订单关闭";
     }
 }
 

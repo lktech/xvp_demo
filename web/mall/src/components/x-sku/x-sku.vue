@@ -16,7 +16,7 @@
 				</div>
 				<div class="weui_media_box" v-if="hasSku>0">
 					<div class="sku-list" :style="{maxHeight:height}">
-						<span class="ki" :class="{'ki-act':item.id == actId}" v-for="item in sku" @click="selectSku(item)">{{item.name}}</span>
+						<span class="ki" :class="{'ki-act':i == 0}" v-for="(i,item) in sku" @click="selectSku(item)">{{item.name}}</span>
 					</div>
 				</div>
 				<div class="weui_media_box">
@@ -26,7 +26,7 @@
 					</div>
 				</div>
 				<div class="weui_media_box">
-					<r-button :type="disabled1?'disabled1':'primary'" :disabled="disabled1" @click.native="submit" :text="text1"></r-button>
+					<r-button type="primary" @click.native="submit" :text="text1"></r-button>
 				</div>
 
 			</div>
@@ -41,7 +41,7 @@
 			return {
 				show:false,
 				skuprice:null,
-				actId:this.sku[0].id,
+				actId:-1,
 				actName:"",
 				selectNUm:this.num,
 				skustock:0,
