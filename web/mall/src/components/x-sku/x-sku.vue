@@ -41,7 +41,7 @@
 			return {
 				show:false,
 				skuprice:null,
-				actId:-1,
+				actId:this.sku[0].id,
 				actName:"",
 				selectNUm:this.num,
 				skustock:0,
@@ -111,11 +111,13 @@
 		},
 		mounted: function () {
             this.$nextTick(function () {
+ 
+
             	var that = this;
 				$.each(that.sku,function(i,v){
 					that.skustock+=v.stock*1;
 				})
-				that.actId = that.sku[0].id;
+
 				this.max1 = that.skustock;
 			});
 		},

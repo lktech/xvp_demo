@@ -26,7 +26,7 @@
 					</div>
 				</div>
 				<div class="weui_media_box">
-					<r-button :type="disabled1?'disabled1':'primary'" :disabled="disabled1" @click.native="submit" :text="text1"></r-button>
+					<r-button :type='primary' @click.native="submit" :text="text1"></r-button>
 				</div>
 
 			</div>
@@ -41,7 +41,7 @@
 			return {
 				show:false,
 				skuprice:null,
-				actId:-1,
+				actId:this.sku[0].id,
 				actName:"",
 				selectNUm:this.num,
 				skustock:0,

@@ -156,6 +156,16 @@ Mock.mock(basepath + "/seller/order/delivery",'post',{
     
 });
 
+Mock.mock(basepath + "/seller/product/get",'post',{
+    "code": 'SUCESS',
+    "result":{"id":"851","name":"测试商品","pics":"http://okxm1ge1z.bkt.clouddn.com/6a15ca64-ba5d-46f9-9a68-b2842fbc796d.png","product_detail":"","pay_type":"0","logistics_fee":"0","product_desc":"[]"}
+});
+
+Mock.mock(basepath + "/seller/product/sku/get",'post',{
+    "code": 'SUCESS',
+    "result":[{"id":"303","price":"100","stock":"1","sku_str":"测试商品"}]
+});
+
 Mock.mock(basepath + "/seller/seller/login",'post',{
     "code": 'SUCESS',
     
