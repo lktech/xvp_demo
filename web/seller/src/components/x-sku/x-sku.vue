@@ -10,7 +10,7 @@
 					<div class="weui_media_bd">
 						<h4 class="weui_media_title">{{title}}</h4>
 						<div class="weui_media_desc">
-							<span class="show-price">{{unit}}{{skuprice?skuprice:price}}</span>
+							<span class="show-price">{{skuprice?skuprice:price}}</span>
 						</div>
 					</div>
 				</div>
@@ -26,7 +26,7 @@
 					</div>
 				</div>
 				<div class="weui_media_box">
-					<r-button type='primary' @click.native="submit" :text="text1"></r-button>
+					<r-button type="primary" @click.native="submit" :text="text1"></r-button>
 				</div>
 
 			</div>
@@ -41,7 +41,7 @@
 			return {
 				show:false,
 				skuprice:null,
-				actId:this.sku[0].id,
+				actId:-1,
 				actName:"",
 				selectNUm:this.num,
 				skustock:0,
@@ -111,11 +111,20 @@
 		},
 		mounted: function () {
             this.$nextTick(function () {
-            	var that = this;
-				$.each(that.sku,function(i,v){
-					that.skustock+=v.stock*1;
-				})
-				this.max1 = that.skustock;
+ 
+
+
+				this.actId = this.sku[0].id;
+				this.skustock = this.sku[0].stock;
+				this.skuprice = this.sku[0].price;
+				if(this.skustock*1 <= 0){
+					this.text1="已售罄";
+					this.disabled1=true;
+				}else{
+					this.max1=this.skustock*1;
+					this.text1=this.text;
+					this.disabled1=false;
+				}
 			});
 		},
 		methods: {
