@@ -16,7 +16,7 @@
 				</div>
 				<div class="weui_media_box" v-if="hasSku>0">
 					<div class="sku-list" :style="{maxHeight:height}">
-						<span class="ki" :class="{'ki-act':i == 0}" v-for="(i,item) in sku" @click="selectSku(item)">{{item.name}}</span>
+						<span class="ki" :class="{'ki-act':item.id == actId}" v-for="item in sku" @click="selectSku(item)">{{item.name}}</span>
 					</div>
 				</div>
 				<div class="weui_media_box">
@@ -115,6 +115,7 @@
 				$.each(that.sku,function(i,v){
 					that.skustock+=v.stock*1;
 				})
+				that.actId = that.sku[0].id;
 				this.max1 = that.skustock;
 			});
 		},
