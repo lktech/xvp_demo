@@ -7,7 +7,7 @@
             <span>{{item.orderStatus | orderStatus}}</span>
         </div>
         <ul class="goodsOrder">
-            <li v-for="goods in item.goods" @click="goodsclick(goods.id)">
+            <li v-for="goods in item.goods" @click="goodsclick(item.orderNum)">
                 <div class="goodsImg">
                     <img :src="goods.goodsUrl"/>
                 </div>

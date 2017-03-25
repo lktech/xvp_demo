@@ -41,7 +41,7 @@
                     status:false,
                     url:basepath + "/mall/store/shelf_product_sku_get",
                     buttonTxt:"下一步",
-                    disabled:true
+                    disabled:false
                 },
                 submitType:"buy",
                 hasCart:true,//是否显示购物车

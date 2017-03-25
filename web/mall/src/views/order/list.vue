@@ -8,7 +8,7 @@
             <c-tab-item @on-item-click='orderList("DSH")'>已发货</c-tab-item>
             <c-tab-item @on-item-click='orderList("YSH")'>已完成</c-tab-item>
         </c-tab>
-        <c-order :order-data="orderData" type="primary" :order-status="odr"  @fukuan="fukuan"  @qrsh="qrsh"  @look="look" @fahuo="fahuo"></c-order>
+        <c-order :order-data="orderData" type="primary" :order-status="odr"  @fukuan="fukuan"  @qrsh="qrsh" @goto='look'  @look="look" @fahuo="fahuo"></c-order>
         <c-scroll-load @on-load="load" :url='url'><!-- 列表滚动加载--></c-scroll-load>
     </div>
 </template>

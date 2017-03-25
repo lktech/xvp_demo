@@ -107,8 +107,24 @@
                                 that.step=2;
                             }
                             if(data.result.orderStatus=='YSH'){
-                                that.step=1;
+                                that.step=3;
                             }
+
+                            if (data.result.orderStatus == 'DQR') {
+                                that.orderStatus_text= "订单状态：订单待确认";
+                            } else if (data.result.orderStatus == 'DFK') {
+                                that.orderStatus_text= "订单状态：等待买家付款";
+                            } else if (data.result.orderStatus == 'DFH') {
+                                that.orderStatus_text= "订单状态：等待卖家发货";
+                            } else if (data.result.orderStatus == 'DSH') {
+                                that.orderStatus_text= "订单状态：卖家已经发货";
+                            } else if (data.result.orderStatus == 'YSH') {
+                                that.orderStatus_text= "订单状态：完成交易";
+                            } else if (data.result.orderStatus == 'YGB') {
+                                that.orderStatus_text= "订单状态：订单关闭";
+                            }
+
+
                             $.each(data.result.goods,function(i,v){
                                 that.order_item_id_list.push(v.id);
                             })
