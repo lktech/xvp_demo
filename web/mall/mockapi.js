@@ -52,19 +52,19 @@ Mock.mock(basepath + "/user/product/get",'post',{
         'logistics_fee':'1',
         'product_desc':'value'}
 });
-Mock.mock(basepath + "/user/user/address/default",'post',{
+Mock.mock(basepath + "/user/address/default",'post',{
     "code": 'SUCESS',
     "msg": null,
     'result':{
         'id':'1',
         'name':'测试',
-        'phone':'111111111111',
-        'address':'详细地址',
-        'post_code':'1',
+        'phone':'13691109303',
+        'address':'详细地址详细地址',
+        'post_code':'2131231',
         'str':'value',
-        'province':'000000',
-        'city':'000000',
-        'county':'000000'
+        'province':'110000',
+        'city':'110100',
+        'county':'110101'
     }
 });
 

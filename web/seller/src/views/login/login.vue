@@ -3,7 +3,7 @@
     <div>
         <c-group>
             <c-input title="手机号" placeholder="请输入手机号" @on-change="validate" v-model="formData.phone" name="phone" is-type="china-mobile" :max='11'></c-input>
-            <c-input title="密码" type="password" placeholder="请输入密码" @on-change="validate" name="password" required v-model="formData.password" :max='20'></c-input>
+            <c-input title="密码 " type="password" placeholder="请输入密码" @on-change="validate" name="password" required v-model="formData.password" :max='20'></c-input>
         </c-group>
         <div class="wrap-pd" style="margin-top:10px">
             <c-button :disabled="disabled" :type="color" text="登录" @click.native="login" size="block"></c-button>

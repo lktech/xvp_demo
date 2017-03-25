@@ -1,12 +1,12 @@
 <template>
-<div>
+<div class="addradd">
     <c-top-back></c-top-back>
     <c-group>
-        <c-input title="收货人" @on-change="validate" placeholder="请输入姓名" name="name" v-model="formData.name" required :max="20" ></c-input>
-        <c-input title="电话" @on-change="validate" placeholder="请输入手机号" name="phone" required v-model="formData.phone" is-type="china-mobile" ></c-input>
+        <c-input title="收货人 " @on-change="validate" placeholder="请输入姓名" name="name" v-model="formData.name" required :max="20" ></c-input>
+        <c-input title="电话  " @on-change="validate" placeholder="请输入手机号" name="phone" required v-model="formData.phone" is-type="china-mobile" ></c-input>
             <c-city title="选择地区" v-model="formData.addr_code" @getname="getname" @on-hide="logHide" placeholder="选择省市县" :list="addressData"></c-city>
         <c-input title="详细地址" @on-change="validate" placeholder="请输入详细地址" required name="address" v-model="formData.address" :min="5" :max="100"></c-input>
-        <c-input title="邮编" @on-change="validate" placeholder="请输入邮编" required name="post_code" v-model="formData.post_code" is-type="number" :min="6" :max="10"></c-input>
+        <c-input title="邮编  " @on-change="validate" placeholder="请输入邮编" required name="post_code" v-model="formData.post_code" is-type="number" :min="6" :max="10"></c-input>
     </c-group>
     <div class="wrap-pd">
         <c-button text="保存" :type="color" :disabled="disabled" @click.native="preserve" size="block"></c-button>
@@ -27,9 +27,6 @@
                     post_code:'',             //邮编
                     address:'',             //详细地址
                     addr_code:[],             //省市区
-                    province_name:'',
-                    city_name:'',
-                    county_name:'',
                     addr_text:[]
                 },
                 addressData:ChinaAddressData,
@@ -48,7 +45,7 @@
                 if(!this.disabled){
                     let that = this;
                     utils.ajax({
-                        url: basepath + "/user/user/address/set",
+                        url: basepath + "/user/address/set",
                         dataType: 'json',
                         type: 'POST',
                         data:{
@@ -59,7 +56,7 @@
                             'province':that.formData.addr_code[0],
                             'city':that.formData.addr_code[1],
                             'county':that.formData.addr_code[2],
-                            'str':that.addr_text[0]+that.addr_text[1]+that.addr_text[2]+that.formData.address
+                            'str':that.formData.addr_text[0]+that.formData.addr_text[1]+that.formData.addr_text[2]+that.formData.address
                         },
                         success: function(data){
                             if(data.code=="SUCESS"){
@@ -104,7 +101,7 @@
                 
             },
             getname(txt){
-                this.addr_text=txt.split(' ');
+                this.formData.addr_text=txt.split(' ');
             }
             
         },
@@ -121,4 +118,8 @@
         }
     }
 </script>
-
+<style>
+    .addradd .vux-popup-picker-value{
+        white-space: nowrap; width:210px; overflow: hidden; display: block;
+    }
+</style>

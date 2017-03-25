@@ -106,10 +106,7 @@
                             });
 
                             that.dataReady = true;
-                        }else if(data.code=='auth_seller_error'){
-                                utils.wang(that,utils,data.message);
-
-                            }else{
+                        }else{
                             that.$vux.alert.show(data.message);
                         }
                     }

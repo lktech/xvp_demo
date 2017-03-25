@@ -263,3 +263,11 @@
       }
   }
 </script>
+<style>
+  .tabbar-wrap2 .weui_cell{
+    padding:10px !important;
+  }
+  .tabbar-wrap2 .weui_uploader_hd.weui_cell{
+    padding: 0 !important; padding-bottom: 10px !important;
+  }
+</style>

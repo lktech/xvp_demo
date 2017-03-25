@@ -6,7 +6,7 @@
         </c-group>
         <c-group v-else>
             <c-address-info :id="addressData.id" :name="addressData.name" :phone="addressData.phone" :arrows="true"
-                            :address="addressData.str"></c-address-info>
+                            :address="addressData.str" @click="modarr"></c-address-info>
         </c-group>
         <!--商品列表-->
         <div>
@@ -123,6 +123,9 @@
                 }
 
             },
+            modarr(){
+                utils.go({path:'/order/mod',query:{id:this.addressData.id}},that.$router);
+            }
 
         },
         components: {

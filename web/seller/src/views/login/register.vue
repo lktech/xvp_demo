@@ -8,7 +8,7 @@
             </c-input>
         </c-group>
         <c-group>
-            <c-input title="密码" placeholder="请输入密码" type="password" @on-change="validate" required v-model="formData.password" name="password" :max="20" is-type="notnull"></c-input>
+            <c-input title="密码 " placeholder="请输入密码" type="password" @on-change="validate" required v-model="formData.password" name="password" :max="20" is-type="notnull"></c-input>
         </c-group>
         <div class="wrap-pd" style="margin-top:10px">
             <c-button :type="color" :disabled='disabled' text="注册" @click.native="register" size="block"></c-button>

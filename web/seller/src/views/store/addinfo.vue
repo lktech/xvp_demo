@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="addinfo">
     <c-top-back></c-top-back>
     <c-group>
         <c-input title="店铺名称" @on-change="validate" placeholder="请输入店铺名称" required name="name" v-model="formData.name" ></c-input>
@@ -8,7 +8,7 @@
     <c-group>   
         <c-input title="详细地址" @on-change="validate" placeholder="请输入您的详细地址" required name="address" v-model="formData.address" :max="50"></c-input>
         <c-input title="客服电话" @on-change="validate" placeholder="请输入客服电话" name="phone" required v-model="formData.phone" :max="50"></c-input>
-        <c-input title="QQ号码" @on-change="validate" placeholder="请输入QQ号码(选填)" name="QQ" v-model="formData.QQ"></c-input>
+        <c-input title="QQ号码 " @on-change="validate" placeholder="请输入QQ号码(选填)" name="QQ" v-model="formData.QQ"></c-input>
     </c-group>
     <div class="wrap-pd" style="margin-top:10px">
         <c-button text="进入店铺" :type="color" :disabled="disabled" @click.native="preserve" size="block"></c-button>
@@ -129,4 +129,9 @@
         }
     }
 </script>
+<style>
+    .addinfo .vux-popup-picker-value{
+        white-space: nowrap; width:210px; overflow: hidden; display: block;
+    }
+</style>
 

@@ -26,7 +26,7 @@
 					</div>
 				</div>
 				<div class="weui_media_box">
-					<r-button :type='primary' @click.native="submit" :text="text1"></r-button>
+					<r-button type='primary' @click.native="submit" :text="text1"></r-button>
 				</div>
 
 			</div>

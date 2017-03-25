@@ -4,13 +4,13 @@
 
     <div v-if="!success">
         <c-group>
-            <c-input title="手机号" placeholder="请输入注册时的手机号" @on-change="validate" required v-model="formData.phone" name="phone" :max='11' is-type="china-mobile"></c-input>
-            <c-input title="验证码" placeholder="请输入验证码" @on-change="validate" required v-model="formData.code" name="code" :max="6" class="weui_vcode">
+            <c-input title="手机号  " placeholder="请输入注册时的手机号" @on-change="validate" required v-model="formData.phone" name="phone" :max='11' is-type="china-mobile"></c-input>
+            <c-input title="验证码  " placeholder="请输入验证码" @on-change="validate" required v-model="formData.code" name="code" :max="6" class="weui_vcode">
                 <c-button-send slot="right" type="primary" :validate="phone_status" @on-send="send_out">获取验证码</c-button-send>
             </c-input>
         </c-group>
         <c-group>
-            <c-input title="新密码" type="password" placeholder="请输入新密码" @on-change="validate" required v-model="formData.password" name="password" :max='20'></c-input>
+            <c-input title="新密码  " type="password" placeholder="请输入新密码" @on-change="validate" required v-model="formData.password" name="password" :max='20'></c-input>
             <c-input title="确认新密码"  type="password" placeholder="确认新密码" @on-change="validate" required v-model="formData.password1" name="password1" :max='20'></c-input>
         </c-group>
         <div class="wrap-pd" style="margin-top:10px">

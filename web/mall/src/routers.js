@@ -80,6 +80,13 @@ exports.routes = [
                     require(['./views/addr/add.vue'],resolve);
                 }
             },
+            {
+                path:'mod',
+                name:'mod',
+                component: function(resolve){
+                    require(['./views/addr/mod.vue'],resolve);
+                }
+            }
         ]
     }
     

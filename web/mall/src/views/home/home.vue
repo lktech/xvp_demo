@@ -18,7 +18,7 @@
       <c-data-null v-else msg='这个店家很懒，什么都没有留下！'></c-data-null>
       <c-scroll-load @on-load="load" eleid="search_show" :url='searchurl' :params='params'></c-scroll-load>
     </div>
-    <r-tabbar style='height:50px;'>
+    <r-tabbar style='height:58px;'>
       <r-tabbar-item selected>
         <img slot="icon"  src="http://static.taggole.com/sithbrobot/poster/1490339048405.jpg">
         <span slot="label">首页</span>
@@ -54,7 +54,6 @@
 
           utils.ajax({
             url: basepath + "/user/user/getIsvInfo",
-            async:false,
             success: function(data) {
               if(data.code=="SUCESS") {  
 
@@ -66,7 +65,6 @@
                       utils.ajax({
                         url: basepath + "/user/user/login",
                         data:{'xvp_uid':xvp_uid},
-                        async:false,
                         success: function(res) {
                           if(res.code=="SUCESS") {  
                             that.init();
@@ -108,17 +106,18 @@
           utils.ajax({
             url: basepath + "/user/store/main",
             data:{'store_id':that.$route.query.id*1},
-            async:false,
             success: function(data) {
               if(data.code=="SUCESS") {
                 that.firstloading = true;
                 that.baseinfo.title = data.result.store_name; //店铺名称
+                if(data.result.logo){
+                  that.baseinfo.logo = data.result.logo; //店铺名称
+                }
                 that.component1=data.result.products;
                 $.each(that.component1,function(i,v){
                     utils.ajax({
                       url: basepath + "/user/product/sku/get",
                       data:{'product_id':v.id},
-                      async:false,
                       success: function(res) {
                         if(res.code=="SUCESS") {
                           var min=res.result[0].price;
