@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="addrmod">
     <c-top-back></c-top-back>
     <c-group>
         <c-input title="收货人 " @on-change="validate" placeholder="请输入姓名" name="name" v-model="formData.name" required :max="20" ></c-input>
@@ -140,4 +140,8 @@
         }
     }
 </script>
-
+<style>
+    .addrmod .vux-popup-picker-value{
+        white-space: nowrap; width:210px; overflow: hidden; display: block;
+    }
+</style>
