@@ -117,6 +117,7 @@
                 $.each(that.component1,function(i,v){
                     utils.ajax({
                       url: basepath + "/user/product/sku/get",
+                      async:false,
                       data:{'product_id':v.id},
                       success: function(res) {
                         if(res.code=="SUCESS") {

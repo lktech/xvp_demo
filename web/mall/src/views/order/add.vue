@@ -124,7 +124,7 @@
 
             },
             modarr(){
-                utils.go({path:'/order/mod',query:{id:this.addressData.id}},that.$router);
+                utils.go({path:'/addr/mod',query:{'id':this.addressData.id}},this.$router);
             }
 
         },
