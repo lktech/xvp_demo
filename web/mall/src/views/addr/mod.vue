@@ -44,7 +44,7 @@
             init(id){
                 let that = this;
                 utils.ajax({
-                    url: basepath + "/user/address/default",
+                    url: basepath + "/user/user/address/default",
                     dataType: 'json',
                     type: 'POST',
                     data:{id:id},
@@ -65,7 +65,7 @@
                 if(!this.disabled){
                     let that = this;
                     utils.ajax({
-                        url: basepath + "/user/address/set",
+                        url: basepath + "/user/user/address/set",
                         dataType: 'json',
                         type: 'POST',
                         data:{
