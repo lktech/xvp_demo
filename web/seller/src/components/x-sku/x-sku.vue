@@ -10,7 +10,7 @@
 					<div class="weui_media_bd">
 						<h4 class="weui_media_title">{{title}}</h4>
 						<div class="weui_media_desc">
-							<span class="show-price">{{skuprice?skuprice:price}}</span>
+							<span class="show-price">{{unit}}{{skuprice?skuprice:price}}</span>
 						</div>
 					</div>
 				</div>
