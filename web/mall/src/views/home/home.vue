@@ -58,6 +58,8 @@
             success: function(data) {
               if(data.code=="SUCESS") {  
                 alert(2)
+                alert(data.result.appId)
+                alert(data.result.isvUrl)
                 $xvp.login({
                     app_key : data.result.appId,
                     isv_url: data.result.isvUrl,
