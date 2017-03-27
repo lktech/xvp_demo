@@ -286,6 +286,12 @@
 
           }
       },
+      mounted: function () {
+          this.$nextTick(function () {
+              utils.loadingShow();
+              utils.loadingHide();
+          })
+      },
       components: {
         "cTopBack": require('../../components/x-top-back/x-top-back.vue'),
         "cCell": require('../../components/cell/cell.vue'),
