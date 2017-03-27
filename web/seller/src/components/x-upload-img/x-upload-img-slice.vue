@@ -73,7 +73,7 @@ export default {
   watch: {
   	newList(newList){
   		this.$emit('upload' , newList);
-  		utils.loadingHide();
+  		//utils.loadingHide();
   	}
   },
   mounted: function () {
