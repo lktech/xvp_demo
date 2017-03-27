@@ -34,7 +34,25 @@
       },
       mounted: function () {
         this.$nextTick(function () {
+
+
           let that=this;
+
+          utils.ajax({
+              url: basepath + "/seller/seller/login/check",
+              dataType: 'json',
+              type: 'POST',
+              async:false,
+              success: function(data){
+                  if(data.code=="SUCESS"){
+                    if(data.result.flag=='no'){
+                      utils.go({path:'/login/login'},that.$router,true);
+                    }
+                  }
+              }
+          });
+
+
           utils.ajax({
               url: basepath + "/seller/store/get",
               dataType: 'json',
@@ -46,9 +64,9 @@
                       $('title').text(data.result.store_name);
                       that.entranceData[3].link=Y+'/mall/index.html#/home/home?id='+data.result.id+'&xv=enter';
                   }else if(data.code=='auth_seller_error'){
-                              utils.wang(that,utils,data.message);
+                      utils.wang(that,utils,data.message);
 
-                          }
+                  }
               }
           });
 

@@ -2,7 +2,7 @@
 exports.routes = [
     {
         path: '/',
-        redirect:'/login/login'
+        redirect:'/store/store'
     },
     {//注册登录
         path: '/login',
