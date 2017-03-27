@@ -128,7 +128,7 @@
 
                 utils.ajax({
                   url: "/mall/wxconfig/get",
-                  data:{'base_url':window.location.href.split('#')[0]}),
+                  data:{'base_url':window.location.href.split('#')[0]},
                   success: function(data) {
                     if(data.code=='SUCESS') {
                       wx.config({
@@ -143,13 +143,13 @@
                         wx.onMenuShareAppMessage({
                             title: that.goods.title, // 分享标题
                             desc: '【'+that.storeInfo.name+'】发现好商品，立即分享给你，进店有惊喜呦。', // 分享描述
-                            link: window.location.href+'?xv=enter', // 分享链接
+                            link: window.location.href, // 分享链接
                             imgUrl: that.goods.pic // 分享图标
                         });
 
                         wx.onMenuShareTimeline({
                             title: that.goods.title, // 分享标题
-                            link: window.location.href+'?xv=enter', // 分享链接
+                            link: window.location.href, // 分享链接
                             imgUrl: that.goods.pic // 分享图标
                         });
                       })

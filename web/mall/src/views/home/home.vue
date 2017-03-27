@@ -141,7 +141,7 @@
                 that.component = that.component1; // 组件
 
                 sessionStorage.setItem('title_',that.baseinfo.title);
-                sessionStorage.setItem('link_','http://m.fvt.xiaovpu.com/wap/order/index.html#!/home/'+that.$route.query.id+'?xv=enter');
+                sessionStorage.setItem('link_','http://demo.open.xiaovpu.com/mall/index.html#!/home/home?id='+that.$route.query.id+'&xv=enter');
                 sessionStorage.setItem('logo_',that.baseinfo.logo);
                 utils.MenuShare();
               } else {
