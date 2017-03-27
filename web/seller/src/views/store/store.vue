@@ -63,9 +63,6 @@
                     var Y=Yin.substring(0,Yin.indexOf('/seller'));
                       $('title').text(data.result.store_name);
                       that.entranceData[3].link=Y+'/mall/index.html#/home/home?id='+data.result.id+'&xv=enter';
-                  }else if(data.code=='auth_seller_error'){
-                      utils.wang(that,utils,data.message);
-
                   }
               }
           });
