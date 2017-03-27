@@ -36,11 +36,16 @@ Mock.mock(basepath + "/user/store/main",'post',{
 });
 
 
+Mock.mock(basepath + "/user/user/getIsvInfo",'post',{
+    "code": 'SUCESS'
+});
+
 Mock.mock(basepath + "/user/product/sku/get",'post',{
     "code": 'SUCESS',
     "msg": null,
     'result':[{'id':'1','price':12,'stock':'1','sku_str':'value'},{'id':'2','price':15,'stock':'4','sku_str':'value'}]
 });
+
 Mock.mock(basepath + "/user/product/get",'post',{
     "code": 'SUCESS',
     "msg": null,
@@ -50,7 +55,7 @@ Mock.mock(basepath + "/user/product/get",'post',{
         'pics':'',
         'product_detail':'value',
         'logistics_fee':'1',
-        'product_desc':'value'}
+        'product_desc':'[]'}
 });
 Mock.mock(basepath + "/user/address/default",'post',{
     "code": 'SUCESS',

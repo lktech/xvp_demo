@@ -17,8 +17,8 @@
             <c-panel-list v-for='item in json.goods'
                           :id='item.id'
                           :others='item.num'
-                          :title='item.product_name'
-                          :details='item.sku_str?"规格："+item.sku:"规格：无"'
+                          :title='item.goodsName'
+                          :details='item.sku?"规格："+item.sku:"规格：无"'
                           :from='item.price | formatPrice'
                           type="org"
                           :imglink="item.goodsUrl"
@@ -36,7 +36,7 @@
             创建时间：{{json.create_time}}<br/>
             <div v-if="json.orderStatus==odr.close">订单超时：{{json.timeOut}}</div>
             <div v-if="json.orderStatus==odr.dfh">付款时间：{{json.pay_time}}</div>
-            <div v-if="json.orderStatus==odr.dsh">发货时间：{{json.goods[0].create_time}}</div>
+            <div v-if="json.orderStatus==odr.dsh">发货时间：{{json.orderdeliverys[0].create_time}}</div>
             <div v-if="json.orderStatus==odr.ok">收货时间：{{json.confirm_receive_time}}</div>
         </c-cell-wrap>
         <div class="wrap-pd" style="margin-top:10px">
@@ -51,6 +51,12 @@
                 </c-flexbox-item>
             </c-flexbox>
         </div>
+
+        <c-confirm v-model="show" title="确认收货"
+                 @on-cancel="onCancel"
+                 @on-confirm="onConfirm">
+          <p style="text-align:center;">确认收货后，订单交易完成，钱款将立即到达商家账户</p>
+        </c-confirm>
     </div>
 </template>
 <script>
@@ -78,7 +84,8 @@
                 discount:"",//优惠金额
                 step:0,
                 orderStatus:'',
-                discount1:''
+                discount1:'',
+                show:false
             }
         },
         computed: {},
@@ -101,22 +108,7 @@
                 });
             },
             qrsh(){
-                let that = this;
-                utils.ajax({
-                    url: basepath + "/user/order/confirm",
-                    dataType: 'json',
-                    type: 'POST',
-                    data: {
-                        order_id: that.$route.query.id,
-                    },
-                    success: function (data) {
-                        if (data.code=="SUCESS") {
-                            that.into();
-                        }else{
-                            that.$vux.alert.show(data.message);
-                        }
-                    }
-                });
+                this.show=true;
             },
             into(){
                 let that = this;
@@ -164,6 +156,28 @@
                         }
                     }
                 });
+            },
+            onCancel(){
+                this.show=false;
+            },
+            onConfirm(){
+                let that = this;
+                utils.ajax({
+                    url: basepath + "/user/order/confirm",
+                    dataType: 'json',
+                    type: 'POST',
+                    data: {
+                        order_id: that.$route.query.id,
+                    },
+                    success: function (data) {
+                        if (data.code=="SUCESS") {
+                            that.into();
+                            that.show=false;
+                        }else{
+                            that.$vux.alert.show(data.message);
+                        }
+                    }
+                });
             }
         },
         components: {
@@ -181,6 +195,7 @@
             "cFlexboxItem": require('../../components/flexbox/flexbox-item.vue'),
             "cAddressInfo": require('../../components/x-address-info/x-address-info.vue'),
             "cInput": require('../../components/input/input.vue'),
+            "cConfirm": require('../../components/confirm/confirm.vue'),
         }
     }
 </script>

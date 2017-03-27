@@ -36,7 +36,7 @@
     data() {
         return {
           mar: true, //去掉边距
-          firstloading: true, // 首次加载
+          firstloading: false, // 首次加载
           baseinfo: {
             logo:'http://okxm1ge1z.bkt.clouddn.com/c64c93ad-01a6-440f-9acd-7dabc0408cdb.png',
             title:''
@@ -44,7 +44,7 @@
           component: [], // 商品列表的判断
           component1: [], // 商品列表的判断
           searchurl:basepath + "/user/store/main", // 搜索接口
-          params:{"pageNumber":1,"pagesize":10} // 滚动加载数量控制
+          params:{"pageNumber":1,"pagesize":10}, // 滚动加载数量控制
         }
       },
       mounted: function () {
@@ -52,40 +52,37 @@
           let that = this ;
 
 
-          utils.ajax({
-            url: basepath + "/user/user/getIsvInfo",
-            success: function(data) {
-              if(data.code=="SUCESS") {  
+          // utils.ajax({
+          //   url: basepath + "/user/user/getIsvInfo",
+          //   success: function(data) {
+          //     if(data.code=="SUCESS") {  
 
-                $xvp.login({
-                    app_key : data.result.appId,
-                    isv_url: data.result.isvUrl,
-                    success : function(xvp_uid){
+          //       $xvp.login({
+          //           app_key : data.result.appId,
+          //           isv_url: data.result.isvUrl,
+          //           success : function(xvp_uid){
 
-                      utils.ajax({
-                        url: basepath + "/user/user/login",
-                        data:{'xvp_uid':xvp_uid},
-                        success: function(res) {
-                          if(res.code=="SUCESS") {  
+          //             utils.ajax({
+          //               url: basepath + "/user/user/login",
+          //               data:{'xvp_uid':xvp_uid},
+          //               success: function(res) {
+          //                 if(res.code=="SUCESS") {  
                             that.init();
 
-                          } else {
-                            that.$vux.alert.show(res.message);
-                          }
-                        },
-                      });
-                    }
-                });
+              //             } else {
+              //               that.$vux.alert.show(res.message);
+              //             }
+              //           },
+              //         });
+              //       }
+              //   });
 
-              } else {
-                that.$vux.alert.show(data.message);
-              }
-            },
-          });
+                // } else {
+                //   that.$vux.alert.show(data.message);
+                // }
+            //   },
+            // });
 
-
-
-         // utils.MenuShare();
         
         })
       },
@@ -130,7 +127,6 @@
                             }
                           }
                           that.component1[i].price = min;
-
                         } else {
                           that.$vux.alert.show(res.message);
                         }

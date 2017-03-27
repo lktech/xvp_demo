@@ -6,11 +6,11 @@
         <c-product-wrap type="normal">
           <c-product :title="goods.name" :des="goods.logistics_fee | formatPriceCNY" :price="goods.price" :pic="goods.pics"></c-product>
         </c-product-wrap>
-        <c-cell-wrap>
+       <!-- <c-cell-wrap>
             <c-cell :title="storeInfo.name" value="进入店铺" is-link>
                 <img class="wq-img" slot="icon" src='http://static.taggole.com/sithbrobot/poster/1489997146660.jpg'/>
             </c-cell>
-        </c-cell-wrap>
+        </c-cell-wrap>-->
 
         <c-title title="商品详情"></c-title>
         <div class="wrap-detail">

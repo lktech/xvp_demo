@@ -4,14 +4,12 @@
       <div>
           <c-cell-wrap>
               <c-input title="商品名称" @on-change="validate" placeholder="请输入商品名称" required name="name" :max="20" v-model="formData.name"></c-input>
-              <c-uploadmul title='添加图片' :list="img_list1" @upload="upload1" name="upload1" :max="1">
-                <span slot="after-title" class="placeholder">请添加商品封面图</span> 
+              <c-uploadmul title='添加商品封面图' :list="img_list1" @upload="upload1" name="upload1" :max="1">
               </c-uploadmul>
           </c-cell-wrap>
           <c-cell-wrap>
               <c-input title="商品描述" @on-change="validate" placeholder="请输入商品描述" name="describe" :max="500" v-model="formData.describe" ></c-input>
-              <c-uploadmul title='添加图片' :list="img_list2" @upload="upload2" name="upload2" :max="9">
-                <span slot="after-title" class="placeholder">请添加商品详情图</span> 
+              <c-uploadmul title='添加商品详情图' :list="img_list2" @upload="upload2" name="upload2" :max="9">
               </c-uploadmul>
           </c-cell-wrap>
           <c-cell-wrap>
@@ -37,7 +35,13 @@
             <c-button :type="color" text="确定" @click.native="hold" :disabled="disabled" size="block"></c-button>
           </div>
       </div>
-      
+      <c-confirm v-model="show"
+               @on-cancel="onCancel"
+               @on-confirm="onConfirm"
+               cancelText="返回"
+               confirmText="继续添加">
+        <p style="text-align:center;">保存成功</p>
+      </c-confirm>
   </div>
 
 </template>
@@ -69,6 +73,7 @@
             disabled:true,
             img_list1:[],
             img_list2:[],
+            show:false,
             money: function (value) {
               return {
                 valid: value.search(/^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/) > -1
@@ -205,14 +210,15 @@
                   data:hold_obj,
                   success: function(data){
                       if(data.code=="SUCESS"){
-                          utils.go({path:'/store/store'},that.$router,true);
+                          that.show=true;
                       }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
 
                             }else{
                           that.$vux.alert.show('添加商品失败');
                       }
-                  }
+                  },
+                  message:'拼命保存中'
               });
             }
           },
@@ -243,6 +249,38 @@
                 this.color='default';
               }
             }
+          },
+          onCancel(){
+              this.show=false;
+              utils.go({path:'/store/store'},this.$router,true);
+          },
+          onConfirm(){
+            location.reload();
+                // this.formData={
+                //       name:'',
+                //       describe:'',
+                //       invoice:false,
+                //       stock:'',
+                //       price:'',
+                //       specifica_list:[{stock:'',price:'',sku_str:''}],
+                //       rule_id:'',
+                //       freight:''
+                //     }
+                // this.status={
+                //       name_status:false,
+                //       stock_status:false,
+                //       price_status:false,
+                //       lim_num_status:false,
+                //       specifications:false,
+                //       specifica_list_status:[{stock:false,price:false,value:false}],
+                //       specifica_status:false,
+                //     }
+                // this.color='default';
+                // this.disabled=true;
+                // this.img_list1=[];
+                // this.img_list2=[];
+                // this.show=false;
+
           }
       },
       components: {
@@ -254,7 +292,8 @@
         "cUploadmul": require('../../components/x-upload-img/x-upload-img-Slice.vue'),
         //"cChoiceTag": require('../../components/choice-tag.vue'),
         "cButton": require('../../components/button/button.vue'),
-        "cNumber": require('../../components/number/number.vue')
+        "cNumber": require('../../components/number/number.vue'),
+        "cConfirm": require('../../components/confirm/confirm.vue'),
       },
       watch:{
         img_list(){

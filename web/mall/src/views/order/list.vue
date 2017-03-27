@@ -10,6 +10,11 @@
         </c-tab>
         <c-order :order-data="orderData" type="primary" :order-status="odr"  @fukuan="fukuan"  @qrsh="qrsh" @goto='look'  @look="look" @fahuo="fahuo"></c-order>
         <c-scroll-load @on-load="load" :url='url'><!-- 列表滚动加载--></c-scroll-load>
+        <c-confirm v-model="show" title="确认收货"
+                 @on-cancel="onCancel"
+                 @on-confirm="onConfirm">
+          <p style="text-align:center;">确认收货后，订单交易完成，钱款将立即到达商家账户</p>
+        </c-confirm>
     </div>
 </template>
 <script>
@@ -29,7 +34,9 @@
                     close: constants.orderStatus.close//订单关闭（用户关闭/订单超时）
                 },
                 url: basepath + "/mall/order/order_list",
-                status:''
+                status:'',
+                order_id:-1,
+                show:false
             }
         },
         mounted: function () {
@@ -62,22 +69,8 @@
                 });
             },
             qrsh(id){
-                let that = this;
-                utils.ajax({
-                    url: basepath + "/user/order/confirm",
-                    dataType: 'json',
-                    type: 'POST',
-                    data: {
-                        order_id: id,
-                    },
-                    success: function (data) {
-                        if (data.code=="SUCESS") {
-                            that.orderList(that.status);
-                        }else{
-                            that.$vux.alert.show(data.message);
-                        }
-                    }
-                });
+                this.order_id=id;
+                this.show=true;
             },
             //订单列表
             orderList(id){
@@ -93,6 +86,28 @@
                         }
                     }
                 });
+            },
+            onCancel(){
+                this.show=false;
+            },
+            onConfirm(){
+                let that = this;
+                utils.ajax({
+                    url: basepath + "/user/order/confirm",
+                    dataType: 'json',
+                    type: 'POST',
+                    data: {
+                        order_id: id,
+                    },
+                    success: function (data) {
+                        if (data.code=="SUCESS") {
+                            that.orderList(that.status);
+                            that.show=false;
+                        }else{
+                            that.$vux.alert.show(data.message);
+                        }
+                    }
+                });
             }
 
         },
@@ -104,6 +119,7 @@
             "cTopBack": require('../../components/x-top-back/x-top-back.vue'),
             // 滚动加载
             "cScrollLoad": require('../../components/x-scroll-load/x-scroll-load.vue'),
+            "cConfirm": require('../../components/confirm/confirm.vue'),
         }
     }
 </script>

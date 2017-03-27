@@ -171,6 +171,11 @@ Mock.mock(basepath + "/seller/seller/login",'post',{
     
 });
 
+Mock.mock(basepath + "/seller/product/add",'post',{
+    "code": 'SUCESS',
+    
+});
+
 
 Mock.mock(basepath + "/seller/store/get",'post',{"code":"SUCESS","result":{"store_name":"测试","owner_real_name":"","customer_service_phone":"213123123","region_code":"110101","detail_address":"撒打算打算打算打算打算","qq":null}});
 

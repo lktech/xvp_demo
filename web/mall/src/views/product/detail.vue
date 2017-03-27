@@ -2,26 +2,33 @@
 <div class="tabbar-wrap">
     <!-- banner -->
     <c-top-back :mar='true'></c-top-back>
-    <div v-if="dataReady">
-        <c-product-wrap type="normal">
-          <c-product :title="goods.name" :des="goods.logistics_fee | formatPriceCNY" :price="goods.price" :pic="goods.pics"></c-product>
-        </c-product-wrap>
-        <c-cell-wrap>
-            <c-cell :title="storeInfo.name" value="进入店铺" is-link @click.native="link_home">
-                <img class="wq-img" slot="icon" src='http://static.taggole.com/sithbrobot/poster/1489997146660.jpg'/>
-            </c-cell>
-        </c-cell-wrap>
-
-        <c-title title="商品详情"></c-title>
-        <div class="wrap-detail">
-            <p>{{goods.product_detail}}</p>
-            <p v-for='i in goods.product_desc'><img v-bind:src="i" alt="" style="width:100%; height:auto;"></p>
+    <c-messages v-if="product_no" :status="2" msg="商品不存在或已删除">
+        <div slot="btn">
+          <c-button type="primary" text="返回首页" @click.native="btnClick"></c-button>
         </div>
+    </c-messages>
+    <div v-else>
+        <div v-if="dataReady">
+            <c-product-wrap type="normal">
+              <c-product :title="goods.name" :des="goods.logistics_fee | formatPriceCNY" :price="goods.price" :pic="goods.pics"></c-product>
+            </c-product-wrap>
+            <c-cell-wrap>
+                <c-cell :title="storeInfo.name" value="进入店铺" is-link @click.native="link_home">
+                    <img class="wq-img" slot="icon" src='http://static.taggole.com/sithbrobot/poster/1489997146660.jpg'/>
+                </c-cell>
+            </c-cell-wrap>
 
-        <c-sku v-model="sku.status" :title="goods.name" :img="goods.pics" :price="goods.price" :text="sku.buttonTxt" :sku='skuList' @submit="submit"></c-sku>
-        <c-button text="立即购买" size="block" @click.native="barClick" type="primary" style="position:fixed; bottom:0"></c-button>
+            <c-title title="商品详情"></c-title>
+            <div class="wrap-detail">
+                <p>{{goods.product_detail}}</p>
+                <p v-for='i in goods.product_desc'><img v-bind:src="i" alt="" style="width:100%; height:auto;"></p>
+            </div>
+
+            <c-sku v-model="sku.status" :title="goods.name" :img="goods.pics" :price="goods.price" :text="sku.buttonTxt" :sku='skuList' @submit="submit"></c-sku>
+            <c-button text="立即购买" size="block" @click.native="barClick" type="primary" style="position:fixed; bottom:0"></c-button>
+        </div>
     </div>
-
+        
 </div>
 
 </template>
@@ -49,6 +56,7 @@
                 pageId:'',
                 invoiceTypes:[],
                 logistic_flg:1,
+                product_no:false
             }
         },
         mounted: function () {
@@ -106,6 +114,8 @@
                             });
 
                             that.dataReady = true;
+                        }else if(data.code=='SUCESS'){
+                            that.product_no=true;
                         }else{
                             that.$vux.alert.show(data.message);
                         }
@@ -200,6 +210,9 @@
             },
             link_home(){
                 utils.go({path:'/home/home',query:{id:this.$route.query.store_id}},this.$router,true);
+            },
+            btnClick(){
+                utils.go({path:'/home/home',query:{id:this.$route.query.store_id}},this.$router,true);
             }
             
         },
@@ -213,7 +226,8 @@
             "cTitle":require('../../components/x-title/x-title.vue'),
             "cPayBar1":require('../../components/x-pay-bar/x-pay-bar1.vue'),
             "cPayBar1":require('../../components/x-pay-bar/x-pay-bar2.vue'),
-            "cSku":require('../../components/x-sku/x-sku.vue')
+            "cSku":require('../../components/x-sku/x-sku.vue'),
+            "cMessages": require('../../components/x-messages/x-messages.vue'),
         }
     }
 </script>

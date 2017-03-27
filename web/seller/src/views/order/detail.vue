@@ -17,8 +17,8 @@
             <c-panel-list v-for='item in json.goods'
                           :id='item.id'
                           :others='item.num'
-                          :title='item.product_name'
-                          :details='item.sku_str?"规格："+item.sku:"规格：无"'
+                          :title='item.goodsName'
+                          :details='item.sku?"规格："+item.sku:"规格：无"'
                           :from='item.price | formatPrice'
                           type="org"
                           :imglink="item.goodsUrl"
@@ -36,8 +36,8 @@
             订单编号：{{json.orderNum}}<br/>
             创建时间：{{json.create_time}}<br/>
             <div v-if="json.orderStatus==odr.close">订单超时：{{json.timeOut}}</div>
-            <div v-if="json.orderStatus==odr.dfh">付款时间：{{json.pay_time}}</div>
-            <div v-if="json.orderStatus==odr.dsh">发货时间：{{json.goods[0].create_time}}</div>
+            <div v-if="json.orderStatus==odr.dfh || json.orderStatus==odr.dsh || json.orderStatus==odr.ok">付款时间：{{json.pay_time}}</div>
+            <div v-if="json.orderStatus==odr.dsh || json.orderStatus==odr.ok">发货时间：{{json.orderdeliverys[0].create_time}}</div>
             <div v-if="json.orderStatus==odr.ok">收货时间：{{json.confirm_receive_time}}</div>
         </c-cell-wrap>
         <div class="wrap-pd" style="margin-top:10px">
@@ -115,9 +115,9 @@
                             } else if (data.result.orderStatus == 'DFK') {
                                 that.orderStatus_text= "订单状态：等待买家付款";
                             } else if (data.result.orderStatus == 'DFH') {
-                                that.orderStatus_text= "订单状态：等待卖家发货";
+                                that.orderStatus_text= "订单状态：买家已付款";
                             } else if (data.result.orderStatus == 'DSH') {
-                                that.orderStatus_text= "订单状态：卖家已经发货";
+                                that.orderStatus_text= "订单状态：等待买家收货";
                             } else if (data.result.orderStatus == 'YSH') {
                                 that.orderStatus_text= "订单状态：完成交易";
                             } else if (data.result.orderStatus == 'YGB') {

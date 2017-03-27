@@ -722,5 +722,12 @@ p {
     transform: translate3d(100%, 0, 0);
   }
 }
+.weui_cells {
+  margin-top: 10px !important;
+  margin-bottom: 0 !important;
+}
+.view-box {
+  padding-top: 0 !important;
+}
 
 /*# sourceMappingURL=style.css.map*/
