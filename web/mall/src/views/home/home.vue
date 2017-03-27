@@ -51,7 +51,7 @@
       mounted: function () {
         this.$nextTick(function () {
           let that = this ;
-
+          alert(1)
 
           utils.ajax({
             url: basepath + "/user/user/getIsvInfo",
