@@ -57,11 +57,12 @@
             url: basepath + "/user/user/getIsvInfo",
             success: function(data) {
               if(data.code=="SUCESS") {  
+                alert(2)
                 $xvp.login({
                     app_key : data.result.appId,
                     isv_url: data.result.isvUrl,
                     success : function(xvp_uid){
-
+                      alert(3)
                       utils.ajax({
                         url: basepath + "/user/user/login",
                         data:{'xvp_uid':xvp_uid},
