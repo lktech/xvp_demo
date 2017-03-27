@@ -166,6 +166,10 @@
                             }
                         }
                     });
+                }else if(this.discount*100<=0){
+                    this.$vux.alert.show({content:'请输入优惠金额',onHide :function(){
+                                  return false
+                                }});
                 }else{
                     this.$vux.alert.show({content:'优惠金额需要小于实付金额',onHide :function(){
                                   return false

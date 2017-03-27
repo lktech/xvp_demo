@@ -41,6 +41,7 @@
                 dataReady:false,
                 goods:{},//商品信息
                 skuList:[],//商品sku列表
+                skuList1:[]
                 storeInfo:{name:'测试'},//店铺信息
                 content:{},//商品详细信息
                 goods_id:0,//商品id
@@ -98,6 +99,7 @@
                                         }else{
                                             that.goods.price='¥'+utils.formatPrice(min);
                                         }
+                                        that.skuList1=res.result;
                                         $.each(res.result,function(i,v){
                                             that.skuList.push({
                                                 id:v.id,
@@ -114,7 +116,7 @@
                             });
 
                             that.dataReady = true;
-                        }else if(data.code=='SUCESS'){
+                        }else if(data.code=='1111'){
                             that.product_no=true;
                         }else{
                             that.$vux.alert.show(data.message);
@@ -124,60 +126,60 @@
                     
                 });
 
-                // utils.ajax({
-                //   url: "/mall/wxconfig/get",
-                //   data:{'url':window.location.href}),
-                //   success: function(data) {
-                //     if(data.success) {
-                //       wx.config({
-                //           debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                //           appId: data.obj.appId, // 必填，公众号的唯一标识
-                //           timestamp: data.obj.timestamp, // 必填，生成签名的时间戳
-                //           nonceStr: data.obj.nonceStr, // 必填，生成签名的随机串
-                //           signature: data.obj.signature,// 必填，签名，见附录1
-                //           jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-                //       });
-                //       wx.ready(function(){
-                //         wx.onMenuShareAppMessage({
-                //             title: that.goods.title, // 分享标题
-                //             desc: '【'+that.storeInfo.name+'】发现好商品，立即分享给你，进店有惊喜呦。', // 分享描述
-                //             link: window.location.href+'?xv=enter', // 分享链接
-                //             imgUrl: that.goods.pic // 分享图标
-                //         });
+                utils.ajax({
+                  url: "/mall/wxconfig/get",
+                  data:{'url':window.location.href}),
+                  success: function(data) {
+                    if(data.code=='SUCESS') {
+                      wx.config({
+                          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                          appId: data.obj.appId, // 必填，公众号的唯一标识
+                          timestamp: data.obj.timestamp, // 必填，生成签名的时间戳
+                          nonceStr: data.obj.nonceStr, // 必填，生成签名的随机串
+                          signature: data.obj.signature,// 必填，签名，见附录1
+                          jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                      });
+                      wx.ready(function(){
+                        wx.onMenuShareAppMessage({
+                            title: that.goods.title, // 分享标题
+                            desc: '【'+that.storeInfo.name+'】发现好商品，立即分享给你，进店有惊喜呦。', // 分享描述
+                            link: window.location.href+'?xv=enter', // 分享链接
+                            imgUrl: that.goods.pic // 分享图标
+                        });
 
-                //         wx.onMenuShareTimeline({
-                //             title: that.goods.title, // 分享标题
-                //             link: window.location.href+'?xv=enter', // 分享链接
-                //             imgUrl: that.goods.pic // 分享图标
-                //         });
-                //       })
-                //     } else {
-                //       that.$vux.alert.show(data.message);
-                //     }
-                //   },
-                // });
+                        wx.onMenuShareTimeline({
+                            title: that.goods.title, // 分享标题
+                            link: window.location.href+'?xv=enter', // 分享链接
+                            imgUrl: that.goods.pic // 分享图标
+                        });
+                      })
+                    } else {
+                      that.$vux.alert.show(data.message);
+                    }
+                  },
+                });
 
-                // if(utils.getSession('pageId')){
-                //     that.pageId=utils.getSession('pageId');
-                // }else{
-                //     utils.ajax({
-                //         url: basepath + "/mall/store/get",
-                //         dataType: 'json',
-                //         type: 'POST',
-                //         success: function(data){
-                //             if(data.success){
-                //                 that.pageId=data.obj.page_id;
-                //             }
-                //         }
-                //     });
-                // }
+                if(utils.getSession('pageId')){
+                    that.pageId=utils.getSession('pageId');
+                }else{
+                    utils.ajax({
+                        url: basepath + "/mall/store/get",
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function(data){
+                            if(data.success){
+                                that.pageId=data.obj.page_id;
+                            }
+                        }
+                    });
+                }
             })
         },
         methods:{
             submit(submitData){
                 if(this.submitType == "buy"){
                     var buy_info_price = null;
-                    $.each(this.skuList,function(i,v){
+                    $.each(this.skuList1,function(i,v){
                         if(v.id==submitData.sku.id){
                             buy_info_price = v.price;
                         }

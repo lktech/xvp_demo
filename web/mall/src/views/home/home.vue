@@ -1,5 +1,5 @@
 <template>
-  <div class="wq_home" v-if='firstloading==true' >
+  <div class="wq_home" v-if='firstloading' >
     <div class="tabbar-wrap">
       <c-top-back :mar='mar' hide="true"></c-top-back>
       <!--店铺信息 -->
@@ -57,7 +57,6 @@
             url: basepath + "/user/user/getIsvInfo",
             success: function(data) {
               if(data.code=="SUCESS") {  
-
                 $xvp.login({
                     app_key : data.result.appId,
                     isv_url: data.result.isvUrl,
@@ -67,7 +66,8 @@
                         url: basepath + "/user/user/login",
                         data:{'xvp_uid':xvp_uid},
                         success: function(res) {
-                          if(res.code=="SUCESS") {  
+                          if(res.code=="SUCESS") { 
+                            alert('登陆') 
                             that.init();
 
                           } else {
@@ -106,6 +106,7 @@
             data:{'store_id':that.$route.query.id*1},
             success: function(data) {
               if(data.code=="SUCESS") {
+                alert('加载')
                 that.firstloading = true;
                 that.baseinfo.title = data.result.store_name; //店铺名称
                 if(data.result.logo){
@@ -139,6 +140,7 @@
                 sessionStorage.setItem('title_',that.baseinfo.title);
                 sessionStorage.setItem('link_','http://m.fvt.xiaovpu.com/wap/order/index.html#!/home/'+that.$route.query.id+'?xv=enter');
                 sessionStorage.setItem('logo_',that.baseinfo.logo);
+                utils.MenuShare();
               } else {
                 that.$vux.alert.show(data.message);
               }
