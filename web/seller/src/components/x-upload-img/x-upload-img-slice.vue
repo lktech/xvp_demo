@@ -73,6 +73,7 @@ export default {
   watch: {
   	newList(newList){
   		this.$emit('upload' , newList);
+  		utils.loadingHide();
   	}
   },
   mounted: function () {
@@ -89,7 +90,6 @@ export default {
       				
       			},
       			success:function(data){
-      				utils.loadingHide();
       				that.newList.push(data.url);
       			},
       			error:function(data){

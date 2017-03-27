@@ -143,7 +143,7 @@
         methods: {
             //更新订单
             updateOrder(){
-                if(this.discount*100<=this.discount1+this.json.pay){
+                if(this.discount*100<this.discount1+this.json.pay){
                     let that = this;
                     utils.ajax({
                         url: basepath + "/seller/order/discount",
@@ -167,7 +167,7 @@
                         }
                     });
                 }else{
-                    this.$vux.alert.show({content:'您输入的优惠金额大于实付金额',onHide :function(){
+                    this.$vux.alert.show({content:'优惠金额需要小于实付金额',onHide :function(){
                                   return false
                                 }});
                 }

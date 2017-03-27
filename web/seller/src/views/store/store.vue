@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="flag">
     <c-entrance :list="entranceData"></c-entrance>
     <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
   </div>
@@ -31,6 +31,7 @@
             link:'Setting',
             icon:'http://img1.xiaovpu.com/3027349865458448.png'
           }],
+          flag:false
         }
       },
       mounted: function () {
@@ -60,6 +61,7 @@
               type: 'POST',
               success: function(data){
                   if(data.code=="SUCESS"){
+                    that.flag=true;
                     var Yin=location.href;
                     var Y=Yin.substring(0,Yin.indexOf('/seller'));
                       $('title').text(data.result.store_name);

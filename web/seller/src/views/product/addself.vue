@@ -89,9 +89,11 @@
       },
       methods: {
           upload1(src){
+            $('input').blur();
             this.img_list1=src;
           },
           upload2(src){
+            $('input').blur();
             this.img_list2=src;
           },
           validate(obj){

@@ -36,7 +36,7 @@
                 code_status:false,             //邮编校检
                 addr_status:false,             //详细地址校检
                 disabled:true,             //是否禁用保存按钮
-                addr_code_status:false             //省市区校检
+                addr_code_status:false,            //省市区校检
             }
         },
 
@@ -74,6 +74,7 @@
                     this.name_status = obj.valid;
                 }
                 if(obj.name=='phone'){
+                    console.log(obj.valid)
                     this.phone_status = obj.valid;
                 }
                 if(obj.name=='address'){

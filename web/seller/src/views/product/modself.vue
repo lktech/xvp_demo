@@ -86,9 +86,11 @@
       methods: {
           upload1(src){
             this.img_list1=src;
+            $('input').blur();
           },
           upload2(src){
             this.img_list2=src;
+            $('input').blur();
           },
           validate(obj){
             if(obj.name=='name'){

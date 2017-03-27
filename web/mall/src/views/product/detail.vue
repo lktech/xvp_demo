@@ -176,7 +176,13 @@
         methods:{
             submit(submitData){
                 if(this.submitType == "buy"){
-                    var total_price = submitData.sku.price*submitData.num + this.goods.postage;
+                    var buy_info_price = null;
+                    $.each(this.skuList,function(i,v){
+                        if(v.id==submitData.sku.id){
+                            buy_info_price = v.price;
+                        }
+                    })
+                    
                     var buy_info = {
                         "products":[
                             {
@@ -184,7 +190,7 @@
                                 "name": this.goods.name,//商品名称
                                 "pic": this.goods.pics,//商品图片
                                 "properties": submitData.sku.name,//规格信息
-                                "price": submitData.sku.price*100,//货架商品价格
+                                "price": buy_info_price,//货架商品价格
                                 "num": submitData.num,//购买商品的数量
                             }
                         ],
