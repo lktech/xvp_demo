@@ -10,6 +10,7 @@ public class StoreResponse implements XvpResponse {
 	private String region_code;
 	private String detail_address;
 	private String qq;
+	private String logo;
 	
 
 	public String getId() {
@@ -67,6 +68,16 @@ public class StoreResponse implements XvpResponse {
 	public void setQq(String qq) {
 		this.qq = qq;
 	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+	
+	
 	
 
 }

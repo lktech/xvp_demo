@@ -51,14 +51,14 @@ public class StoreController {
 	public XvpResponse createStore(@RequestBody StoreCreateRequest request) throws Exception {
 		XvpStoreCreateRequest ropRequest = BeanCopyUtil.copy(request, XvpStoreCreateRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
-		String extendFields = getExtendField(request.getRegion_code(),request.getDetail_address(),request.getQq());
+		String extendFields = getExtendField(request.getRegion_code(),request.getDetail_address(),request.getQq(),null);
 		ropRequest.setExtend_fields(extendFields);
 		XvpStoreCreateResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		SessionUtil.sellerSetStoreId(ropResponse.getStore().getId());
 		Seller.updateSellerStoreId();
 		return null;
 	}
-	private String getExtendField(String region_code,String detail_address,String qq){
+	private String getExtendField(String region_code,String detail_address,String qq,String logo){
 		List<ExtendFieldRequest> extendFields = new ArrayList<ExtendFieldRequest>();
 		if(!StringUtils.isEmpty(region_code)){
 			ExtendFieldRequest extendField = new ExtendFieldRequest();
@@ -76,6 +76,12 @@ public class StoreController {
 			ExtendFieldRequest extendField = new ExtendFieldRequest();
 			extendField.setColumnName("qq");
 			extendField.setColumnValue(qq);
+			extendFields.add(extendField);
+		}
+		if(!StringUtils.isEmpty(logo)){
+			ExtendFieldRequest extendField = new ExtendFieldRequest();
+			extendField.setColumnName("logo");
+			extendField.setColumnValue(logo);
 			extendFields.add(extendField);
 		}
 		return JsonUtils.toJson(extendFields);
@@ -104,7 +110,7 @@ public class StoreController {
 		XvpStoreUpdateRequest ropRequest = BeanCopyUtil.copy(request, XvpStoreUpdateRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.parseLong(SessionUtil.sellerGetStoreId()));
-		String extendFields = getExtendField(request.getRegion_code(),request.getDetail_address(),request.getQq());
+		String extendFields = getExtendField(request.getRegion_code(),request.getDetail_address(),request.getQq(),request.getLogo());
 		ropRequest.setExtend_fields(extendFields);
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;

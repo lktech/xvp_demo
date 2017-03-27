@@ -7,6 +7,7 @@ public class StoreUpdateRequest implements XvpRequest {
 	private String region_code;
 	private String detail_address;
 	private String qq;
+	private String logo;
 
 	public String getStore_name() {
 		return store_name;
@@ -55,5 +56,15 @@ public class StoreUpdateRequest implements XvpRequest {
 	public void setQq(String qq) {
 		this.qq = qq;
 	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+	
+	
 
 }
