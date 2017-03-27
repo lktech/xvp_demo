@@ -5,7 +5,14 @@ import java.util.List;
 
 public class StoreMainResponse implements XvpResponse {
 	private  String store_name;
+	private String logo;
 	private  List<ProductResponse> products;
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
 	public String getStore_name() {
 		return store_name;
 	}

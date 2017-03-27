@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Rop.api.domain.ExtendField;
+import com.Rop.api.domain.Store;
 import com.Rop.api.request.XvpProductQueryRequest;
 import com.Rop.api.request.XvpStoreGetRequest;
 import com.Rop.api.response.XvpProductQueryResponse;
@@ -36,7 +38,9 @@ public class StoreController {
 		XvpStoreGetRequest ropRequest = BeanCopyUtil.copy(request, XvpStoreGetRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpStoreGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
-		StoreMainResponse response = BeanCopyUtil.copy(ropResponse.getStore(), StoreMainResponse.class);
+		Store store = ropResponse.getStore();
+		StoreMainResponse response = BeanCopyUtil.copy(store, StoreMainResponse.class);
+		response.setLogo(getLogo(store.getExtendfields()));
 		XvpProductQueryRequest ropProductRequest= new XvpProductQueryRequest();
 		ropProductRequest.setApp_id(ropClientAdapter.getAppId());
 		ropProductRequest.setStore_id(request.getStore_id());
@@ -47,5 +51,17 @@ public class StoreController {
 		response.setProducts(products);
 		SessionUtil.userSetStoreId(String.valueOf(request.getStore_id()));
 		return response;
+	}
+	
+	private String getLogo(List<ExtendField> extendFields){
+		if(extendFields==null||extendFields.size()==0){
+			return null;
+		}
+		for(ExtendField extend : extendFields){
+			if("logo".equals(extend.getColumn_name())){
+				return extend.getColumn_value();
+			}
+		}
+		return null;
 	}
 }
