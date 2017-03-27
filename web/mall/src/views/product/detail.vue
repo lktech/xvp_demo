@@ -41,7 +41,7 @@
                 dataReady:false,
                 goods:{},//商品信息
                 skuList:[],//商品sku列表
-                skuList1:[]
+                skuList1:[],
                 storeInfo:{name:'测试'},//店铺信息
                 content:{},//商品详细信息
                 goods_id:0,//商品id
@@ -61,8 +61,7 @@
             }
         },
         mounted: function () {
-            this.$nextTick(function () {
-                //utils.MenuShare();    
+            this.$nextTick(function () {  
                 let that = this;
                 utils.ajax({
                     url: basepath + "/user/product/get",
@@ -127,7 +126,7 @@
                 });
 
                 utils.ajax({
-                  url: "/mall/wxconfig/get",
+                  url:basepath+ "/common/wxconfig/get",
                   data:{'base_url':window.location.href.split('#')[0]},
                   success: function(data) {
                     if(data.code=='SUCESS') {
@@ -144,13 +143,13 @@
                             title: that.goods.title, // 分享标题
                             desc: '【'+that.storeInfo.name+'】发现好商品，立即分享给你，进店有惊喜呦。', // 分享描述
                             link: window.location.href, // 分享链接
-                            imgUrl: that.goods.pic // 分享图标
+                            imgUrl: that.goods.pics // 分享图标
                         });
 
                         wx.onMenuShareTimeline({
                             title: that.goods.title, // 分享标题
                             link: window.location.href, // 分享链接
-                            imgUrl: that.goods.pic // 分享图标
+                            imgUrl: that.goods.pics // 分享图标
                         });
                       })
                     } else {
@@ -158,21 +157,6 @@
                     }
                   },
                 });
-
-                if(utils.getSession('pageId')){
-                    that.pageId=utils.getSession('pageId');
-                }else{
-                    utils.ajax({
-                        url: basepath + "/mall/store/get",
-                        dataType: 'json',
-                        type: 'POST',
-                        success: function(data){
-                            if(data.success){
-                                that.pageId=data.obj.page_id;
-                            }
-                        }
-                    });
-                }
             })
         },
         methods:{
