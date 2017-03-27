@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="pay/jquery-3.1.1.js"></script>
+<script>
+test();
+function test(){
+	wx.config({
+	    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	    "signature":"565ff4b26220095a180b17b439289e19f23e9f3b",
+	    "appId":"wx9130fbba59fae4be",
+	    "nonceStr":"5ywpk3r071zv",
+	    "timestamp":1490602344,
+	    jsApiList: ['onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	});
+	wx.ready(function(){
+		wx.onMenuShareTimeline({
+		    title: 'test', // 分享标题
+		    link: window.location.href, // 分享链接
+		    imgUrl: '', // 分享图标
+		    success: function (result) { 
+		        // 用户确认分享后执行的回调函数
+		        alert(result);
+		    },
+		    cancel: function (result) { 
+		        // 用户取消分享后执行的回调函数
+		        alert(result);
+		    }
+		});
+	});
+	wx.error(function(res){
+		alert(res);
+	    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+
+	});
+}
+
+</script>
+<meta charset="UTF-8">
+<title>share分享页面</title>
+</head>
+<body>
+</body>
+</html>
