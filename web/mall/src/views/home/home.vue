@@ -1,6 +1,6 @@
 <template>
-  <div class="wq_home">
-    <div v-if='firstloading==true' class="tabbar-wrap">
+  <div class="wq_home" v-if='firstloading==true' >
+    <div class="tabbar-wrap">
       <c-top-back :mar='mar' hide="true"></c-top-back>
       <!--店铺信息 -->
       <c-banner-info :logo="baseinfo.logo" :upload-type='false'  banner='http://img1.xiaovpu.com/3028216099602841.png'>
@@ -17,7 +17,9 @@
       </div>
       <c-data-null v-else msg='这个店家很懒，什么都没有留下！'></c-data-null>
       <c-scroll-load @on-load="load" eleid="search_show" :url='searchurl' :params='params'></c-scroll-load>
-      <c-tabbar style='height:58px;'>
+      
+    </div>
+    <c-tabbar style='height:58px;'>
         <c-tabbac-item selected>
           <img slot="icon"  src="http://static.taggole.com/sithbrobot/poster/1490339048405.jpg">
           <span slot="label">首页</span>
@@ -27,7 +29,6 @@
           <span slot="label">我的</span>
         </c-tabbac-item>
       </c-tabbar>
-    </div>
   </div>
 </template>
 <script>
