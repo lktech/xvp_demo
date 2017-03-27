@@ -86,6 +86,7 @@
 							   <directory>web/seller/</directory>
 							   <includes>
 								  <include>index.html</include>
+								  <include>test_share.html</include>
 								   <include>xvupload.js</include>
 								  <include>dist/**</include>
 								  <include>static/**</include>
