@@ -1,5 +1,5 @@
 <template>
-<div class="tabbar-wrap2">
+<div class="tabbar-wrap2" v-if="res.setting">
     <div v-if="!res.inv_set">
          <c-top-back></c-top-back>
          <c-banner-info :title="res.formData.name" @upload='upload' :upload-type='true' :logo="res.formData.logo" banner='http://img1.xiaovpu.com/3028216099602841.png'>
@@ -31,7 +31,7 @@
             return {
                 res:{
                     formData:{               //填写的数据
-                        logo:'',
+                        logo:'http://okxm1ge1z.bkt.clouddn.com/026e2cee-d3f5-468a-9bbf-257ec9a993c2.png',
                         phone:'',             //手机号
                         name:'',              //姓名                           
                         QQ:'',             //邮编
@@ -45,6 +45,7 @@
                     addr_status:true,             //详细地址校检
                     disabled:false,             //是否禁用保存按钮
                     addr_code_status:true,            //省市区校检
+                    setting:false
                 }
             }
         },
@@ -120,8 +121,7 @@
                             that.res.formData.name=data.result.store_name;
                             if(data.result.logo){
                                 that.res.formData.logo = data.result.logo; //店铺名称
-                            }else{
-                                that.res.formData.logo = 'http://okxm1ge1z.bkt.clouddn.com/c64c93ad-01a6-440f-9acd-7dabc0408cdb.png';
+                                console.log(that.res.formData.logo);
                             }
                             that.res.formData.phone=data.result.customer_service_phone;
                             that.res.formData.QQ=data.result.qq;
@@ -132,6 +132,7 @@
 
                             that.res.formData.addr_code=[province,city,data.result.region_code];
 
+                            that.res.setting=true;
                         }else if(data.code=='auth_seller_error'){
                             utils.wang(that,utils,data.message);
 
@@ -159,7 +160,7 @@
     }
 </script>
 <style>
-    .addinfo .vux-popup-picker-value{
+    .tabbar-wrap2 .vux-popup-picker-value{
         white-space: nowrap; width:210px; overflow: hidden; display: block;
     }
 </style>

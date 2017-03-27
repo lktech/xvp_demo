@@ -17,7 +17,7 @@
                               :title='item.name'
                               :details='item.properties?"规格："+item.properties:"规格：无"'
                               :from='item.price/100'
-                              :imglink="item.pic"
+                              :imglink="item.pic+'?imageMogr2/thumbnail/60x'"
                               :colororg='true'
                               :cheng="true">
                 </c-panel-list>

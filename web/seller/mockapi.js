@@ -177,5 +177,5 @@ Mock.mock(basepath + "/seller/product/add",'post',{
 });
 
 
-Mock.mock(basepath + "/seller/store/get",'post',{"code":"SUCESS","result":{"store_name":"测试","owner_real_name":"","customer_service_phone":"213123123","region_code":"110101","detail_address":"撒打算打算打算打算打算","qq":null}});
+Mock.mock(basepath + "/seller/store/get",'post',{"code":"SUCESS","result":{"store_name":"测试","owner_real_name":"","customer_service_phone":"213123123","region_code":"110101","detail_address":"撒打算打算打算打算打算","qq":null,'logo':"http://okxm1ge1z.bkt.clouddn.com/026e2cee-d3f5-468a-9bbf-257ec9a993c2.png"}});
 

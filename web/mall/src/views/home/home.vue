@@ -12,7 +12,7 @@
       </c-banner-info>
       <div v-if='component.length > 0'>
           <c-product-wrap type="smaller">
-            <c-product v-for="(item,index) in component" :title="item.name" :price="item.price | formatPrice" :pic="item.pics" @click.native="click(item.id)"></c-product>
+            <c-product v-for="(item,index) in component" :title="item.name" :price="item.price | formatPrice" :pic="item.pics+'?imageMogr2/thumbnail/173x'" @click.native="click(item.id)"></c-product>
           </c-product-wrap>
       </div>
       <c-data-null v-else msg='这个店家很懒，什么都没有留下！'></c-data-null>
