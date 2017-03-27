@@ -70,6 +70,7 @@
 		try{
 			total = Math.ceil(file.size/options.blockSize);
 		}catch(e){}
+		alert(4)
 		startFunc[id]();
 		ajax({
 			url: options.uploadUrl + interfaces.vldUrl,
