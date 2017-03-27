@@ -87,7 +87,7 @@ export default {
       				utils.loadingShow('上传中');
       			},
       			process:function(p){
-      				
+      				that.show();
       			},
       			success:function(data){
       				that.newList.push(data.url);
@@ -115,6 +115,9 @@ export default {
 	        this.list.splice(this.deleteId,1);
 	    }
 	    this.deleteId = -1;
+	  },
+	  show(){
+	  	utils.loadingShow('上传中');
 	  }
   },
   components: {
