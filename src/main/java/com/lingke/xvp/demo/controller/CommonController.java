@@ -78,6 +78,12 @@ public class CommonController {
 		XvpCommonGetcountyareasResponse ropResponse = ropClientAdapter.ropInvoke(request);
 		return convertRopRespToXvpResp(ropResponse);
 	}
+	
+	@RequestMapping(path = "/wxconfig/get", method = RequestMethod.POST)
+	public XvpResponse getWxConfig() throws Exception {
+		
+		return null;
+	}	
 
 	/**
 	 * 从ropresp转换到ropresp
