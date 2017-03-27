@@ -515,7 +515,7 @@ exports.MenuShare = function() {
       async:false,
       //headers:{'xvp-token':$xvpAuthToken},
       contentType:'application/json',
-      data:JSON.stringify({'base_url':window.location.href}),
+      data:JSON.stringify({'base_url':window.location.href.split('#')[0]}),
       success: function(data) {
         if(data.code=='SUCESS') {
           wx.config({

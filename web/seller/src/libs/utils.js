@@ -520,7 +520,7 @@ $.ajax({
   type:'POST',
   async:false,
   contentType:'application/json',
-  data:JSON.stringify({'base_url':window.location.href}),
+  data:JSON.stringify({'base_url':window.location.href.split('#')[0]}),
   success: function(data) {
     if(data.code=="SUCESS") {
       wx.config({

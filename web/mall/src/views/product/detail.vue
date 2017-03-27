@@ -128,7 +128,7 @@
 
                 utils.ajax({
                   url: "/mall/wxconfig/get",
-                  data:{'url':window.location.href}),
+                  data:{'base_url':window.location.href.split('#')[0]}),
                   success: function(data) {
                     if(data.code=='SUCESS') {
                       wx.config({
