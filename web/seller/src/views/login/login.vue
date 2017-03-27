@@ -13,6 +13,7 @@
         </div>
         <div style="color:#5ABA5A; margin-top:10px; font-size:14px; margin-left:10px" @click="forget">忘记密码</div>
     </div>
+    <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
 </div>
 
 </template>

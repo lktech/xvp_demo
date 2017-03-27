@@ -13,7 +13,7 @@
     <div class="wrap-pd" style="margin-top:10px">
         <c-button text="进入店铺" :type="color" :disabled="disabled" @click.native="preserve" size="block"></c-button>
     </div>
-    
+    <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
 </div>
 
 </template>

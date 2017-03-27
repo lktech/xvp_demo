@@ -19,7 +19,7 @@
          </div>
     </div>
 
-    
+    <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
 </div>
 
 </template>
@@ -118,7 +118,9 @@
                     success: function(data){
                         if(data.code=="SUCESS"){
                             that.res.formData.name=data.result.store_name;
-                            if(data.result.logo) that.res.formData.logo=data.result.logo;
+                            if(data.result.logo){
+                                that.res.formData.logo=data.result.logo;
+                            } 
                             that.res.formData.phone=data.result.customer_service_phone;
                             that.res.formData.QQ=data.result.qq;
                             that.res.formData.address=data.result.detail_address;

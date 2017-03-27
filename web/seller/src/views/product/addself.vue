@@ -42,6 +42,7 @@
                confirmText="继续添加">
         <p style="text-align:center;">保存成功</p>
       </c-confirm>
+      <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
   </div>
 
 </template>

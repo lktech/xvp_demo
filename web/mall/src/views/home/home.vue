@@ -2,8 +2,8 @@
   <div class="wq_home">
     <div v-if='firstloading==true' class="tabbar-wrap">
       <c-top-back :mar='mar' hide="true"></c-top-back>
-      <!--åº—é“ºä¿¡æ¯ -->
-      <c-banner-info :logo="baseinfo.logo" banner='http://img1.xiaovpu.com/3028216099602841.png'>
+      <!--µêÆÌĞÅÏ¢ -->
+      <c-banner-info :logo="baseinfo.logo" :upload-type='false'  banner='http://img1.xiaovpu.com/3028216099602841.png'>
         <div slot="inner">
           <div>
             <div class="fontbg">{{baseinfo.title}}</div>
@@ -15,19 +15,19 @@
             <c-product v-for="(item,index) in component" :title="item.name" :price="item.price | formatPrice" :pic="item.pics" @click.native="click(item.id)"></c-product>
           </c-product-wrap>
       </div>
-      <c-data-null v-else msg='è¿™ä¸ªåº—å®¶å¾ˆæ‡’ï¼Œä»€ä¹ˆéƒ½æ²¡æœ‰ç•™ä¸‹ï¼'></c-data-null>
+      <c-data-null v-else msg='Õâ¸öµê¼ÒºÜÀÁ£¬Ê²Ã´¶¼Ã»ÓĞÁôÏÂ£¡'></c-data-null>
       <c-scroll-load @on-load="load" eleid="search_show" :url='searchurl' :params='params'></c-scroll-load>
+      <c-tabbar style='height:58px;'>
+        <c-tabbac-item selected>
+          <img slot="icon"  src="http://static.taggole.com/sithbrobot/poster/1490339048405.jpg">
+          <span slot="label">Ê×Ò³</span>
+        </c-tabbac-item>
+        <c-tabbac-item link="/order/list">
+          <img slot="icon" src="http://static.taggole.com/sithbrobot/poster/1490339019315.jpg">
+          <span slot="label">ÎÒµÄ</span>
+        </c-tabbac-item>
+      </c-tabbar>
     </div>
-    <r-tabbar style='height:58px;'>
-      <r-tabbar-item selected>
-        <img slot="icon"  src="http://static.taggole.com/sithbrobot/poster/1490339048405.jpg">
-        <span slot="label">é¦–é¡µ</span>
-      </r-tabbar-item>
-      <r-tabbar-item link="/order/list">
-        <img slot="icon" src="http://static.taggole.com/sithbrobot/poster/1490339019315.jpg">
-        <span slot="label">æˆ‘çš„</span>
-      </r-tabbar-item>
-    </r-tabbar>
   </div>
 </template>
 <script>
@@ -35,16 +35,16 @@
   export default {
     data() {
         return {
-          mar: true, //å»æ‰è¾¹è·
-          firstloading: false, // é¦–æ¬¡åŠ è½½
+          mar: true, //È¥µô±ß¾à
+          firstloading: false, // Ê×´Î¼ÓÔØ
           baseinfo: {
             logo:'http://okxm1ge1z.bkt.clouddn.com/c64c93ad-01a6-440f-9acd-7dabc0408cdb.png',
             title:''
-          }, //åº—é“ºåŸºæœ¬ä¿¡æ¯
-          component: [], // å•†å“åˆ—è¡¨çš„åˆ¤æ–­
-          component1: [], // å•†å“åˆ—è¡¨çš„åˆ¤æ–­
-          searchurl:basepath + "/user/store/main", // æœç´¢æ¥å£
-          params:{"pageNumber":1,"pagesize":10}, // æ»šåŠ¨åŠ è½½æ•°é‡æ§åˆ¶
+          }, //µêÆÌ»ù±¾ĞÅÏ¢
+          component: [], // ÉÌÆ·ÁĞ±íµÄÅĞ¶Ï
+          component1: [], // ÉÌÆ·ÁĞ±íµÄÅĞ¶Ï
+          searchurl:basepath + "/user/store/main", // ËÑË÷½Ó¿Ú
+          params:{"pageNumber":1,"pagesize":10}, // ¹ö¶¯¼ÓÔØÊıÁ¿¿ØÖÆ
         }
       },
       mounted: function () {
@@ -86,8 +86,8 @@
         
         })
       },
-      methods: { // æœç´¢
-        // æ»šåŠ¨åŠ è½½
+      methods: { // ËÑË÷
+        // ¹ö¶¯¼ÓÔØ
         load(data) {
           if(data) {
             let that = this;
@@ -106,9 +106,9 @@
             success: function(data) {
               if(data.code=="SUCESS") {
                 that.firstloading = true;
-                that.baseinfo.title = data.result.store_name; //åº—é“ºåç§°
+                that.baseinfo.title = data.result.store_name; //µêÆÌÃû³Æ
                 if(data.result.logo){
-                  that.baseinfo.logo = data.result.logo; //åº—é“ºåç§°
+                  that.baseinfo.logo = data.result.logo; //µêÆÌÃû³Æ
                 }
                 that.component1=data.result.products;
                 $.each(that.component1,function(i,v){
@@ -133,7 +133,7 @@
                       },
                     });
                 })
-                that.component = that.component1; // ç»„ä»¶
+                that.component = that.component1; // ×é¼ş
 
                 sessionStorage.setItem('title_',that.baseinfo.title);
                 sessionStorage.setItem('link_','http://m.fvt.xiaovpu.com/wap/order/index.html#!/home/'+that.$route.query.id+'?xv=enter');
@@ -151,10 +151,10 @@
         "cProduct": require('../../components/x-product/x-product.vue'),
         "cProductWrap": require('../../components/x-product/x-product-wrap.vue'),
         "cDataNull": require('../../components/x-datanull/x-datanull.vue'),
-        // æ»šåŠ¨åŠ è½½
+        // ¹ö¶¯¼ÓÔØ
         "cScrollLoad": require('../../components/x-scroll-load/x-scroll-load.vue'),
-        "rTabbar": require('../../components/tabbar/tabbar.vue'),
-        "rTabbarItem": require('../../components/tabbar/tabbar-item.vue'),
+        "cTabbar": require('../../components/tabbar/tabbar.vue'),
+        "cTabbarItem": require('../../components/tabbar/tabbar-item.vue'),
       },
   }
 </script>

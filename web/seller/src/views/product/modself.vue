@@ -37,7 +37,7 @@
             <c-button :type="color" text="确定" @click.native="hold" :disabled="disabled" size="block"></c-button>
           </div>
       </div>
-    
+    <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
   </div>
 
 </template>

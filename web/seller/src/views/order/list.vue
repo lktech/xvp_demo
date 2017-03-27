@@ -10,6 +10,7 @@
         </c-tab>
         <c-order :order-data="orderData" type="primary" :order-status="odr"  @look="look" @goto="look" @fahuo="fahuo"></c-order>
        <!-- <c-scroll-load @on-load="load" :url='url'>列表滚动加载</c-scroll-load>-->
+       <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
     </div>
 </template>
 <script>

@@ -22,6 +22,7 @@
            <c-button slot="btn" type="primary" link="login" size="block" text="返回登录页面"></c-button>
        </c-msg>
     </div>
+    <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
 </div>
 
 </template>

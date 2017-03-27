@@ -18,6 +18,7 @@
         </div>
         <c-addr title="选择物流" @get-addressid="logisticsId"  @address-add="cancel" v-model="logisticsStatus" :address="logisticsData" type="default" size='block' btn-txt="取消"></c-addr>
         <c-addr title="选择快递公司" @get-addressid="companyId"  @address-add="cancel" v-model="companyStatus" :address="companyData" type="default" size='block' btn-txt="取消"></c-addr>
+        <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
    </div>
 </template>
 <script>

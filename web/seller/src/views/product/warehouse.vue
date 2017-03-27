@@ -9,6 +9,7 @@
     </div>
     <c-data-null msg='暂无商品信息' v-else></c-data-null>
     <c-action-sheet v-model="show2" :menus="menus2" title='操作商品' show-cancel @on-click-menu="click"></c-action-sheet>
+    <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
   </div>
 </template>
 <script>

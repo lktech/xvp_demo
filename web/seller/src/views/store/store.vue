@@ -1,6 +1,7 @@
 <template>
   <div>
     <c-entrance :list="entranceData"></c-entrance>
+    <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
   </div>
 
 </template>
