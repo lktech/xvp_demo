@@ -8,7 +8,7 @@ public class ShareResponse implements XvpResponse {
 	private String signature;
 	private String appId;
 	private String nonceStr;
-	private String timestamp;
+	private Long timestamp;
 
 	public String getSignature() {
 		return signature;
@@ -34,11 +34,11 @@ public class ShareResponse implements XvpResponse {
 		this.nonceStr = nonceStr;
 	}
 
-	public String getTimestamp() {
+	public Long getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(String timestamp) {
+	public void setTimestamp(Long timestamp) {
 		this.timestamp = timestamp;
 	}
 

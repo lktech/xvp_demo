@@ -109,10 +109,10 @@ public class CommonController {
 		String respBody = new String(result.getRespBody(), "UTF-8");
 		JsonNode response = JsonUtils.readJsonObject(respBody).findValue("ruixue_xvp_wx_config_response").findValue("jsonobject");
 		ShareResponse shareResponse = new ShareResponse();
-		shareResponse.setSignature(String.valueOf(response.get("signature")));
-		shareResponse.setAppId(String.valueOf(response.get("appId")));
-		shareResponse.setNonceStr(String.valueOf(response.get("nonceStr")));
-		shareResponse.setTimestamp(String.valueOf(response.get("timestamp")));
+		shareResponse.setSignature(response.get("signature").asText());
+		shareResponse.setAppId(response.get("appId").asText());
+		shareResponse.setNonceStr(response.get("nonceStr").asText());
+		shareResponse.setTimestamp(response.get("timestamp").asLong());
 		return shareResponse;
 	}
 
