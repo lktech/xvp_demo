@@ -2,7 +2,7 @@
 <div class="tabbar-wrap2">
     <div v-if="!res.inv_set">
          <c-top-back></c-top-back>
-         <c-banner-info :title="res.formData.name" @upload='upload' :upload-type='true' :logo.sync="res.formData.logo" banner='http://img1.xiaovpu.com/3028216099602841.png'>
+         <c-banner-info :title="res.formData.name" @upload='upload' :upload-type='true' :logo="res.formData.logo" banner='http://img1.xiaovpu.com/3028216099602841.png'>
          </c-banner-info>
          <c-group>
              <c-input title="店铺名称" @on-change="validate" placeholder="请输入店铺名称" name="name"required  v-model="res.formData.name" ></c-input>
@@ -119,8 +119,8 @@
                         if(data.code=="SUCESS"){
                             that.res.formData.name=data.result.store_name;
                             if(data.result.logo){
-                                that.res.formData.logo=data.result.logo;
-                            } 
+                              that.res.formData.logo = data.result.logo; //店铺名称
+                            }
                             that.res.formData.phone=data.result.customer_service_phone;
                             that.res.formData.QQ=data.result.qq;
                             that.res.formData.address=data.result.detail_address;
