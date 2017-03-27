@@ -51,26 +51,21 @@
       mounted: function () {
         this.$nextTick(function () {
           let that = this ;
-          alert(1)
 
           utils.ajax({
             url: basepath + "/user/user/getIsvInfo",
             success: function(data) {
               if(data.code=="SUCESS") {  
-                alert(2)
-                alert(data.result.appId)
-                alert(data.result.isvUrl)
+
                 $xvp.login({
                     app_key : data.result.appId,
                     isv_url: data.result.isvUrl,
                     success : function(xvp_uid){
-                      alert(3)
                       utils.ajax({
                         url: basepath + "/user/user/login",
                         data:{'xvp_uid':xvp_uid},
                         success: function(res) {
                           if(res.code=="SUCESS") { 
-                            alert('登陆') 
                             that.init();
 
                           } else {
@@ -109,7 +104,6 @@
             data:{'store_id':that.$route.query.id*1},
             success: function(data) {
               if(data.code=="SUCESS") {
-                alert('加载')
                 that.firstloading = true;
                 that.baseinfo.title = data.result.store_name; //店铺名称
                 if(data.result.logo){
@@ -141,7 +135,7 @@
                 that.component = that.component1; // 组件
 
                 sessionStorage.setItem('title_',that.baseinfo.title);
-                sessionStorage.setItem('link_','http://demo.open.xiaovpu.com/mall/index.html#!/home/home?id='+that.$route.query.id+'&xv=enter');
+                sessionStorage.setItem('link_','http://demo.open.xiaovpu.com/mall/index.html#/home/home?id='+that.$route.query.id+'&xv=enter');
                 sessionStorage.setItem('logo_',that.baseinfo.logo);
                 utils.MenuShare();
               } else {
