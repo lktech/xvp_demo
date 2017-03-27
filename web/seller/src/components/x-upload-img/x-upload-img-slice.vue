@@ -73,7 +73,7 @@ export default {
   watch: {
   	newList(newList){
   		this.$emit('upload' , newList);
-  		//utils.loadingHide();
+  		utils.loadingHide();
   	}
   },
   mounted: function () {
@@ -84,7 +84,6 @@ export default {
       			ids:[that.name],
       			type:1,
       			start:function(){
-      				alert(1)
       				utils.loadingShow('上传中');
       			},
       			process:function(p){
