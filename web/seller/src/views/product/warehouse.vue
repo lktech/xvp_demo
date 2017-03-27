@@ -64,7 +64,7 @@
                                 minPrice:min,
                                 price:min,
                                 stock:_stock,
-                                pics:o.pics
+                                pics:o.pics+'?imageMogr2/thumbnail/60x'
                               })
                           }else if(res.code=='auth_seller_error'){
                               utils.wang(that,utils,res.message);

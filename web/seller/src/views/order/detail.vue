@@ -21,7 +21,7 @@
                           :details='item.sku?"规格："+item.sku:"规格：无"'
                           :from='item.price | formatPrice'
                           type="org"
-                          :imglink="item.goodsUrl"
+                          :imglink="item.goodsUrl+'?imageMogr2/thumbnail/60x'"
                           :colororg='true'
                           :cheng="true">
             </c-panel-list>

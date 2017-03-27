@@ -20,14 +20,14 @@
       
     </div>
     <c-tabbar style='height:58px;'>
-        <c-tabbac-item selected>
+        <c-tabbar-item selected>
           <img slot="icon"  src="http://static.taggole.com/sithbrobot/poster/1490339048405.jpg">
           <span slot="label">首页</span>
-        </c-tabbac-item>
-        <c-tabbac-item link="/order/list">
+        </c-tabbar-item>
+        <c-tabbar-item link="/order/list">
           <img slot="icon" src="http://static.taggole.com/sithbrobot/poster/1490339019315.jpg">
           <span slot="label">我的</span>
-        </c-tabbac-item>
+        </c-tabbar-item>
       </c-tabbar>
   </div>
 </template>

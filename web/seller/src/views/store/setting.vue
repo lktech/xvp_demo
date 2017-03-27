@@ -31,7 +31,7 @@
             return {
                 res:{
                     formData:{               //填写的数据
-                        logo:'http://okxm1ge1z.bkt.clouddn.com/c64c93ad-01a6-440f-9acd-7dabc0408cdb.png',
+                        logo:'',
                         phone:'',             //手机号
                         name:'',              //姓名                           
                         QQ:'',             //邮编
@@ -119,7 +119,9 @@
                         if(data.code=="SUCESS"){
                             that.res.formData.name=data.result.store_name;
                             if(data.result.logo){
-                              that.res.formData.logo = data.result.logo; //店铺名称
+                                that.res.formData.logo = data.result.logo; //店铺名称
+                            }else{
+                                that.res.formData.logo = 'http://okxm1ge1z.bkt.clouddn.com/c64c93ad-01a6-440f-9acd-7dabc0408cdb.png';
                             }
                             that.res.formData.phone=data.result.customer_service_phone;
                             that.res.formData.QQ=data.result.qq;
