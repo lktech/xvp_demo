@@ -106,9 +106,10 @@
             }
             
         },
-        ready(){
-            utils.MenuShare();
-            utils.loadingHide();
+        mounted: function () {
+            this.$nextTick(function () {
+                utils.MenuShare();
+            })
         },
         components:{
             "cGroup":require('../../components/group/group.vue'),

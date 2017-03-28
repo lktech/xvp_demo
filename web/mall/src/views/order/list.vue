@@ -43,6 +43,7 @@
             this.$nextTick(function () {
             //所有订单列表
                 this.orderList();
+                utils.MenuShare();
            })
         },
         methods: {
@@ -97,7 +98,7 @@
                     dataType: 'json',
                     type: 'POST',
                     data: {
-                        order_id: order_id,
+                        order_id: that.order_id,
                     },
                     success: function (data) {
                         if (data.code=="SUCESS") {

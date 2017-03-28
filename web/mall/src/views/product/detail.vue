@@ -168,74 +168,76 @@
                             that.dataReady = true;
                         }else if(data.code=='xvp_error_001'){
                             that.product_no=true;
-                        }else if(data.code=='user_seller_error'){
-                            utils.ajax({
-                              url: basepath + "/user/user/getIsvInfo",
-                              success: function(data) {
-                                if(data.code=="SUCESS") {  
-
-                                  $xvp.login({
-                                      app_key : data.result.appId,
-                                      isv_url: data.result.isvUrl,
-                                      success : function(xvp_uid){
-                                        utils.ajax({
-                                          url: basepath + "/user/user/login",
-                                          data:{'xvp_uid':xvp_uid},
-                                          success: function(res) {
-                                            if(res.code=="SUCESS") { 
-                                              that.init();
-
-                                            } else {
-                                              that.$vux.alert.show(res.message);
-                                            }
-                                          },
-                                        });
-                                      }
-                                  });
-
-                                  } else {
-                                    that.$vux.alert.show(data.message);
-                                  }
-                                },
-                              });
                         }else{
                             that.$vux.alert.show(data.message);
                         }
+                        // else if(data.code=='user_seller_error'){
+                        //     utils.ajax({
+                        //       url: basepath + "/user/user/getIsvInfo",
+                        //       success: function(data) {
+                        //         if(data.code=="SUCESS") {  
+
+                        //           $xvp.login({
+                        //               app_key : data.result.appId,
+                        //               isv_url: data.result.isvUrl,
+                        //               success : function(xvp_uid){
+                        //                 utils.ajax({
+                        //                   url: basepath + "/user/user/login",
+                        //                   data:{'xvp_uid':xvp_uid},
+                        //                   success: function(res) {
+                        //                     if(res.code=="SUCESS") { 
+                        //                       that.init();
+
+                        //                     } else {
+                        //                       that.$vux.alert.show(res.message);
+                        //                     }
+                        //                   },
+                        //                 });
+                        //               }
+                        //           });
+
+                        //           } else {
+                        //             that.$vux.alert.show(data.message);
+                        //           }
+                        //         },
+                        //       });
+                        // }
+
                     } 
                 });
+                utils.MenuShare();
+                // utils.ajax({
+                //   url:basepath+ "/common/wxconfig/get",
+                //   data:{'base_url':window.location.href.split('#')[0]},
+                //   success: function(data) {
+                //     if(data.code=='SUCESS') {
+                //       wx.config({
+                //           debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                //           appId: data.result.appId, // 必填，公众号的唯一标识
+                //           timestamp: data.result.timestamp, // 必填，生成签名的时间戳
+                //           nonceStr: data.result.nonceStr, // 必填，生成签名的随机串
+                //           signature: data.result.signature,// 必填，签名，见附录1
+                //           jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                //       });
+                //       wx.ready(function(){
+                //         wx.onMenuShareAppMessage({
+                //             title: that.goods.title, // 分享标题
+                //             desc: '【'+that.storeInfo.name+'】发现好商品，立即分享给你，进店有惊喜呦。', // 分享描述
+                //             link: window.location.href, // 分享链接
+                //             imgUrl: that.goods.pics // 分享图标
+                //         });
 
-                utils.ajax({
-                  url:basepath+ "/common/wxconfig/get",
-                  data:{'base_url':window.location.href.split('#')[0]},
-                  success: function(data) {
-                    if(data.code=='SUCESS') {
-                      wx.config({
-                          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                          appId: data.result.appId, // 必填，公众号的唯一标识
-                          timestamp: data.result.timestamp, // 必填，生成签名的时间戳
-                          nonceStr: data.result.nonceStr, // 必填，生成签名的随机串
-                          signature: data.result.signature,// 必填，签名，见附录1
-                          jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-                      });
-                      wx.ready(function(){
-                        wx.onMenuShareAppMessage({
-                            title: that.goods.title, // 分享标题
-                            desc: '【'+that.storeInfo.name+'】发现好商品，立即分享给你，进店有惊喜呦。', // 分享描述
-                            link: window.location.href, // 分享链接
-                            imgUrl: that.goods.pics // 分享图标
-                        });
-
-                        wx.onMenuShareTimeline({
-                            title: that.goods.title, // 分享标题
-                            link: window.location.href, // 分享链接
-                            imgUrl: that.goods.pics // 分享图标
-                        });
-                      })
-                    } else {
-                      that.$vux.alert.show(data.message);
-                    }
-                  },
-                });
+                //         wx.onMenuShareTimeline({
+                //             title: that.goods.title, // 分享标题
+                //             link: window.location.href, // 分享链接
+                //             imgUrl: that.goods.pics // 分享图标
+                //         });
+                //       })
+                //     } else {
+                //       that.$vux.alert.show(data.message);
+                //     }
+                //   },
+                // });
             }
             
         },

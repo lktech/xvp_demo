@@ -92,6 +92,7 @@
         mounted: function () {
             this.$nextTick(function () {
                 this.into();
+                utils.MenuShare();
             })
         },
         methods: {

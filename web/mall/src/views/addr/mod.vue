@@ -129,6 +129,7 @@
         mounted: function () {
             this.$nextTick(function () {
                 this.init(this.$route.query.id);
+                utils.MenuShare();
             })
         },
         components:{
