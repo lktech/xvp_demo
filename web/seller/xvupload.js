@@ -12,7 +12,8 @@
 		error:function(){},//上传失败
 		type:1,//上传类型  1普通上传  2 私密上传
 		uploadUrl:"http://101.201.76.184:8999",
-		blockSize:10*1024
+		blockSize:10*1024,
+		base64:''
 	},
 	interfaces = {
 		vldUrl:"/authUploadFile",
@@ -50,7 +51,10 @@
 		ele.onchange = function(){
 			if(ele.files){
 				var file = ele.files[0];
-				if(file){
+				if(file.type.indexOf('image/')>-1){
+					wang(file);
+					validate(id,file);
+				}else if(file && file.type.indexOf('image/')==-1){
 					if(ele.getAttribute("upld")){
 						errorFunc[id]({"status":false,"id":id,"message":"正在上传中，客官莫急！"});
 					}else{
@@ -64,6 +68,24 @@
 		}
 	}
 	
+	var wang = function(file){
+		var reader = new FileReader();  
+	      reader.readAsDataURL(file);  
+	      reader.onload = function (e) {  
+	        var img = new Image,  
+	        width = 95,    //图片resize宽度  
+	        quality = 1.0,  //图像质量  
+	        canvas = document.createElement("canvas"),  
+	        drawer = canvas.getContext("2d");  
+	        img.src = this.result;  
+	        canvas.width = width;  
+	        canvas.height = width * (img.height / img.width);  
+	        drawer.drawImage(img, 0, 0, canvas.width, canvas.height);  
+	        img.src = canvas.toDataURL();  
+	        var image_base64 = img.src.replace('data:image/png;base64,',''); 
+	        options.base64 = image_base64 
+	      }  
+	}
 	//验证 上传
 	var validate = function(id,file){
 		var total = 1;
@@ -77,14 +99,19 @@
 				dataType: 'json',
 				type: 'POST',
 				data: {
-					"total":total,
+					"total":1,
 					"name":file.name,
 					"size":file.size,
 					"type":file.type
 				},
 				success: function (data) {
 					if (data.success) {
-						upload(id,file,data.uid,total);
+						if(options.base64){
+							upload1(id,options.base64,data.uid,total);
+						}else{
+							upload(id,file,data.uid,total);
+						}
+						
 					}else{
 						errorFunc[id]({"status":false,"id":id,"message":"验证失败"});
 						clearInput(id);
@@ -115,10 +142,10 @@
 				perFile = file.slice(i*per,file.size);
 			}
 			var fmData = new FormData();
-			fmData.append("type", options.type);
+			fmData.append("type", 1);
 			fmData.append("uid", uid);
-			fmData.append("num", i+1);
-			fmData.append("file", perFile);
+			fmData.append("num", 1);
+			fmData.append("imgStr", file);
 			ajax({
 				url: options.uploadUrl + interfaces.url,
 				dataType: 'json',
@@ -126,6 +153,59 @@
 				type: 'POST',
 				async:false,
 				data:fmData,
+				success: function (data) {
+					if (data.success){
+						processFunc[id]({"id":id,"percent":(i+1)/total});
+						if(i+1 == total){
+							var result = {"id":id,"url":data.idata};
+							successFunc[id](result);
+							clearInput(id);
+						}
+						
+					}else{
+						breakFlag = true;
+						errorFunc[id]({"status":false,"id":id,"message":"上传失败"});
+						clearInput(id);
+					}
+					
+				},
+				error: function (o, xhr, property) {
+					breakFlag = true;
+					errorFunc[id]({"status":false,"id":id,"message":"上传失败"});
+					clearInput(id);
+				}
+			});
+			if(breakFlag){
+				break;
+			}	
+			
+		}
+		
+	}
+
+	var upload1 = function(id,file,uid,total){
+		var ele = document.getElementById(id);
+		ele.setAttribute("upld","1");
+		var breakFlag = false;
+		var per = options.blockSize;
+		for(var i=0;i<total;i++){
+			var perFile;
+			if(i < total-1){
+				perFile = file.slice(i*per,(i+1)*per);
+			}else{
+				perFile = file.slice(i*per,file.size);
+			}
+			ajax({
+				url: options.uploadUrl + '/upload',
+				dataType: 'json',
+				type: 'POST',
+				async:false,
+				data:{
+					'uid':uid,
+					'type':1,
+					'num':1,
+					'imgStr':encodeURIComponent(file)
+				},
 				success: function (data) {
 					if (data.success){
 						processFunc[id]({"id":id,"percent":(i+1)/total});
