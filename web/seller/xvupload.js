@@ -73,7 +73,7 @@
 	      reader.readAsDataURL(file);  
 	      reader.onload = function (e) {  
 	        var img = new Image,  
-	        width = 700,    //图片resize宽度  
+	        width = 500,    //图片resize宽度  
 	        quality = 1.0,  //图像质量  
 	        canvas = document.createElement("canvas"),  
 	        drawer = canvas.getContext("2d");  
