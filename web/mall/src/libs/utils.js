@@ -206,7 +206,7 @@ exports.ajax = function (obj) {
         data: params,
         success: function (data) {
             exports.loadingHide();
-            if (data.code="SUCESS") {
+            if (data.code) {
                 if (obj.success) {
                     obj.success(data);
                 }

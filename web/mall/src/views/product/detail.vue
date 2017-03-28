@@ -39,9 +39,7 @@
         data (){
             return {
                 dataReady:false,
-                goods:{
-                    logistics_fee:0
-                },//商品信息
+                goods:{},//商品信息
                 skuList:[],//商品sku列表
                 skuList1:[],
                 storeInfo:{name:'测试'},//店铺信息
@@ -122,6 +120,7 @@
                     data:{"id":that.$route.query.product_id},
                     success: function(data){
                         if(data.code=='SUCESS'){
+                            alert(2)
                             that.goods=data.result;
                             that.goods.logistics_fee=that.goods.logistics_fee;
                             that.goods.product_desc=JSON.parse(that.goods.product_desc);
