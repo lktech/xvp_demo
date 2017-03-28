@@ -33,6 +33,7 @@
 </template>
 <script>
   import utils from '../../libs/utils.js';
+  import Vue from 'vue';
   export default {
     data() {
         return {
@@ -126,7 +127,9 @@
                             }
                           }
                           that.component1[i].price = min;
+                          alert(1)
                           Vue.set(that.component, i, that.component1[i]);
+                          console.log(that.component);
                           //that.component = that.component1;
                         } else {
                           that.$vux.alert.show(res.message);
