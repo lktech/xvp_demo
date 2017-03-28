@@ -62,6 +62,57 @@
         },
         mounted: function () {
             this.$nextTick(function () {  
+                this.init();
+            })
+        },
+        methods:{
+            submit(submitData){
+                if(this.submitType == "buy"){
+                    var buy_info_price = null;
+                    $.each(this.skuList1,function(i,v){
+                        if(v.id==submitData.sku.id){
+                            buy_info_price = v.price;
+                        }
+                    })
+                    
+                    var buy_info = {
+                        "products":[
+                            {
+                                "id":submitData.sku.id,
+                                "name": this.goods.name,//商品名称
+                                "pic": this.goods.pics,//商品图片
+                                "properties": submitData.sku.name,//规格信息
+                                "price": buy_info_price,//货架商品价格
+                                "num": submitData.num,//购买商品的数量
+                            }
+                        ],
+                        'logistics_fee':this.goods.logistics_fee,
+                        'discount':0,
+                        'logistic_flg':1
+                    };
+                    utils.setSession("buy_info",buy_info);
+                    utils.go({path:"/order/add"},this.$router);
+                }else{
+                    this.sku.status = false;
+                    this.$vux.toast.show({
+                        text:"操作成功",
+                        type:"success"
+                    });
+                }
+
+
+            },
+            barClick(type){
+                this.sku.status = true;
+                this.submitType = "buy";
+            },
+            link_home(){
+                utils.go({path:'/home/home',query:{id:this.$route.query.store_id}},this.$router,true);
+            },
+            btnClick(){
+                utils.go({path:'/home/home',query:{id:this.$route.query.store_id}},this.$router,true);
+            },
+            init(){
                 let that = this;
                 utils.ajax({
                     url: basepath + "/user/product/get",
@@ -117,12 +168,41 @@
                             that.dataReady = true;
                         }else if(data.code=='xvp_product1002'){
                             that.product_no=true;
+                        }else if(){
+
+                            utils.ajax({
+                              url: basepath + "/user/user/getIsvInfo",
+                              success: function(data) {
+                                if(data.code=="SUCESS") {  
+
+                                  $xvp.login({
+                                      app_key : data.result.appId,
+                                      isv_url: data.result.isvUrl,
+                                      success : function(xvp_uid){
+                                        utils.ajax({
+                                          url: basepath + "/user/user/login",
+                                          data:{'xvp_uid':xvp_uid},
+                                          success: function(res) {
+                                            if(res.code=="SUCESS") { 
+                                              that.init();
+
+                                            } else {
+                                              that.$vux.alert.show(res.message);
+                                            }
+                                          },
+                                        });
+                                      }
+                                  });
+
+                                  } else {
+                                    that.$vux.alert.show(data.message);
+                                  }
+                                },
+                              });
                         }else{
                             that.$vux.alert.show(data.message);
                         }
-                    }
-                    
-                    
+                    } 
                 });
 
                 utils.ajax({
@@ -157,54 +237,6 @@
                     }
                   },
                 });
-            })
-        },
-        methods:{
-            submit(submitData){
-                if(this.submitType == "buy"){
-                    var buy_info_price = null;
-                    $.each(this.skuList1,function(i,v){
-                        if(v.id==submitData.sku.id){
-                            buy_info_price = v.price;
-                        }
-                    })
-                    
-                    var buy_info = {
-                        "products":[
-                            {
-                                "id":submitData.sku.id,
-                                "name": this.goods.name,//商品名称
-                                "pic": this.goods.pics,//商品图片
-                                "properties": submitData.sku.name,//规格信息
-                                "price": buy_info_price,//货架商品价格
-                                "num": submitData.num,//购买商品的数量
-                            }
-                        ],
-                        'logistics_fee':this.goods.logistics_fee,
-                        'discount':0,
-                        'logistic_flg':1
-                    };
-                    utils.setSession("buy_info",buy_info);
-                    utils.go({path:"/order/add"},this.$router);
-                }else{
-                    this.sku.status = false;
-                    this.$vux.toast.show({
-                        text:"操作成功",
-                        type:"success"
-                    });
-                }
-
-
-            },
-            barClick(type){
-                this.sku.status = true;
-                this.submitType = "buy";
-            },
-            link_home(){
-                utils.go({path:'/home/home',query:{id:this.$route.query.store_id}},this.$router,true);
-            },
-            btnClick(){
-                utils.go({path:'/home/home',query:{id:this.$route.query.store_id}},this.$router,true);
             }
             
         },
