@@ -115,7 +115,7 @@
                             });
 
                             that.dataReady = true;
-                        }else if(data.code=='1111'){
+                        }else if(data.code=='xvp_product1002'){
                             that.product_no=true;
                         }else{
                             that.$vux.alert.show(data.message);

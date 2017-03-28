@@ -71,30 +71,33 @@
 			total = Math.ceil(file.size/options.blockSize);
 		}catch(e){}
 		startFunc[id]();
-		ajax({
-			url: options.uploadUrl + interfaces.vldUrl,
-			dataType: 'json',
-			type: 'POST',
-			data: {
-				"total":total,
-				"name":file.name,
-				"size":file.size,
-				"type":file.type
-			},
-			success: function (data) {
-				if (data.success) {
-					upload(id,file,data.uid,total);
-				}else{
+		setTimeout(function(){
+			ajax({
+				url: options.uploadUrl + interfaces.vldUrl,
+				dataType: 'json',
+				type: 'POST',
+				data: {
+					"total":total,
+					"name":file.name,
+					"size":file.size,
+					"type":file.type
+				},
+				success: function (data) {
+					if (data.success) {
+						upload(id,file,data.uid,total);
+					}else{
+						errorFunc[id]({"status":false,"id":id,"message":"验证失败"});
+						clearInput(id);
+					}
+					
+				},
+				error: function (data) {
 					errorFunc[id]({"status":false,"id":id,"message":"验证失败"});
 					clearInput(id);
 				}
-				
-			},
-			error: function (data) {
-				errorFunc[id]({"status":false,"id":id,"message":"验证失败"});
-				clearInput(id);
-			}
-		});
+			});
+		},1000)
+		
 		
 	}
 	

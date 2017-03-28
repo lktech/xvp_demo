@@ -35,8 +35,8 @@
             订单编号：{{json.orderNum}}<br/>
             创建时间：{{json.create_time}}<br/>
             <div v-if="json.orderStatus==odr.close">订单超时：{{json.timeOut}}</div>
-            <div v-if="json.orderStatus==odr.dfh">付款时间：{{json.pay_time}}</div>
-            <div v-if="json.orderStatus==odr.dsh">发货时间：{{json.orderdeliverys[0].create_time}}</div>
+            <div v-if="json.orderStatus==odr.dfh || json.orderStatus==odr.dsh || json.orderStatus==odr.ok">付款时间：{{json.pay_time}}</div>
+            <div v-if="json.orderStatus==odr.dsh || json.orderStatus==odr.ok">发货时间：{{json.orderdeliverys[0].create_time}}</div>
             <div v-if="json.orderStatus==odr.ok">收货时间：{{json.confirm_receive_time}}</div>
         </c-cell-wrap>
         <div class="wrap-pd" style="margin-top:10px">

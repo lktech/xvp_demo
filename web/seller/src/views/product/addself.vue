@@ -14,17 +14,17 @@
           </c-cell-wrap>
           <c-cell-wrap>
               <c-cell title="付款方式" value='微信支付'></c-cell>
-              <c-input title="运费" @on-change="validate" placeholder="¥0.00" name="freight" v-model="formData.freight" :max="10" :is-type="money"></c-input>
+              <c-input title="运费" @on-change="validate" placeholder="¥0.00" name="freight" v-model="formData.freight" :max="13" :is-type="money"></c-input>
           </c-cell-wrap>
 
           <c-cell-wrap title="无规格" v-if="!status.specifications">
-                <c-input title="价格" @on-change="validate" placeholder="请输入价格" required name="price" v-model="formData.price" :max="10" :is-type="money"></c-input>
-                <c-input title="库存" @on-change="validate" placeholder="请输入库存" required name="stock" v-model="formData.stock" :max="10" :is-type="number"  ></c-input>
+                <c-input title="价格" @on-change="validate" placeholder="请输入价格" required name="price" v-model="formData.price" :max="13" :is-type="money"></c-input>
+                <c-input title="库存" @on-change="validate" placeholder="请输入库存" required name="stock" v-model="formData.stock" :max="13" :is-type="number"  ></c-input>
           </c-cell-wrap>
           <div v-else>
             <c-cell-wrap title="规格设置" desc="删除" desc-color='red' v-for="(item, index) in formData.specifica_list"  @desc="descClick(index)" >
-                  <c-input title="价格" @on-change="validate" placeholder="请输入价格" required :name="order('Yprice',index)" v-model="item.price" :max="10" :is-type="money"></c-input>
-                  <c-input title="库存" @on-change="validate" placeholder="请输入库存" required :name="order('Ystock',index)" v-model="item.stock" :max="10" :is-type="number"  ></c-input>
+                  <c-input title="价格" @on-change="validate" placeholder="请输入价格" required :name="order('Yprice',index)" v-model="item.price" :max="13" :is-type="money"></c-input>
+                  <c-input title="库存" @on-change="validate" placeholder="请输入库存" required :name="order('Ystock',index)" v-model="item.stock" :max="13" :is-type="number"  ></c-input>
                   <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" required :name="order('Yvalue',index)"  :max="50" v-model="item.sku_str" ></c-input>
             </c-cell-wrap>
           </div>
@@ -285,12 +285,6 @@
                 // this.show=false;
 
           }
-      },
-      mounted: function () {
-          this.$nextTick(function () {
-              utils.loadingShow();
-              utils.loadingHide();
-          })
       },
       components: {
         "cTopBack": require('../../components/x-top-back/x-top-back.vue'),

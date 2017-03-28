@@ -341,7 +341,10 @@ export default {
     return data
   },
   watch: {
-    valid () {
+    valid (newVal) {
+      if(!newVal){
+        this.errors.required = '必填哦'
+      }
       this.getError()
     },
     value (val) {

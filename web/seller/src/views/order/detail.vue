@@ -143,7 +143,7 @@
         methods: {
             //更新订单
             updateOrder(){
-                if(this.discount*100<this.discount1+this.json.pay){
+                if(this.discount*100<this.discount1+this.json.pay && this.discount*100>0){
                     let that = this;
                     utils.ajax({
                         url: basepath + "/seller/order/discount",

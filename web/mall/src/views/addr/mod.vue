@@ -8,7 +8,7 @@
         <c-input title="详细地址" @on-change="validate" placeholder="请输入详细地址" required name="address" v-model="formData.address" :min="5" :max="100"></c-input>
         <c-input title="邮编  " @on-change="validate" placeholder="请输入邮编" required name="post_code" v-model="formData.post_code" is-type="number" :min="6" :max="10"></c-input>
     </c-group>
-    <div class="wrap-pd">
+    <div class="wrap-pd" style="margin-top:10px">
         <c-button text="保存" :type="color" :disabled="disabled" @click.native="preserve" size="block"></c-button>
     </div>
     

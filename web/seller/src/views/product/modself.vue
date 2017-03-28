@@ -4,29 +4,27 @@
       <div>
           <c-cell-wrap>
               <c-input title="商品名称" @on-change="validate" placeholder="请输入商品名称" required name="name" :max="20" v-model="formData.name"></c-input>
-              <c-uploadmul title='添加图片' :list="img_list1" @upload="upload1" name="upload1"  :max="1">
-                <span slot="after-title" class="placeholder">请添加商品封面图</span> 
+              <c-uploadmul title='添加商品封面图' :list="img_list1" @upload="upload1" name="upload1" :max="1">
               </c-uploadmul>
           </c-cell-wrap>
           <c-cell-wrap>
               <c-input title="商品描述" @on-change="validate" placeholder="请输入商品描述" name="describe" :max="500" v-model="formData.describe" ></c-input>
-              <c-uploadmul title='添加图片' :list="img_list2" @upload="upload1" name="upload2"  :max="9">
-                <span slot="after-title" class="placeholder">请添加商品详情图</span> 
+              <c-uploadmul title='添加商品详情图' :list="img_list2" @upload="upload2" name="upload2" :max="9">
               </c-uploadmul>
           </c-cell-wrap>
           <c-cell-wrap>
               <c-cell title="付款方式" value='微信支付'></c-cell>
-              <c-input title="运费" @on-change="validate" placeholder="¥0.00" name="freight" v-model="formData.freight" :max="10" :is-type="money"></c-input>
+              <c-input title="运费" @on-change="validate" placeholder="¥0.00" name="freight" v-model="formData.freight" :max="13" :is-type="money"></c-input>
 
           </c-cell-wrap>
           <c-cell-wrap title="无规格" v-if="!status.specifications">
-                <c-input title="价格" @on-change="validate" placeholder="请输入价格" required name="price" v-model="formData.price" :max="10" :is-type="money"></c-input>
-                <c-input title="库存" @on-change="validate" placeholder="请输入库存" required name="stock" v-model="formData.stock" :max="10" :is-type="number"  ></c-input>
+                <c-input title="价格" @on-change="validate" placeholder="请输入价格" required name="price" v-model="formData.price" :max="13" :is-type="money"></c-input>
+                <c-input title="库存" @on-change="validate" placeholder="请输入库存" required name="stock" v-model="formData.stock" :max="13" :is-type="number"  ></c-input>
           </c-cell-wrap>
           <div v-else>
             <c-cell-wrap title="规格设置" v-for="(item, index) in formData.specifica_list" >
-                  <c-input title="价格" @on-change="validate" placeholder="请输入价格" required :name="order('Yprice',index)" v-model="item.price" :max="10" :is-type="money"></c-input>
-                  <c-input title="库存" @on-change="validate" placeholder="请输入库存" required :name="order('Ystock',index)" v-model="item.stock" :max="10" :is-type="number"  ></c-input>
+                  <c-input title="价格" @on-change="validate" placeholder="请输入价格" required :name="order('Yprice',index)" v-model="item.price" :max="13" :is-type="money"></c-input>
+                  <c-input title="库存" @on-change="validate" placeholder="请输入库存" required :name="order('Ystock',index)" v-model="item.stock" :max="13" :is-type="number"  ></c-input>
                   <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" required :name="order('Yvalue',index)"  :max="50" v-model="item.sku_str" ></c-input>
             </c-cell-wrap>
           </div>
@@ -253,7 +251,7 @@
         "cCellWrap": require('../../components/cell/cell-wrap.vue'),
         "cInput":require('../../components/input/input.vue'),
         "cSwitch": require('../../components/switch/switch.vue'),
-        "cUploadmul": require('../../components/x-upload-img/x-upload-img.vue'),
+        "cUploadmul": require('../../components/x-upload-img/x-upload-img-Slice.vue'),
         "cButton": require('../../components/button/button.vue'),
         "cNumber": require('../../components/number/number.vue')
       },
@@ -270,7 +268,7 @@
               success: function(data){
                   if(data.code=="SUCESS"){
                     that.formData.name=data.result.name;
-                    that.formData.freight=that.converter(data.result.logistics_fee/100+'');
+                    that.formData.freight=data.result.logistics_fee/100+'';
                     that.formData.describe=data.result.product_detail?data.result.product_detail:'';
 
 
@@ -293,11 +291,11 @@
                                 that.status.specifications=true;
                                 that.formData.specifica_list=res.result;
                                 for(var i=0;i<that.formData.specifica_list.length;i++){
-                                  that.formData.specifica_list[i].price=that.converter(that.formData.specifica_list[i].price/100+'');
+                                  that.formData.specifica_list[i].price=that.formData.specifica_list[i].price/100+'';
                                 }
                               }else{
                                 that.status.specifications=false;
-                                that.formData.price=that.converter(res.result[0].price/100+'');
+                                that.formData.price=res.result[0].price/100+'';
                                 that.formData.stock=res.result[0].stock+'';
                                 that.sku_id=res.result[0].id;
                               }

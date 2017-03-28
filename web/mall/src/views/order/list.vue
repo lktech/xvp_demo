@@ -97,7 +97,7 @@
                     dataType: 'json',
                     type: 'POST',
                     data: {
-                        order_id: id,
+                        order_id: order_id,
                     },
                     success: function (data) {
                         if (data.code=="SUCESS") {
