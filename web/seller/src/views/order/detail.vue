@@ -28,7 +28,7 @@
         </c-panel-img>
         <c-group>
             <c-cell v-if="json.orderStatus!='DFK'" title="优惠" :value="json.seller_discount_fee | formatPriceCNY"></c-cell>
-            <c-input title="优惠" v-else placeholder="可输入优惠金额" v-model="discount"></c-input>
+            <c-input title="优惠" name="discount" v-else @on-change="validate" placeholder="可输入优惠金额" required v-model="discount" :is-type="money"></c-input>
             <c-cell title="运费" :value="json.logistic_fee | formatPriceCNY"></c-cell>
             <c-cell title="实付金额" :value="json.pay | formatPriceCNY"></c-cell>
         </c-group>
@@ -81,7 +81,13 @@
                 step:0,
                 readonly:false,
                 discount1:'',
-                order_item_id_list:[]
+                order_item_id_list:[],
+                status:true,
+                money: function (value) {
+                  return {
+                    valid: value.search(/^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/) > -1
+                  }
+                },
             }
         },
         computed: {},
@@ -144,6 +150,10 @@
         methods: {
             //更新订单
             updateOrder(){
+                if(!this.status){
+                    this.$vux.alert.show('请输入正确优惠金额');
+                    return false
+                }
                 if(this.discount*100<this.discount1+this.json.pay && this.discount*100>0){
                     let that = this;
                     utils.ajax({
@@ -183,6 +193,9 @@
             updateOrder1(){
                 utils.go({path:'logistics',query:{'id':this.$route.query.id}},this.$router,true);
             },
+            validate(obj){
+                this.status=obj.valid;
+            }
         },
         components: {
             "cTopBack": require('../../components/x-top-back/x-top-back.vue'),
