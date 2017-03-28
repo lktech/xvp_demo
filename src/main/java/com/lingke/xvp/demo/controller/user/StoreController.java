@@ -1,7 +1,10 @@
 package com.lingke.xvp.demo.controller.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +18,7 @@ import com.Rop.api.request.XvpProductQueryRequest;
 import com.Rop.api.request.XvpStoreGetRequest;
 import com.Rop.api.response.XvpProductQueryResponse;
 import com.Rop.api.response.XvpStoreGetResponse;
+import com.lingke.xvp.demo.XvpAspect;
 import com.lingke.xvp.demo.XvpConstants;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.StoreMainRequest;
@@ -30,6 +34,7 @@ import com.lingke.xvp.demo.utils.SessionUtil;
 @RestController("user_store")
 @RequestMapping(value = "/user/store")
 public class StoreController {
+	private final Logger logger = LoggerFactory.getLogger(StoreController.class);
 	@Autowired
 	private XvpRopClient ropClientAdapter;
 	@RequestMapping(path="/main",method=RequestMethod.POST)
@@ -46,8 +51,13 @@ public class StoreController {
 		ropProductRequest.setStore_id(request.getStore_id());
 		ropProductRequest.setPage_no(XvpConstants.PAGE_NO);
 		ropProductRequest.setPage_size(XvpConstants.PAGE_SIZE);
-		XvpProductQueryResponse ropProductResponse = ropClientAdapter.ropInvoke(ropProductRequest);
-		List<ProductResponse> products = BeanCopyUtil.copyList(ropProductResponse.getProducts(), ProductResponse.class);
+		List<ProductResponse> products = new ArrayList<>();
+		try {
+			XvpProductQueryResponse ropProductResponse = ropClientAdapter.ropInvoke(ropProductRequest);
+			products = BeanCopyUtil.copyList(ropProductResponse.getProducts(), ProductResponse.class);
+		} catch (Exception e) {
+			logger.error("查询商品失败,失败消息：", e);
+		}
 		response.setProducts(products);
 		SessionUtil.userSetStoreId(String.valueOf(request.getStore_id()));
 		return response;
