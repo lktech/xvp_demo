@@ -125,13 +125,13 @@
                             }
                           }
                           that.component1[i].price = min;
+                          that.component = that.component1;
                         } else {
                           that.$vux.alert.show(res.message);
                         }
                       },
                     });
                 })
-                that.component = that.component1; // 组件
 
                 sessionStorage.setItem('title_',that.baseinfo.title);
                 sessionStorage.setItem('link_','http://demo.open.xiaovpu.com/mall/index.html#/home/home?id='+that.$route.query.id+'&xv=enter');
