@@ -110,6 +110,7 @@
                   that.baseinfo.logo = data.result.logo; //店铺名称
                 }
                 that.component1=data.result.products;
+                that.component=that.component1;
                 $.each(that.component1,function(i,v){
                     utils.ajax({
                       url: basepath + "/user/product/sku/get",
