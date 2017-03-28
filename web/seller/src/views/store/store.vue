@@ -61,6 +61,7 @@
       },
       methods: {
         init(){
+          let that = this;
           utils.MenuShare();
           utils.ajax({
               url: basepath + "/seller/store/get",
