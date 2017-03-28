@@ -126,7 +126,8 @@
                             }
                           }
                           that.component1[i].price = min;
-                          that.component = that.component1;
+                          Vue.set(that.component, i, that.component1[i]);
+                          //that.component = that.component1;
                         } else {
                           that.$vux.alert.show(res.message);
                         }
