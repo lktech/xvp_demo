@@ -120,7 +120,6 @@
                     data:{"id":that.$route.query.product_id},
                     success: function(data){
                         if(data.code=='SUCESS'){
-                            alert(2)
                             that.goods=data.result;
                             that.goods.logistics_fee=that.goods.logistics_fee;
                             that.goods.product_desc=JSON.parse(that.goods.product_desc);
@@ -167,10 +166,9 @@
                             });
 
                             that.dataReady = true;
-                        }else if(data.code=='xvp_product1002'){
+                        }else if(data.code=='xvp_error_001'){
                             that.product_no=true;
                         }else if(data.code=='user_seller_error'){
-                            alert(1)
                             utils.ajax({
                               url: basepath + "/user/user/getIsvInfo",
                               success: function(data) {
