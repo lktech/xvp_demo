@@ -10,7 +10,7 @@
     <div v-else>
         <div v-if="dataReady">
             <c-product-wrap type="normal">
-              <c-product :title="goods.name" :des="goods.logistics_fee | formatPriceCNY" :price="goods.price" :pic="goods.pics"></c-product>
+              <c-product :title="goods.name" :des="goods.logistics_fee | formatPriceCNY" :price="goods.price" :pic="goods.pics+'?imageMogr2/thumbnail/1500x'"></c-product>
             </c-product-wrap>
             <c-cell-wrap>
                 <c-cell :title="storeInfo.name" value="进入店铺" is-link @click.native="link_home">
@@ -21,7 +21,7 @@
             <c-title title="商品详情"></c-title>
             <div class="wrap-detail">
                 <p>{{goods.product_detail}}</p>
-                <p v-for='i in goods.product_desc'><img v-bind:src="i" alt="" style="width:100%; height:auto;"></p>
+                <p v-for='i in goods.product_desc'><img v-bind:src="i+'?imageMogr2/thumbnail/1500x'" alt="" style="width:100%; height:auto;"></p>
             </div>
 
             <c-sku v-model="sku.status" :title="goods.name" :img="goods.pics" :price="goods.price" :text="sku.buttonTxt" :sku='skuList' @submit="submit"></c-sku>

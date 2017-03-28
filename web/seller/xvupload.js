@@ -90,7 +90,7 @@
 	var validate = function(id,file){
 		var total = 1;
 		try{
-			total = Math.ceil(file.size/options.blockSize);
+			total =  1;//Math.ceil(file.size/options.blockSize);
 		}catch(e){}
 		startFunc[id]();
 		setTimeout(function(){
@@ -99,7 +99,7 @@
 				dataType: 'json',
 				type: 'POST',
 				data: {
-					"total":1,
+					"total":total,
 					"name":file.name,
 					"size":file.size,
 					"type":file.type

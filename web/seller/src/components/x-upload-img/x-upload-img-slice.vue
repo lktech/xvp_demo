@@ -73,7 +73,7 @@ export default {
   watch: {
   	newList(newList){
   		this.$emit('upload' , newList);
-  		utils.loadingHide();
+  		
   	}
   },
   mounted: function () {
@@ -90,9 +90,11 @@ export default {
       				that.show();
       			},
       			success:function(data){
-      				that.newList.push(data.url);
+      				that.newList.push(data.url+'?imageMogr2/thumbnail/173x');
+      				utils.loadingHide();
       			},
       			error:function(data){
+      				utils.loadingHide();
       				that.$vux.alert.show('上传失败');
       			}
       		});
