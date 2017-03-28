@@ -40,8 +40,12 @@ export default {
 			xvUpload.init({
 				ids:['banner_info_slice'],
 				type:1,
+				start:function(){
+					utils.loadingShow('上传中');
+				},
 				success:function(data){
 					that.imgurl=data.url;
+					utils.loadingHide();
 				},
 				error:function(data){
 					that.$vux.alert.show('上传失败');
