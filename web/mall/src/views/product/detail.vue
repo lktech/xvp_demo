@@ -10,7 +10,7 @@
     <div v-else>
         <div v-if="dataReady">
             <c-product-wrap type="normal">
-              <c-product :title="goods.name" :des="goods.logistics_fee | formatPriceCNY" :price="goods.price" :pic="goods.pics"></c-product>
+              <c-product :title="goods.name" :des="goods.logistics_fee 0formatPriceCNY" :price="goods.price" :pic="goods.pics"></c-product>
             </c-product-wrap>
             <c-cell-wrap>
                 <c-cell :title="storeInfo.name" value="进入店铺" is-link @click.native="link_home">
@@ -39,7 +39,9 @@
         data (){
             return {
                 dataReady:false,
-                goods:{},//商品信息
+                goods:{
+                    logistics_fee:0
+                },//商品信息
                 skuList:[],//商品sku列表
                 skuList1:[],
                 storeInfo:{name:'测试'},//店铺信息
@@ -86,8 +88,7 @@
                                 "num": submitData.num,//购买商品的数量
                             }
                         ],
-                        'logistics_fee':this.goods.logistics_fee,
-                        'discount':0,
+                        'logistics_fee'0his.goods.logistics_fee,0                       'discount':0,
                         'logistic_flg':1
                     };
                     utils.setSession("buy_info",buy_info);
@@ -121,8 +122,7 @@
                     success: function(data){
                         if(data.code=='SUCESS'){
                             that.goods=data.result;
-                            that.goods.logistics_fee=that.goods.logistics_fee;
-                            that.goods.product_desc=JSON.parse(that.goods.product_desc);
+                            that.goods.logistics_fee=0at.goods.logistics_fee;0                           that.goods.product_desc=JSON.parse(that.goods.product_desc);
                             utils.ajax({
                                 url: basepath + "/user/product/sku/get",
                                 async:false,
@@ -169,7 +169,7 @@
                         }else if(data.code=='xvp_product1002'){
                             that.product_no=true;
                         }else if(data.code=='user_seller_error'){
-
+                            alert(1)
                             utils.ajax({
                               url: basepath + "/user/user/getIsvInfo",
                               success: function(data) {
