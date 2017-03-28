@@ -168,7 +168,7 @@
                             that.dataReady = true;
                         }else if(data.code=='xvp_product1002'){
                             that.product_no=true;
-                        }else if(){
+                        }else if(data.code=='user_seller_error'){
 
                             utils.ajax({
                               url: basepath + "/user/user/getIsvInfo",
