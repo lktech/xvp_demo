@@ -50,11 +50,17 @@
                     if(data.result.flag=='no'){
                       utils.go({path:'/login/login'},that.$router,true);
                       return false;
+                    }else{
+                      that.init();
                     }
                   }
               }
           });
 
+         })
+      },
+      methods: {
+        init(){
           utils.MenuShare();
           utils.ajax({
               url: basepath + "/seller/store/get",
@@ -70,10 +76,8 @@
                   }
               }
           });
-
-         })
-        },
-      methods: {},
+        }
+      },
       components: {
         "cEntrance": require('../../components/x-entrance/x-entrance.vue'),
       },

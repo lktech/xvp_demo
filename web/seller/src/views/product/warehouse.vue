@@ -14,6 +14,7 @@
 </template>
 <script>
   import utils from '../../libs/utils.js';
+  import Vue from 'vue';
   export default {
     data() {
         return {
@@ -38,6 +39,7 @@
             datatype:'json',
             success: function(data) {
               if(data.code=="SUCESS") {
+                that.goods=data.result;
                 $.each(data.result,function(k,o){
                   utils.ajax({
                       url:"/seller/product/sku/get", type:'post', data: {product_id:o.id}, success: function (res) {
@@ -57,8 +59,7 @@
                                   min = v.price;
                                 }
                               })
-
-                              that.goods.push({
+                              Vue.set(that.goods, k, {
                                 id:o.id,
                                 name:o.name,
                                 maxPrice:max,
@@ -66,7 +67,7 @@
                                 price:min,
                                 stock:_stock,
                                 pics:o.pics+'?imageMogr2/thumbnail/60x'
-                              })
+                              });
                           }else if(res.code=='auth_seller_error'){
                               utils.wang(that,utils,res.message);
 
