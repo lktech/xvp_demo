@@ -302,7 +302,12 @@
         img_list(){
           this.judge();
         }
-      }
+      },
+      mounted: function () {
+          this.$nextTick(function () {
+              utils.MenuShare();
+         })
+      },
   }
 </script>
 <style>

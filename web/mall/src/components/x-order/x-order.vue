@@ -9,7 +9,7 @@
         <ul class="goodsOrder">
             <li v-for="goods in item.goods" @click="goodsclick(item.orderNum)">
                 <div class="goodsImg">
-                    <img :src="goods.goodsUrl"/>
+                    <img :src="goods.goodsUrl+'?imageMogr2/thumbnail/60x'"/>
                 </div>
                 <div class="goodsDesc">
                     <div class="goodsName">{{goods.goodsName}}</div>

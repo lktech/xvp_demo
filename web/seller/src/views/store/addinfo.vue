@@ -117,7 +117,7 @@
         },
         mounted: function () {
             this.$nextTick(function () {
-
+                utils.MenuShare();
            })
         },
         components:{

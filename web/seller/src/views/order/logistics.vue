@@ -43,6 +43,7 @@
         computed: {},
         mounted: function () {
             this.$nextTick(function () {
+                utils.MenuShare();
                 this.logisticsData=[{'id':'1','trueName':'有物流'},{'id':'0','trueName':'无物流'}];
                 this.companyData=[{'id':'0','trueName':'申通快递'},{'id':'1','trueName':'圆通快递'},{'id':'2','trueName':'顺丰快递'},{'id':'3','trueName':'飞鸟快递'},{'id':'4','trueName':'EMC'},{'id':'5','trueName':'中通快递'},{'id':'6','trueName':'其他'}];
             })

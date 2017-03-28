@@ -90,7 +90,7 @@ export default {
       				that.show();
       			},
       			success:function(data){
-      				that.newList.push(data.url+'?imageMogr2/thumbnail/173x');
+      				that.newList.push(data.url);
       				utils.loadingHide();
       			},
       			error:function(data){

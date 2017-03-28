@@ -49,12 +49,13 @@
                   if(data.code=="SUCESS"){
                     if(data.result.flag=='no'){
                       utils.go({path:'/login/login'},that.$router,true);
+                      return false;
                     }
                   }
               }
           });
 
-
+          utils.MenuShare();
           utils.ajax({
               url: basepath + "/seller/store/get",
               dataType: 'json',

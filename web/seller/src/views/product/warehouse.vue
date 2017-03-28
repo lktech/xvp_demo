@@ -30,6 +30,7 @@
       },
       mounted: function () {
         this.$nextTick(function () {
+          utils.MenuShare();
           let that = this;
           utils.ajax({
             url: that.url,
