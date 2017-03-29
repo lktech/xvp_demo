@@ -79,7 +79,7 @@
                                 that.color='primary';
                                 that.addr_id=data.result.id;
                             }
-                        }else{
+                        }else if(data.code!="SUCESS" && data.code!="xvp_user1006"){
                             that.$vux.alert.show(data.message);
                         }
                     }

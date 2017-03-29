@@ -77,7 +77,7 @@
                             'province':that.formData.addr_code[0],
                             'city':that.formData.addr_code[1],
                             'county':that.formData.addr_code[2],
-                            'str':that.formData.addr_text[0]+that.formData.addr_text[1]+that.formData.addr_text[2]+that.formData.address
+                            'str':that.formData.addr_text[0]+' '+that.formData.addr_text[1]+' '+that.formData.addr_text[2]+' '+that.formData.address
                         },
                         success: function(data){
                             if(data.code=="SUCESS"){

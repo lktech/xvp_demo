@@ -74,18 +74,65 @@
 	      reader.onload = function (e) {  
 	        var img = new Image,  
 	        width = 500,    //图片resize宽度  
-	        quality = 1.0,  //图像质量  
+	        quality = 0.1,  //图像质量  
 	        canvas = document.createElement("canvas"),  
 	        drawer = canvas.getContext("2d");  
-	        img.src = this.result;  
+	        img.src = this.result,
+	        width1 = img.width,
+	        height1 = img.height;
+
 	        canvas.width = width;  
 	        canvas.height = width * (img.height / img.width);  
-	        drawer.drawImage(img, 0, 0, canvas.width, canvas.height);  
-	        img.src = canvas.toDataURL();  
+	        drawImageIOSFix(drawer,img, 0, 0,  width1, height1, 0 , 0, canvas.width, canvas.height);  
+	        img.src = canvas.toDataURL('image/png',quality);  
 	        var image_base64 = img.src.replace('data:image/png;base64,',''); 
 	        options.base64 = image_base64 
 	      }  
 	}
+
+
+
+
+
+	function detectVerticalSquash(img) {
+		var iw = img.naturalWidth, ih = img.naturalHeight;
+		var canvas = document.createElement('canvas');
+		canvas.width = 1;
+		canvas.height = ih;
+		var ctx = canvas.getContext('2d');
+		ctx.drawImage(img, 0, 0);
+		var data = ctx.getImageData(0, 0, 1, ih).data;
+		// search image edge pixel position in case it is squashed vertically.
+		var sy = 0;
+		var ey = ih;
+		var py = ih;
+		while (py > sy) {
+			var alpha = data[(py - 1) * 4 + 3];
+			if (alpha === 0) {
+				ey = py;
+			} else {
+				sy = py;
+			}
+			py = (ey + sy) >> 1;
+		}
+		var ratio = (py / ih);
+		return (ratio===0)?1:ratio;
+	}
+	function drawImageIOSFix(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
+		var vertSquashRatio = detectVerticalSquash(img);
+		ctx.drawImage(img, sx * vertSquashRatio, sy * vertSquashRatio,
+				sw * vertSquashRatio, sh * vertSquashRatio,
+				dx, dy, dw, dh);
+	}
+
+
+
+
+
+
+
+
+
 	//验证 上传
 	var validate = function(id,file){
 		var total = 1;
