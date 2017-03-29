@@ -53,7 +53,7 @@
                               $.each(res.result,function(i,v){
                                 _stock+=v.stock*1;
                                 if(v.price > max){
-                                  max = v.price*1;
+                                  max = v.price;
                                 }
                                 if(v.price < min){
                                   min = v.price;
@@ -62,9 +62,9 @@
                               Vue.set(that.goods, k, {
                                 id:o.id,
                                 name:o.name,
-                                maxPrice:max,
-                                minPrice:min,
-                                price:min,
+                                maxPrice:max*1,
+                                minPrice:min*1,
+                                price:min*1,
                                 stock:_stock,
                                 pics:o.pics+'?imageMogr2/thumbnail/60x'
                               });
