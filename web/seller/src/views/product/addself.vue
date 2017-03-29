@@ -3,7 +3,7 @@
       <c-top-back></c-top-back>
       <div>
           <c-cell-wrap>
-              <c-input title="商品名称" @on-change="validate" placeholder="请输入商品名称" required name="name" :max="20" v-model="formData.name"></c-input>
+              <c-input title="商品名称" @on-change="validate" placeholder="请输入商品名称" required name="name" :max="30" v-model="formData.name"></c-input>
               <c-uploadmul title='添加商品封面图' :list="img_list1" @upload="upload1" name="upload1" :max="1">
               </c-uploadmul>
           </c-cell-wrap>
@@ -25,7 +25,7 @@
             <c-cell-wrap title="规格设置" desc="删除" desc-color='red' v-for="(item, index) in formData.specifica_list"  @desc="descClick(index)" >
                   <c-input title="价格" @on-change="validate" placeholder="请输入价格" required :name="order('Yprice',index)" v-model="item.price" :max="13" :is-type="money"></c-input>
                   <c-input title="库存" @on-change="validate" placeholder="请输入库存" required :name="order('Ystock',index)" v-model="item.stock" :max="13" :is-type="number"  ></c-input>
-                  <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" required :name="order('Yvalue',index)"  :max="50" v-model="item.sku_str" ></c-input>
+                  <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" required :name="order('Yvalue',index)"  :max="20" v-model="item.sku_str" ></c-input>
             </c-cell-wrap>
           </div>
           <div class="wrap-pd" style='margin-top:10px;'>
@@ -91,10 +91,12 @@
           upload1(src){
             $('input').blur();
             this.img_list1=src;
+            this.judge();
           },
           upload2(src){
             $('input').blur();
             this.img_list2=src;
+            this.judge();
           },
           validate(obj){
             if(obj.name=='name'){
@@ -141,7 +143,7 @@
                 num++;
               }
             }
-            if(this.status.name_status  && this.status.specifica_list_status.length==num){
+            if(this.status.name_status  && this.status.specifica_list_status.length==num && this.img_list1.length){
               this.disabled=false;
               this.color='primary';
             }else{
@@ -163,19 +165,20 @@
           },
           hold(){
             if(!this.disabled){
-              let hold_sku_obj=this.formData.specifica_list;
+              let hold_sku_obj=[];
               let stock=0;
               if(this.status.specifications){
-                for(var i=0;i<hold_sku_obj.length;i++){
-                  hold_sku_obj[i].price=hold_sku_obj[i].price*100;
-                  stock+=hold_sku_obj[i].stock*1;
+                hold_sku_obj=JSON.stringify(this.formData.specifica_list);
+                for(var i=0;i<JSON.parse(hold_sku_obj).length;i++){
+                  JSON.parse(hold_sku_obj)[i].price=JSON.parse(hold_sku_obj)[i].price*100;
+                  stock+=JSON.parse(hold_sku_obj)[i].stock*1;
                 }
               }else{
                 hold_sku_obj=[{
                   price:this.formData.price?this.formData.price*100:0,
                   stock:this.formData.stock?this.formData.stock*1:stock*1,
                   sku_str:this.formData.name
-                }]
+                }];
               }
               
               var hold_obj={
@@ -236,7 +239,7 @@
                   num++;
                 }
               }
-              if(this.status.name_status  && this.status.specifica_list_status.length==num){
+              if(this.status.name_status  && this.status.specifica_list_status.length==num && this.img_list1.length){
                 this.disabled=false;
                 this.color='primary';
               }else{
@@ -244,7 +247,7 @@
                 this.color='default';
               }
             }else{
-              if(this.status.name_status  && this.status.price_status && this.status.stock_status){
+              if(this.status.name_status  && this.status.price_status && this.status.stock_status && this.img_list1.length){
                 this.disabled=false;
                 this.color='primary';
               }else{
@@ -284,6 +287,11 @@
                 // this.img_list2=[];
                 // this.show=false;
 
+          },
+          watch:{
+            img_list1(newImgList1){
+              this.judge();
+            }
           }
       },
       components: {
@@ -297,11 +305,6 @@
         "cButton": require('../../components/button/button.vue'),
         "cNumber": require('../../components/number/number.vue'),
         "cConfirm": require('../../components/confirm/confirm.vue'),
-      },
-      watch:{
-        img_list(){
-          this.judge();
-        }
       },
       mounted: function () {
           this.$nextTick(function () {

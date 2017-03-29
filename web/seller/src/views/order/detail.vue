@@ -107,7 +107,7 @@
                             that.json=data.result;
                             utils.loadingHide();
                             that.discount=data.result.seller_discount_fee/100+'';
-                           // that.discount1=data.result.discountInfo;
+                            that.discount1=that.discount;
                             if(data.result.orderStatus=='DFH'){
                                 that.step=1;
                             }
