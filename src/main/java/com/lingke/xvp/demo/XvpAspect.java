@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.Rop.api.ApiException;
 import com.lingke.xvp.demo.controller.response.ExceptionResponse;
 import com.lingke.xvp.demo.controller.response.SuccessResponse;
+import com.lingke.xvp.demo.exception.DemoException;
 
 @Component
 @Aspect
@@ -39,7 +40,14 @@ public class XvpAspect {
 				successResponse.setResult(result);
 			}
 			return successResponse;
-		} catch (RuntimeException e) {
+		}catch (DemoException e) {
+			logger.error("请求处理返回运行时异常，errorMessage：{}", e.getMessage(), e);
+			ExceptionResponse exceptionResponse = new ExceptionResponse();
+			exceptionResponse.setCode(e.getCode());
+			exceptionResponse.setMessage(e.getMessage());
+			return exceptionResponse;
+		} 
+		catch (RuntimeException e) {
 			logger.error("请求处理返回运行时异常，errorMessage：{}", e.getMessage(), e);
 			ExceptionResponse exceptionResponse = new ExceptionResponse();
 			exceptionResponse.setCode(XvpConstants.ERROR_CODE01);

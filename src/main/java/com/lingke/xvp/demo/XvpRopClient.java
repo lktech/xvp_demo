@@ -12,6 +12,7 @@ import com.Rop.api.DefaultRopClient;
 import com.Rop.api.RopClient;
 import com.Rop.api.RopRequest;
 import com.Rop.api.RopResponse;
+import com.lingke.xvp.demo.exception.DemoException;
 
 @Component
 public class XvpRopClient implements InitializingBean {
@@ -34,9 +35,9 @@ public class XvpRopClient implements InitializingBean {
 		logger.info("rop 调用结束，response：{}", resp.getBody());
 		if (!resp.isSuccess()) {
 			if (!StringUtils.isEmpty(resp.getSubCode())) {
-				throw new RuntimeException(resp.getSubMsg());
+				throw new DemoException(resp.getSubCode(),resp.getSubMsg());
 			} else {
-				throw new RuntimeException(resp.getMsg());
+				throw new DemoException(resp.getErrorCode(),resp.getMsg());
 			}
 		}
 		return resp;
