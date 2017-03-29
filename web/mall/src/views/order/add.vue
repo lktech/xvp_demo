@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="order_add">
         <c-top-back></c-top-back>
         <c-group v-if="!addressStatus">
             <c-cell title="+ 添加收货地址" @click.native="addarr" is-link></c-cell>
@@ -144,4 +144,14 @@
         }
     }
 </script>
-
+<style>
+    .order_add .weui_cell_ft.with_arrow{
+        margin-right:0 !important; 
+    }
+    .order_add .weui_cell_ft.with_arrow:after{
+        right:0 !important;
+    }
+    .order_add .weui_panel:first-child{
+        margin-top:10px !important;
+    }
+</style>

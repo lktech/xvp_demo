@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="warehouse">
     <c-top-back></c-top-back>
     <div v-if='goods.length > 0'>
       <!-- 商品列表 -->
@@ -153,3 +153,8 @@
       },
   }
 </script>
+<style>
+  .warehouse .pannel-list.weui_media_box .from{
+    padding-top: 20px !important;
+  }
+</style>
