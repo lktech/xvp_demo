@@ -2,7 +2,7 @@
     <div>
         <c-top-back></c-top-back>
         <c-group v-if="!addressStatus">
-            <c-cell title="+ 添加收货地址" :link="{path:'/addr/add'}"></c-cell>
+            <c-cell title="+ 添加收货地址" @click="addarr" is-link></c-cell>
         </c-group>
         <c-group v-else>
             <c-address-info :id="addressData.id" :name="addressData.name" :phone="addressData.phone" :arrows="true"
@@ -126,7 +126,10 @@
 
             },
             modarr(){
-                utils.go({path:'/addr/mod',query:{'id':this.addressData.id}},this.$router);
+                utils.go({path:'/addr/mod',query:{'id':this.addressData.id}},this.$router,true);
+            },
+            addarr(){
+                utils.go({path:'/addr/add'},this.$router,true);
             }
 
         },
