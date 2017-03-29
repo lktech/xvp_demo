@@ -191,7 +191,7 @@
                 'logistics_fee':this.formData.freight?this.formData.freight*100:0,
                 //付款方式
 
-                "sku": hold_sku_obj,
+                "sku": JSON.parse(hold_sku_obj),
 
                 "pics":this.img_list1[0],
 
