@@ -6,7 +6,7 @@
         </c-group>
         <c-group v-else>
             <c-address-info :id="addressData.id" :name="addressData.name" :phone="addressData.phone" :arrows="true"
-                            :address="addressData.str" @click.native="modarr"></c-address-info>
+                            :address="addressData.str" @click="modarr"></c-address-info>
         </c-group>
         <!--商品列表-->
         <div>
