@@ -121,10 +121,12 @@
 				if(this.skustock*1 <= 0){
 					this.text1="已售罄";
 					this.disabled1=true;
+					this.color='default';
 				}else{
 					this.max1=this.skustock*1;
 					this.text1=this.text;
 					this.disabled1=false;
+					this.color='primary';
 				}
 			});
 		},

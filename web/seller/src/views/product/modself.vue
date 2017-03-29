@@ -197,8 +197,7 @@
                           utils.go({path:'/store/store'},that.$router,true);
                       }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
-
-                            }else{
+                      }else{
                           that.$vux.alert.show('编辑商品失败');
                           if(that.status.specifications){
                             for(var i=0;i<that.formData.specifica_list.length;i++){
