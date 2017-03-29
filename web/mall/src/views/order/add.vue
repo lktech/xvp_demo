@@ -27,7 +27,7 @@
             <c-cell title="优惠" :value="json.discount | formatPriceCNY"></c-cell>
             <c-cell title="运费" :value="json.logistics_fee | formatPriceCNY"></c-cell>
         </c-group>
-        <c-pay-bar2 :disabled="disabled" :type="color" :price="(totalMoney*1)+(json.logistics_fee*1) | formatPrice" @on-button="addOrder" buytext="提交订单"></c-pay-bar2>
+        <c-pay-bar2 :disabled="disabled" :type="color" :price="(totalMoney*1)+(json.logistics_fee/100) | formatPrice" @on-button="addOrder" buytext="提交订单"></c-pay-bar2>
     </div>
 
 
