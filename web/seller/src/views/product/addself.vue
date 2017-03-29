@@ -169,9 +169,10 @@
               let stock=0;
               if(this.status.specifications){
                 hold_sku_obj=JSON.stringify(this.formData.specifica_list);
-                for(var i=0;i<JSON.parse(hold_sku_obj).length;i++){
-                  JSON.parse(hold_sku_obj)[i].price=JSON.parse(hold_sku_obj)[i].price*100;
-                  stock+=JSON.parse(hold_sku_obj)[i].stock*1;
+                hold_sku_obj=JSON.parse(hold_sku_obj);
+                for(var i=0;i<hold_sku_obj.length;i++){
+                  hold_sku_obj[i].price=hold_sku_obj[i].price*100;
+                  stock+=hold_sku_obj[i].stock*1;
                 }
               }else{
                 hold_sku_obj=[{
@@ -191,7 +192,7 @@
                 'logistics_fee':this.formData.freight?this.formData.freight*100:0,
                 //付款方式
 
-                "sku": JSON.parse(hold_sku_obj),
+                "sku": hold_sku_obj,
 
                 "pics":this.img_list1[0],
 
