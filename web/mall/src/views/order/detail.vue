@@ -13,7 +13,7 @@
                 <div style="font-size:12px; margin-top:10px; color:#999;">{{json.address}}</div>
             </div>
         </c-cell-wrap>
-        <c-panel-img v-if="json.orderdeliverys[0].logistics_num" :listname="json.orderdeliverys[0].logistics_company_name" :moreinform="'运单编号：'+json.orderdeliverys[0].logistics_num">
+        <c-panel-img v-if="json.orderdeliverys" :listname="json.orderdeliverys[0].logistics_company_name?json.orderdeliverys[0].logistics_company_name:'商品列表'" :moreinform="json.orderdeliverys[0].logistics_num?'运单编号：'+json.orderdeliverys[0].logistics_num:''">
             <c-panel-list v-for='item in json.goods'
                           :id='item.id'
                           :others='item.num'
