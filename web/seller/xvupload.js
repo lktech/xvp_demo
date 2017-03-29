@@ -74,7 +74,7 @@
 	      reader.onload = function (e) {  
 	        var img = new Image,  
 	        width = 500,    //图片resize宽度  
-	        quality = 0.1,  //图像质量  
+	        quality = 1.0,  //图像质量  
 	        canvas = document.createElement("canvas"),  
 	        drawer = canvas.getContext("2d");  
 	        img.src = this.result,
