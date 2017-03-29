@@ -68,26 +68,46 @@
 		}
 	}
 	
-	var wang = function(file){
-		var reader = new FileReader();  
-	      reader.readAsDataURL(file);  
-	      reader.onload = function (e) {  
-	        var img = new Image,  
-	        width = 500,    //图片resize宽度  
-	        quality = 1.0,  //图像质量  
-	        canvas = document.createElement("canvas"),  
-	        drawer = canvas.getContext("2d");  
-	        img.src = this.result,
-	        width1 = img.width,
-	        height1 = img.height;
+	var wang = function(fileObj){
+		// var reader = new FileReader();  
+	 //      reader.readAsDataURL(file);  
+	 //      reader.onload = function (e) {  
+	 //        var img = new Image,  
+	 //        width = 500,    //图片resize宽度  
+	 //        quality = 1.0,  //图像质量  
+	 //        canvas = document.createElement("canvas"),  
+	 //        drawer = canvas.getContext("2d");  
+	 //        img.src = this.result,
+	 //        width1 = img.width,
+	 //        height1 = img.height;
 
-	        canvas.width = width;  
-	        canvas.height = width * (img.height / img.width);  
-	        drawer.drawImage(img, 0 , 0, canvas.width, canvas.height);  
-	        img.src = canvas.toDataURL('image/png',quality);  
-	        var image_base64 = img.src.replace('data:image/png;base64,',''); 
-	        options.base64 = image_base64 
-	      }  
+	 //        canvas.width = width;  
+	 //        canvas.height = width * (img.height / img.width);  
+	 //        drawer.drawImage(img, 0 , 0, canvas.width, canvas.height);  
+	 //        img.src = canvas.toDataURL('image/png',quality);  
+	 //        var image_base64 = img.src.replace('data:image/png;base64,',''); 
+	 //        options.base64 = image_base64 
+	 //      }  
+
+
+
+	 	var file = fileObj,
+            cvs = document.createElement("canvas"),
+            ctx = cvs.getContext("2d");
+        if(file){
+            var url = window.URL.createObjectURL(file);//PS:不兼容IE
+            var img = new Image();
+            img.src = url;
+            img.onload = function(){
+                ctx.clearRect(0,0,cvs.width,cvs.height);
+                cvs.width = 500;
+                cvs.height = 500 * (img.height / img.width);
+                ctx.drawImage(img,0,0,cvs.width,cvs.height);
+                var base64 = cvs.toDataURL("image/png",1.0);
+                var image_base64 = base64.replace('data:image/png;base64,',''); 
+                options.base64 = image_base64;
+            }
+        }
 	}
 
 
