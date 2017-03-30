@@ -119,6 +119,7 @@
             }
             if(obj.name.indexOf('Yvalue')!=-1){
               var i=obj.name.split('_')[1];
+              console.log(obj.valid)
               this.status.specifica_list_status[i].value=obj.valid;
             }
             this.judge();

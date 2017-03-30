@@ -102,10 +102,10 @@
                         buy_sku_list:that.arr
                     }
                     utils.ajax({
-                        url: basepath + "/user/order/add", data: obj, success: function (data) {
-                        	var backUrl = basepath + "/mall/index.html#/order/detail?id=" + data.result.order_id;
-							window.history.replaceState(null, "订单详情页", backUrl);
+                        url: basepath + "/user/order/add", data: obj, success: function (data) {	
                             if (data.code=="SUCESS") {
+                                var backUrl = basepath + "/mall/index.html#/order/detail?id=" + data.result.order_id;
+                                window.history.replaceState(null, "订单详情页", backUrl);
                                 utils.ajax({
                                     url: basepath + "/user/order/payurl", data: {order_id:data.result.order_id}, success: function (res) {
                                         if (res.code=="SUCESS") {
