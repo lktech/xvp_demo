@@ -41,7 +41,7 @@ public class XvpAspect {
 			}
 			return successResponse;
 		}catch (DemoException e) {
-			logger.error("请求处理返回运行时异常，errorMessage：{}", e.getMessage(), e);
+			logger.error("请求处理返回OpenAPI异常， errorcode： {} , errorMessage：{}", e.getMessage(),e.getCode(), e);
 			ExceptionResponse exceptionResponse = new ExceptionResponse();
 			exceptionResponse.setCode(e.getCode());
 			exceptionResponse.setMessage(e.getMessage());
