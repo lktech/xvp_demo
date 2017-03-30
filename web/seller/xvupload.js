@@ -55,11 +55,13 @@
 					wang(file);
 					validate(id,file);
 				}else if(file && file.type.indexOf('image/')==-1){
-					if(ele.getAttribute("upld")){
-						errorFunc[id]({"status":false,"id":id,"message":"正在上传中，客官莫急！"});
-					}else{
-						validate(id,file);
-					}
+					errorFunc[id]({"status":false,"id":id,"message":"上传图片格式错误"});
+					clearInput(id);
+					// if(ele.getAttribute("upld")){
+					// 	errorFunc[id]({"status":false,"id":id,"message":"正在上传中，客官莫急！"});
+					// }else{
+					// 	validate(id,file);
+					// }
 				}
 			}else{
 				errorFunc[id]({"status":false,"id":id,"message":"浏览器版本过低，请升级"});

@@ -95,7 +95,7 @@ export default {
       			},
       			error:function(data){
       				utils.loadingHide();
-      				that.$vux.alert.show('上传失败');
+      				that.$vux.alert.show(data.message);
       			}
       		});
       })
