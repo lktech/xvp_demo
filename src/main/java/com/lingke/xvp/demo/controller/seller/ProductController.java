@@ -1,5 +1,6 @@
 package com.lingke.xvp.demo.controller.seller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,13 +129,21 @@ public class ProductController {
 	@RequestMapping(path = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public XvpResponse updateProduct(@RequestBody ProductUpdateRequest request) throws Exception {
+		List<SkuUpdateRequest> sku_list = request.getSku();
+		List<String> skuStrList = new ArrayList<String>();
+		for (SkuUpdateRequest sku : sku_list) {
+			String sku_str = sku.getSku_str();
+			if(skuStrList.contains(sku_str)){
+				throw new RuntimeException("规格名称重复");
+			}
+			skuStrList.add(sku_str);
+		}
 		XvpProductUpdateRequest ropRequest = BeanCopyUtil.copy(request, XvpProductUpdateRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.parseLong(SessionUtil.sellerGetStoreId()));
 		ropRequest.setVirtual_flg(0);
 		ropClientAdapter.ropInvoke(ropRequest);
 
-		List<SkuUpdateRequest> sku_list = request.getSku();
 		for (SkuUpdateRequest sku : sku_list) {
 			if (sku.getId() != null) {
 				XvpSkuDeleteskuRequest ropSkuDelRequest = new XvpSkuDeleteskuRequest();
