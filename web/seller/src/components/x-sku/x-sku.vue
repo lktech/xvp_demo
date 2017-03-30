@@ -26,7 +26,7 @@
 					</div>
 				</div>
 				<div class="weui_media_box">
-					<r-button type="primary" @click.native="submit" :text="text1"></r-button>
+					<r-button :type="color" @click.native="submit" :text="text1"></r-button>
 				</div>
 
 			</div>
@@ -47,7 +47,8 @@
 				skustock:0,
 				text1:this.text,
 				disabled1:this.disabled,
-				max1:this.max
+				max1:this.max,
+				color:'primary'
 			}
 		},
 		props: {
@@ -120,10 +121,12 @@
 				if(this.skustock*1 <= 0){
 					this.text1="已售罄";
 					this.disabled1=true;
+					this.color='default';
 				}else{
 					this.max1=this.skustock*1;
 					this.text1=this.text;
 					this.disabled1=false;
+					this.color='primary';
 				}
 			});
 		},
@@ -140,10 +143,12 @@
 				if(this.skustock*1 <= 0){
 					this.text1="已售罄";
 					this.disabled1=true;
+					this.color='default';
 				}else{
 					this.max1=this.skustock*1;
 					this.text1=this.text;
 					this.disabled1=false;
+					this.color='primary';
 				}
 			},
 			fixIos(zIndex) {

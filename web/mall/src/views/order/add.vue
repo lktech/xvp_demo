@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div class="order_add">
         <c-top-back></c-top-back>
         <c-group v-if="!addressStatus">
             <c-cell title="+ 添加收货地址" @click.native="addarr" is-link></c-cell>
         </c-group>
         <c-group v-else>
             <c-address-info :id="addressData.id" :name="addressData.name" :phone="addressData.phone" :arrows="true"
-                            :address="addressData.str" @click.native="modarr"></c-address-info>
+                            :address="addressData.str" @click="modarr"></c-address-info>
         </c-group>
         <!--商品列表-->
         <div>
@@ -16,7 +16,7 @@
                               :others='item.num'
                               :title='item.name'
                               :details='item.properties?"规格："+item.properties:"规格：无"'
-                              :from='item.price/100'
+                              :from='item.price | formatPrice'
                               :imglink="item.pic+'?imageMogr2/thumbnail/60x'"
                               :colororg='true'
                               :cheng="true">
@@ -27,7 +27,7 @@
             <c-cell title="优惠" :value="json.discount | formatPriceCNY"></c-cell>
             <c-cell title="运费" :value="json.logistics_fee | formatPriceCNY"></c-cell>
         </c-group>
-        <c-pay-bar2 :disabled="disabled" :type="color" :price="totalMoney | formatPrice" @on-button="addOrder" buytext="提交订单"></c-pay-bar2>
+        <c-pay-bar2 :disabled="disabled" :type="color" :price="(totalMoney*1)+(json.logistics_fee*1) | formatPrice" @on-button="addOrder" buytext="提交订单"></c-pay-bar2>
     </div>
 
 
@@ -61,7 +61,7 @@
                 this.json = JSON.parse(utils.getSession("buy_info"));//商品数据列表
                 let that = this;
                 $.each(this.json.products,function(i,v){
-                    that.totalMoney+=v.price*v.num
+                    that.totalMoney+=v.price*v.num;
                     that.arr.push({
                         sku_id:v.id,
                         price:v.price,
@@ -79,7 +79,7 @@
                                 that.color='primary';
                                 that.addr_id=data.result.id;
                             }
-                        }else if(data.code!="SUCESS" && data.code!="xvp_user1006"){
+                        }else if(data.code!="SUCESS" && data.code!="xvp_user1008"){
                             that.$vux.alert.show(data.message);
                         }
                     }
@@ -144,4 +144,14 @@
         }
     }
 </script>
-
+<style>
+    .order_add .weui_cell_ft.with_arrow{
+        margin-right:0 !important; 
+    }
+    .order_add .weui_cell_ft.with_arrow:after{
+        right:0 !important;
+    }
+    .order_add .weui_panel:first-child{
+        margin-top:10px !important;
+    }
+</style>

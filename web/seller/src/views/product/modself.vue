@@ -85,10 +85,12 @@
           upload1(src){
             this.img_list1=src;
             $('input').blur();
+            this.judge();
           },
           upload2(src){
             this.img_list2=src;
             $('input').blur();
+            this.judge();
           },
           validate(obj){
             if(obj.name=='name'){
@@ -150,15 +152,15 @@
           },
           hold(){
             if(!this.disabled){
-              let hold_sku_obj=this.formData.specifica_list;
+              let hold_sku_obj=[];
               let stock=0;
               if(this.status.specifications){
+                hold_sku_obj=JSON.stringify(this.formData.specifica_list);
+                hold_sku_obj=JSON.parse(hold_sku_obj);
                 for(var i=0;i<hold_sku_obj.length;i++){
                   hold_sku_obj[i].price=hold_sku_obj[i].price*100;
                   stock+=hold_sku_obj[i].stock*1;
                 }
-                this.formData.price='';
-                this.formData.stock='';
               }else{
                 hold_sku_obj=[{
                   price:this.formData.price?this.formData.price*100:0,
@@ -174,7 +176,7 @@
                 //商品详情  
                 "pay_type":0,
 
-                'logistics_fee':this.formData.freight?this.formData.freight*1:0,
+                'logistics_fee':this.formData.freight?this.formData.freight*100:0,
                 //付款方式
 
                 "sku": hold_sku_obj,
@@ -196,8 +198,7 @@
                           utils.go({path:'/store/store'},that.$router,true);
                       }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
-
-                            }else{
+                      }else{
                           that.$vux.alert.show('编辑商品失败');
                           if(that.status.specifications){
                             for(var i=0;i<that.formData.specifica_list.length;i++){
@@ -220,7 +221,7 @@
                   num++;
                 }
               }
-              if(this.status.name_status && this.status.specifica_list_status.length==num){
+              if(this.status.name_status && this.status.specifica_list_status.length==num && this.img_list1.length){
                 this.disabled=false;
                 this.color='primary';
               }else{
@@ -228,7 +229,7 @@
                 this.color='default';
               }
             }else{
-              if(this.status.name_status && this.status.price_status && this.status.stock_status){
+              if(this.status.name_status && this.status.price_status && this.status.stock_status && this.img_list1.length){
                 this.disabled=false;
                 this.color='primary';
               }else{
@@ -325,7 +326,7 @@
         })
       },
       watch:{
-        img_list(){
+        img_list1(newImgList1){
           this.judge();
         }
       }

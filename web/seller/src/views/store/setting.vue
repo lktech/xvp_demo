@@ -9,9 +9,9 @@
              <c-city title="地址" v-model="res.formData.addr_code" @on-hide="logHide" placeholder="您所在的省市县" :list="res.addressData"></c-city>
          </c-group> 
          <c-group>   
-             <c-input title="详细地址" @on-change="validate" placeholder="请输入您的详细地址" name="address" required  v-model="res.formData.address":max="50"></c-input>
-             <c-input title="客服电话" @on-change="validate" placeholder="请输入客服电话" name="phone" required  v-model="res.formData.phone" :max="50"></c-input>
-             <c-input title="QQ号码 " @on-change="validate" placeholder="请输入QQ号码(选填)" name="QQ" v-model="res.formData.QQ"></c-input>
+             <c-input title="详细地址" @on-change="validate" placeholder="请输入您的详细地址" name="address" required  v-model="res.formData.address":max="100"></c-input>
+             <c-input title="客服电话" @on-change="validate" placeholder="请输入客服电话" name="phone" required  v-model="res.formData.phone" :max="30"></c-input>
+             <c-input title="QQ号码 " @on-change="validate" placeholder="请输入QQ号码(选填)" name="QQ" v-model="res.formData.QQ" :max="20"></c-input>
          </c-group>
          
          <div class="wrap-pd"  style="margin-top:10px">

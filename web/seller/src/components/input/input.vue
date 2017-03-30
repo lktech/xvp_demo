@@ -87,7 +87,7 @@
     <div class="weui_cell_ft">
       <icon type="clear" v-show="!equalWith && showClear && currentValue && !readonly && !disabled" @click.native="clear"></icon>
 
-      <icon class="vux-input-icon" type="warn" :title="!valid ? firstError : ''" v-show="!novalidate && !equalWith && ((touched && !valid && firstError) || (forceShowError && !valid && firstError))"></icon>
+      <icon class="vux-input-icon" type="warn" :title="!valid ? firstError : ''" v-show="!novalidate && !equalWith && ((touched && !valid && firstError) || (forceShowError && !valid && firstError)) || (currentValue && !valid)"></icon>
       <icon class="vux-input-icon" type="warn" v-if="!novalidate && hasLengthEqual && dirty && equalWith && !valid"></icon>
       <icon type="success" v-show="!novalidate && equalWith && equalWith === currentValue && valid"></icon>
 
@@ -342,9 +342,6 @@ export default {
   },
   watch: {
     valid (newVal) {
-      if(!newVal){
-        this.errors.required = '必填哦'
-      }
       this.getError()
     },
     value (val) {

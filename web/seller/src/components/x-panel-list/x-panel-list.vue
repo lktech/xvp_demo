@@ -72,6 +72,12 @@ export default {
   computed: {
   },
   watch: {
+  	price(){
+  		this.price2=this.price,
+  		this.minPrice2=this.minPrice,
+  		this.maxPrice2=this.maxPrice
+  		this.format();
+  	}
   },
   methods: {
 	  goUrl() {
@@ -90,15 +96,15 @@ export default {
 	  },
 	  format() {
 	    if(this.minPrice2) { //有规格
-	    	console.log(this.minPrice2);
 	      if(this.minPrice2 == this.maxPrice2) {
 	        this.price2 = "价格:￥" + utils.formatPrice(this.minPrice2);
-	
+			
 	      } else if(this.minPrice2 != this.maxPrice2) {
 	        this.price2 = "价格:￥" + utils.formatPrice(this.minPrice2) + "~" + utils.formatPrice(this.maxPrice2);
+	        
 	      }
 	    } else if(this.price2) {
-					this.price2 = "价格:￥" + utils.formatPrice(this.price2);
+			this.price2 = "价格:￥" + utils.formatPrice(this.price2);
 	    }
 	  }
   },
