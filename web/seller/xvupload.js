@@ -128,6 +128,7 @@
 			total =  1;//Math.ceil(file.size/options.blockSize);
 		}catch(e){}
 		startFunc[id]();
+		console.log(file)
 		setTimeout(function(){
 			ajax({
 				url: options.uploadUrl + interfaces.vldUrl,
@@ -135,7 +136,7 @@
 				type: 'POST',
 				data: {
 					"total":total,
-					"name":file.name,
+					"name":'1.'+file.type.split('/')[1],
 					"size":file.size,
 					"type":file.type
 				},
