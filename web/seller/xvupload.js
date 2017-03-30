@@ -83,7 +83,7 @@
                 cvs.width = 500;
                 cvs.height = 500 * (img.height / img.width);
                 drawImageIOSFix(ctx,img,0,0,img.width,img.height,0,0,cvs.width,cvs.height);
-                var base64 = cvs.toDataURL("image/png",0.1);
+				var base64 = cvs.toDataURL("image/png",0.1);
                 var image_base64 = base64.replace('data:image/png;base64,',''); 
                 options.base64 = image_base64;
             }

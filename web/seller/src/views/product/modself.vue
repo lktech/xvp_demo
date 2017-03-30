@@ -25,7 +25,7 @@
             <c-cell-wrap title="规格设置" v-for="(item, index) in formData.specifica_list" >
                   <c-input title="价格" @on-change="validate" placeholder="请输入价格" required :name="order('Yprice',index)" v-model="item.price" :max="13" :is-type="money"></c-input>
                   <c-input title="库存" @on-change="validate" placeholder="请输入库存" required :name="order('Ystock',index)" v-model="item.stock" :max="13" :is-type="number"  ></c-input>
-                  <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" required :name="order('Yvalue',index)"  :max="50" v-model="item.sku_str" ></c-input>
+                  <c-input title="规格" @on-change="validate" placeholder="请输入商品规格，如颜色，尺寸" required :name="order('Yvalue',index)"  :max="20" v-model="item.sku_str" ></c-input>
             </c-cell-wrap>
           </div>
          <!-- <div class="wrap-pd" style='margin-top:10px;'>
@@ -199,7 +199,7 @@
                       }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
                       }else{
-                          that.$vux.alert.show('编辑商品失败');
+                          that.$vux.alert.show(data.message);
                           if(that.status.specifications){
                             for(var i=0;i<that.formData.specifica_list.length;i++){
                               that.formData.specifica_list[i].price=that.formData.specifica_list[i].price/100+'';
@@ -319,7 +319,7 @@
                                 utils.wang(that,utils,data.message);
 
                             }else{
-                      that.$vux.alert.show('获取商品信息失败');
+                      that.$vux.alert.show(data.message);
                   }
               }
           }); 

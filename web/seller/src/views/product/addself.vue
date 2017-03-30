@@ -222,7 +222,7 @@
                                 utils.wang(that,utils,data.message);
 
                             }else{
-                          that.$vux.alert.show('添加商品失败');
+                          that.$vux.alert.show(data.message);
                       }
                   },
                   message:'拼命保存中'
