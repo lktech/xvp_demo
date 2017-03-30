@@ -18,6 +18,7 @@ public class XvpApp {
 	public static void main(String[] args) throws Exception {
 		loogger.info("#######################  APP Starting ... ################################");
 		SpringApplication.run(XvpApp.class, args);
+		System.setProperty("java.security.egd","file:/dev/./urandom");
 		loogger.info("#######################  APP Success Started . ################################");
 	}
     /**
