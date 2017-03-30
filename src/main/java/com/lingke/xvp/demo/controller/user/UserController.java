@@ -72,7 +72,7 @@ public class UserController {
 
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public XvpResponse setDefaultAddress(@RequestBody UserLoginRequest request) throws Exception {
+	public XvpResponse login(@RequestBody UserLoginRequest request) throws Exception {
 		if (!StringUtils.isEmpty(request.getXvp_uid())) {
 			SessionUtil.userLogin(request.getXvp_uid());
 		}
