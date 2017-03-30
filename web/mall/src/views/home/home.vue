@@ -118,12 +118,12 @@
                       data:{'product_id':v.id},
                       success: function(res) {
                         if(res.code=="SUCESS") {
-                          var min=res.result[0].price;
+                          var min=res.result[0].price*1;
                           var len=res.result.length;
 
-                          for(var ii=1; ii<len; ii++){
-                            if(res.result[ii].price < min){
-                              min = res.result[ii].price;
+                          for(var ii=0; ii<len; ii++){
+                            if(res.result[ii].price*1 < min){
+                              min = res.result[ii].price*1;
                             }
                           }
                           that.component1[i].price = min;

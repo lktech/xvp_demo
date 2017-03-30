@@ -45,26 +45,26 @@
                       url:"/seller/product/sku/get", type:'post', data: {product_id:o.id}, success: function (res) {
                           if (res.code=="SUCESS") {
 
-                              var min=res.result[0].price;
+                              var min=res.result[0].price*1;
                               var max=min;
                               var len=res.result.length;
                               var _stock=0;
 
                               $.each(res.result,function(i,v){
                                 _stock+=v.stock*1;
-                                if(v.price > max){
-                                  max = v.price;
+                                if(v.price*1 > max){
+                                  max = v.price*1;
                                 }
-                                if(v.price < min){
-                                  min = v.price;
+                                if(v.price*1 < min){
+                                  min = v.price*1;
                                 }
                               })
                               Vue.set(that.goods, k, {
                                 id:o.id,
                                 name:o.name,
-                                maxPrice:max*1,
-                                minPrice:min*1,
-                                price:min*1,
+                                maxPrice:max,
+                                minPrice:min,
+                                price:min,
                                 stock:_stock,
                                 pics:o.pics+'?imageMogr2/thumbnail/60x'
                               });

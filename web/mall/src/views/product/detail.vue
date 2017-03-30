@@ -129,19 +129,19 @@
                                 data:{"product_id":data.result.id},
                                 success: function(res){
                                     if(res.code=='SUCESS'){
-                                        var max=res.result[0].price;
-                                        var min=res.result[0].price;
+                                        var max=res.result[0].price*1;
+                                        var min=res.result[0].price*1;
                                         var len=res.result.length;
 
                                         for(var ii=1; ii<len; ii++){
-                                          if(res.result[ii].price > max){
-                                            max = res.result[ii].price;
+                                          if(res.result[ii].price*1 > max){
+                                            max = res.result[ii].price*1;
                                           }
                                         }
 
                                         for(var i=1; i<len; i++){
-                                          if(res.result[i].price < min){
-                                            min = res.result[i].price;
+                                          if(res.result[i].price*1 < min){
+                                            min = res.result[i].price*1;
                                           }
                                         }
                                         if(min!=max){
