@@ -53,35 +53,35 @@
         this.$nextTick(function () {
           let that = this ;
 
-          utils.ajax({
-            url: basepath + "/user/user/getIsvInfo",
-            success: function(data) {
-              if(data.code=="SUCESS") {  
+          // utils.ajax({
+          //   url: basepath + "/user/user/getIsvInfo",
+          //   success: function(data) {
+          //     if(data.code=="SUCESS") {  
 
-                $xvp.login({
-                    app_key : data.result.appId,
-                    isv_url: data.result.isvUrl,
-                    success : function(xvp_uid){
-                      utils.ajax({
-                        url: basepath + "/user/user/login",
-                        data:{'xvp_uid':xvp_uid},
-                        success: function(res) {
-                          if(res.code=="SUCESS") { 
+          //       $xvp.login({
+          //           app_key : data.result.appId,
+          //           isv_url: data.result.isvUrl,
+          //           success : function(xvp_uid){
+          //             utils.ajax({
+          //               url: basepath + "/user/user/login",
+          //               data:{'xvp_uid':xvp_uid},
+          //               success: function(res) {
+          //                 if(res.code=="SUCESS") { 
                             that.init();
 
-                          } else {
-                            that.$vux.alert.show(res.message);
-                          }
-                        },
-                      });
-                    }
-                });
+            //               } else {
+            //                 that.$vux.alert.show(res.message);
+            //               }
+            //             },
+            //           });
+            //         }
+            //     });
 
-                } else {
-                  that.$vux.alert.show(data.message);
-                }
-              },
-            });
+            //     } else {
+            //       that.$vux.alert.show(data.message);
+            //     }
+            //   },
+            // });
 
         
         })
@@ -139,6 +139,7 @@
                 sessionStorage.setItem('title_',that.baseinfo.title);
                 sessionStorage.setItem('link_','http://demo.open.xiaovpu.com/mall/index.html#/home/home?id='+that.$route.query.id+'&xv=enter');
                 sessionStorage.setItem('logo_',that.baseinfo.logo);
+                sessionStorage.setItem('product_id',that.$route.query.id);
                 utils.MenuShare();
               } else {
                 that.$vux.alert.show(data.message);
@@ -164,5 +165,12 @@
 <style>
   .wq_home .weui_tabbar{
     position: fixed;
+  }
+  .wq_home .pdt-tit{
+    display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
   }
 </style>

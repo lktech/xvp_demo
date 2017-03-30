@@ -12,7 +12,7 @@ Mock.mock(basepath + "/user/store/main",'post',{
             'logistics_fee':'value',
         },{
             'id':1,
-            'name':'商品商品商品商品商品',
+            'name':'商品商品商品商品商品商品商品商品商品商品',
             'pics':'http://static.taggole.com/hbrobot/poster/1489739579290.jpg',
             'product_detail':'value',
             'product_desc':'value',
@@ -51,7 +51,7 @@ Mock.mock(basepath + "/user/product/get",'post',{
     "msg": null,
     'result':{
         'id':'1',
-        'name':'测试商品',
+        'name':'测试商品测试商品测试商品测试商品测试商品测试商品测试商品测试商品测试商品测试商品测试商品',
         'pics':'',
         'product_detail':'value',
         'logistics_fee':'1',

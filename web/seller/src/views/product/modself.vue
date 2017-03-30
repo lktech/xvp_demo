@@ -3,7 +3,7 @@
       <c-top-back></c-top-back>
       <div>
           <c-cell-wrap>
-              <c-input title="商品名称" @on-change="validate" placeholder="请输入商品名称" required name="name" :max="20" v-model="formData.name"></c-input>
+              <c-input title="商品名称" @on-change="validate" placeholder="请输入商品名称" required name="name" :max="30" v-model="formData.name"></c-input>
               <c-uploadmul title='添加商品封面图' :list="img_list1" @upload="upload1" name="upload1" :max="1">
               </c-uploadmul>
           </c-cell-wrap>
@@ -195,7 +195,7 @@
                   data:hold_obj,
                   success: function(data){
                       if(data.code=="SUCESS"){
-                          utils.go({path:'/store/store'},that.$router,true);
+                          utils.go({path:'/product/warehouse'},that.$router,true);
                       }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
                       }else{

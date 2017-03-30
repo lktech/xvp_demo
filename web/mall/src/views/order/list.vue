@@ -81,6 +81,10 @@
                     url:"/user/order/query", type:'post', data: {order_status:id?id:''}, success: function (data) {
                         if (data.code=="SUCESS") {
                             that.orderData = data.result;
+                        }else if(data.code=='user_seller_error'){
+                                that.$vux.alert.show({content:'访问超时',onHide :function(){
+                                  utils.go({path:'/login/login',query:{id:sessionStorage.getItem('product_id')},that.$router);
+                                }});
                         }else{
                             that.orderData = [];
                             that.$vux.alert.show(data.message);

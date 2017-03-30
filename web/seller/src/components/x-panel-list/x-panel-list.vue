@@ -3,7 +3,7 @@
     <div class="weui_media_hd imgheight" @click='goUrl()'>
       <div v-if='icon' class='imgheight' :class='icon'></div>
 		<template v-else>
-			<img class="weui_media_appmsg_thumb" v-if="imglink" v-lazy="imglink">
+			<img class="weui_media_appmsg_thumb" v-if="imglink" :src="imglink">
 		</template>
     </div>
     <div class="weui_media_bd" @click='goUrl()'>

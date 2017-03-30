@@ -81,6 +81,10 @@
                             }
                         }else if(data.code!="SUCESS" && data.code!="xvp_user1008"){
                             that.$vux.alert.show(data.message);
+                        }else if(data.code=='user_seller_error'){
+                            that.$vux.alert.show({content:'访问超时',onHide :function(){
+                              utils.go({path:'/login/login',query:{id:sessionStorage.getItem('product_id')},that.$router);
+                            }});
                         }
                     }
                 });
@@ -115,6 +119,10 @@
                                         }
                                     }
                                 });
+                            }else if(data.code=='user_seller_error'){
+                                that.$vux.alert.show({content:'访问超时',onHide :function(){
+                                  utils.go({path:'/login/login',query:{id:sessionStorage.getItem('product_id')},that.$router);
+                                }});
                             }else{
                                 that.$vux.alert.show(data.message);
                             }

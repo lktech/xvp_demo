@@ -166,8 +166,12 @@
                             });
 
                             that.dataReady = true;
-                        }else if(data.code=='xvp_error_001'){
+                        }else if(data.code=='xvp_product1002'){
                             that.product_no=true;
+                        }else if(data.code=='user_seller_error'){
+                            that.$vux.alert.show({content:'访问超时',onHide :function(){
+                              utils.go({path:'/login/login',query:{id:sessionStorage.getItem('product_id')},that.$router);
+                            }});
                         }else{
                             that.$vux.alert.show(data.message);
                         }
@@ -266,4 +270,12 @@
     .tabbar-wrap .weui_cell_ft.with_arrow:after{
         right:0 !important;
     }
+    .tabbar-wrap .pdt-tit{
+      display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+    }
+
 </style>
