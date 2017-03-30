@@ -16,7 +16,7 @@
 	              <li v-for="(item,index) in newList" class="weui_uploader_file" :style="'background-image:url('+ item +')'" @click="showDel(index)"></li>
 	            </ul>
 	            <div class="weui_uploader_input_wrp" v-show="newList.length < max">
-	              <input :id='name' class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" ref='input'>
+	              <input :id='name' class="weui_uploader_input" type="file" ref='input'>
 	            </div>
 	          </div>
 	        </div>

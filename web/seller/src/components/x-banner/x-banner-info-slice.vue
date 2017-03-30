@@ -48,7 +48,7 @@ export default {
 					utils.loadingHide();
 				},
 				error:function(data){
-					that.$vux.alert.show('上传失败');
+					that.$vux.alert.show(data.message);
 					utils.loadingHide();
 				}
 			});

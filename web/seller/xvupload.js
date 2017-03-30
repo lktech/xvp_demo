@@ -51,10 +51,10 @@
 		ele.onchange = function(){
 			if(ele.files){
 				var file = ele.files[0];
-				if(file.type.indexOf('image/')>-1){
+				if(file.type=='image/jpg' || file.type=='image/jpeg' || file.type=='image/png' || file.type=='image/gif'){
 					wang(file);
 					validate(id,file);
-				}else if(file && file.type.indexOf('image/')==-1){
+				}else{
 					errorFunc[id]({"status":false,"id":id,"message":"上传图片格式错误"});
 					clearInput(id);
 					// if(ele.getAttribute("upld")){
