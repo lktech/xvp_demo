@@ -57,7 +57,7 @@
                             that.formData.addr_code = [data.result.province,data.result.city,data.result.county];
                         }else if(data.code=='user_seller_error'){
                                 that.$vux.alert.show({content:'访问超时',onHide :function(){
-                                  utils.go({path:'/login/login',query:{id:sessionStorage.getItem('product_id')},that.$router);
+                                  utils.go({path:'/home/home',query:{id:sessionStorage.getItem('product_id')}},that.$router);
                                 }});
                         }else{
                             that.$vux.alert.show(data.message);
@@ -88,7 +88,7 @@
                                     utils.go({path:'/order/add'},that.$router,true);
                             }else if(data.code=='user_seller_error'){
                                 that.$vux.alert.show({content:'访问超时',onHide :function(){
-                                  utils.go({path:'/login/login',query:{id:sessionStorage.getItem('product_id')},that.$router);
+                                  utils.go({path:'/home/home',query:{id:sessionStorage.getItem('product_id')}},that.$router);
                                 }});
                             }else{
                                 that.$vux.alert.show(data.message);
