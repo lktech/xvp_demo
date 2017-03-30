@@ -49,6 +49,7 @@ export default {
 				},
 				error:function(data){
 					that.$vux.alert.show('上传失败');
+					utils.loadingHide();
 				}
 			});
         })
