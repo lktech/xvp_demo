@@ -54,10 +54,10 @@ Mock.mock(basepath + "/user/product/get",'post',{
         'name':'测试商品测试商品测试商品测试商品测试商品测试商品测试商品测试商品测试商品测试商品测试商品',
         'pics':'',
         'product_detail':'value',
-        'logistics_fee':'1',
+        'logistics_fee':1,
         'product_desc':'[]'}
 });
-Mock.mock(basepath + "/user/address/default",'post',{
+Mock.mock(basepath + "/user/user/address/default",'post',{
     "code": 'SUCESS',
     "msg": null,
     'result':{

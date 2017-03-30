@@ -78,18 +78,34 @@
            send_out(){
                 let that=this;
                 utils.ajax({
-                    url: basepath + "/seller/seller/verify",
+                    url: basepath + "/seller/seller/check",
                     dataType: 'json',
                     type: 'POST',
                     data:{'phone':that.formData.phone},
                     success: function(data){
-                        if(data.code=="SUCESS"){
-                            that.formData.sn=data.result.sn;
+                        if(data.result.flag=="yes"){
+                            utils.ajax({
+                                url: basepath + "/seller/seller/verify",
+                                dataType: 'json',
+                                type: 'POST',
+                                data:{'phone':that.formData.phone},
+                                success: function(data){
+                                    if(data.code=="SUCESS"){
+                                        that.formData.sn=data.result.sn;
+                                    }else{
+                                        that.$vux.alert.show('发送失败，请重试');
+                                    }
+                                }
+                            });
                         }else{
-                            that.$vux.alert.show('发送失败，请重试');
+                            that.$vux.alert.show({content:'您没有注册过,点击确定去注册',onHide :function(){
+                              utils.go({path:'/login/register'},that.$router);
+                            }});
                         }
                     }
                 });
+
+                
             },
             modify(){
               if(!this.disabled){

@@ -10,7 +10,7 @@
     <div v-else>
         <div v-if="dataReady">
             <c-product-wrap type="normal">
-              <c-product :title="goods.name" :des="goods.logistics_fee | formatPriceCNY" :price="goods.price" :pic="goods.pics"></c-product>
+              <c-product :title="goods.name" :des="logistics_fee1=='0.00'?'包邮':'运费：¥'+logistics_fee1" :price="goods.price" :pic="goods.pics"></c-product>
             </c-product-wrap>
             <c-cell-wrap>
                 <c-cell :title="storeInfo.name" value="进入店铺" is-link @click.native="link_home">
@@ -57,7 +57,8 @@
                 pageId:'',
                 invoiceTypes:[],
                 logistic_flg:1,
-                product_no:false
+                product_no:false,
+                logistics_fee1:0
             }
         },
         mounted: function () {
@@ -122,6 +123,7 @@
                         if(data.code=='SUCESS'){
                             that.goods=data.result;
                             that.goods.logistics_fee=that.goods.logistics_fee;
+                            that.logistics_fee1=utils.formatPrice(that.goods.logistics_fee);
                             that.goods.product_desc=JSON.parse(that.goods.product_desc);
                             utils.ajax({
                                 url: basepath + "/user/product/sku/get",

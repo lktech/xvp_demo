@@ -153,11 +153,9 @@
     }
 </script>
 <style>
-    .order_add .weui_cell_ft.with_arrow{
-        margin-right:0 !important; 
-    }
     .order_add .weui_cell_ft.with_arrow:after{
-        right:0 !important;
+        position:absolute !important;
+        top:50% !important;
     }
     .order_add .weui_panel:first-child{
         margin-top:10px !important;

@@ -68,6 +68,7 @@ router.beforeEach((to, from, next) => {
     next();
 });
 router.afterEach(route => {
+    window.scrollTo(0,0);
     utils.loadingHide();
 });
 

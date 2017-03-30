@@ -7,7 +7,7 @@
         
         <div v-if="logistics_Status==1">
             <c-group>
-                <c-input title="快递单号" placeholder="请输入快递单号" @on-change="validate" v-model="num" name="num" required></c-input>
+                <c-input title="快递单号" placeholder="请输入快递单号" @on-change="validate" v-model="num" name="num" :max="30" required></c-input>
             </c-group>   
             <c-cell-wrap>
                 <c-cell title="选择快递公司" is-link :value='company' @address-add="cancel" @click.native="company_cli"></c-cell>
