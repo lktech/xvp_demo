@@ -39,6 +39,7 @@ import com.lingke.xvp.demo.controller.response.ProductResponse;
 import com.lingke.xvp.demo.controller.response.ProductSkuGetListResponse;
 import com.lingke.xvp.demo.controller.response.ProductSkuGetResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
+import com.lingke.xvp.demo.db.dao.DemoProduct;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
 
@@ -66,7 +67,8 @@ public class ProductController {
 		ropRequest.setStore_id(Long.parseLong(SessionUtil.sellerGetStoreId()));
 		ropRequest.setVirtual_flg(0);
 		XvpProductCreateResponse productCreateResponse = ropClientAdapter.ropInvoke(ropRequest);
-
+		//FOR TESTING
+		DemoProduct.addProduct(Long.valueOf(productCreateResponse.getProduct().getId()), request.getName());
 		for (SkuAddRequest skuRequest : request.getSku()) {
 			XvpSkuAddskuRequest ropSkuRequest = BeanCopyUtil.copy(skuRequest, XvpSkuAddskuRequest.class);
 			ropSkuRequest.setApp_id(ropClientAdapter.getAppId());
@@ -99,6 +101,11 @@ public class ProductController {
 		ropRequest.setProduct_id(request.getId());
 		XvpProductGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		ProductResponse response = BeanCopyUtil.copy(ropResponse.getProduct(), ProductResponse.class);
+		//FOR TESTING
+		String name = DemoProduct.getProductName(request.getId());
+		if(name!=null){
+			response.setName(name);
+		}
 		return response;
 	}
 
