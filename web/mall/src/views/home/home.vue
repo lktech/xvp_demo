@@ -53,35 +53,35 @@
         this.$nextTick(function () {
           let that = this ;
 
-          // utils.ajax({
-          //   url: basepath + "/user/user/getIsvInfo",
-          //   success: function(data) {
-          //     if(data.code=="SUCESS") {  
+          utils.ajax({
+            url: basepath + "/user/user/getIsvInfo",
+            success: function(data) {
+              if(data.code=="SUCESS") {  
 
-          //       $xvp.login({
-          //           app_key : data.result.appId,
-          //           isv_url: data.result.isvUrl,
-          //           success : function(xvp_uid){
-          //             utils.ajax({
-          //               url: basepath + "/user/user/login",
-          //               data:{'xvp_uid':xvp_uid},
-          //               success: function(res) {
-          //                 if(res.code=="SUCESS") { 
+                $xvp.login({
+                    app_key : data.result.appId,
+                    isv_url: data.result.isvUrl,
+                    success : function(xvp_uid){
+                      utils.ajax({
+                        url: basepath + "/user/user/login",
+                        data:{'xvp_uid':xvp_uid},
+                        success: function(res) {
+                          if(res.code=="SUCESS") { 
                             that.init();
 
-            //               } else {
-            //                 that.$vux.alert.show(res.message);
-            //               }
-            //             },
-            //           });
-            //         }
-            //     });
+                          } else {
+                            that.$vux.alert.show(res.message);
+                          }
+                        },
+                      });
+                    }
+                });
 
-            //     } else {
-            //       that.$vux.alert.show(data.message);
-            //     }
-            //   },
-            // });
+                } else {
+                  that.$vux.alert.show(data.message);
+                }
+              },
+            });
 
         
         })
