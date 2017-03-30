@@ -118,6 +118,24 @@
 						</resources>              
 					</configuration>
 					</execution>
+					<execution>
+					  <id>copy-MP_verify_il3WwgxnMwyPpQaY</id>
+					  <phase>validate</phase>
+					  <goals>
+						<goal>copy-resources</goal>
+					 </goals>
+					 <configuration>
+						<outputDirectory>target/web</outputDirectory>
+						<resources>          
+							<resource>
+							   <directory>web</directory>
+							   <includes>
+								  <include>MP_verify_il3WwgxnMwyPpQaY.txt</include>
+								</includes>
+							</resource>
+						</resources>              
+					</configuration>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
