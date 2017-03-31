@@ -14,7 +14,7 @@
           </c-cell-wrap>
           <c-cell-wrap>
               <c-cell title="付款方式" value='微信支付'></c-cell>
-              <c-input title="运费" @on-change="validate" placeholder="¥0.00" name="freight" v-model="formData.freight" :max="13" :is-type="money"></c-input>
+              <c-input title="运费" @on-change="validate" placeholder="¥0.00" name="freight" v-model="formData.freight" :max="13" :is-type="money1"></c-input>
 
           </c-cell-wrap>
           <c-cell-wrap title="无规格" v-if="!status.specifications">
@@ -72,6 +72,11 @@
             money: function (value) {
               return {
                 valid: value.search(/^(([1-9]\d{0,9})|(0\.[1-9])|(0\.\d[1-9]))(\.\d{1,2})?$/) > -1
+              }
+            },
+            money1: function (value) {
+              return {
+                valid: value.search(/^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/) > -1
               }
             },
             number: function (value) {
