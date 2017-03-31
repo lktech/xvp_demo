@@ -39,8 +39,8 @@
                @on-cancel="onCancel"
                @on-confirm="onConfirm"
                cancelText="返回"
-               confirmText="继续添加">
-        <p style="text-align:center;">保存成功</p>
+               confirmText="继续添加"
+               title='保存成功'>
       </c-confirm>
       <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
   </div>

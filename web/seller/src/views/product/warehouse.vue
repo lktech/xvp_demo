@@ -84,7 +84,7 @@
 
               }else if(data.code=='xvp_product1004'){
                 that.$vux.confirm.show({
-                  content: '无商品信息，立即添加商品？',
+                  title: '无商品信息，立即添加商品？',
                   onConfirm() {
                     utils.go({path:'/product/addSelf'},that.$router);
                   },
@@ -121,7 +121,7 @@
             }, that.$router);
           } else if(key == 'menu3') { // 删除商品
             that.$vux.confirm.show({
-              content: '商品删除后不可恢复请确认？',
+              title: '商品删除后不可恢复请确认？',
               onConfirm() {
                 utils.ajax({
                   url: basepath + "/seller/product/delete",
