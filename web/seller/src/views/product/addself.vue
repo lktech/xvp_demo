@@ -3,12 +3,12 @@
       <c-top-back></c-top-back>
       <div>
           <c-cell-wrap>
-              <c-input title="商品名称" @on-change="validate" placeholder="请输入商品名称" required name="name" :max="30" v-model="formData.name"></c-input>
+              <c-input title="商品名称" @on-change="validate" placeholder="请输入商品名称" required name="name" :max="30" v-model="formData.name" :is-type="kong"></c-input>
               <c-uploadmul title='添加商品封面图' :list="img_list1" @upload="upload1" name="upload1" :max="1">
               </c-uploadmul>
           </c-cell-wrap>
           <c-cell-wrap>
-              <c-input title="商品描述" @on-change="validate" placeholder="请输入商品描述" name="describe" :max="500" v-model="formData.describe" ></c-input>
+              <c-input title="商品描述" @on-change="validate" placeholder="请输入商品描述" name="describe" :max="500" v-model="formData.describe" :is-type="kong"></c-input>
               <c-uploadmul title='添加商品详情图' :list="img_list2" @upload="upload2" name="upload2" :max="9">
               </c-uploadmul>
           </c-cell-wrap>
@@ -88,6 +88,11 @@
             number: function (value) {
               return {
                 valid: value.search(/^[0-9]{0,}$/) > -1
+              }
+            },
+            kong: function (value) {
+              return {
+                valid: value.search(/.*[^ ].*/) > -1
               }
             },
         }
