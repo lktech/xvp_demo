@@ -72,7 +72,9 @@
                               utils.wang(that,utils,res.message);
 
                           }else{
-                              that.$vux.alert.show(res.message);
+                              that.$vux.alert.show({content:res.message,onHide :function(){
+                                return false
+                              }});
                           }
                       }
                   });
@@ -80,8 +82,14 @@
               }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
 
-                            } else {
-                that.$vux.alert.show(data.message);
+              }else if(data.code=='xvp_product1004'){
+                that.$vux.alert.show({content:'res.message',onHide :function(){
+                                return false
+                              }});
+              } else {
+                that.$vux.alert.show({content:res.message,onHide :function(){
+                                return false
+                              }});
               }
             }
           });
