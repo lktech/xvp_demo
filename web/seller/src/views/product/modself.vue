@@ -165,7 +165,7 @@
                 hold_sku_obj=[{
                   price:this.formData.price?this.formData.price*100:0,
                   stock:this.formData.stock?this.formData.stock*1:stock*1,
-                  sku_str:this.formData.name,
+                  sku_str:'无规格',
                   id:this.sku_id
                 }]
               }
@@ -289,17 +289,17 @@
                     utils.ajax({
                         url:"/seller/product/sku/get", type:'post', data: {product_id:data.result.id}, success: function (res) {
                             if (res.code=="SUCESS") {
-                              if(res.result.length>1){
+                              if(res.result.length==1 && res.result[0].sku_str=='无规格'){
+                                that.status.specifications=false;
+                                that.formData.price=res.result[0].price/100+'';
+                                that.formData.stock=res.result[0].stock+'';
+                                that.sku_id=res.result[0].id;
+                              }else{
                                 that.status.specifications=true;
                                 that.formData.specifica_list=res.result;
                                 for(var i=0;i<that.formData.specifica_list.length;i++){
                                   that.formData.specifica_list[i].price=that.formData.specifica_list[i].price/100+'';
                                 }
-                              }else{
-                                that.status.specifications=false;
-                                that.formData.price=res.result[0].price/100+'';
-                                that.formData.stock=res.result[0].stock+'';
-                                that.sku_id=res.result[0].id;
                               }
 
                               if(that.status.specifications){
