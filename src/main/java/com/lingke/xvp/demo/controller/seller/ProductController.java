@@ -139,7 +139,7 @@ public class ProductController {
 		List<SkuUpdateRequest> sku_list = request.getSku();
 		List<String> skuStrList = new ArrayList<String>();
 		for (SkuUpdateRequest sku : sku_list) {
-			String sku_str = sku.getSku_str();
+			String sku_str = sku.getSku_str().trim();
 			if(skuStrList.contains(sku_str)){
 				throw new RuntimeException("规格名称重复");
 			}
