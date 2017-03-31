@@ -143,6 +143,9 @@ public class ProductController {
 			if(skuStrList.contains(sku_str)){
 				throw new RuntimeException("规格名称重复");
 			}
+			if(sku.getPrice() <= 0){
+				throw new RuntimeException("商品规格价格不能小于或等于0");
+			}
 			skuStrList.add(sku_str);
 		}
 		XvpProductUpdateRequest ropRequest = BeanCopyUtil.copy(request, XvpProductUpdateRequest.class);
