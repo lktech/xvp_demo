@@ -105,6 +105,7 @@
 	        ctx.drawImage(img, 0, 0, w, h);
 	        var base64 = canvas.toDataURL('image/png', 0.1);
 	        if(navigator.userAgent.match(/iphone/i)) {
+	        	alert(1)
 	            var myorientation = 0;
 	            EXIF.getData(file, function() {
 	                //图片方向角  
@@ -128,14 +129,9 @@
 	                options.base64=image_base64;
 	            });
 	        }
-
-	        // 修复android
-	        if(navigator.userAgent.match(/Android/i)) {
-	            var encoder = new JPEGEncoder();
-	            base64 = encoder.encode(ctx.getImageData(0, 0, w, h), o.quality * 100 || 80);
 	            var image_base64 = base64.replace('data:image/png;base64,',''); 
 	            options.base64=image_base64;
-	        }
+
 
 	    };
 	}
