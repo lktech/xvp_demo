@@ -45,7 +45,12 @@
                     addr_status:true,             //详细地址校检
                     disabled:false,             //是否禁用保存按钮
                     addr_code_status:true,            //省市区校检
-                    setting:false
+                    setting:false,
+                    money: function (value) {
+                      return {
+                        valid: value.search(/^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/) > -1
+                      }
+                    },
                 }
             }
         },
