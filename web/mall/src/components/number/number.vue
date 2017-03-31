@@ -65,7 +65,7 @@ export default {
   },
   watch: {
     currentValue (newValue, old) {
-        newValue.replace('.','');
+        if(newValue.indexOf('.')>-1)newValue.replace('.','');
         if (this.min && this.currentValue < this.min) {
           this.currentValue = this.min
         }
