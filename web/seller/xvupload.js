@@ -52,7 +52,7 @@
 			if(ele.files){
 				var file = ele.files[0];
 				if(file.type=='image/jpg' || file.type=='image/jpeg' || file.type=='image/png' || file.type=='image/gif'){
-					wang(file);
+					wang(file,ele);
 					validate(id,file);
 				}else{
 					errorFunc[id]({"status":false,"id":id,"message":"上传图片格式错误"});
@@ -92,7 +92,7 @@
  //        }
 	// }
 
-	function wang( file) {
+	function wang(file,ele) {
 	    var img = new Image();
 	    img.src = window.URL.createObjectURL(file);
 	    img.onload = function() {
@@ -105,17 +105,28 @@
 	        ctx.drawImage(img, 0, 0, w, h);
 	        var base64 = canvas.toDataURL('image/png', 0.1);
 	        if(navigator.userAgent.match(/iphone/i)) {
-	        	alert(1)
 	            var myorientation = 0;
 	            EXIF.getData(file, function() {
 	                //图片方向角  
 	                var Orientation = null;
-	                // alert(EXIF.pretty(this));  
-	                EXIF.getAllTags(this);
-	                //alert(EXIF.getTag(this, 'Orientation')); 
-	                myorientation = EXIF.getTag(this, 'Orientation');
-	                //return;  
+	                // alert(EXIF.pretty(ele)); 
+	                var that = this;
+	                that = {
+	                		exifdata:this.exifdata,
+	                		iptcdata:this.iptcdata,
+	                		lastModified:this.lastModified,
+	                		lastModifiedDate:this.lastModifiedDate,
+	                		name:'1.'+this.type.split('/')[0],
+	                		size:this.size,
+	                		type:this.type,
+	                		webkitRelativePath:this.webkitRelativePath,
+	                		xmpdata:this.xmpdata,
 
+	                }; 
+	                EXIF.getAllTags(that);
+	                //alert(EXIF.getTag(that, 'Orientation')); 
+	                myorientation = EXIF.getTag(that, 'Orientation');
+	                //return;  
 	                //                      alert(myorientation.toString());
 	                var mpImg = new MegaPixImage(img);
 	                mpImg.render(canvas, {
