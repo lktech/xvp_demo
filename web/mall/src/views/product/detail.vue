@@ -42,7 +42,7 @@
                 goods:{},//商品信息
                 skuList:[],//商品sku列表
                 skuList1:[],
-                storeInfo:{name:'测试'},//店铺信息
+                storeInfo:{name:localStorage.getItem('store_name')},//店铺信息
                 content:{},//商品详细信息
                 goods_id:0,//商品id
                 sku:{

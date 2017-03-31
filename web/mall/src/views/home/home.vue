@@ -107,6 +107,7 @@
               if(data.code=="SUCESS") {
                 that.firstloading = true;
                 that.baseinfo.title = data.result.store_name; //店铺名称
+                localStorage.setItem('store_name',that.baseinfo.title);
                 if(data.result.logo){
                   that.baseinfo.logo = data.result.logo; //店铺名称
                 }
