@@ -345,7 +345,7 @@ export default {
       this.getError()
     },
     value (val) {
-      this.currentValue = val
+      this.currentValue = utils.emoji(val) 
     },
     equalWith (newVal) {
       if (newVal && this.equalWith) {

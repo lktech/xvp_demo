@@ -164,10 +164,14 @@
             //更新订单
             updateOrder(){
                 if(!this.status){
-                    this.$vux.alert.show('请输入正确优惠金额');
+                    this.$vux.alert.show({content:'请输入正确优惠金额',onHide :function(){
+                      return false
+                    }});
                     return false
                 }
-                if(this.discount*100<(this.discount1*1+this.json.pay*1+this.json.logistic_fee*1)){
+                alert(this.discount*100);
+                alert((this.discount1*100)+(this.json.pay*1)+(this.json.logistic_fee*1));
+                if(this.discount*100<((this.discount1*100)+(this.json.pay*1)+(this.json.logistic_fee*1))){
                     let that = this;
                     utils.ajax({
                         url: basepath + "/seller/order/discount",
@@ -190,10 +194,6 @@
                             }
                         }
                     });
-                }else if(this.discount==''){
-                    this.$vux.alert.show({content:'请输入优惠金额',onHide :function(){
-                                  return false
-                                }});
                 }else{
                     this.$vux.alert.show({content:'优惠金额需要小于实付金额',onHide :function(){
                                   return false

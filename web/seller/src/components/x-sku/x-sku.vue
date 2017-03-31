@@ -112,12 +112,10 @@
 		},
 		mounted: function () {
             this.$nextTick(function () {
- 
-
-
 				this.actId = this.sku[0].id;
 				this.skustock = this.sku[0].stock;
 				this.skuprice = this.sku[0].price;
+				this.actName = this.sku[0].name;
 				if(this.skustock*1 <= 0){
 					this.text1="已售罄";
 					this.disabled1=true;
