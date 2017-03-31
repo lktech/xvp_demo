@@ -179,6 +179,7 @@
 				url: options.uploadUrl + interfaces.vldUrl,
 				dataType: 'json',
 				type: 'POST',
+				async:true,
 				data: {
 					"total":total,
 					"name":'1.'+file.type.split('/')[1],
@@ -232,7 +233,7 @@
 				dataType: 'json',
 				contentType: false,
 				type: 'POST',
-				async:false,
+				async:true,
 				data:fmData,
 				success: function (data) {
 					if (data.success){
