@@ -12,6 +12,7 @@ import com.Rop.api.ApiException;
 import com.lingke.xvp.demo.controller.response.ExceptionResponse;
 import com.lingke.xvp.demo.controller.response.SuccessResponse;
 import com.lingke.xvp.demo.exception.DemoException;
+import com.lingke.xvp.demo.exception.UserNoLoginException;
 
 @Component
 @Aspect
@@ -45,6 +46,13 @@ public class XvpAspect {
 			ExceptionResponse exceptionResponse = new ExceptionResponse();
 			exceptionResponse.setCode(e.getCode());
 			exceptionResponse.setMessage(e.getMessage());
+			return exceptionResponse;
+		} 
+		catch (UserNoLoginException e) {
+			logger.error("请求处理返回用户没有登录异常， errorcode： {} , errorMessage：{}", e.getMessage(),e.getCode(), e);
+			ExceptionResponse exceptionResponse = new ExceptionResponse();
+			exceptionResponse.setCode("user_seller_error");
+			exceptionResponse.setMessage("用户没有登录");
 			return exceptionResponse;
 		} 
 		catch (RuntimeException e) {
