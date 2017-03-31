@@ -529,7 +529,7 @@ exports.MenuShare=function(){
               timestamp: data.result.timestamp, // 必填，生成签名的时间戳
               nonceStr: data.result.nonceStr, // 必填，生成签名的随机串
               signature: data.result.signature,// 必填，签名，见附录1
-              jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+              jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline','hideMenuItems'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
           });
           wx.ready(function(){
             wx.onMenuShareAppMessage({
@@ -543,6 +543,9 @@ exports.MenuShare=function(){
                 title: '小V铺商家管理后台', // 分享标题
                 link: 'http://demo.open.xiaovpu.com/seller/index.html', // 分享链接
                 imgUrl: 'http://img1.xiaovpu.com/3628208054774302.png' // 分享图标
+            });
+            wx.hideMenuItems({
+                menuList: ['menuItem:copyUrl'] 
             });
           })
         } 
