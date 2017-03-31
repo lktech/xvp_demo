@@ -68,7 +68,7 @@ public class ProductController {
 		ropRequest.setVirtual_flg(0);
 		XvpProductCreateResponse productCreateResponse = ropClientAdapter.ropInvoke(ropRequest);
 		//FOR TESTING
-		DemoProduct.addProduct(Long.valueOf(productCreateResponse.getProduct().getId()), request.getName());
+//		DemoProduct.addProduct(Long.valueOf(productCreateResponse.getProduct().getId()), request.getName());
 		for (SkuAddRequest skuRequest : request.getSku()) {
 			XvpSkuAddskuRequest ropSkuRequest = BeanCopyUtil.copy(skuRequest, XvpSkuAddskuRequest.class);
 			ropSkuRequest.setApp_id(ropClientAdapter.getAppId());
@@ -101,11 +101,11 @@ public class ProductController {
 		ropRequest.setProduct_id(request.getId());
 		XvpProductGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		ProductResponse response = BeanCopyUtil.copy(ropResponse.getProduct(), ProductResponse.class);
-		//FOR TESTING
-		String name = DemoProduct.getProductName(request.getId());
-		if(name!=null){
-			response.setName(name);
-		}
+//		FOR TESTING
+//		String name = DemoProduct.getProductName(request.getId());
+//		if(name!=null){
+//			response.setName(name);
+//		}
 		return response;
 	}
 
