@@ -35,6 +35,7 @@ import com.lingke.xvp.demo.controller.response.OrderQueryItemResponse;
 import com.lingke.xvp.demo.controller.response.OrderQueryListResponse;
 import com.lingke.xvp.demo.controller.response.OrderQueryResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
+import com.lingke.xvp.demo.exception.UserNoLoginException;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
 
@@ -111,6 +112,11 @@ public class OrderController {
 		XvpOrderGetRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderGetRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpOrderGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
+		String store_id = ropResponse.getXvporder().getStore_id();
+		String user_id = ropResponse.getXvporder().getXvp_uid();
+		if (!store_id.equals(SessionUtil.userGetStoreId()) || !user_id.equals(SessionUtil.userGetUserId())) {
+			throw new UserNoLoginException();
+		}
 		OrderQueryResponse response = copyXvpOrderToXvpResponse(ropResponse.getXvporder());
 		return response;
 	}
