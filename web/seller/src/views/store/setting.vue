@@ -5,13 +5,13 @@
          <c-banner-info :title="res.formData.name" @upload='upload' :upload-type='true' :logo="res.formData.logo" banner='http://img1.xiaovpu.com/3028216099602841.png'>
          </c-banner-info>
          <c-group>
-             <c-input title="店铺名称" @on-change="validate" placeholder="请输入店铺名称" :max="20" name="name"required  v-model="res.formData.name" ></c-input>
+             <c-input title="店铺名称" @on-change="validate" placeholder="请输入店铺名称" :max="20" name="name" required :is-type="kong" v-model="res.formData.name" ></c-input>
              <c-city title="地址" v-model="res.formData.addr_code" @on-hide="logHide" placeholder="您所在的省市县" :list="res.addressData"></c-city>
          </c-group> 
          <c-group>   
-             <c-input title="详细地址" @on-change="validate" placeholder="请输入您的详细地址" name="address" required  v-model="res.formData.address":max="100"></c-input>
-             <c-input title="客服电话" @on-change="validate" placeholder="请输入客服电话" name="phone" required  v-model="res.formData.phone" :max="30"></c-input>
-             <c-input title="QQ号码 " @on-change="validate" placeholder="请输入QQ号码(选填)" name="QQ" v-model="res.formData.QQ" :max="20"></c-input>
+             <c-input title="详细地址" @on-change="validate" placeholder="请输入您的详细地址" name="address" required  v-model="res.formData.address":max="100" :is-type="kong"></c-input>
+             <c-input title="客服电话" @on-change="validate" placeholder="请输入客服电话" name="phone" required  v-model="res.formData.phone" :max="30" :is-type="kong"></c-input>
+             <c-input title="QQ号码 " @on-change="validate" placeholder="请输入QQ号码(选填)" name="QQ" v-model="res.formData.QQ" :max="20" :is-type="kong"></c-input>
          </c-group>
          
          <div class="wrap-pd"  style="margin-top:10px">
@@ -46,9 +46,9 @@
                     disabled:false,             //是否禁用保存按钮
                     addr_code_status:true,            //省市区校检
                     setting:false,
-                    money: function (value) {
+                    kong: function (value) {
                       return {
-                        valid: value.search(/^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/) > -1
+                        valid: value.search(/.*[^ ].*/) > -1
                       }
                     },
                 }

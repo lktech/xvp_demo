@@ -2,13 +2,13 @@
 <div class="addinfo">
     <c-top-back></c-top-back>
     <c-group>
-        <c-input title="店铺名称" @on-change="validate" placeholder="请输入店铺名称" required name="name" :max="20" v-model="formData.name" ></c-input>
+        <c-input title="店铺名称" @on-change="validate" placeholder="请输入店铺名称" required name="name" :max="20" v-model="formData.name" :is-type="kong"></c-input>
         <c-city title="区域" v-model="formData.addr_code" @on-hide="logHide" placeholder="您所在的省市县" :list="addressData"></c-city>
     </c-group> 
     <c-group>   
-        <c-input title="详细地址" @on-change="validate" placeholder="请输入您的详细地址" required name="address" v-model="formData.address" :max="100"></c-input>
-        <c-input title="客服电话" @on-change="validate" placeholder="请输入客服电话" name="phone" required v-model="formData.phone" :max="30"></c-input>
-        <c-input title="QQ号码 " @on-change="validate" placeholder="请输入QQ号码(选填)" name="QQ" v-model="formData.QQ" :max="20"></c-input>
+        <c-input title="详细地址" @on-change="validate" placeholder="请输入您的详细地址" required name="address" v-model="formData.address" :max="100" :is-type="kong"></c-input>
+        <c-input title="客服电话" @on-change="validate" placeholder="请输入客服电话" name="phone" required v-model="formData.phone" :max="30" :is-type="kong"></c-input>
+        <c-input title="QQ号码 " @on-change="validate" placeholder="请输入QQ号码(选填)" name="QQ" v-model="formData.QQ" :max="20" :is-type="kong"></c-input>
     </c-group>
     <div class="wrap-pd" style="margin-top:10px">
         <c-button text="进入店铺" :type="color" :disabled="disabled" @click.native="preserve" size="block"></c-button>
@@ -36,7 +36,12 @@
                 phone_status:false,             //手机号校检
                 addr_status:false,             //详细地址校检
                 disabled:true,             //是否禁用保存按钮
-                addr_code_status:false             //省市区校检
+                addr_code_status:false,             //省市区校检
+                kong: function (value) {
+                  return {
+                    valid: value.search(/.*[^ ].*/) > -1
+                  }
+                },
             }
         },
 
