@@ -179,7 +179,7 @@
                 hold_sku_obj=[{
                   price:this.formData.price?this.formData.price*100:0,
                   stock:this.formData.stock?this.formData.stock*1:stock*1,
-                  sku_str:this.formData.name
+                  sku_str:'无规格'
                 }];
               }
               

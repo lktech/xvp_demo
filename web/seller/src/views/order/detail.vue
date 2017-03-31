@@ -167,7 +167,7 @@
                     this.$vux.alert.show('请输入正确优惠金额');
                     return false
                 }
-                if(this.discount*100<this.discount1+this.json.pay+this.json.logistic_fee){
+                if(this.discount*100<(this.discount1*1+this.json.pay*1+this.json.logistic_fee*1)){
                     let that = this;
                     utils.ajax({
                         url: basepath + "/seller/order/discount",

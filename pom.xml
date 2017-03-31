@@ -88,7 +88,9 @@
 								  <include>index.html</include>
 								  <include>test_share.html</include>
 								  <include>test_share2.html</include>
-								   <include>xvupload.js</include>
+								  <include>xvupload.js</include>
+								  <include>exif.js</include>
+								  <include>MegaPixImage.js</include>
 								  <include>dist/**</include>
 								  <include>static/**</include>
 								</includes>
