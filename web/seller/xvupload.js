@@ -108,6 +108,7 @@
 	        	alert(1)
 	            var myorientation = 0;
 	            EXIF.getData(file, function() {
+	            	alert(2)
 	                //图片方向角  
 	                var Orientation = null;
 	                // alert(EXIF.pretty(ele)); 
@@ -126,6 +127,8 @@
 	                base64 = canvas.toDataURL('image/png', 0.1);
 	                var image_base64 = base64.replace('data:image/png;base64,',''); 
 	                options.base64=image_base64;
+	                alert(3);
+	                alert(options.base64);
 	            });
 	        }
 	            var image_base64 = base64.replace('data:image/png;base64,',''); 
