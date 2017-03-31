@@ -74,7 +74,9 @@
                           //utils.header();
                           that.login1();
                       }else{
-                          that.$vux.alert.show('用户名或密码不正确');
+                          this.$vux.alert.show({content:'用户名或密码不正确',onHide :function(){
+                                  return false
+                                }});
                       }
                   }
               });

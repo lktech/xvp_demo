@@ -222,8 +222,10 @@
                       }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
 
-                            }else{
-                          that.$vux.alert.show(data.message);
+                      }else{
+                          that.$vux.alert.show({content:data.message,onHide :function(){
+                                                            return false
+                                                          }});
                       }
                   },
                   message:'拼命保存中'

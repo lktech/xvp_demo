@@ -96,7 +96,9 @@
                                   utils.go({path:'list'},that.$router,true);
                                 }});
                             }else{
-                                that.$vux.alert.show('发货失败');
+                                that.$vux.alert.show({content:data.message,onHide :function(){
+                                                            return false
+                                                          }});
                             }
                         }
                     });

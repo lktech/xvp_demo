@@ -199,12 +199,9 @@
                       }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
                       }else{
-                          that.$vux.alert.show(data.message);
-                          if(that.status.specifications){
-                            for(var i=0;i<that.formData.specifica_list.length;i++){
-                              that.formData.specifica_list[i].price=that.formData.specifica_list[i].price/100+'';
-                            }
-                          }
+                          this.$vux.alert.show({content:data.message,onHide :function(){
+                            return false
+                          }});
                       }
                   }
               });
@@ -311,15 +308,19 @@
                                 utils.wang(that,utils,res.message);
 
                             }else{
-                                that.$vux.alert.show(res.message);
+                                that.$vux.alert.show({content:res.message,onHide :function(){
+                                                                      return false
+                                                                    }});
                             }
                         }
                     });
                   }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
 
-                            }else{
-                      that.$vux.alert.show(data.message);
+                  }else{
+                      that.$vux.alert.show({content:data.message,onHide :function(){
+                                                            return false
+                                                          }});
                   }
               }
           }); 

@@ -1,5 +1,6 @@
 <template>
 <div>
+    <c-top-back></c-top-back>
     <div v-if="!success">
         <c-group>
             <c-input title="手机号" placeholder="请输入手机号" @on-change="validate" required v-model="formData.phone" name="phone" :max='11' is-type="china-mobile"></c-input>
@@ -88,7 +89,9 @@
                                     if(data.code=="SUCESS"){
                                         that.formData.sn=data.result.sn;
                                     }else{
-                                        that.$vux.alert.show('发送失败，请重试');
+                                        that.$vux.alert.show({content:'发送失败，请重试',onHide :function(){
+                                                return false
+                                              }});
                                     }
                                 }
                             });
@@ -137,7 +140,9 @@
                             if(data.code=="SUCESS"){
                                 that.success=true;
                             }else{
-                                that.$vux.alert.show(data.message);
+                                that.$vux.alert.show({content:data.message,onHide :function(){
+                                        return false
+                                      }});
                             }
                         }
                     });

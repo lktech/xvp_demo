@@ -70,7 +70,9 @@
                             if(data.code=="SUCESS"){
                                 utils.go({path:'/store/store'},that.$router,true);
                             }else{
-                                that.$vux.alert.show(data.message);
+                                that.$vux.alert.show({content:data.message,onHide :function(){
+                                                            return false
+                                                          }});
                             }
                         }
                     });
@@ -138,7 +140,9 @@
                             utils.wang(that,utils,data.message);
 
                         }else{
-                            that.$vux.alert.show(data.message);
+                            that.$vux.alert.show({content:data.message,onHide :function(){
+                                                            return false
+                                                          }});
                         }
 
                     }

@@ -104,7 +104,9 @@
                                         
 
                                     }else{
-                                        that.$vux.alert.show(res.message);
+                                        that.$vux.alert.show({content:res.message,onHide :function(){
+                                                            return false
+                                                          }});
                                     }
                                 }
                                 
@@ -114,8 +116,10 @@
                         }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
 
-                            }else{
-                            that.$vux.alert.show(data.message);
+                        }else{
+                            that.$vux.alert.show({content:data.message,onHide :function(){
+                                                            return false
+                                                          }});
                         }
                     }
                     
@@ -178,7 +182,9 @@
                 this.submitType = "buy";
             },
             submit(){
-                this.$vux.alert.show('无法购买自己店铺的商品。');
+                this.$vux.alert.show({content:'无法购买自己店铺的商品。',onHide :function(){
+                                            return false
+                                          }});
             }
             
         },

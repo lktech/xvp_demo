@@ -87,7 +87,9 @@
 
                         }else{
                             that.orderData = [];
-                            that.$vux.alert.show(data.message);
+                            that.$vux.alert.show({content:data.message,onHide :function(){
+                                                            return false
+                                                          }});
                         }
                     }
                 });
