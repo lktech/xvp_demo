@@ -336,6 +336,7 @@
 			alert('浏览器版本过低！');
 			return;
 		}
+		xhr.timeout = 300000;
 		//obj.url = obj.url + '?rand=' + Math.random();
 		if (obj.type === 'get' || obj.type === 'GET') {
 			obj.url += obj.url.indexOf('?') == -1 ? '?' + obj.data : '&' + obj.data; 
