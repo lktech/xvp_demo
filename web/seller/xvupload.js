@@ -70,58 +70,107 @@
 		}
 	}
 	
-	var wang = function(fileObj){
+	// var wang = function(fileObj){
 
-	 	var file = fileObj,
-            cvs = document.createElement("canvas"),
-            ctx = cvs.getContext("2d");
-        if(file){
-            var url = window.URL.createObjectURL(file);//PS:不兼容IE
-            var img = new Image();
-            img.src = url;
-            img.onload = function(){
-                ctx.clearRect(0,0,cvs.width,cvs.height);
+	//  	var file = fileObj,
+ //            cvs = document.createElement("canvas"),
+ //            ctx = cvs.getContext("2d");
+ //        if(file){
+ //            var url = window.URL.createObjectURL(file);//PS:不兼容IE
+ //            var img = new Image();
+ //            img.src = url;
+ //            img.onload = function(){
+ //                ctx.clearRect(0,0,cvs.width,cvs.height);
 
-                cvs.width = 500;
-                cvs.height = 500 * (img.height / img.width);
-                drawImageIOSFix(ctx,img,0,0,img.width,img.height,0,0,cvs.width,cvs.height);
-				var base64 = cvs.toDataURL("image/png",0.1);
-                var image_base64 = base64.replace('data:image/png;base64,',''); 
-                options.base64 = image_base64;
-            }
-        }
+ //                cvs.width = 500;
+ //                cvs.height = 500 * (img.height / img.width);
+ //                drawImageIOSFix(ctx,img,0,0,img.width,img.height,0,0,cvs.width,cvs.height);
+	// 			var base64 = cvs.toDataURL("image/"+file.type.split('/')[1],0.1);
+ //                var image_base64 = base64.replace('data:image/png;base64,',''); 
+ //                options.base64 = image_base64;
+ //            }
+ //        }
+	// }
+
+	function wang( file) {
+	    var img = new Image();
+	    img.src = window.URL.createObjectURL(file);
+	    img.onload = function() {
+	        var canvas = document.createElement('canvas');
+	        var ctx = canvas.getContext('2d');
+            var w = 500;
+            var h =w * (img.height / img.width);
+            canvas.width = w;
+            canvas.height = h;
+	        ctx.drawImage(img, 0, 0, w, h);
+	        var base64 = canvas.toDataURL(file.type, 0.1);
+	        if(navigator.userAgent.match(/iphone/i)) {
+	            var myorientation = 0;
+	            EXIF.getData(file, function() {
+	                //图片方向角  
+	                var Orientation = null;
+	                // alert(EXIF.pretty(this));  
+	                EXIF.getAllTags(this);
+	                //alert(EXIF.getTag(this, 'Orientation')); 
+	                myorientation = EXIF.getTag(this, 'Orientation');
+	                //return;  
+
+	                //                      alert(myorientation.toString());
+	                var mpImg = new MegaPixImage(img);
+	                mpImg.render(canvas, {
+	                    maxWidth: w,
+	                    maxHeight: h,
+	                    quality: 0.1,
+	                    orientation: myorientation
+	                });
+	                base64 = canvas.toDataURL(file.type, 0.1);
+	                var image_base64 = base64.replace('data:'+file.type+';base64,',''); 
+	                options.base64=image_base64;
+	            });
+	        }
+
+	        // 修复android
+	        if(navigator.userAgent.match(/Android/i)) {
+	            var encoder = new JPEGEncoder();
+	            base64 = encoder.encode(ctx.getImageData(0, 0, w, h), o.quality * 100 || 80);
+	            var image_base64 = base64.replace('data:'+file.type+';base64,',''); 
+	            options.base64=image_base64;
+	        }
+
+	    };
 	}
 
-	function detectVerticalSquash(img) {
-		var iw = img.naturalWidth, ih = img.naturalHeight;
-		var canvas = document.createElement('canvas');
-		canvas.width = 1;
-		canvas.height = ih;
-		var ctx = canvas.getContext('2d');
-		ctx.drawImage(img, 0, 0);
-		var data = ctx.getImageData(0, 0, 1, ih).data;
-		// search image edge pixel position in case it is squashed vertically.
-		var sy = 0;
-		var ey = ih;
-		var py = ih;
-		while (py > sy) {
-			var alpha = data[(py - 1) * 4 + 3];
-			if (alpha === 0) {
-				ey = py;
-			} else {
-				sy = py;
-			}
-			py = (ey + sy) >> 1;
-		}
-		var ratio = (py / ih);
-		return (ratio===0)?1:ratio;
-	}
-	function drawImageIOSFix(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
-		var vertSquashRatio = detectVerticalSquash(img);
-		ctx.drawImage(img, sx * vertSquashRatio, sy * vertSquashRatio,
-				sw * vertSquashRatio, sh * vertSquashRatio,
-				dx, dy, dw, dh);
-	}
+
+	// function detectVerticalSquash(img) {
+	// 	var iw = img.naturalWidth, ih = img.naturalHeight;
+	// 	var canvas = document.createElement('canvas');
+	// 	canvas.width = 1;
+	// 	canvas.height = ih;
+	// 	var ctx = canvas.getContext('2d');
+	// 	ctx.drawImage(img, 0, 0);
+	// 	var data = ctx.getImageData(0, 0, 1, ih).data;
+	// 	// search image edge pixel position in case it is squashed vertically.
+	// 	var sy = 0;
+	// 	var ey = ih;
+	// 	var py = ih;
+	// 	while (py > sy) {
+	// 		var alpha = data[(py - 1) * 4 + 3];
+	// 		if (alpha === 0) {
+	// 			ey = py;
+	// 		} else {
+	// 			sy = py;
+	// 		}
+	// 		py = (ey + sy) >> 1;
+	// 	}
+	// 	var ratio = (py / ih);
+	// 	return (ratio===0)?1:ratio;
+	// }
+	// function drawImageIOSFix(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
+	// 	var vertSquashRatio = detectVerticalSquash(img);
+	// 	ctx.drawImage(img, sx * vertSquashRatio, sy * vertSquashRatio,
+	// 			sw * vertSquashRatio, sh * vertSquashRatio,
+	// 			dx, dy, dw, dh);
+	// }
 
 	//验证 上传
 	var validate = function(id,file){

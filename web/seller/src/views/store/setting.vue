@@ -2,10 +2,10 @@
 <div class="tabbar-wrap2" v-if="res.setting">
     <div v-if="!res.inv_set">
          <c-top-back></c-top-back>
-         <c-banner-info :title="res.formData.name" @upload='upload' :upload-type='true' :logo="res.formData.logo" :max="20" banner='http://img1.xiaovpu.com/3028216099602841.png'>
+         <c-banner-info :title="res.formData.name" @upload='upload' :upload-type='true' :logo="res.formData.logo" banner='http://img1.xiaovpu.com/3028216099602841.png'>
          </c-banner-info>
          <c-group>
-             <c-input title="店铺名称" @on-change="validate" placeholder="请输入店铺名称" name="name"required  v-model="res.formData.name" ></c-input>
+             <c-input title="店铺名称" @on-change="validate" placeholder="请输入店铺名称" :max="20" name="name"required  v-model="res.formData.name" ></c-input>
              <c-city title="地址" v-model="res.formData.addr_code" @on-hide="logHide" placeholder="您所在的省市县" :list="res.addressData"></c-city>
          </c-group> 
          <c-group>   

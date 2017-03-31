@@ -1,6 +1,7 @@
 <template>
 <div>
     <div>
+        <c-top-back mar='true' hide="true"></c-top-back>
         <c-group>
             <c-input title="手机号" placeholder="请输入手机号" required @on-change="validate" v-model="formData.phone" name="phone" is-type="china-mobile" :max='11'></c-input>
             <c-input title="密码 " type="password" placeholder="请输入密码" @on-change="validate" name="password" required v-model="formData.password" :max='20'></c-input>

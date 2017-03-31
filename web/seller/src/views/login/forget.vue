@@ -98,9 +98,7 @@
                                 }
                             });
                         }else{
-                            that.$vux.alert.show({content:'您没有注册过,点击确定去注册',onHide :function(){
-                              utils.go({path:'/login/register'},that.$router);
-                            }});
+                            that.$vux.alert.show('该手机号未注册');
                         }
                     }
                 });
