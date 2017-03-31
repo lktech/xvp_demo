@@ -65,7 +65,7 @@ export default {
   },
   watch: {
     currentValue (newValue, old) {
-      
+        newValue.replace('.','');
         if (this.min && this.currentValue < this.min) {
           this.currentValue = this.min
         }
@@ -83,7 +83,6 @@ export default {
             this.currentValue = this.max
           }
         }
-        
   
     },
     value (newValue) {
