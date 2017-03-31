@@ -199,7 +199,7 @@
                       }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
                       }else{
-                          this.$vux.alert.show({content:data.message,onHide :function(){
+                          that.$vux.alert.show({content:data.message,onHide :function(){
                             return false
                           }});
                       }
