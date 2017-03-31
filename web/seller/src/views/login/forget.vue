@@ -51,6 +51,7 @@
         mounted: function () {
             this.$nextTick(function () {
               utils.loadingHide();
+              utils.MenuShare();
             })
         },
         methods:{

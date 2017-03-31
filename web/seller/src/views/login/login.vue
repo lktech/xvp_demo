@@ -39,6 +39,7 @@
             this.$nextTick(function () {
               utils.loadingHide();
               //this.login1('1');
+              utils.MenuShare();
             })
         },
         methods:{
