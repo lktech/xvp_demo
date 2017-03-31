@@ -169,9 +169,7 @@
                     }});
                     return false
                 }
-                alert(this.discount*100);
-                alert((this.discount1*100)+(this.json.pay*1)+(this.json.logistic_fee*1));
-                if(this.discount*100<((this.discount1*100)+(this.json.pay*1)+(this.json.logistic_fee*1))){
+                if(this.discount*100<((this.discount1*100)+(this.json.pay*1))){
                     let that = this;
                     utils.ajax({
                         url: basepath + "/seller/order/discount",
