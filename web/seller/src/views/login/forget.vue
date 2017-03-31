@@ -83,7 +83,7 @@
                     type: 'POST',
                     data:{'phone':that.formData.phone},
                     success: function(data){
-                        if(data.result.flag=="yes"){
+                        if(data.result.flag==="yes"){
                             utils.ajax({
                                 url: basepath + "/seller/seller/verify",
                                 dataType: 'json',
@@ -93,14 +93,14 @@
                                     if(data.code=="SUCESS"){
                                         that.formData.sn=data.result.sn;
                                     }else{
-                                        this.$vux.alert.show({content:'发送失败，请重试',onHide :function(){
+                                        that.$vux.alert.show({content:'发送失败，请重试',onHide :function(){
                                                 return false
                                               }});
                                     }
                                 }
                             });
                         }else{
-                            this.$vux.alert.show({content:'该手机号未注册',onHide :function(){
+                            that.$vux.alert.show({content:'该手机号未注册',onHide :function(){
                                     return false
                                   }});
                         }

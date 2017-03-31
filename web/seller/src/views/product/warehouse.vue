@@ -83,8 +83,8 @@
                                 utils.wang(that,utils,data.message);
 
               }else if(data.code=='xvp_product1004'){
-                that.$vux.alert.show({content:'res.message',onHide :function(){
-                                return false
+                that.$vux.alert.show({content:'无商品信息，立即添加商品？',onHide :function(){
+                                utils.go({path:'/product/addSelf'},that.$router);
                               }});
               } else {
                 that.$vux.alert.show({content:res.message,onHide :function(){

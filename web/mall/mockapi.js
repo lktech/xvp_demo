@@ -168,6 +168,80 @@ Mock.mock(basepath + "/user/order/query",'post',{
             'need_logistics_flg':'是否需要物流', //0 不要物流 1 需要物流,
              'create_time':'value'
          }] 
+    },{
+        orderNum: "2394847HGGR",
+        orderStatus: "DSH",
+        pay: 3000,
+        goods: [
+            {
+                id: "123",
+                goodsName: "26度果园 芒果攀枝花果树熟芒果8kg芒果攀枝花果树熟芒果8kg",
+                goodsUrl: "http://tupian.enterdesk.com/2012/1115/gha/3/enterdesk%20%289%29.jpg",
+                sku: "3kg",
+                price: 1000,
+                num: 3
+            },
+            {
+                id: "456",
+                goodsName: "26度果园 芒果攀枝花果树熟芒果8kg芒果攀枝花果树熟芒果8kg",
+                goodsUrl: "http://tupian.enterdesk.com/2012/1115/gha/3/enterdesk%20%289%29.jpg",
+                sku: "2kg",
+                price: 1000,
+                num: 3
+            }, {
+                id: "789",
+                goodsName: "芒果攀枝花果树熟芒果8kg芒果攀枝花果树熟芒果8kg",
+                goodsUrl: "http://tupian.enterdesk.com/2012/1115/gha/3/enterdesk%20%289%29.jpg",
+                sku: "无",
+                price: 2000,
+                num: 2
+            }
+        ],
+        'orderdeliverys':[{
+            'id':'value',
+            'logistics_company_code':'快递公司编码',
+            'logistics_company_name':'快递公司名称',
+            'logistics_num':  '运单号',
+            'need_logistics_flg':'是否需要物流', //0 不要物流 1 需要物流,
+             'create_time':'value'
+         }] 
+    },{
+        orderNum: "2394847HGGR",
+        orderStatus: "DSH",
+        pay: 3000,
+        goods: [
+            {
+                id: "123",
+                goodsName: "26度果园 芒果攀枝花果树熟芒果8kg芒果攀枝花果树熟芒果8kg",
+                goodsUrl: "http://tupian.enterdesk.com/2012/1115/gha/3/enterdesk%20%289%29.jpg",
+                sku: "3kg",
+                price: 1000,
+                num: 3
+            },
+            {
+                id: "456",
+                goodsName: "26度果园 芒果攀枝花果树熟芒果8kg芒果攀枝花果树熟芒果8kg",
+                goodsUrl: "http://tupian.enterdesk.com/2012/1115/gha/3/enterdesk%20%289%29.jpg",
+                sku: "2kg",
+                price: 1000,
+                num: 3
+            }, {
+                id: "789",
+                goodsName: "芒果攀枝花果树熟芒果8kg芒果攀枝花果树熟芒果8kg",
+                goodsUrl: "http://tupian.enterdesk.com/2012/1115/gha/3/enterdesk%20%289%29.jpg",
+                sku: "无",
+                price: 2000,
+                num: 2
+            }
+        ],
+        'orderdeliverys':[{
+            'id':'value',
+            'logistics_company_code':'快递公司编码',
+            'logistics_company_name':'快递公司名称',
+            'logistics_num':  '运单号',
+            'need_logistics_flg':'是否需要物流', //0 不要物流 1 需要物流,
+             'create_time':'value'
+         }] 
     }]
 });
 
