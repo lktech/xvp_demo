@@ -15,6 +15,16 @@
                  @on-confirm="onConfirm">
           <p style="text-align:center;">确认收货后，订单交易完成，钱款将立即到达商家账户</p>
         </c-confirm>
+        <c-tabbar style='height:58px;' @click.native="next">
+            <c-tabbar-item >
+              <img slot="icon"  src="http://static.taggole.com/sithbrobot/poster/1490951254855.jpg">
+              <span slot="label">首页</span>
+            </c-tabbar-item>
+            <c-tabbar-item selected >
+              <img slot="icon" src="http://static.taggole.com/sithbrobot/poster/1490951277761.jpg">
+              <span slot="label">我的</span>
+            </c-tabbar-item>
+          </c-tabbar>
     </div>
 </template>
 <script>
@@ -113,6 +123,9 @@
                         }
                     }
                 });
+            },
+            next(){
+                utils.go({path:'/home/home',query:{id:sessionStorage.getItem('product_id')}},this.$router);
             }
 
         },
@@ -125,6 +138,8 @@
             // 滚动加载
             "cScrollLoad": require('../../components/x-scroll-load/x-scroll-load.vue'),
             "cConfirm": require('../../components/confirm/confirm.vue'),
+            "cTabbar": require('../../components/tabbar/tabbar.vue'),
+            "cTabbarItem": require('../../components/tabbar/tabbar-item.vue'),
         }
     }
 </script>

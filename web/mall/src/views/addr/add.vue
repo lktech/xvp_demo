@@ -3,7 +3,7 @@
     <c-top-back></c-top-back>
     <c-group>
         <c-input title="收货人 " @on-change="validate" placeholder="请输入姓名" name="name" v-model="formData.name" required :max="20" ></c-input>
-        <c-input title="电话  " @on-change="validate" placeholder="请输入手机号" name="phone" required v-model="formData.phone" is-type="china-mobile" ></c-input>
+        <c-input title="手机号  " @on-change="validate" placeholder="请输入手机号" name="phone" required v-model="formData.phone" is-type="china-mobile" ></c-input>
             <c-city title="选择地区" v-model="formData.addr_code" @getname="getname" @on-hide="logHide" placeholder="选择省市县" :list="addressData"></c-city>
         <c-input title="详细地址" @on-change="validate" placeholder="请输入详细地址" required name="address" v-model="formData.address" :min="5" :max="100"></c-input>
         <c-input title="邮编  " @on-change="validate" placeholder="请输入邮编" required name="post_code" v-model="formData.post_code" is-type="number" :min="6" :max="10"></c-input>

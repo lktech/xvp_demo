@@ -24,7 +24,7 @@
                 <p v-for='i in goods.product_desc'><img v-bind:src="i" alt="" style="width:100%; height:auto;"></p>
             </div>
 
-            <c-sku v-model="sku.status" :title="goods.name" :img="goods.pics" :price="goods.price" :text="sku.buttonTxt" :sku='skuList' @submit="submit"></c-sku>
+            <c-sku v-model="sku.status" fillable :title="goods.name" :img="goods.pics" :price="goods.price" :text="sku.buttonTxt" :sku='skuList' @submit="submit"></c-sku>
             <c-button text="立即购买" size="block" @click.native="barClick" type="primary" style="position:fixed; bottom:0"></c-button>
         </div>
     </div>
