@@ -179,7 +179,6 @@
 				url: options.uploadUrl + interfaces.vldUrl,
 				dataType: 'json',
 				type: 'POST',
-				async:true,
 				data: {
 					"total":total,
 					"name":'1.'+file.type.split('/')[1],
@@ -233,7 +232,7 @@
 				dataType: 'json',
 				contentType: false,
 				type: 'POST',
-				async:true,
+				async:false,
 				data:fmData,
 				success: function (data) {
 					if (data.success){
@@ -246,7 +245,7 @@
 						
 					}else{
 						breakFlag = true;
-						errorFunc[id]({"status":false,"id":id,"message":"上传失败！"});
+						errorFunc[id]({"status":false,"id":id,"message":"上传失败"});
 						clearInput(id);
 					}
 					
@@ -329,17 +328,14 @@
 	
 	//封装ajax
 	function ajax(obj) {
-		 var xhr;
 		if (window.XMLHttpRequest) {//IE7+、Firefox、Opera、Chrome 和Safari
-			 xhr = new XMLHttpRequest();
-			 xhr.timeout = 300000;
+			 var xhr = new XMLHttpRequest();
 		} else if (window.ActiveXObject) {   //IE6 及以下
-			 xhr = new ActiveXObject("Microsoft.XMLHTTP");
+			var xhr = new ActiveXObject("Microsoft.XMLHTTP");
 		} else {
 			alert('浏览器版本过低！');
 			return;
 		}
-	
 		//obj.url = obj.url + '?rand=' + Math.random();
 		if (obj.type === 'get' || obj.type === 'GET') {
 			obj.url += obj.url.indexOf('?') == -1 ? '?' + obj.data : '&' + obj.data; 
