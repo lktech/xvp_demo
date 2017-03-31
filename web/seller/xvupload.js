@@ -245,7 +245,7 @@
 						
 					}else{
 						breakFlag = true;
-						errorFunc[id]({"status":false,"id":id,"message":"上传失败"});
+						errorFunc[id]({"status":false,"id":id,"message":"上传失败！"});
 						clearInput(id);
 					}
 					
