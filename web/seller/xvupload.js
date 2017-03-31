@@ -105,27 +105,15 @@
 	        ctx.drawImage(img, 0, 0, w, h);
 	        var base64 = canvas.toDataURL('image/png', 0.1);
 	        if(navigator.userAgent.match(/iphone/i)) {
+	        	alert(1)
 	            var myorientation = 0;
 	            EXIF.getData(file, function() {
 	                //图片方向角  
 	                var Orientation = null;
 	                // alert(EXIF.pretty(ele)); 
-	                var that = this;
-	                that = {
-	                		exifdata:this.exifdata,
-	                		iptcdata:this.iptcdata,
-	                		lastModified:this.lastModified,
-	                		lastModifiedDate:this.lastModifiedDate,
-	                		name:'1.'+this.type.split('/')[0],
-	                		size:this.size,
-	                		type:this.type,
-	                		webkitRelativePath:this.webkitRelativePath,
-	                		xmpdata:this.xmpdata,
-
-	                }; 
-	                EXIF.getAllTags(that);
-	                //alert(EXIF.getTag(that, 'Orientation')); 
-	                myorientation = EXIF.getTag(that, 'Orientation');
+	                EXIF.getAllTags(this);
+	                //alert(EXIF.getTag(this, 'Orientation')); 
+	                myorientation = EXIF.getTag(this, 'Orientation');
 	                //return;  
 	                //                      alert(myorientation.toString());
 	                var mpImg = new MegaPixImage(img);
