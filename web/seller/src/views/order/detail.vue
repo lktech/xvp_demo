@@ -188,7 +188,7 @@
                                 utils.wang(that,utils,data.message);
 
                             }else{
-                                that.$vux.alert.show('更新失败');
+                                that.$vux.alert.show(data.message);
                             }
                         }
                     });
