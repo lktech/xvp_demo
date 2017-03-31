@@ -1,5 +1,10 @@
 package com.lingke.xvp.demo.controller.seller;
 
+import java.time.Duration;
+import java.time.Instant;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +37,7 @@ import com.lingke.xvp.demo.utils.SessionUtil;
 @RestController("seller_seller")
 @RequestMapping(value = "/seller/seller")
 public class SellerController {
+	private static final Logger logger = LoggerFactory.getLogger(SellerController.class);
 	@Autowired
 	private XvpRopClient ropClientAdapter;
 
@@ -88,14 +94,26 @@ public class SellerController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public XvpResponse login(@RequestBody SellerRegisterRequest request) throws Exception {
+		Instant sellerQueryStart = Instant.now();
 		Seller seller = Seller.getSellerByPhoneAndPassword(request.getPhone(), request.getPassword());
+		Instant sellerQueryEnd = Instant.now();
+		logger.info("查询用户信息总共花费：" + (Duration.between(sellerQueryStart, sellerQueryEnd).toMillis()/ 1000) + "秒");
 		if (seller == null) {
 			throw new RuntimeException("用户名或者密码错误");
 		}
+		Instant sellerLogoutStart = Instant.now();
 		SessionUtil.sellerLogout();
+		Instant sellerLogoutEnd = Instant.now();
+		logger.info("用户退出总共花费：" + (Duration.between(sellerLogoutStart, sellerLogoutEnd).toMillis()/ 1000) + "秒");
+		Instant sellerLoginStart = Instant.now();
 		SessionUtil.sellerLogin(seller.getId());
+		Instant sellerLoginEnd = Instant.now();
+		logger.info("用户登录总共花费：" + (Duration.between(sellerLoginStart, sellerLoginEnd).toMillis()/ 1000) + "秒");
 		if(!StringUtils.isEmpty(seller.getXvpStoreId())){
+			Instant sellerStoreIdStart = Instant.now();
 			SessionUtil.sellerSetStoreId(seller.getXvpStoreId().toString());
+			Instant sellerStoreIdEnd = Instant.now();
+			logger.info("用户设置storeId到session总共花费：" + (Duration.between(sellerStoreIdStart, sellerStoreIdEnd).toMillis() / 1000) + "秒");
 		}
 		return null;
 	}

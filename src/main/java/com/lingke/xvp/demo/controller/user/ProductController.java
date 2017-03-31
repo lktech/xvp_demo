@@ -20,6 +20,7 @@ import com.lingke.xvp.demo.controller.response.ProductResponse;
 import com.lingke.xvp.demo.controller.response.ProductSkuGetListResponse;
 import com.lingke.xvp.demo.controller.response.ProductSkuGetResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
+import com.lingke.xvp.demo.exception.UserNoLoginException;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
 /**
@@ -39,6 +40,10 @@ public class ProductController {
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setProduct_id(request.getId());
 		XvpProductGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
+		String store_id = ropResponse.getProduct().getStore_id();
+		if(!store_id.equals(SessionUtil.userGetStoreId())){
+			throw new UserNoLoginException();
+		}
 		ProductResponse response= BeanCopyUtil.copy(ropResponse.getProduct(), ProductResponse.class);
 		return response;
 	}
