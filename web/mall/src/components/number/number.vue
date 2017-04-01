@@ -65,17 +65,12 @@ export default {
   },
   watch: {
     currentValue (newValue, old) {
-
+        this.currentValue = Math.floor(newValue);
         if (this.min && this.currentValue < this.min) {
           this.currentValue = this.min
         }
         if (this.max && this.currentValue > this.max) {
           this.currenValue = this.max
-        }
-        if(nValue.indexOf('.')>-1){
-          let nValue=newValue+'';
-          nValue.replace('.','');
-          this.currentValue = nValue*1
         }
         this.$emit('on-change', this.currentValue)
         this.$emit('input', this.currentValue)
@@ -88,6 +83,7 @@ export default {
             this.currentValue = this.max
           }
         }
+
   
     },
     value (newValue) {
