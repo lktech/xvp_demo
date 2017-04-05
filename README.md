@@ -42,7 +42,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 </pre>
 
-##接入融数开放平台<br>
+##融数开放平台<br>
 ###1.登录融数开放平台 http://open.rongcapital.cn/ <br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/01.png)<br>
 ###2.点击右上角`未登录`，按照要求进行注册，`成为开发者` <br>
@@ -65,6 +65,31 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ###8.申请API审核通过后，点击左侧`文档与工具`-->`SDK下载`，下载SDK <br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/12.png)<br>
 
+##RUI
+###基于vue.js重写Cnodejs.org社区的webapp [线上访问地址](http://shinygang.github.io/cnodevue/)
+###安装
+
+项目地址：（`git clone`）
+
+```shell
+git clone https://github.com/shinygang/Vue-cnodejs.git
+```
+
+通过`npm`安装本地服务第三方依赖模块(需要已安装[Node.js](https://nodejs.org/))
+
+```
+npm install
+```
+启动服务(http://localhost:8090)
+
+```
+node server.js
+```
+发布代码
+```
+npm run dist
+```
+
 ##项目部署<br>
 ###1.下载xvp_demo项目源代码(`git clone`)<br>
 ```shell
@@ -73,7 +98,7 @@ git clone https://github.com/lktech/xvp_demo.git
 ###2.解压SDK，将RopExSdk.jar放在项目lib文件夹下<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/13.png)<br>
 ###3.修改src/main/resources下的application-dev.properties配置文件<br>
-![](https://github.com/lktech/xvp_demo/raw/master/image/8.png)<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/08.png)<br>
 
 ```java
 server.tomcat.access-log-enabled=true
@@ -103,7 +128,8 @@ mvn clean package
 ```
 java -jar xxx.jar
 ```
-###6.访问页面http://localhost:端口/seller/index.html
+###6.访问页面http://localhost:端口/seller/index.html<br>
+
 ##目录结构
 <pre>                              
 ├── src
@@ -114,40 +140,67 @@ java -jar xxx.jar
 │                   └── xvp
 │                       └── demo
 │                           ├── controller
-│                           │   ├── request                 // request body
-│                           │   ├── response                // response body
+│                           │   ├── request                         // request body
+│                           │   ├── response                        // response body
 │                           │   ├── seller                  
-│                           │   │   ├── OrderController     // 订单相关业务处理
-│                           │   │   ├── ProductController   // 商品相关业务处理
-│                           │   │   ├── SellerController    // 卖家相关业务处理
-│                           │   │   └── StoreController     // 店铺相关业务处理
+│                           │   │   ├── OrderController.java        // 订单相关业务处理
+│                           │   │   ├── ProductController.java      // 商品相关业务处理
+│                           │   │   ├── SellerController.java       // 卖家相关业务处理
+│                           │   │   └── StoreController.java        // 店铺相关业务处理
 │                           │   ├── user                    
-│                           │   │   ├── OrderController     // 订单相关业务处理
-│                           │   │   ├── ProductController   // 商品相关业务处理
-│                           │   │   ├── StoreController     // 店铺相关业务处理
-│                           │   │   └── UserController      // 普通用户相关业务处理
-│                           │   └── CommonController        // 通用类相关业务处理
+│                           │   │   ├── OrderController.java        // 订单相关业务处理
+│                           │   │   ├── ProductController.java      // 商品相关业务处理
+│                           │   │   ├── StoreController.java        // 店铺相关业务处理
+│                           │   │   └── UserController.java         // 普通用户相关业务处理
+│                           │   └── CommonController.java           // 通用类相关业务处理
 │                           ├── db                          
-│                           │   ├── codegen                 // 生成代码
+│                           │   ├── codegen                 
+│                           │   │   └── ActiveRecordGen             // 使用jFinal动态生成代码
 │                           │   └── dao
-│                           ├── utils                       // 工具方法
-│                           ├── XvpApp.java                 
-│                           ├── XvpAspect.java              // 事务
-│                           ├── XvpConstants.java           // 常量
-│                           ├── XvpDbConfig.java            // db配置
-│                           ├── XvpInterceptorConfig.java   // 拦截器配置
-│                           └── XvpRopClient.java           // rop客户端
+│                           ├── utils                               // 工具方法
+│                           ├── XvpApp.java                         // 项目的mainClass，用于启动服务
+│                           ├── XvpAspect.java                      // 事务控制
+│                           ├── XvpConstants.java                   // 常量
+│                           ├── XvpDbConfig.java                    // 获取数据库连接
+│                           ├── XvpInterceptorConfig.java           // 配置需要拦截的请求
+│                           └── XvpRopClient.java                   // rop客户端
 ├── src
 │   └── main
 │       └── resources
-│           ├── application.properties							// 配置文件
-│           └── logback-online.xml								// logback配置文件
+│           ├── application.properties						        // 配置文件
+│           └── logback-online.xml							        // logback配置文件
 ├── lib          
-│   └── RopExSdk.jar												// SDK
+│   └── RopExSdk.jar										        // SDK
 ├── src                
 │   └── main
-├── web																// 前端页面
-├── LICENSE														// 版权
-├── pom.xml														// pom文件
+├── web														        // 前端页面
+│   ├── mall                                                        // 商城页面
+│   │   ├── README.md           
+│   │   ├── dist                                                    // 项目build目录
+│   │   ├── index.html                                              // 项目入口文件
+│   │   ├── package.json                                            // 项目配置文件
+│   │   ├── src                                                     // 生产目录
+│   │   │   ├── assets                                              // css js 和图片资源
+│   │   │   ├── components                                          // 各种组件
+│   │   │   ├── views                                               // 各种页面
+│   │   │   ├── filters.js                                          // 各种过滤器
+│   │   │   └── main.js                                             // Webpack 预编译入口
+│   │   ├── server.js                                               // webpack-dev-server服务配置
+│   │   └── webpack.constants.js                                    // Webpack 配置文件
+│   └── seller                                                      // 卖家页面
+│       ├── README.md           
+│       ├── dist                                                    // 项目build目录
+│       ├── index.html                                              // 项目入口文件
+│       ├── package.json                                            // 项目配置文件
+│       ├── src                                                     // 生产目录
+│       │   ├── assets                                              // css js 和图片资源
+│       │   ├── components                                          // 各种组件
+│       │   ├── views                                               // 各种页面
+│       │   ├── filters.js                                          // 各种过滤器
+│       │   └── main.js                                             // Webpack 预编译入口
+│       ├── server.js                                               // webpack-dev-server服务配置
+│       └── webpack.constants.js                                    // Webpack 配置文件
+├── LICENSE														    // 版权
+├── pom.xml														    // pom文件
 └── README.md
 </pre>
