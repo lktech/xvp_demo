@@ -77,40 +77,40 @@ router.beforeEach((to, from, next) => {
       }
       document.body.appendChild(i);
     }
-    if(transition.to.path == "/login/login"){
+    if(to.path == "/login/login"){
         document.setTitle('会员登录');
     }
-    if(transition.to.path == "/login/forget"){
+    if(to.path == "/login/forget"){
         document.setTitle('忘记密码');
     }
-    if(transition.to.path == "/login/register"){
+    if(to.path == "/login/register"){
         document.setTitle('商家注册');
     }
-    if(transition.to.path == "/order/detail"){
+    if(to.path == "/order/detail"){
         document.setTitle('订单详情');
     }
-    if(transition.to.path == "/order/list"){
+    if(to.path == "/order/list"){
         document.setTitle('我的订单');
     }
-    if(transition.to.path == "/product/addself"){
+    if(to.path == "/product/addself"){
         document.setTitle('添加自营商品');
     }
-    if(transition.to.path == "/product/detail"){
+    if(to.path == "/product/detail"){
         document.setTitle('商品详情');
     }
-    if(transition.to.path == "/product/modself"){
+    if(to.path == "/product/modself"){
         document.setTitle('编辑自营商品');
     }
-    if(transition.to.path == "/store/addinfo"){
+    if(to.path == "/store/addinfo"){
         document.setTitle('填写店铺信息');
     }
-    if(transition.to.path == "/store/setting"){
+    if(to.path == "/store/setting"){
         document.setTitle('店铺设置');
     }
-    if(transition.to.path == "/product/warehouse"){
+    if(to.path == "/product/warehouse"){
         document.setTitle('我的仓库');
     }
-    setTimeout(transition.next,50);
+    setTimeout(next,50);
 });
 router.afterEach(route => {
     window.scrollTo(0,0);
