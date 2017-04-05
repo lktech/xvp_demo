@@ -44,7 +44,7 @@ rop-sdk v1.0 <br>
 │                           │   └── dao
 │                           ├── utils                       // 工具方法
 │                           ├── XvpApp.java                 
-│                           ├── XvpAspect.java              // 事物
+│                           ├── XvpAspect.java              // 事务
 │                           ├── XvpConstants.java           // 常量
 │                           ├── XvpDbConfig.java            // db配置
 │                           ├── XvpInterceptorConfig.java   // 拦截器配置
@@ -52,18 +52,18 @@ rop-sdk v1.0 <br>
 ├── src
 │   └── main
 │       └── resources
-│           ├── static                                      // 前端页面
-│           ├── application.properties                      // 配置文件
-│           └── logback-online.xml                          // logback配置文件
+│           ├── application.properties							// 配置文件
+│           └── logback-online.xml								// logback配置文件
 ├── JRE System Library
 ├── Maven Dependencies
 ├── lib          
-│   └── RopExSdk.jar                                        // SDK
+│   └── RopExSdk.jar												// SDK
 ├── src                
 │   └── main
 ├── target
-├── LICENSE                                                 // 版权
-├── pom.xml                                                 // pom文件
+├── web																// 前端页面
+├── LICENSE														// 版权
+├── pom.xml														// pom文件
 └── README.md
 </pre>
 
