@@ -14,16 +14,28 @@ druid v1.0.15 <br>
 tutils2 v1.3.3 (`git clone https://github.com/CZ-chen/tutils2.git`) <br>
 rop-sdk v1.0 <br>
 
-##快速开始
-1.登录融数开放平台 http://open.rongcapital.cn/ <br>
+##接入融数开放平台
+###1.登录融数开放平台 http://open.rongcapital.cn/ <br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/1.png)<br>
-2.点击右上角`未登录`，按照要求进行注册，`成为开发者` <br>
-3.登录后，点击右上角昵称，选择`应用管理`，进入应用列表页面 <br>
-4.添加应用，待审核通过后，在操作一栏，点击`API信息`，API类型选择`小微铺核心API`，选中api，进行Api申请 <br>
-5.通过审核后，点击左侧`文档与工具`-->`SDK下载`，下载SDK <br>
-6.解压压缩包，将RopExSdk.jar放在项目下的lib文件夹下 <br>
-7.打开项目，进入src/main/resources，打开application.properties文件，修改rop和db参数，rop的参数在`融数开放平台`-->`应用管理`-->`应用列表`，在操作栏点击`账号信息`查到 <br>
-8.打包项目(`mvn clean package`)，将*.jar文件部署到服务器上，启动服务器 <br>
+###2.点击右上角`未登录`，按照要求进行注册，`成为开发者` <br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/2.png)<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/3.png)<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/4.png)<br>
+###3.登录后，点击右上角昵称，选择`应用管理`，进入应用列表页面 <br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/5.png)<br>
+###4.添加应用<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/6.png)<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/7.png)<br>
+###5.点击账号信息，查看详情信息<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/8.png)<br>
+###6.审核通过后，申请小微铺核心API<br>
+①点API信息；②选择未申请；③选择小微铺核心API；④选中需要申请的API；⑤申请API<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/9.png)<br>
+###7.申请API审核通过后，点击API信息，选择已申请，点击API，查看API详细信息(入参，返回结果示例，错误码等)<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/10.png)<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/11.png)<br>
+###8.申请API审核通过后，点击左侧`文档与工具`-->`SDK下载`，下载SDK <br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/12.png)<br>
 
 ##目录结构
 <pre>                              
