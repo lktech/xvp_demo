@@ -16,6 +16,7 @@ rop-sdk v1.0 <br>
 
 ##快速开始
 1.登录融数开放平台 http://open.rongcapital.cn/ <br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/1.png)<br>
 2.点击右上角`未登录`，按照要求进行注册，`成为开发者` <br>
 3.登录后，点击右上角昵称，选择`应用管理`，进入应用列表页面 <br>
 4.添加应用，待审核通过后，在操作一栏，点击`API信息`，API类型选择`小微铺核心API`，选中api，进行Api申请 <br>
