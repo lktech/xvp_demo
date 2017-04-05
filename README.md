@@ -2,7 +2,7 @@
 
 
 ##项目介绍<br>
-小V铺开源商城是免费开源的移动商城，它采用国际标准HTML5+CSS3技术，你可以二次开发，将商城改成你想要的样子。顾客通过手机浏览器、微信公众号、好友/朋友圈转发打开你的微商城，随时随地在线购买。
+小V铺是完全开源的项目，通过提供商城源码、商城开放API、RUI前端开源组件库三大核心功能，方便二次开发，帮助开发者简单高效降低二次开发成本，满足专注业务深度开发的需求。
 
 ##环境依赖<br>
 spring-boot-starter-parent v1.4.3.RELEASE <br>
@@ -43,25 +43,33 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 </pre>
 
 ##融数开放平台<br>
+
 ###1.登录融数开放平台 http://open.rongcapital.cn/ <br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/01.png)<br>
+
 ###2.点击右上角`未登录`，按照要求进行注册，`成为开发者` <br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/02.png)<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/03.png)<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/04.png)<br>
+
 ###3.登录后，点击右上角昵称，选择`应用管理`，进入应用列表页面 <br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/05.png)<br>
+
 ###4.添加应用<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/06.png)<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/07.png)<br>
+
 ###5.点击账号信息，查看详情信息<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/08.png)<br>
+
 ###6.审核通过后，申请小微铺核心API<br>
 ①点API信息；②选择未申请；③选择小微铺核心API；④选中需要申请的API；⑤申请API<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/09.png)<br>
+
 ###7.申请API审核通过后，点击API信息，选择已申请，点击API，查看API详细信息(入参，返回结果示例，错误码等)<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/10.png)<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/11.png)<br>
+
 ###8.申请API审核通过后，点击左侧`文档与工具`-->`SDK下载`，下载SDK <br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/12.png)<br>
 
@@ -91,12 +99,14 @@ npm run dist
 ```
 
 ##项目部署<br>
+
 ###1.下载xvp_demo项目源代码(`git clone`)<br>
 ```shell
 git clone https://github.com/lktech/xvp_demo.git
 ```
 ###2.解压SDK，将RopExSdk.jar放在项目lib文件夹下<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/13.png)<br>
+
 ###3.修改src/main/resources下的application-dev.properties配置文件<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/08.png)<br>
 
@@ -120,14 +130,17 @@ com.lingke.xvp.db.name=替换为您的数据库name
 com.xiaovpu.openapi.isv.url=http://sit-open.xiaovpu.com/isv/
 com.xiaovpu.openapi.url=http://sit-open.xiaovpu.com/api/invoke?
 ```
+
 ###4.在项目根目录下，执行打包
 ```
 mvn clean package
 ```
+
 ###5.执行xxx.jar文件
 ```
 java -jar xxx.jar
 ```
+
 ###6.访问页面http://localhost:端口/seller/index.html<br>
 
 ##目录结构
