@@ -65,7 +65,34 @@ router.beforeEach((to, from, next) => {
         to.path !== '/' && history.setItem(to.path, historyCount)
         store.commit('UPDATE_DIRECTION', 'forward')
     }
-    next();
+    document.setTitle = function(t) {
+      document.title = t;
+      var i = document.createElement('iframe');
+      i.src = '//m.baidu.com/favicon.ico';
+      i.style.display = 'none';
+      i.onload = function() {
+        setTimeout(function(){
+          i.remove();
+        }, 9)
+      }
+      document.body.appendChild(i);
+    }
+    if(to.path == "/home/home"){
+        document.setTitle('店铺首页');
+    }
+    if(to.path == "/product/detail"){
+        document.setTitle('商品详情');
+    }
+    if(to.path == "/order/add"){
+        document.setTitle('提交订单');
+    }
+    if(to.path == "/addr/add"){
+        document.setTitle('新增收货地址');
+    }
+    if(to.path == "/addr/mod"){
+        document.setTitle('修改收货地址');
+    }
+    setTimeout(next,50);
 });
 router.afterEach(route => {
     window.scrollTo(0,0);

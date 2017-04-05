@@ -65,7 +65,52 @@ router.beforeEach((to, from, next) => {
         to.path !== '/' && history.setItem(to.path, historyCount)
         store.commit('UPDATE_DIRECTION', 'forward')
     }
-    next();
+    document.setTitle = function(t) {
+      document.title = t;
+      var i = document.createElement('iframe');
+      i.src = '//m.baidu.com/favicon.ico';
+      i.style.display = 'none';
+      i.onload = function() {
+        setTimeout(function(){
+          i.remove();
+        }, 9)
+      }
+      document.body.appendChild(i);
+    }
+    if(transition.to.path == "/login/login"){
+        document.setTitle('会员登录');
+    }
+    if(transition.to.path == "/login/forget"){
+        document.setTitle('忘记密码');
+    }
+    if(transition.to.path == "/login/register"){
+        document.setTitle('商家注册');
+    }
+    if(transition.to.path == "/order/detail"){
+        document.setTitle('订单详情');
+    }
+    if(transition.to.path == "/order/list"){
+        document.setTitle('我的订单');
+    }
+    if(transition.to.path == "/product/addself"){
+        document.setTitle('添加自营商品');
+    }
+    if(transition.to.path == "/product/detail"){
+        document.setTitle('商品详情');
+    }
+    if(transition.to.path == "/product/modself"){
+        document.setTitle('编辑自营商品');
+    }
+    if(transition.to.path == "/store/addinfo"){
+        document.setTitle('填写店铺信息');
+    }
+    if(transition.to.path == "/store/setting"){
+        document.setTitle('店铺设置');
+    }
+    if(transition.to.path == "/product/warehouse"){
+        document.setTitle('我的仓库');
+    }
+    setTimeout(transition.next,50);
 });
 router.afterEach(route => {
     window.scrollTo(0,0);
