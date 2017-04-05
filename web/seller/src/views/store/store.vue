@@ -12,7 +12,7 @@
         return {
           entranceData: [{ //九宫格
             title: '添加商品',
-            link:'/product/addSelf',
+            link:'/product/addself',
             icon:'http://img1.xiaovpu.com/3027352051236343.png'
           }, {
             title: '我的仓库',
