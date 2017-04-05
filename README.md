@@ -1,11 +1,10 @@
 # xvp demo
 
 
-##项目介绍
+##项目介绍<br>
 小V铺开源商城是免费开源的移动商城，它采用国际标准HTML5+CSS3技术，你可以二次开发，将商城改成你想要的样子。顾客通过手机浏览器、微信公众号、好友/朋友圈转发打开你的微商城，随时随地在线购买。
 
-
-##环境依赖
+##环境依赖<br>
 spring-boot-starter-parent v1.4.3.RELEASE <br>
 spring-boot-starter-web v1.4.3.RELEASE <br>
 spring-boot-starter-aop v1.4.3.RELEASE <br>
@@ -13,72 +12,6 @@ jfinal v3.0 <br>
 druid v1.0.15 <br>
 tutils2 v1.3.3 (`git clone https://github.com/CZ-chen/tutils2.git`) <br>
 rop-sdk v1.0 <br>
-
-##接入融数开放平台
-###1.登录融数开放平台 http://open.rongcapital.cn/ <br>
-![](https://github.com/lktech/xvp_demo/raw/master/image/1.png)<br>
-###2.点击右上角`未登录`，按照要求进行注册，`成为开发者` <br>
-![](https://github.com/lktech/xvp_demo/raw/master/image/2.png)<br>
-![](https://github.com/lktech/xvp_demo/raw/master/image/3.png)<br>
-![](https://github.com/lktech/xvp_demo/raw/master/image/4.png)<br>
-###3.登录后，点击右上角昵称，选择`应用管理`，进入应用列表页面 <br>
-![](https://github.com/lktech/xvp_demo/raw/master/image/5.png)<br>
-###4.添加应用<br>
-![](https://github.com/lktech/xvp_demo/raw/master/image/6.png)<br>
-![](https://github.com/lktech/xvp_demo/raw/master/image/7.png)<br>
-###5.点击账号信息，查看详情信息<br>
-![](https://github.com/lktech/xvp_demo/raw/master/image/8.png)<br>
-###6.审核通过后，申请小微铺核心API<br>
-①点API信息；②选择未申请；③选择小微铺核心API；④选中需要申请的API；⑤申请API<br>
-![](https://github.com/lktech/xvp_demo/raw/master/image/9.png)<br>
-###7.申请API审核通过后，点击API信息，选择已申请，点击API，查看API详细信息(入参，返回结果示例，错误码等)<br>
-![](https://github.com/lktech/xvp_demo/raw/master/image/10.png)<br>
-![](https://github.com/lktech/xvp_demo/raw/master/image/11.png)<br>
-###8.申请API审核通过后，点击左侧`文档与工具`-->`SDK下载`，下载SDK <br>
-![](https://github.com/lktech/xvp_demo/raw/master/image/12.png)<br>
-
-##目录结构
-<pre>                              
-├── src
-│   └── main
-│       └── java
-│           └── com
-│               └── lingke
-│                   └── xvp
-│                       └── demo
-│                           ├── controller
-│                           │   ├── request                 // request body
-│                           │   ├── response                // response body
-│                           │   ├── seller                  // 卖方相关业务处理
-│                           │   ├── user                    // 用户相关业务处理
-│                           │   └── CommonController.java   // 通用类相关业务处理
-│                           ├── db                          
-│                           │   ├── codegen                 // 生成代码
-│                           │   └── dao
-│                           ├── utils                       // 工具方法
-│                           ├── XvpApp.java                 
-│                           ├── XvpAspect.java              // 事务
-│                           ├── XvpConstants.java           // 常量
-│                           ├── XvpDbConfig.java            // db配置
-│                           ├── XvpInterceptorConfig.java   // 拦截器配置
-│                           └── XvpRopClient.java           // rop客户端
-├── src
-│   └── main
-│       └── resources
-│           ├── application.properties							// 配置文件
-│           └── logback-online.xml								// logback配置文件
-├── JRE System Library
-├── Maven Dependencies
-├── lib          
-│   └── RopExSdk.jar												// SDK
-├── src                
-│   └── main
-├── target
-├── web																// 前端页面
-├── LICENSE														// 版权
-├── pom.xml														// pom文件
-└── README.md
-</pre>
 
 ##License
 <pre>
@@ -107,4 +40,114 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</pre>
+
+##接入融数开放平台<br>
+###1.登录融数开放平台 http://open.rongcapital.cn/ <br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/01.png)<br>
+###2.点击右上角`未登录`，按照要求进行注册，`成为开发者` <br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/02.png)<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/03.png)<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/04.png)<br>
+###3.登录后，点击右上角昵称，选择`应用管理`，进入应用列表页面 <br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/05.png)<br>
+###4.添加应用<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/06.png)<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/07.png)<br>
+###5.点击账号信息，查看详情信息<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/08.png)<br>
+###6.审核通过后，申请小微铺核心API<br>
+①点API信息；②选择未申请；③选择小微铺核心API；④选中需要申请的API；⑤申请API<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/09.png)<br>
+###7.申请API审核通过后，点击API信息，选择已申请，点击API，查看API详细信息(入参，返回结果示例，错误码等)<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/10.png)<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/11.png)<br>
+###8.申请API审核通过后，点击左侧`文档与工具`-->`SDK下载`，下载SDK <br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/12.png)<br>
+
+##项目部署<br>
+###1.下载xvp_demo项目源代码(`git clone`)<br>
+```shell
+git clone https://github.com/lktech/xvp_demo.git
+```
+###2.解压SDK，将RopExSdk.jar放在项目lib文件夹下<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/13.png)<br>
+###3.修改src/main/resources下的application-dev.properties配置文件<br>
+![](https://github.com/lktech/xvp_demo/raw/master/image/8.png)<br>
+
+```java
+server.tomcat.access-log-enabled=true
+server.port=端口号
+server.session.cookie.max-age=7200
+server.session.timeout=7200
+#rop
+com.lingke.xvp.rop.url=参考上图，替换为您的调用地址
+com.lingke.xvp.rop.key=参考上图，替换为您的App Key
+com.lingke.xvp.rop.secret=参考上图，替换为您的App Secret
+
+#db
+com.lingke.xvp.db.url=替换为您的数据库URL
+com.lingke.xvp.db.user=替换为您的数据库user
+com.lingke.xvp.db.password=替换为您的数据库password
+com.lingke.xvp.db.name=替换为您的数据库name
+
+#isv
+com.xiaovpu.openapi.isv.url=http://sit-open.xiaovpu.com/isv/
+com.xiaovpu.openapi.url=http://sit-open.xiaovpu.com/api/invoke?
+```
+###4.在项目根目录下，执行打包
+```
+mvn clean package
+```
+###5.执行xxx.jar文件
+```
+java -jar xxx.jar
+```
+###6.访问页面http://localhost:端口/seller/index.html
+##目录结构
+<pre>                              
+├── src
+│   └── main
+│       └── java
+│           └── com
+│               └── lingke
+│                   └── xvp
+│                       └── demo
+│                           ├── controller
+│                           │   ├── request                 // request body
+│                           │   ├── response                // response body
+│                           │   ├── seller                  
+│                           │   │   ├── OrderController     // 订单相关业务处理
+│                           │   │   ├── ProductController   // 商品相关业务处理
+│                           │   │   ├── SellerController    // 卖家相关业务处理
+│                           │   │   └── StoreController     // 店铺相关业务处理
+│                           │   ├── user                    
+│                           │   │   ├── OrderController     // 订单相关业务处理
+│                           │   │   ├── ProductController   // 商品相关业务处理
+│                           │   │   ├── StoreController     // 店铺相关业务处理
+│                           │   │   └── UserController      // 普通用户相关业务处理
+│                           │   └── CommonController        // 通用类相关业务处理
+│                           ├── db                          
+│                           │   ├── codegen                 // 生成代码
+│                           │   └── dao
+│                           ├── utils                       // 工具方法
+│                           ├── XvpApp.java                 
+│                           ├── XvpAspect.java              // 事务
+│                           ├── XvpConstants.java           // 常量
+│                           ├── XvpDbConfig.java            // db配置
+│                           ├── XvpInterceptorConfig.java   // 拦截器配置
+│                           └── XvpRopClient.java           // rop客户端
+├── src
+│   └── main
+│       └── resources
+│           ├── application.properties							// 配置文件
+│           └── logback-online.xml								// logback配置文件
+├── lib          
+│   └── RopExSdk.jar												// SDK
+├── src                
+│   └── main
+├── web																// 前端页面
+├── LICENSE														// 版权
+├── pom.xml														// pom文件
+└── README.md
 </pre>
