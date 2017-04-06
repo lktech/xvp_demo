@@ -73,9 +73,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ###8.申请API审核通过后，点击左侧`文档与工具`-->`SDK下载`，下载SDK <br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/12.png)<br>
 
-##RUI
-###基于vue.js重写Cnodejs.org社区的webapp [线上访问地址](http://shinygang.github.io/cnodevue/)
-###安装
+##RUI<br>
+###基于vue.js重写Cnodejs.org社区的webapp [线上访问地址](http://shinygang.github.io/cnodevue/)<br>
+###安装<br>
 
 项目地址：（`git clone`）
 
@@ -131,17 +131,17 @@ com.xiaovpu.openapi.isv.url=http://sit-open.xiaovpu.com/isv/
 com.xiaovpu.openapi.url=http://sit-open.xiaovpu.com/api/invoke?
 ```
 
-###4.在项目根目录下，执行打包
+###4.在项目根目录下，执行打包<br>
 ```
 mvn clean package
 ```
 
-###5.执行xxx.jar文件
+###5.执行xxx.jar文件<br>
 ```
 java -jar xxx.jar
 ```
 
-###6.访问页面http://localhost:端口/seller/index.html<br>
+###6.访问页面http://主机:端口/seller/index.html<br>
 
 ##目录结构
 <pre>                              
