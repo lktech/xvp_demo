@@ -74,14 +74,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ![](https://github.com/lktech/xvp_demo/raw/master/image/12.png)<br>
 
 ##RUI<br>
-###基于vue.js重写Cnodejs.org社区的webapp [线上访问地址](http://shinygang.github.io/cnodevue/)<br>
+###关于RUI [线上访问地址](http://rui.lingketech.com/)<br>
+
+RUI 是一套基于 Vue2.0 的完整的前端解决方案，不仅包含PC组件库和移动端组件库，还包含了完整的项目脚手架已及组件配套原型，可零配置直接启动脚手架。<br>
+
+在项目根目录配置了Mockjax本地接口模拟依赖库，可在mockapi里配置模拟接口，实现前后端同步进行。<br>
+
+RUI，不止于UI。
+
 ###安装<br>
-
-项目地址：（`git clone`）
-
-```shell
-git clone https://github.com/shinygang/Vue-cnodejs.git
-```
 
 通过`npm`安装本地服务第三方依赖模块(需要已安装[Node.js](https://nodejs.org/))
 
