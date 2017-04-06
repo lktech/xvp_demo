@@ -144,6 +144,25 @@ java -jar xxx.jar
 
 ###6.访问页面http://主机:端口/seller/index.html<br>
 
+
+##创建数据库<br>
+
+###1.安装MySQL<br>
+
+官方下载地址http://dev.mysql.com/downloads/mysql/#downloads<br>
+
+###2.创建数据库<br>
+
+```
+CREATE DATABASE 数据库名;  //创建数据库
+```
+
+###3.执行sql脚本<br>
+
+在数据库执行sql文件下面的*.sql脚本，<br>
+
+![](https://github.com/lktech/xvp_demo/raw/master/image/14.png)<br>
+
 ##目录结构
 <pre>                              
 ├── src
@@ -185,6 +204,7 @@ java -jar xxx.jar
 │           └── logback-online.xml							        // logback配置文件
 ├── lib          
 │   └── RopExSdk.jar										        // SDK
+├── sql                                                             // sql脚本
 ├── src                
 │   └── main
 ├── web														        // 前端页面
