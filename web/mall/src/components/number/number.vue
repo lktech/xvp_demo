@@ -65,6 +65,7 @@ export default {
   },
   watch: {
     currentValue (newValue, old) {
+      if(this.currentValue!==''){
         this.currentValue = Math.floor(newValue);
         if (this.min && this.currentValue < this.min) {
           this.currentValue = this.min
@@ -76,15 +77,15 @@ export default {
         this.$emit('input', this.currentValue)
         if(this.fillable){
           if(newValue > this.max){
-
-
             // this.currentValue = nValue.substring(0,nValue.length - 1)*1;
             let nValue=newValue
             this.currentValue = this.max
           }
         }
 
-  
+      }else{
+        this.$emit('on-change', false)
+      }
     },
     value (newValue) {
       this.currentValue = newValue
