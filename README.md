@@ -138,7 +138,7 @@ com.xiaovpu.openapi.isv.url=http://sit-open.xiaovpu.com/isv/
 ```
 mvn clean package
 ```
-###6.将项目根目录下target/web下的mall和seller文件下复制到src/main/resources/static目录下<br>
+###6.在src/main/resources下创建一个static文件夹，将项目根目录下target/web下的mall和seller文件下复制到src/main/resources/static目录下<br>
 
 ![](https://github.com/lktech/xvp_demo/raw/master/image/15.png)<br>
 
