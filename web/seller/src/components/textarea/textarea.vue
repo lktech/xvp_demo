@@ -67,7 +67,8 @@ export default {
     spellcheck: {
       type: String,
       default: 'false'
-    }
+    },
+    emoji: Boolean
   },
   created () {
     this.currentValue = this.value
@@ -77,6 +78,12 @@ export default {
       this.currentValue = val
     },
     currentValue (newVal) {
+      if(!this.emoji){
+        try{
+          newVal = unescape(escape(newVal).replace(/\%uD.{3}|(\%u[a-zA-Z0-9]{4})+/g, ''));
+          this.currentValue = newVal;
+        }catch(e){}
+      }
       if (this.max && newVal > this.max) {
         this.currentValue = newVal.slice(0, this.max)
       }

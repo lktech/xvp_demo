@@ -1,15 +1,13 @@
 <template>
-<div class="balance">
+<div class="withdra">
     <c-top-back></c-top-back>
     <c-group>
         <c-cell title="银行卡" :value="account"></c-cell>
     </c-group>
 
     <c-group>
-        <c-flexbox>
-          <c-flexbox-item :span="10"><c-withdraw :maxvalue="maxvalue" :minvalue="minvalue" :digit="2" @on-input="getInput"></c-withdraw></c-flexbox-item>
-          <c-flexbox-item :span="2"><div class="flex-demo">2</div></c-flexbox-item>
-        </c-flexbox>
+         <c-withdraw :maxvalue="maxvalue" :placeholder="placeholder" :words="words" :val="in_money" :minvalue="minvalue" :digit="2" @on-input="getInput"></c-withdraw>
+         <div v-if="!in_money" class="flex-demo-withdra" @click="q_withdra">全部提现</div>
       
     </c-group>
 
@@ -39,19 +37,37 @@
                 counter:'0.00元',
                 money:'0.00元',
                 cycle:'1-2个工作日',
+                in_money:'',
                 disabled:true,
                 maxvalue:1000,
                 minvalue:100,
-
+                in_money_status:false,
+                words:{
+                    error:'请输入正确的金额',
+                    min:'提现金额需大于100元',
+                    max:'输入金额超过本次可提现金额',
+                    empty:'金额不能为空',
+                },
+                placeholder:'账户余额1000.00'
             }
         },
 
         methods:{
-            getInput(val){
-
+            getInput(val,status){
+                this.in_money=val;
+                if(status=='success'){
+                    this.color='primary';
+                    this.disabled=false;
+                }else{
+                    this.color='default';
+                    this.disabled=true;
+                }
             },
             wit_cancel(){
 
+            },
+            q_withdra(){
+                this.in_money=this.maxvalue+'';
             }
         },
         mounted: function () {
@@ -72,8 +88,11 @@
     }
 </script>
 <style>
-    .balance .weui_cell_ft{
+    .withdra .weui_cell_ft{
         padding-right:10px;
+    }
+    .withdra .flex-demo-withdra{
+         color:#F57B00;     position: absolute; right: 15px; top: 37px; height:45px; line-height:45px;
     }
 </style>
 

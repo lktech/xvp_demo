@@ -1,5 +1,5 @@
 <template>
-<div class="realname">
+<div class="binding">
     <c-top-back></c-top-back>
     <c-cell-wrap :title="title">
         <c-cell title="发卡银行" :value="bank" @click.native="bankClick" is-link></c-cell>
@@ -162,23 +162,23 @@
     }
 </script>
 <style>
-    .realname .weui_cell_ft.with_arrow:after{
+    .binding .weui_cell_ft.with_arrow:after{
         position:absolute !important;
         top:44% !important;
     }
-    .realname .weui_cell_ft.with_arrow{
+    .binding .weui_cell_ft.with_arrow{
         margin-right:15px;
     }
-    .realname .weui_panel:first-child{
+    .binding .weui_panel:first-child{
         margin-top:10px !important;
     }
-    .realname .placeholder{
+    .binding .placeholder{
         color:#999; margin-left:10px;
     }
-    .realname .weui_cell{
+    .binding .weui_cell{
       padding:10px !important;
     }
-    .realname .weui_uploader_hd.weui_cell{
+    .binding .weui_uploader_hd.weui_cell{
       padding: 0 !important; padding-bottom: 10px !important;
     }
 </style>

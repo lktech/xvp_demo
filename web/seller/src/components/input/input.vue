@@ -192,7 +192,8 @@ export default {
       default: false
     },
     iconType: String,
-    name: String
+    name: String,
+    emoji: Boolean
   },
   computed: {
     pattern () {
@@ -358,6 +359,12 @@ export default {
       }
     },
     currentValue (newVal) {
+      if(!this.emoji){
+        try{
+          newVal = unescape(escape(newVal).replace(/\%uD.{3}|(\%u[a-zA-Z0-9]{4})+/g, ''));
+          this.currentValue = newVal;
+        }catch(e){}
+      }
       if (!this.equalWith && newVal) {
         this.validateEqual()
       }

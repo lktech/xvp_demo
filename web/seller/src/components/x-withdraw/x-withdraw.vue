@@ -4,7 +4,7 @@
       <div class="title">{{title?title:'提现金额'}}</div>
       <div class="num">
         <div class="num-mark">￥</div>
-        <div class="of"><input @keyup="verification" data_id="inputNum"></div>
+        <div class="of"><input @keyup="verification" :placeholder="placeholder" data_id="inputNum"></div>
       </div>
     </div>
     <div class="vux-1px-b tips">{{tips}}</div>
@@ -19,10 +19,15 @@
 	    cancelText: String,
 	    minvalue: Number,
 	    digit: Number,
-	    tip:String
+	    tip:String,
+      val:String,
+      placeholder:String,
+      words:Object
 	},
     mounted() {
-      this.$nextTick(() => {})
+      this.$nextTick(() => {
+        $('[data_id=inputNum]').val(this.val);
+      })
     },
     created() {},
     data() {
@@ -33,7 +38,12 @@
     computed: {
 
     },
-    watch: {},
+    watch: {
+      val(newValue){
+        $('[data_id=inputNum]').val(newValue);
+        this.verification();
+      }
+    },
     methods: {
       verification() {
         var value = $.trim($('[data_id=inputNum]').val());
@@ -45,17 +55,17 @@
             var reg = new RegExp("^[0-9]+(\.\\d+)?$");
           };
           if(!reg.test(value)) {
-            this.tips = '请输入正确值';
+            this.tips = this.words.error || '请输入正确值';
             status = 'fail';
             this.$emit('on-input', value, status);
             return false;
           } else if(value - 0 < this.minvalue) {
-            this.tips = '输入值不能低于最小值';
+            this.tips = this.words.min || '输入值不能低于最小值';
             status = 'fail';
             this.$emit('on-input', value, status);
             return false;
           } else if(value - 0 > this.maxvalue) {
-            this.tips = '输入值不能超出最大值';
+            this.tips = this.words.max || '输入值不能超出最大值';
             status = 'fail';
             this.$emit('on-input', value, status);
             return false;
@@ -65,7 +75,7 @@
             this.$emit('on-input', value, status);
           }
         } else {
-          this.tips = '输入值不能为空';
+          this.tips = this.words.empty || '输入值不能为空';
           status = 'fail';
           this.$emit('on-input', value, status);
           return false;
@@ -80,4 +90,5 @@
 
 <style lang="less">
   @import '../../assets/styles/components/rui/withdraws.less';
+
 </style>
