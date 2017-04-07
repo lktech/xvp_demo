@@ -6,8 +6,8 @@ package com.lingke.xvp.demo.controller.response;
  */
 public class ShareResponse implements XvpResponse {
 	private String signature;
-	private String appId;
-	private String nonceStr;
+	private String appid;
+	private String noncestr;
 	private Long timestamp;
 
 	public String getSignature() {
@@ -18,20 +18,21 @@ public class ShareResponse implements XvpResponse {
 		this.signature = signature;
 	}
 
-	public String getAppId() {
-		return appId;
+
+	public String getAppid() {
+		return appid;
 	}
 
-	public void setAppId(String appId) {
-		this.appId = appId;
+	public void setAppid(String appid) {
+		this.appid = appid;
 	}
 
-	public String getNonceStr() {
-		return nonceStr;
+	public String getNoncestr() {
+		return noncestr;
 	}
 
-	public void setNonceStr(String nonceStr) {
-		this.nonceStr = nonceStr;
+	public void setNoncestr(String noncestr) {
+		this.noncestr = noncestr;
 	}
 
 	public Long getTimestamp() {
@@ -44,7 +45,7 @@ public class ShareResponse implements XvpResponse {
 
 	@Override
 	public String toString() {
-		return "ShareResponse [signature=" + signature + ", appId=" + appId + ", nonceStr=" + nonceStr + ", timestamp="
+		return "ShareResponse [signature=" + signature + ", appid=" + appid + ", noncestr=" + noncestr + ", timestamp="
 				+ timestamp + "]";
 	}
 	
