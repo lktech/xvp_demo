@@ -80,7 +80,7 @@ export default {
     currentValue (newVal) {
       if(!this.emoji){
         try{
-          newVal = unescape(escape(newVal).replace(/\%uD.{3}|(\%u[a-zA-Z0-9]{4})+/g, ''));
+          newVal = unescape(escape(newVal).replace(/\%uD.{3}|(\%u[a-zA-Z0-9]{4}[^\u0000-\u00FF])+/g, ''));
           this.currentValue = newVal;
         }catch(e){}
       }
