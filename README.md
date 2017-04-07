@@ -108,7 +108,10 @@ git clone https://github.com/lktech/xvp_demo.git
 ###2.解压SDK，将RopExSdk.jar放在项目lib文件夹下<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/13.png)<br>
 
-###3.修改src/main/resources下的application-dev.properties配置文件<br>
+###3.修改src/main/resources下的application.properties配置文件为开发者模式，配置如下<br>
+spring.profiles.active=dev
+
+###4.修改src/main/resources下的application-dev.properties配置文件<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/08.png)<br>
 
 ```java
@@ -129,20 +132,19 @@ com.lingke.xvp.db.name=替换为您的数据库name
 
 #isv
 com.xiaovpu.openapi.isv.url=http://sit-open.xiaovpu.com/isv/
-com.xiaovpu.openapi.url=http://sit-open.xiaovpu.com/api/invoke?
 ```
 
-###4.在项目根目录下，执行打包<br>
+###5.在项目根目录下，执行打包<br>
 ```
 mvn clean package
 ```
-
-###5.执行xxx.jar文件<br>
+###6.将项目根目录下target/web下的mall和seller文件下复制到src/main/resources/static目录下<br>
 ```
-java -jar xxx.jar
-```
+![](https://github.com/lktech/xvp_demo/raw/master/image/09.png)<br>
 
-###6.访问页面http://主机:端口/seller/index.html<br>
+###7.找到XvpApp.java文件，在开发中执行此类中的main方法<br>
+
+###8.访问页面http://主机:端口/seller/index.html<br>
 
 
 ##创建数据库<br>
