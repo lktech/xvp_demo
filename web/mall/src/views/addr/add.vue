@@ -112,6 +112,7 @@
         },
         mounted: function () {
             this.$nextTick(function () {
+                this.$vux.alert.hide();
                 utils.MenuShare();
             })
         },

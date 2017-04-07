@@ -139,7 +139,7 @@ Mock.mock(basepath + "/seller/product/get",'post',{
 
 Mock.mock(basepath + "/seller/product/sku/get",'post',{
     "code": 'SUCESS',
-    "result":[{"id":"511","price":"1","stock":"12","sku_str":"gg"},{"id":"512","price":"2","stock":"2","sku_str":"dd"}]
+    "result":[{"id":"511","price":"1","stock":"12","sku_str":"gg"},{"id":"512","price":"2","stock":"0","sku_str":"dd"}]
 });
 
 Mock.mock(basepath + "/seller/seller/login",'post',{

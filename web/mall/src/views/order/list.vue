@@ -15,8 +15,8 @@
                  @on-confirm="onConfirm">
           <p style="text-align:center;">确认收货后，订单交易完成，钱款将立即到达商家账户</p>
         </c-confirm>
-        <c-tabbar style='height:58px;' @click.native="next">
-            <c-tabbar-item >
+        <c-tabbar style='height:58px;'>
+            <c-tabbar-item  @click.native="next">
               <img slot="icon"  src="http://static.taggole.com/sithbrobot/poster/1490951254855.jpg">
               <span slot="label">首页</span>
             </c-tabbar-item>
@@ -51,6 +51,7 @@
         },
         mounted: function () {
             this.$nextTick(function () {
+                this.$vux.alert.hide();
             //所有订单列表
                 this.orderList();
                 utils.MenuShare();

@@ -69,6 +69,7 @@
               specifications:false,
               specifica_list_status:[{stock:false,price:false,value:false}],
               specifica_status:false,
+              freight_status:true
             },
             color:'default',
             disabled:true,
@@ -118,6 +119,9 @@
             if(obj.name=='price'){
               this.status.price_status=obj.valid;
             }
+            if(obj.name=='freight'){
+              this.status.freight_status=obj.valid;
+            }
             if(obj.name.indexOf('Yprice')!=-1){
               var i=obj.name.split('_')[1];
               this.status.specifica_list_status[i].price=obj.valid;
@@ -154,7 +158,7 @@
                 num++;
               }
             }
-            if(this.status.name_status  && this.status.specifica_list_status.length==num && this.img_list1.length){
+            if(this.status.name_status  && this.status.specifica_list_status.length==num && this.img_list1.length && this.status.freight_status){
               this.disabled=false;
               this.color='primary';
             }else{
@@ -253,7 +257,7 @@
                   num++;
                 }
               }
-              if(this.status.name_status  && this.status.specifica_list_status.length==num && this.img_list1.length){
+              if(this.status.name_status  && this.status.specifica_list_status.length==num && this.img_list1.length && this.status.freight_status){
                 this.disabled=false;
                 this.color='primary';
               }else{
@@ -261,7 +265,7 @@
                 this.color='default';
               }
             }else{
-              if(this.status.name_status  && this.status.price_status && this.status.stock_status && this.img_list1.length){
+              if(this.status.name_status  && this.status.price_status && this.status.stock_status && this.img_list1.length && this.status.freight_status){
                 this.disabled=false;
                 this.color='primary';
               }else{
@@ -322,6 +326,7 @@
       },
       mounted: function () {
           this.$nextTick(function () {
+              this.$vux.alert.hide();
               utils.MenuShare();
          })
       },

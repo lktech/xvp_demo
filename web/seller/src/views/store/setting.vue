@@ -118,6 +118,7 @@
         },
         mounted: function () {
             this.$nextTick(function () {
+                this.$vux.alert.hide();
                 utils.MenuShare();
                 let that = this;
                 utils.ajax({

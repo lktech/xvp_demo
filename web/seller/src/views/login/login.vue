@@ -37,6 +37,7 @@
         },
         mounted: function () {
             this.$nextTick(function () {
+              this.$vux.alert.hide();
               utils.loadingHide();
               //this.login1('1');
               utils.MenuShare();

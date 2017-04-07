@@ -15,7 +15,7 @@
   export default {
   	props: {
 	    title: String,
-	    maxValue: Number,
+	    maxvalue: Number,
 	    cancelText: String,
 	    minvalue: Number,
 	    digit: Number,

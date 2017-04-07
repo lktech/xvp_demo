@@ -30,6 +30,7 @@
         },
         mounted: function () {
             this.$nextTick(function () {
+                this.$vux.alert.hide();
                 utils.MenuShare();
             //所有订单列表
                 this.orderList();

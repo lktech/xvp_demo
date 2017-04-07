@@ -21,12 +21,12 @@
 				</div>
 				<div class="weui_media_box">
 					<div class="num">
-						<r-number v-model="selectNUm" :fillable="fillable" :max="max1" :min="min" title="数量"></r-number>
+						<r-number v-model="selectNUm" :fillable="fillable" :max="max1" :min="min" title="数量" @on-change="onchange"></r-number>
 						<p>剩余库存:{{skustock}}件</p>
 					</div>
 				</div>
 				<div class="weui_media_box">
-					<r-button :type="color" @click.native="submit" :text="text1"></r-button>
+					<r-button :type="color" :disabled="disabled1" @click.native="submit" :text="text1"></r-button>
 				</div>
 
 			</div>
@@ -46,7 +46,7 @@
 				selectNUm:this.num,
 				skustock:0,
 				text1:this.text,
-				disabled1:this.disabled,
+				disabled1:false,
 				max1:this.max,
 				color:'primary'
 			}
@@ -112,6 +112,9 @@
 		},
 		mounted: function () {
             this.$nextTick(function () {
+ 
+
+
 				this.actId = this.sku[0].id;
 				this.skustock = this.sku[0].stock;
 				this.skuprice = this.sku[0].price;
@@ -152,6 +155,23 @@
 			fixIos(zIndex) {
 				if(this.$tabbar && /iphone/i.test(navigator.userAgent)) {
 					this.$tabbar.style.zIndex = zIndex
+				}
+			},
+			onchange(val){
+				if(val){
+					if(this.skustock*1 <= 0){
+						this.text1="已售罄";
+						this.disabled1=true;
+						this.color='default';
+					}else{
+						this.max1=this.skustock*1;
+						this.text1=this.text;
+						this.disabled1=false;
+						this.color='primary';
+					}
+				}else{
+					this.disabled1=true;
+					this.color='default';
 				}
 			}
 

@@ -65,14 +65,27 @@ export default {
   },
   watch: {
     currentValue (newValue, old) {
-      if (this.min && this.currentValue < this.min) {
-        this.currentValue = this.min
+      if(this.currentValue!==''){
+        this.currentValue = Math.floor(newValue);
+        if (this.min && this.currentValue < this.min) {
+          this.currentValue = this.min
+        }
+        if (this.max && this.currentValue > this.max) {
+          this.currenValue = this.max
+        }
+        this.$emit('on-change', this.currentValue)
+        this.$emit('input', this.currentValue)
+        if(this.fillable){
+          if(newValue > this.max){
+            // this.currentValue = nValue.substring(0,nValue.length - 1)*1;
+            let nValue=newValue
+            this.currentValue = this.max
+          }
+        }
+
+      }else{
+        this.$emit('on-change', false)
       }
-      if (this.max && this.currentValue > this.max) {
-        this.currenValue = this.max
-      }
-      this.$emit('on-change', this.currentValue)
-      this.$emit('input', this.currentValue)
     },
     value (newValue) {
       this.currentValue = newValue

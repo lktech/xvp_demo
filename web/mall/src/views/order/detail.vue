@@ -104,6 +104,7 @@
         computed: {},
         mounted: function () {
             this.$nextTick(function () {
+                this.$vux.alert.hide();
                 this.into();
                 utils.MenuShare();
             })

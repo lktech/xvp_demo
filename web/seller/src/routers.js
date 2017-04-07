@@ -133,4 +133,56 @@ exports.routes = [
             }
         ]
     },
+    {//订单
+        path: '/withdra',
+        name:'withdra',
+        component: function(resolve){
+            require(['./views/withdra/index.vue'],resolve);
+        },
+        children:[
+
+            {
+                path:'withdra',    // 提现
+                name:'withdra',
+                component: function(resolve){
+                    require(['./views/withdra/withdra.vue'],resolve);
+                }
+            },
+            {
+                path:'agreem',      // 协议
+                name:'agreem',
+                component: function(resolve){
+                    require(['./views/withdra/agreem.vue'],resolve);
+                }
+            },
+            {
+                path:'balance',    // 余额
+                name:'balance',
+                component: function(resolve){
+                    require(['./views/withdra/balance.vue'],resolve);
+                }
+            },
+            {
+                path:'binding',    // 绑卡
+                name:'binding',
+                component: function(resolve){
+                    require(['./views/withdra/binding.vue'],resolve);
+                }
+            },
+            {
+                path:'realname',    // 实名认证
+                name:'realname',
+                component: function(resolve){
+                    require(['./views/withdra/realname.vue'],resolve);
+                }
+            },
+            {
+                path:'record',    // 提现记录
+                name:'record',
+                component: function(resolve){
+                    require(['./views/withdra/record.vue'],resolve);
+                }
+            }
+        ]
+    },
 ];

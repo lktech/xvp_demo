@@ -94,7 +94,8 @@
         },
         address(newList) {
           console.log(newList);
-          this.formatList = this.formatList.concat(this.formatFunc(newList));
+          //this.formatList = this.formatList.concat(this.formatFunc(newList));
+          this.formatList = this.formatFunc(newList);
         }
       },
       beforeDestroy() {

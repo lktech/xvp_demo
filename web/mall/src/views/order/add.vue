@@ -56,6 +56,7 @@
         },
         mounted: function () {
             this.$nextTick(function () {
+                this.$vux.alert.hide();
                 //utils.MenuShare();
 
                 this.json = JSON.parse(utils.getSession("buy_info"));//商品数据列表
