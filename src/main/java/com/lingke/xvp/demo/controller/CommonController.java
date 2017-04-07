@@ -16,9 +16,11 @@ import com.Rop.api.domain.Area;
 import com.Rop.api.request.XvpCommonGetcityareasRequest;
 import com.Rop.api.request.XvpCommonGetcountyareasRequest;
 import com.Rop.api.request.XvpCommonGetprovinceareasRequest;
+import com.Rop.api.request.XvpWxConfiggetRequest;
 import com.Rop.api.response.XvpCommonGetcityareasResponse;
 import com.Rop.api.response.XvpCommonGetcountyareasResponse;
 import com.Rop.api.response.XvpCommonGetprovinceareasResponse;
+import com.Rop.api.response.XvpWxConfiggetResponse;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.CommonRequest;
 import com.lingke.xvp.demo.controller.request.ShareRequest;
@@ -85,8 +87,9 @@ public class CommonController {
 
 	@RequestMapping(path = "/wxconfig/get", method = RequestMethod.POST)
 	public XvpResponse getWxConfig(@RequestBody ShareRequest shareRequest) throws Exception {
-		ShareResponse shareResponse = new ShareResponse();
-		return shareResponse;
+		XvpWxConfiggetRequest request = BeanCopyUtil.copy(shareRequest, XvpWxConfiggetRequest.class);
+		XvpWxConfiggetResponse response = ropClientAdapter.ropInvoke(request);
+		return BeanCopyUtil.copy(response.getJsonobject(), ShareResponse.class);
 	}
 
 	/**
