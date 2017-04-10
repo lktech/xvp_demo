@@ -145,7 +145,7 @@ mvn clean package
 
 ![](https://github.com/lktech/xvp_demo/raw/master/image/15.png)<br>
 
-###7.找到XvpApp.java文件，在开发中执行此类中的main方法<br>
+###7.找到XvpApp.java文件，执行此类中的main方法<br>
 
 ###8.访问页面http://主机:端口/seller/index.html<br>
 
