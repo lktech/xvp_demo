@@ -59,7 +59,7 @@
                 this.$vux.alert.hide();
                 //utils.MenuShare();
 
-                this.json = JSON.parse(utils.getSession("buy_info"));//商品数据列表
+                this.json = JSON.parse(localStorage.getItem("buy_info"));//商品数据列表
                 let that = this;
                 $.each(this.json.products,function(i,v){
                     that.totalMoney+=v.price*v.num;
@@ -95,40 +95,52 @@
         methods: {
             //提交订单
             addOrder(){
-                if (utils.getSession("buy_info")) {
+                if (localStorage.getItem("buy_info")) {
                     let that = this;
-
-
-                    let obj = {
-                        logistic_flg:that.json.logistic_flg,
-                        logistic_fee:that.json.logistics_fee*1,
-                        pay_amount:that.totalMoney,
-                        addressee_id:that.addr_id,
-                        buy_sku_list:that.arr
-                    }
-                    utils.ajax({
-                        url: basepath + "/user/order/add", data: obj, success: function (data) {	
-                            if (data.code=="SUCESS") {
-                                var backUrl = basepath + "/mall/index.html#/order/detail?id=" + data.result.order_id;
-                                window.history.replaceState(null, "订单详情页", backUrl);
-                                utils.ajax({
-                                    url: basepath + "/user/order/payurl", data: {order_id:data.result.order_id}, success: function (res) {
-                                        if (res.code=="SUCESS") {
-                                            location.href=res.result.url;
-                                        }else{
-                                            that.$vux.alert.show(res.message);
-                                        }
-                                    }
-                                });
-                            }else if(data.code=='user_seller_error'){
-                                that.$vux.alert.show({content:'访问超时',onHide :function(){
-                                  utils.go({path:'/home/home',query:{id:sessionStorage.getItem('product_id')}},that.$router);
-                                }});
-                            }else{
-                                that.$vux.alert.show(data.message);
-                            }
+                    if(!localStorage.getItem("ORDERID")){
+                        
+                        let obj = {
+                            logistic_flg:that.json.logistic_flg,
+                            logistic_fee:that.json.logistics_fee*1,
+                            pay_amount:that.totalMoney,
+                            addressee_id:that.addr_id,
+                            buy_sku_list:that.arr
                         }
-                    });
+                        utils.ajax({
+                            url: basepath + "/user/order/add", data: obj, success: function (data) {    
+                                if (data.code=="SUCESS") {
+                                    var backUrl = basepath + "/mall/index.html#/order/detail?id=" + data.result.order_id;
+                                    window.history.replaceState(null, "订单详情页", backUrl);
+                                    localStorage.setItem("ORDERID",data.result.order_id);
+                                    utils.ajax({
+                                        url: basepath + "/user/order/payurl", data: {order_id:data.result.order_id}, success: function (res) {
+                                            if (res.code=="SUCESS") {
+                                                location.href=res.result.url;
+                                            }else{
+                                                that.$vux.alert.show(res.message);
+                                            }
+                                        }
+                                    });
+                                }else if(data.code=='user_seller_error'){
+                                    that.$vux.alert.show({content:'访问超时',onHide :function(){
+                                      utils.go({path:'/home/home',query:{id:sessionStorage.getItem('product_id')}},that.$router);
+                                    }});
+                                }else{
+                                    that.$vux.alert.show(data.message);
+                                }
+                            }
+                        });
+                    }else{
+                        utils.ajax({
+                            url: basepath + "/user/order/payurl", data: {order_id:localStorage.getItem("ORDERID")}, success: function (res) {
+                                if (res.code=="SUCESS") {
+                                    location.href=res.result.url;
+                                }else{
+                                    that.$vux.alert.show(res.message);
+                                }
+                            }
+                        });
+                    }
                 } else {
                     this.$vux.alert.show('请重新选择商品');
                 }

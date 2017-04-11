@@ -92,7 +92,8 @@
                         'discount':0,
                         'logistic_flg':1
                     };
-                    utils.setSession("buy_info",buy_info);
+                    localStorage.setItem("buy_info",JSON.stringify(buy_info));
+                    localStorage.removeItem('ORDERID');
                     utils.go({path:"/order/add"},this.$router);
                 }else{
                     this.sku.status = false;

@@ -292,6 +292,13 @@ Mock.mock(basepath + "/user/order/confirm",'post',{
     "code": 'SUCESS',
     "msg": null
 });
+Mock.mock(basepath + "/user/order/add",'post',{
+    "code": 'SUCESS',
+    "msg": null,
+    'result':{
+        'order_id':'12121212'
+    }
+});
 
 
 

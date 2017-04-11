@@ -107,24 +107,28 @@
             },
             register(){
                 if(!this.disabled){
-                    var pa=/^[a-zA-Z]{6,20}$/;
-                    if(pa.test(this.formData.password)){
-                      this.$vux.alert.show('密码格式有误，请输入6-20位数字、字母或常用符号的组合，不能包含空格，字母区分大小写');
-                      return false
-                    }
-                    var pa1=/^[\~.!@#_\+]{6,20}$/;
-                    if(pa1.test(this.formData.password)){
-                      this.$vux.alert.show('密码格式有误，请输入6-20位数字、字母或常用符号的组合，不能包含空格，字母区分大小写');
-                      return false
-                    }
-                    var pa2=/^[0-9]{6,20}$/;
-                    if(pa2.test(this.formData.password)){
-                      this.$vux.alert.show('密码格式有误，请输入6-20位数字、字母或常用符号的组合，不能包含空格，字母区分大小写');
-                      return false
-                    }
-                    var pa3=/^[a-zA-Z0-9\~!.@#_\+]{6,20}$/;
-                    if(!pa3.test(this.formData.password)){
-                      this.$vux.alert.show('密码格式有误，请输入6-20位数字、字母或常用符号的组合，不能包含空格，字母区分大小写');
+                    // var pa=/^[a-zA-Z0-9][^]{6,20}$/;
+                    // if(pa.test(this.formData.password)){
+                    //   this.$vux.alert.show('请输入6-20位数字、字母或常用符号，不能包含空格，字母区分大小写');
+                    //   return false
+                    // }
+                    // var pa1=/^[\~.!@#_\+]{6,20}$/;
+                    // if(pa1.test(this.formData.password)){
+                    //   this.$vux.alert.show('密码格式有误，请输入6-20位数字、字母或常用符号的组合，不能包含空格，字母区分大小写');
+                    //   return false
+                    // }
+                    // var pa2=/^[0-9]{6,20}$/;
+                    // if(pa2.test(this.formData.password)){
+                    //   this.$vux.alert.show('密码格式有误，请输入6-20位数字、字母或常用符号的组合，不能包含空格，字母区分大小写');
+                    //   return false
+                    // }
+                    // var pa3=/^[a-zA-Z0-9\~!.@#_\+]{6,20}$/;
+                    // if(!pa3.test(this.formData.password)){
+                    //   this.$vux.alert.show('密码格式有误，请输入6-20位数字、字母或常用符号的组合，不能包含空格，字母区分大小写');
+                    //   return false
+                    // }
+                    if(this.formData.password.length<6 || this.formData.password.indexOf(' ')>-1){
+                      this.$vux.alert.show('请输入6-20位数字、字母或常用符号，不能包含空格，字母区分大小写');
                       return false
                     }
                     let that=this;

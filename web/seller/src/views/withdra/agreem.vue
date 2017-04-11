@@ -1,88 +1,51 @@
 <template>
-  <div v-if="flag">
-    <c-entrance :list="entranceData"></c-entrance>
+<div class="balance">
+    <c-top-back></c-top-back>
+    <c-cell-wrap>
+        <p class="title">小V铺支付协议</p>
+        <p class="con">本服务由大连领客科技有限公司向您提供。 1.您选择使用的本服务应提供个人的支付信息，且需保证您所提供的所有信息是真实的、合法的、正确的、完整的。本协议所指支付信息是指您使用本服务时需要提供的个人信息，包括但不限于账户名、个人姓名、身份证号码、银行卡号等。 2.为了提供本服务的技术需要，我们有权采集、获取或在系统内保存您的部分支付信息。我们将严格确保您的个人信息和支付信息的安全。 3.您如使用本服务进行支付的，应当在确认支付金额后输入密码进行支付。您认可和同意：输入密码即视为您确认交易和交易金额并已不可撤销地向我们的支付系统发出指令，我们有权根据您的指令委托银行或第三方从您绑定的银行卡中将您确认的交易资金划扣给收款人。您不应以非本人意愿交易或其他任何原因要求退款或承担其他责任。 4.您需对使用本服务过程中发出的所有指令的真实性、有效性承担全部责任,我们依照您的指令进行操作的一切风险由您自行承担。 5.您使用本服务所涉及的账户的使用记录数据、交易金额数据等均以我们系统平台记录的数据为准。 6.您知晓，您应妥善保管银行卡、卡号、密码以以及您的账号、密码、数字证书等与银行卡或与您的支付账户有关的一切信息。如您遗失银行卡、泄露账户密码或相关信息的，您应及时通知发卡行及/或我们，以减少可能发生的损失。因泄露密码、数字证书、丢失银行卡等导致的损失需由您自行承担。 7.在我们有合理理由怀疑您提供的资料错误、不实、过时或不完整的情况下，本公司有权暂停或终止向您提供部分或全部本服务，您将承担因此产生的一切责任，公司对此不承担任何责任。 8.如果您未按上述要求进行操作，我们有权暂停或终止向您提供部分或全部本服务，您将承担因此产生的一切责任，本公司对此不承担任何责任。 9.如您发现有他人冒用或盗用您的账户及密码或任何其他未经合法授权之情形时，应立即以书面方式通知本公司并要求本公司暂停本服务。我们将积极响应您的要求，但您理解，对您的要求采取行动需要合理期限，在此之前，本公司对已执行的指令及(或)所导致的您的损失不承担任何责任。 10.若您的支付信息变更而您未及时更新资料，导致本服务无法提供或提供时发生任何错误，您不得将此作为取消交易、拒绝付款的理由，您将承担因此产生的一切后果，本公司不承担任何责任。 11.您使用本服务时同意并认可，可能由于银行本身系统问题、银行相关作业网络连线问题或其他不可抗拒因素，造成本服务无法提供。您确保您所输入的您的资料无误，如果因资料错误造成本公司于上述异常状况发生时，无法及时通知您相关交易后续处理方式的，本公司不承担任何损害赔偿责任。 12.基于运行和交易安全的需要，本公司有权暂停提供或者限制本服务部分功能,或提供新的功能，在减少、增加或者变化任何功能时，只要您仍然使用本服务，表示您仍然同意本协议或者变更后的协议。 13.本公司有权随时对本协议内容进行单方面的变更，并以公告的方式予以公布，无需另行单独通知您；若您在本协议内容公告变更后继续使用本服务的，表示您已充分阅读、理解并接受修改后的协议内容，也将遵循修改后的协议内容使用本服务；若您不同意修改后的协议内容，您应停止使用本服务。 14.本协议之效力、解释、变更、执行与争议解决均适用中华人民共和国法律，没有相关法律规定的，参照通用国际商业惯例和（或）行业惯例。 15.本协议产生之争议，双方应当友好协商解决，无法达成一致的，以本公司所在地法院为一审管辖法院。</p>
+    </c-cell-wrap>
+    <div class="wrap-pd"  style="margin-top:10px; ">
+        <c-button text="我同意" type="primary" size="block" @click.native="wit_cancel"></c-button>
+    </div>
     <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
-  </div>
+</div>
 
 </template>
 <script>
-  import utils from '../../libs/utils.js';
-  export default {
-    data() {
-        return {
-          entranceData: [{ //九宫格
-            title: '添加商品',
-            link:'/product/addself',
-            icon:'http://img1.xiaovpu.com/3027352051236343.png'
-          }, {
-            title: '我的仓库',
-            link:'/product/warehouse',
-            icon:'http://img1.xiaovpu.com/3027346770478267.png'
-          }, {
-            title: '订单管理',
-            link: '/order/list',
-            icon:'http://img1.xiaovpu.com/3027353966276215.png'
-          }, {
-            title: '我的店铺',
-            link: '',
-            icon:'http://img1.xiaovpu.com/3027356383439235.png'
-          }, {
-            title: '店铺设置',
-            link:'Setting',
-            icon:'http://img1.xiaovpu.com/3027349865458448.png'
-          }],
-          flag:false
+    import utils from '../../libs/utils.js';
+    export default {
+        data (){
+            return {
+            }
+        },
+
+        methods:{
+            wit_cancel(){
+                var res=JSON.parse(utils.getSession("json"));
+                res.check=true;
+                utils.setSession("json",res);
+                utils.go({path:'/withdra/binding',query:{'agree':'1'}},this.$router);
+            }
+        },
+        mounted: function () {
+            this.$nextTick(function () {
+                this.$vux.alert.hide();
+           })
+        },
+        components:{
+            "cTopBack":require('../../components/x-top-back/x-top-back.vue'),
+            "cCellWrap": require('../../components/cell/cell-wrap.vue'),
+            "cButton":require('../../components/button/button.vue'),
+            "cCell": require('../../components/cell/cell.vue'),
         }
-      },
-      mounted: function () {
-        this.$nextTick(function () {
-
-
-          let that=this;
-
-          utils.ajax({
-              url: basepath + "/seller/seller/login/check",
-              dataType: 'json',
-              type: 'POST',
-              async:false,
-              success: function(data){
-                  if(data.code=="SUCESS"){
-                    if(data.result.flag=='no'){
-                      utils.go({path:'/login/login'},that.$router,true);
-                      return false;
-                    }else{
-                      that.init();
-                    }
-                  }
-              }
-          });
-
-         })
-      },
-      methods: {
-        init(){
-          let that = this;
-          utils.MenuShare();
-          utils.ajax({
-              url: basepath + "/seller/store/get",
-              dataType: 'json',
-              type: 'POST',
-              success: function(data){
-                  if(data.code=="SUCESS"){
-                    that.flag=true;
-                    var Yin=location.href;
-                    var Y=Yin.substring(0,Yin.indexOf('/seller'));
-                      $('title').text(data.result.store_name);
-                      that.entranceData[3].link=Y+'/mall/index.html#/home/home?id='+data.result.id+'&xv=enter';
-                  }else{
-                      utils.go({path:'/store/addinfo'},that.$router);
-                  }
-              }
-          });
-        }
-      },
-      components: {
-        "cEntrance": require('../../components/x-entrance/x-entrance.vue'),
-      },
-  }
+    }
 </script>
+<style>
+    .title{
+        width:100%; text-align: center;
+    }
+    .con{
+        width:96%; margin:0 auto;
+    }
+</style>

@@ -1,5 +1,6 @@
 <template>
   <div v-if="flag">
+    <!--<c-withdraw-count title="可提现金额" :money='money' subTitleL='今日收入' @click.native="withdraw" :subMoneyL='subMoneyL' subTitleR='累计收入' :subMoneyR='subMoneyR'></c-withdraw-count>-->
     <c-entrance :list="entranceData"></c-entrance>
     <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
   </div>
@@ -31,7 +32,10 @@
             link:'Setting',
             icon:'http://img1.xiaovpu.com/3027349865458448.png'
           }],
-          flag:false
+          flag:true,
+          money:0,
+          subMoneyL:787,
+          subMoneyR:1000
         }
       },
       mounted: function () {
@@ -79,10 +83,14 @@
                   }
               }
           });
-        }
+        },
+        // withdraw(){
+
+        // }
       },
       components: {
         "cEntrance": require('../../components/x-entrance/x-entrance.vue'),
+        "cWithdrawCount": require('../../components/x-withdraw/x-withdraw-count.vue'),
       },
   }
 </script>

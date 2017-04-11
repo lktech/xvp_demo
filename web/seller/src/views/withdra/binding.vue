@@ -1,26 +1,45 @@
 <template>
 <div class="binding">
     <c-top-back></c-top-back>
-    <c-cell-wrap :title="title">
-        <c-cell title="发卡银行" :value="bank" @click.native="bankClick" is-link></c-cell>
-        <c-city title="卡所在地" v-model="addr_code"  @on-hide="logHide" :list="addressData" hideDistrict></c-city>
-    </c-cell-wrap>
+    <div v-if="!res.next">
+        <c-cell-wrap :title="res.title">
+            <c-cell title="发卡银行" :value="res.bank" @click.native="bankClick" is-link></c-cell>
+            <c-city title="卡所在地" v-model="res.addr_code"  @on-hide="logHide" :list="res.addressData" hideDistrict></c-city>
+        </c-cell-wrap>
 
-    <c-cell-wrap>
-        <c-cell title="开户行" :value="open_bank" @click.native="open_bankClick" is-link></c-cell>
-        <c-input title="银行卡 " placeholder="请输入银行卡号" required @on-change="validate" v-model="formData.bank_card" name="bank_card" :is-type="bank_judge"></c-input>
-    </c-cell-wrap>
+        <c-cell-wrap>
+            <c-cell title="开户行" :value="res.open_bank" @click.native="open_bankClick" is-link></c-cell>
+            <c-input title="银行卡 " placeholder="请输入银行卡号" required @on-change="validate" v-model="res.formData.bank_card" name="bank_card" :is-type="res.bank_judge"></c-input>
+        </c-cell-wrap>
 
-    <c-cell-wrap>
-        <c-input title="真实姓名" placeholder="请输入真实姓名" :disabled="disabled_i" required @on-change="validate" v-model="formData.name" name="name" :max='20'></c-input>
-        <c-input title="身份证号" placeholder="请输入身份证号" :disabled="disabled_i" required @on-change="validate" v-model="formData.card" name="card" :is-type="card_judge"></c-input>
-    </c-cell-wrap>
+        <c-cell-wrap>
+            <c-input title="真实姓名" placeholder="请输入真实姓名" :disabled="res.disabled_i" required @on-change="validate" v-model="res.formData.name" name="name" :max='20'></c-input>
+            <c-input title="身份证号" placeholder="请输入身份证号" :disabled="res.disabled_i" required @on-change="validate" v-model="res.formData.card" name="card" :is-type="res.card_judge"></c-input>
+        </c-cell-wrap>
 
-    <div class="wrap-pd"  style="margin-top:10px">
-        <c-button text="下一步" :type="color" :disabled="disabled" size="block"></c-button>
+        <div class="wrap-pd"  style="margin-top:10px">
+            <c-button text="下一步" :type="res.color" :disabled="res.disabled" size="block" @click.native="bin_next"></c-button>
+        </div>
     </div>
-    <c-addr title="选择物流" @get-addressid="bankId"  @address-add="cancel" v-model="bankStatus" :address="bankData" type="default" size='block' btn-txt="取消"></c-addr>
-    <c-addr title="选择物流" @get-addressid="open_bankId"  @address-add="cancel" v-model="open_bankStatus" :address="open_bankData" type="default" size='block' btn-txt="取消"></c-addr>
+    <div v-else>
+        <c-group>
+            <c-cell title="手机号" :value="res.phone"></c-cell>
+            <c-input title="验证码" placeholder="请输入验证码" @on-change="validate" required v-model="res.formData.code" name="code" :max="6" class="weui_vcode">
+                <c-button-send slot="right" type="primary" validate="true" @on-send="send_out">获取验证码</c-button-send>
+            </c-input>
+        </c-group>
+        <c-agree 
+             terms="支付协议"            
+             @on-change="agreeChange"            
+             :checked="res.check" 
+             @showterms="showterms" style="margin-top:10px;">
+         </c-agree>
+        <div class="wrap-pd"  style="margin-top:10px">
+            <c-button text="启用并绑定" :type="res.color1" :disabled="res.disabled1" size="block"></c-button>
+        </div>
+    </div>
+    <c-addr title="选择银行" @get-addressid="bankId"  @address-add="cancel" v-model="res.bankStatus" :address="res.bankData" type="default" size='block' btn-txt="取消"></c-addr>
+    <c-addr title="选择支行" @get-addressid="open_bankId"  @address-add="cancel" v-model="res.open_bankStatus" :address="res.open_bankData" type="default" size='block' btn-txt="取消"></c-addr>
     <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
 </div>
 
@@ -31,119 +50,157 @@
     export default {
         data (){
             return {
-                color:'default',
-                disabled:true,
-                bankData:[],
-                open_bankData:[],
-                title:'个人账户提现账号绑定',
-                addr_code:[],
-                addressData:ChinaAddressData,
-                bank:'',
-                bank_id:'',
-                open_bank:'',
-                bankStatus:false,
-                open_bankStatus:false,
-                disabled_i:false,
-                formData:{
-                    name:'',
-                    bank_card:'',
-                    card:'',
+                res:{
+                    color:'default',
+                    disabled:true,
+                    color1:'default',
+                    disabled1:true,
+                    bankData:[],
+                    open_bankData:[],
+                    check:false,
+                    title:'个人账户提现账号绑定',
+                    addr_code:[],
+                    addressData:ChinaAddressData,
+                    bank:'',
+                    bank_id:'',
+                    open_bank:'',
+                    bankStatus:false,
+                    open_bankStatus:false,
+                    disabled_i:false,
+                    next:false,
+                    phone:'13111111111',
+                    formData:{
+                        name:'',
+                        bank_card:'',
+                        card:'',
+                        code:''
+                    },
+                    status:{
+                        name:false,
+                        bank_card:false,
+                        card:false,
+                        addr_code_status:false,
+                        bank_status:false,
+                        open_bank_status:false,
+                        code:false,
+                        agree:false
+                    },
+                    bank_judge:function (value) {
+                      return {
+                        valid: value.search(/^[0-9]{16,21}$/) > -1
+                      }
+                    },
+                    card_judge:function (value) {
+                      return {
+                        valid: value.search(/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/) > -1
+                      }
+                    },
                 },
-                status:{
-                    name:false,
-                    bank_card:false,
-                    card:false,
-                    addr_code_status:false,
-                    bank_status:false,
-                    open_bank_status:false,
-                },
-                bank_judge:function (value) {
-                  return {
-                    valid: value.search(/^[0-9]{16,21}$/) > -1
-                  }
-                },
-                card_judge:function (value) {
-                  return {
-                    valid: value.search(/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/) > -1
-                  }
-                },
-
+                bank_watch:'',
+                addr_watch:[],
             }
         },
 
         methods:{
             validate(obj){
-                this.status[obj.name]=obj.valid;
+                this.res.status[obj.name]=obj.valid;
                 this.judge();
             },
             judge(){
-                console.log(this.status)
-                if(this.status.name && this.status.bank_card && this.status.card && this.status.addr_code_status && this.status.bank_status && this.status.open_bank_status){
-                    this.color='primary';
-                    this.disabled=false;
-                    console.log(1)
+                if(!this.res.next){
+                    if(this.res.status.name && this.res.status.bank_card && this.res.status.card && this.res.status.addr_code_status && this.res.status.bank_status && this.res.status.open_bank_status){
+                        this.res.color='primary';
+                        this.res.disabled=false;
+                    }else{
+                        this.res.color='default';
+                        this.res.disabled=true;
+                    }
                 }else{
-                    console.log(2)
-                    this.color='default';
-                    this.disabled=true;
+                    if(this.res.status.code && this.res.status.agree){
+                        this.res.color1='primary';
+                        this.res.disabled1=false;
+                    }else{
+                        this.res.color1='default';
+                        this.res.disabled1=true;
+                    }
                 }
             },
             cancel:function(){
-                this.bankStatus=false;
+                this.res.bankStatus=false;
             },
             bankId(id,obj){
-                this.bank=obj.trueName;
-                this.bank_id=id;
-                this.bankStatus=false;
-                this.status.bank_status=true;
+                this.res.bank=obj.trueName;
+                this.bank_watch=obj.trueName;
+                this.res.bank_id=id;
+                this.res.bankStatus=false;
+                this.res.status.bank_status=true;
                 this.obtain();
                 this.judge();
             },
             bankClick(){
-                this.bankStatus=true;
+                this.res.bankStatus=true;
             },
             open_bankId(id,obj){
-                this.open_bank=obj.trueName;
-                this.open_bankStatus=false;
-                this.status.open_bank_status=true;
+                this.res.open_bank=obj.trueName;
+                this.res.open_bankStatus=false;
+                this.res.status.open_bank_status=true;
                 this.judge();
             },
             open_bankClick(){
-                if(this.open_bankData.length){
-                    this.open_bankStatus=true;
+                if(this.res.open_bankData.length){
+                    this.res.open_bankStatus=true;
                 }
                 
             },
             obtain(){
-                if(this.status.addr_code_status && this.status.bank_status){
-                    this.open_bankData=[{'id':'1','trueName':'朝阳区银行'},{'id':'0','trueName':'丰台区银行'}];
+                if(this.res.status.addr_code_status && this.res.status.bank_status){
+                    this.res.open_bankData=[{'id':'1','trueName':'朝阳区银行'},{'id':'0','trueName':'丰台区银行'}];
                 }
             },
             logHide(success){
                 if(success){
-                    this.status.addr_code_status = true;
+                    this.addr_watch=this.res.addr_code;
+                    this.res.status.addr_code_status = true;
                     this.obtain();
                     this.judge();
                 }
                 
             },
             open_bank_switch(){
-                this.open_bank='';
-                this.status.open_bank_status=false;
+                this.res.open_bank='';
+                this.res.status.open_bank_status=false;
                 this.judge();
+            },
+            send_out(){
+
+            },
+            agreeChange(status){
+                this.res.status.agree=status;
+                this.judge();
+            },
+            bin_next(){
+                this.res.next=true;
+            },
+            showterms(){
+                utils.setSession("json",this.res);
+                utils.go({path:'/withdra/agreem'},this.$router);
             }
         },
         mounted: function () {
             this.$nextTick(function () {
                 this.$vux.alert.hide();
-                this.bankData=[{'id':'1','trueName':'招商银行'},{'id':'0','trueName':'建设银行'},{'id':'2','trueName':'交通银行'}];
+                this.res.bankData=[{'id':'1','trueName':'招商银行'},{'id':'0','trueName':'建设银行'},{'id':'2','trueName':'交通银行'}];
+                if(this.$route.query.agree){
+                    this.res=JSON.parse(utils.getSession("json"));
+                    this.judge();
+                }
            })
         },
         watch:{
-            addr_code(){
+            addr_watch(){
                 this.open_bank_switch();
             },
-            bank(){
+            bank_watch(){
                 this.open_bank_switch();
             }
         },
@@ -157,6 +214,9 @@
             "cUploadImg": require('../../components/x-upload-img/x-upload-img-slice.vue'),
             "cAddr": require('../../components/x-address-checked/x-address-checked.vue'),
             "cCity":require('../../components/address/address.vue'),
+            "cButtonSend":require('../../components/x-button-send/x-button-send.vue'),
+            "cGroup":require('../../components/group/group.vue'),
+            "cAgree": require('../../components/x-agree/x-agree.vue'),
 
         }
     }
