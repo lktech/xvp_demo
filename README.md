@@ -66,11 +66,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ①点API信息；②选择未申请；③选择小微铺核心API；④选中需要申请的API；⑤申请API<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/09.png)<br>
 
-###7.申请API审核通过后，点击API信息，选择已申请，点击API，查看API详细信息(入参，返回结果示例，错误码等)<br>
+###7.申请API后,加入QQ群451528860 进行审批<br>
+
+###8.申请API审批通过后，点击API信息，选择已申请，点击API，查看API详细信息(入参，返回结果示例，错误码等)<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/10.png)<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/11.png)<br>
 
-###8.申请API审核通过后，点击左侧`文档与工具`-->`SDK下载`，下载SDK <br>
+###9.申请API审核通过后，点击左侧`文档与工具`-->`SDK下载`，下载SDK <br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/12.png)<br>
 
 ##RUI<br>
