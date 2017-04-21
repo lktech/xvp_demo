@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Rop.api.request.XvpPhoneSendcodeRequest;
-import com.Rop.api.request.XvpPhoneVerfiycodeRequest;
+import com.Rop.api.request.XvpPhoneVerifycodeRequest;
 import com.Rop.api.response.XvpPhoneSendcodeResponse;
-import com.Rop.api.response.XvpPhoneVerfiycodeResponse;
+import com.Rop.api.response.XvpPhoneVerifycodeResponse;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.SellerCheckRequest;
 import com.lingke.xvp.demo.controller.request.SellerRegisterRequest;
@@ -144,9 +144,9 @@ public class SellerController {
 	 * @throws Exception 
 	 */
 	private Boolean checkCode(SellerRegisterRequest request) throws Exception {
-		XvpPhoneVerfiycodeRequest ropRequest = BeanCopyUtil.copy(request, XvpPhoneVerfiycodeRequest.class);
+		XvpPhoneVerifycodeRequest ropRequest = BeanCopyUtil.copy(request, XvpPhoneVerifycodeRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
-		XvpPhoneVerfiycodeResponse response = ropClientAdapter.ropInvoke(ropRequest);
+		XvpPhoneVerifycodeResponse response = ropClientAdapter.ropInvoke(ropRequest);
 		return Boolean.valueOf(response.getPhoneresult().getFlag());
 	}
 }
