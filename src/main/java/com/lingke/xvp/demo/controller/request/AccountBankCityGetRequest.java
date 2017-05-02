@@ -1,9 +1,6 @@
 package com.lingke.xvp.demo.controller.request;
 
 public class AccountBankCityGetRequest implements XvpRequest {
-	/**
-	 * 银行卡所属人姓名
-	 */
 	private String citycode;
 
 	public String getCitycode() {

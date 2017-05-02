@@ -165,15 +165,15 @@ public class AccountController {
 	}
 
 	/**
-	 * 获取省市银行信息
+	 * 获取银行省市信息
 	 * 
 	 * @param request
 	 * @return
 	 * @throws ApiException
 	 */
-	@RequestMapping(path = "/getBankCityCode", method = RequestMethod.POST)
+	@RequestMapping(path = "/getBankCity", method = RequestMethod.POST)
 	@ResponseBody
-	public XvpResponse getBankCityCode(@RequestBody AccountBankCityGetRequest request) throws Exception {
+	public XvpResponse getBankCity(@RequestBody AccountBankCityGetRequest request) throws Exception {
 		XvpTlstoreaccountGetbankcitycodeRequest ropRequest = BeanCopyUtil.copy(request,
 				XvpTlstoreaccountGetbankcitycodeRequest.class);
 		XvpTlstoreaccountGetbankcitycodeResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
