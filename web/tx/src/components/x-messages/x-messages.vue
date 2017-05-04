@@ -1,6 +1,6 @@
 <template>
 	<div class="weui_msg weui_msg weui_msg_rui">
-        <div class="weui_icon_area"><i class="weui_icon_msg" :class="{'weui_icon_success':status==1?true:false,'weui_icon_warn':status==0?true:false,'weui_icon_info':status==2?true:false}"></i></div>
+        <div class="weui_icon_area"><img :src="src" v-if="src"/><i class="weui_icon_msg" :class="{'weui_icon_success':status==1?true:false,'weui_icon_warn':status==0?true:false,'weui_icon_info':status==2?true:false}"></i></div>
         <div class="weui_text_area">
             <div class="weui_msg_title" :style="{color: msgColor}">{{msg}}</div>
             <div class="weui_msg_desc">{{desc}}</div>
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  props: ['status','msg','money','desc','score','fivetext','msgColor'],
+  props: ['status','msg','money','desc','score','fivetext','msgColor',"src"],
 	mounted () {
     this.$nextTick(() => {
     })
