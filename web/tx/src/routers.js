@@ -38,6 +38,12 @@ exports.routes = [
                 component: function(resolve){
                     require(['./views/personal/withdrawals.vue'],resolve);
                 }
+            },{
+                path:'verifyInfo',
+                name:'verifyInfo',
+                component: function(resolve){
+                    require(['./views/personal/verifyInfo.vue'],resolve);
+                }
             }
         ]
     },

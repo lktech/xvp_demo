@@ -48,6 +48,25 @@
           url:'',      // 滚动加载的链接
         }
       },
+      mounted: function () {
+        this.$nextTick(function () {
+            let that = this;
+
+            utils.ajax({
+                url: "/seller/account/getAccountAmount",
+                success: function (res) {
+                    if (res.code == "SUCCESS") {
+                        let json = res.result;
+                        that.item.money = utils.formatPrice(json.withdrawals_amount);
+                        that.item.subMoneyL = utils.formatPrice(json.today_income_amount);
+                        that.item.subMoneyR = utils.formatPrice(json.income_amount);
+                    } else {
+                        that.$vux.alert.show(res.code);
+                    }
+                }
+            })
+        })
+    	},
       ready() {
           utils.MenuShare();
 	        let that = this;
