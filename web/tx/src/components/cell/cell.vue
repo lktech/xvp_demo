@@ -48,7 +48,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @import '../../assets/styles/common/var.less';
 @import '../../assets/styles/components/variable.less';
 @import '../../assets/styles/components/tap.less';
@@ -59,7 +59,7 @@ export default {
 }
 
 .weui_cell_ft.with_arrow {
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .weui_cell_ft.with_arrow:after {

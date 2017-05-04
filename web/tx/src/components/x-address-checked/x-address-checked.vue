@@ -6,35 +6,22 @@
             <div class="weui_actionsheet_menu">
                 <div class="addTitle" v-if='title'>{{title}}</div>
                 <div class="weui_cells weui_cells_checkbox" :style="{maxHeight:height+'px'}">
-                    <r-scroller :lockX="true" :scrollbarY="true" :bounce="true" v-if="showScroller" :style="{maxHeight:height+'px'}">
-                        <div id="scroller">
-                            <div class="weui_cell weui_check_label" v-for="item in formatList"
-                                 @click.stop="getid(item.id,{trueName:item.trueName,userName:item.userName,time:item.time,e:$event})">
-                                <div class="weui_cell_hd">
-                                    <input type="radio" name="dizhi" class="weui_check">
-                                    <i class="weui_icon_checked"
-                                       :class="{'active':status,'active':defaultStatus==item.id}"></i>
-                                </div>
-                                <div class="weui_cell_bd weui_cell_primary" @click="goUrl(item.url)"
-                                     v-if="stylesheet!=1">
-                                    <p class="trueName">{{item.trueName}}</p>
-                                    <p class="userName">{{item.userName}}</p>
-                                    <p class="time">{{item.time}}</p>
-                                </div>
-                                <div class="teacher" v-else>
-                                    <div class="one"><img :src="item.headPic"/><span
-                                            class="trueName">{{item.name}}</span>
-                                        <div class="tag"><span v-for="tag in arrayConver(item.label)">{{tag}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="two">
-                                        {{item.detailIntro}}
-                                    </div>
-                                </div>
-                                <div class="weui_cell_ft with_arrow" v-if="item.url &&stylesheet!=1 ?true:false"></div>
+                    <div id="scroller">
+                        <div class="weui_cell weui_check_label" v-for="item in formatList"
+                             @click.stop="getid(item.id,{trueName:item.trueName,userName:item.userName,time:item.time,e:$event})">
+                            <div class="weui_cell_hd">
+                                <input type="radio" name="dizhi" class="weui_check">
+                                <i class="weui_icon_checked"
+                                   :class="{'active':status,'active':defaultStatus==item.id}"></i>
                             </div>
+                            <div class="weui_cell_bd weui_cell_primary" @click="goUrl(item.url)">
+                                <p class="trueName">{{item.trueName}}</p>
+                                <p class="userName">{{item.userName}}</p>
+                                <p class="time">{{item.time}}</p>
+                            </div>
+                            <div class="weui_cell_ft with_arrow" v-if="item.url &&stylesheet!=1 ?true:false"></div>
                         </div>
-                    </r-scroller>
+                    </div>
                 </div>
                 <div v-if="maxhide && formatList.length > maxhide ? false:true">
                     <div class="wrap noMove">

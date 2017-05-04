@@ -18,6 +18,6 @@ var app = new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     hot:true,
     historyApiFallback: true,
-    proxy:proxy
+    //proxy:proxy
 });
 app.listen(8090);
