@@ -1,0 +1,522 @@
+
+.question {
+    .file {
+        background: url("../../images/upload.png");
+    }
+}
+.liveRadio{
+    .playBar{
+        background: #579fdf url("../../images/sound.png") 10px center no-repeat;
+    }
+    .history{
+        background:#faf9f9 url("../../images/uparrow.png") 15px center no-repeat;
+    }
+}
+
+
+.weui_dialog_confirm .weui_dialog .weui_dialog_bd {
+    text-align: center !important;
+}
+
+.payStatus {
+
+    .slot {
+        .weui_cell_primary {
+            text-align: left;
+        }
+    }
+    .dialogEwm {
+        .img-box {
+            img {
+                width: 100%;
+                padding: 10px;
+            }
+            background-color: #fff;
+        }
+    }
+}
+
+.account {
+    .list {
+        background-color: #ffffff;
+        overflow: hidden;
+    }
+}
+
+.getMoney {
+    padding-top: 30px;
+    .money {
+        overflow: hidden;
+        background-color: #fff;
+        .title {
+            padding-left: 15px;
+            padding-top: 15px;
+            font-size: 16px;
+        }
+        .desc {
+            font-size: 12px;
+            color: #FF6600;
+            padding-left: 15px;
+            line-height: 35px;
+        }
+        .border-t:before {
+            left: 15px;
+        }
+    }
+    .hint {
+        font-size: 14px;
+        line-height: 35px;
+        padding-left: 15px;
+    }
+    .submit {
+        padding: 10px 15px;
+    }
+}
+
+/*dialogue-bar*/
+
+.dialogue-footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    color: gray;
+
+    * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -o-user-select: none;
+    }
+
+    .component-dialogue-bar {
+        position: relative;
+        height: 100%;
+
+        .dialogue-item {
+            position: absolute;
+            height: 50px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+
+            .right-slide-type {
+                width: 20%;
+                height: 100%;
+                padding: 5px;
+                color: #fff;
+                background-color: #f3f3f5;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+
+                input {
+                    position: absolute;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                    filter: "alpha(opacity=0)";
+                    filter: alpha(opacity=0);
+                    -moz-opacity: 0;
+                    left: -5px;
+                    top: -2px;
+                    cursor: pointer;
+                    z-index: 2;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .chat-way {
+                vertical-align: middle;
+                height: 100%;
+                flex-grow: 1;
+                flex-basis: 200px;
+                background-color: #f3f3f5;
+                width: 80%;
+                padding: 5px;
+
+                .chat-say {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 6px;
+                    overflow: hidden;
+                    padding: 0 10px;
+                    width: 200%;
+                    height: 200%;
+                    color: #515153;
+                    border: 1px solid #d2d2d4;
+                    transform: scale(.5);
+                    transform-origin: 0 0;
+                    font-size: 30px;
+                }
+
+                .chat-say_touched {
+                    background-color: #c6c7ca;
+
+                    .two {
+                        display: block;
+                    }
+                    .one {
+                        display: none;
+                    }
+                }
+
+                .two {
+                    display: none;
+                }
+
+                .chat-txt {
+                    border-radius: 6px;
+                    overflow: hidden;
+                    padding: 0 10px;
+                    width: 200%;
+                    height: 200%;
+                    border: 1px solid #7d7e83;
+                    transform: scale(.5);
+                    transform-origin: 0 0;
+                    font-size: 30px;
+                }
+            }
+
+            /*tips*/
+
+            .recording {
+                position: fixed;
+                left: 50%;
+                top: 45%;
+                transform: translate(-50%, -50%);
+                width: 140px;
+                height: 140px;
+                padding: 5px;
+                background-color: rgba(0, 0, 0, .5);
+                color: #ffffff;
+                border-radius: 5px;
+                font-size: 14px;
+                text-align: center;
+
+                .recording-voice .voice-inner {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 110px;
+
+                    .voice-icon {
+                        width: 55px;
+                        height: 90px;
+                        background: url(../../images/recording-bkg.png) no-repeat center center;
+                        background-size: contain;
+                    }
+
+                    .voice-volume {
+                        width: 30px;
+                        height: 55px;
+
+                        span {
+                            display: block;
+                            height: 2px;
+                            margin-top: 4px;
+                            min-width: 8px;
+                            float: left;
+                            clear: both;
+                            animation-iteration-count: infinite;
+                            animation-timing-function: linear;
+                            animation-duration: 2000ms;
+                            background-color: #e4e4e5;
+                            /* opacity: 0 ; */
+                        }
+
+                        span:nth-child(1) {
+                            width: 24px;
+                            visibility: hidden;
+                        }
+
+                        span:nth-child(1) {
+                            width: 24px;
+                            visibility: hidden;
+                        }
+
+                        span:nth-child(2) {
+                            width: 22px;
+                        }
+
+                        span:nth-child(3) {
+                            width: 20px;
+                        }
+
+                        span:nth-child(4) {
+                            width: 18px;
+                        }
+
+                        span:nth-child(5) {
+                            width: 16px;
+                        }
+
+                        span:nth-child(6) {
+                            width: 14px;
+                        }
+
+                        span:nth-child(7) {
+                            width: 12px;
+                        }
+
+                        span:nth-child(8) {
+                            width: 10px;
+                        }
+
+                        span:nth-child(9) {
+                            width: 8px;
+                        }
+
+                    }
+
+                }
+
+                .recording-cancel {
+                    p {
+                        border-radius: 3px;
+                        background-color: #9d383e;
+                    }
+
+                    .cancel-inner {
+                        width: 110px;
+                        height: 110px;
+                        margin: 0 auto;
+                        background-image: url(../../images/record-cancel.png);
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                        background-size: contain;
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+}
+
+/*  questionAsk */
+.record {
+    .weui_cells {
+        margin-top: 0;
+        margin-bottom: 0;
+
+    }
+    .course_out {
+        transition: height 300ms;
+        overflow: hidden;
+    }
+    .course_in {
+        transition: height 300ms;
+        overflow: hidden;
+    }
+    .course_top {
+        transition: top 300ms;
+        overflow: hidden;
+    }
+    .boxshadow {
+        box-shadow: 0 1px 9px #b5b5b5;
+    }
+
+    .box {
+        position: fixed;
+        width: 100%;
+        left: 0;
+        z-index: 1;
+        background-color: #f5f5f5;
+
+    }
+    .big_box {
+        width: 100%;
+        height: 100%;
+
+    }
+    .bigbox2 {
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    .weui_cell_ft.is-reverse:after {
+        -webkit-transform: rotate(134deg);
+        transform: rotate(134deg);
+        top: 28px;
+        right: 10px;
+
+    }
+    .footer {
+        background-color: gainsboro;
+        position: fixed;
+        width: 100%;
+        height: 50px;
+        bottom: -50px;
+        left: 0;
+        transition: bottom 300ms;
+    }
+
+}
+
+.ask_box {
+    .content {
+        color: #333333;
+        img {
+            width: 50px;
+            height: 50px;
+            margin-right: 5px;
+        }
+        .playBar {
+            position: relative;
+            float: left;
+            width: 180px;
+            height: 35px;
+            background: #579fdf url("../../images/sound.png") 10px center no-repeat;
+            background-size: 22px 22px;
+            color: #fff;
+            font-size: 14px;
+            border-radius: 5px;
+            i {
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                background: #579fdf;
+                left: -5px;
+                top: 50%;
+                margin-top: -5px;
+                -webkit-transform: rotate(45deg);
+            }
+            .box {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                border-radius: 5px;
+                .progress {
+                    width: 50%;
+                    height: 100%;
+                    background: -webkit-linear-gradient(left, rgba(87, 159, 223, 0.5) 70%, rgba(150, 192, 233, 0.8));
+                }
+            }
+            .txt {
+                padding-left: 40px;
+                line-height: 36px;
+            }
+        }
+    }
+}
+
+.questionAsk {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    z-index: 1;
+
+}
+
+/*  questionAsk */
+.record {
+    .weui_cells {
+        margin-top: 0;
+        margin-bottom: 0;
+
+    }
+    .course_out {
+        transition: height 300ms;
+        overflow: hidden;
+    }
+    .course_in {
+        transition: height 300ms;
+        overflow: hidden;
+    }
+    .course_top {
+        transition: top 300ms;
+        overflow: hidden;
+    }
+    .boxshadow {
+        box-shadow: 0 1px 9px #b5b5b5;
+    }
+
+    .box {
+        position: fixed;
+        width: 100%;
+        left: 0;
+        z-index: 1;
+        background-color: #f5f5f5;
+
+    }
+    .big_box {
+        width: 100%;
+        height: 100%;
+
+    }
+    .bigbox2 {
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    .weui_cell_ft.is-reverse:after {
+        -webkit-transform: rotate(134deg);
+        transform: rotate(134deg);
+        top: 28px;
+        right: 10px;
+
+    }
+    .footer {
+        background-color: gainsboro;
+        position: fixed;
+        width: 100%;
+        height: 50px;
+        bottom: -50px;
+        left: 0;
+        transition: bottom 300ms;
+    }
+
+}
+
+.voice-icon {
+    width: 55px;
+    height: 90px;
+    background: url(../../images/recording-bkg.png) no-repeat center center;
+    background-size: contain;
+}
+
+.cancel-inner {
+    width: 110px;
+    height: 90px;
+    margin: 0 auto;
+    background-image: url(../../images/record-cancel.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
+
+.RightImg {
+    background: url(../../images/icon-img.png) no-repeat center center;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.footer {
+        background-color: gainsboro;
+        position: fixed;
+        width: 100%;
+        height: 50px;
+        bottom: -50px;
+        left: 0;
+        transition: bottom 300ms;
+    }
+    
+

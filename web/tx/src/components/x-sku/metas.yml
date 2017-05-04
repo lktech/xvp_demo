@@ -1,0 +1,74 @@
+component:
+  sku
+
+about:
+  sku选择组件
+
+author:
+  bob
+
+props: {
+    value: {//显示状态
+        type: Boolean,
+        default:false
+    },
+    text:{//按钮文案
+        type:String,
+        default:"下一步"
+    },
+    type:{
+        type:String,
+        default:"org"
+    },
+    sku:{//sku
+        type:Array,
+        default(){
+            return [];
+        }
+    },
+    max:{//最大数量
+        type:Number
+    },
+    min:{//最小数量
+        type:Number,
+        default(){
+            return 1;
+        }
+    },
+    num:{//初始数量
+        type:Number,
+        default(){
+            return 1;
+        }
+    },
+    fillable: {//数量是否可输入
+        type: Boolean,
+        default:false
+    },
+    title:{//商品标题
+        type:String,
+        default:""
+    },
+    price:{//商品价格
+        type:String,
+        default:""
+    },
+    img:{//商品图片
+        type:String,
+        default:""
+    },
+    unit:{//单位
+        type:String,
+        default:"￥"
+    },
+    disabled: {//按钮是否可用
+        type: Boolean,
+        default:false
+    }
+}
+
+示例：
+   <c-sku :show.sync="skuStatus" :sku='[{"id":1,"name":"红色 XLL"},{"id":2,"name":"黑色 XL"},{"id":3,"name":"灰色 L"}]' :product='skuProduct' :url="skuUrl" :max="20" @submit="skuSubmit"></c-sku>
+
+
+接收submit,返回参数为：this.$emit("submit",{"id":this.product.id,"num":this.selectNum,"sid":this.actId});

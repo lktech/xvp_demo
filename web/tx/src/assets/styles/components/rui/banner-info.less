@@ -1,0 +1,23 @@
+@import "../../common/var.less";
+.banner-info{height: @banner-height;width: 100%;text-align: center;padding-top: @px10;padding-bottom: @px10;}
+.banner-info .bi-img{height: 64px;width: 64px;border-radius: 100%;}
+.banner-info .bi-title{margin-top:@px10;display:inline-block;line-height: 27px;padding:0 @px10;border-radius: 30px;color:@color-white;font-size: @fts-normal;background: rgba(0,0,0,@bg-opacity);}
+.banner-info .bi-inner{color:@color-white;padding-top: 2px;}
+.banner-info .bi-inner span{font-size: @fts-smaller;margin-top: 2px;display: inline-block;}
+.banner-info .dispnone{
+    position: relative;
+}
+.banner-info .dispnone input {
+    position: absolute;
+    display: block;
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+    filter: "alpha(opacity=0)";
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    left: 145px;
+    top: -110px;
+    cursor: pointer;
+    z-index: 2;
+}

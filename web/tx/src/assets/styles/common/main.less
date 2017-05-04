@@ -1,0 +1,560 @@
+@import 'var.less';
+@import '1px.less';
+@import '../components/loading.less';
+
+html, body { /*height:100%;width: 100%;*/
+    -webkit-text-size-adjust: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    padding: 0;
+    margin: 0;
+    font-size: @fts-normal !important;
+}
+
+/*html{overflow-x:hidden;}*/
+body { /*height:100%;*/
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: @line-height;
+    min-width: 320px;
+    word-break: break-word;
+    background: @color-bg;
+    color: @color3;
+}
+
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ol {
+    margin: 0 0 0 20px;
+    padding: 0;
+}
+
+audio, canvas, video, embed {
+    max-width: 100%;
+    display: inline-block;
+}
+
+label, h1, h2, h3, h4 {
+    font-weight: normal;
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+}
+
+a {
+    color: @color3;
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+}
+
+a:focus {
+    outline: none !important;
+}
+
+h1 {
+    color: @color0;
+    font-size: @fts-big;
+}
+
+h2 {
+    color: @color0;
+    font-size: @fts-normal;
+}
+
+h3 {
+    color: @color0;
+    font-size: @fts-small;
+}
+
+h4 {
+    color: @color0;
+    font-size: @fts-smaller;
+}
+
+p {
+    margin: 0;
+}
+
+.body-noscroll {
+    overflow-y: hidden;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.txt-ofl {
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.vux-center-v, .vux-center-h, .vux-center {
+    display: flex;
+}
+
+.vux-center-v, .vux-center {
+    align-items: center;
+}
+
+.vux-center-h, .vux-center {
+    justify-content: center;
+}
+
+.label0 {
+    font-size: @fts-small;
+    color: @color0;
+}
+
+.label3 {
+    font-size: @fts-small;
+    color: @color3;
+}
+
+.label6 {
+    font-size: @fts-small;
+    color: @color6;
+}
+
+.label9 {
+    font-size: @fts-small;
+    color: @color9;
+}
+
+.label0-small {
+    font-size: @fts-smaller;
+    color: @color0;
+}
+
+.label3-small {
+    font-size: @fts-smaller;
+    color: @color3;
+}
+
+.label6-small {
+    font-size: @fts-smaller;
+    color: @color6;
+}
+
+.label9-small {
+    font-size: @fts-smaller;
+    color: @color9;
+}
+
+.clr-3 {
+    color: @color3 !important;
+}
+
+.clr-6 {
+    color: @color6 !important;
+}
+
+.clr-9 {
+    color: @color9 !important;
+}
+
+.clr-gray {
+    color: @color-gray !important;
+}
+
+.clr-blue {
+    color: @color-blue !important;
+}
+
+.clr-blue2 {
+    color: @color-blue2 !important;
+}
+
+.clr-org {
+    color: @color-org !important;
+}
+
+.clr-green {
+    color: @color-green !important;
+}
+
+.clr-red {
+    color: @color-red !important;
+}
+
+.clr-white {
+    color: @color-white !important;
+}
+
+.clr-dark {
+    color: @color0 !important;
+}
+
+.clr-primary {
+    color: @color-theme !important;
+}
+
+.line-height {
+    line-height: @line-height;
+}
+
+.fontbg {
+    background: rgba(0, 0, 0, 0.7);
+    display: inline-block;
+    border-radius: 20px;
+    padding: 5px 10px;
+    color: @color-white;
+}
+
+.label-white {
+    color: @color9;
+}
+
+.bg-white {
+    background-color: @color-white;
+}
+
+.cell-wrap-title {
+    line-height: @px36;
+    font-size: @fts-small;
+    color: @color9;
+    padding-left: @px10;
+}
+
+.cell-wrap-title-dark {
+    color: @color0;
+}
+
+.border-t, .border-b, .border-l, .border-r {
+    position: relative;
+}
+
+.border-t:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200%;
+    height: 1px;
+    border-top: 1px solid @color-gray;
+    color: @color-gray;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+}
+
+.border-b:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 200%;
+    height: 1px;
+    border-bottom: 1px solid @color-gray;
+    color: @color-gray;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+}
+
+.border-l:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 200%;
+    width: 1px;
+    border-left: 1px solid @color-gray;
+    color: @color-gray;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+}
+
+.border-r:before {
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 200%;
+    width: 1px;
+    border-right: 1px solid @color-gray;
+    color: @color-gray;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+}
+
+.vux-tap-active {
+    tap-highlight-color: transparent
+}
+
+.vux-tap-active:active {
+    background-color: @color-gray;
+}
+
+.tabbar-wrap {
+    padding-bottom: @tabbar-height + @px20;
+}
+
+.tabbar-wrap2 {
+    padding-bottom: @btn-heigth;
+}
+
+.footer-fixed {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    min-height: @tabbar-height; /*padding: @distance;*/
+    z-index: 100;
+    background: @color-bg;
+    -webkit-transform: translateZ(0);
+}
+
+.footer-fixed .weui_btn {
+    display: block !important;
+    line-height: 49px !important;
+}
+
+.btn-sendmsg {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 49px;
+    line-height: 49px;
+    z-index: 100;
+    background: @color-white;
+    text-align: right;
+    font-size: @fts-big;
+    color: @color6;
+    padding: 0 @px10;
+}
+
+.btn-sendmsg:after {
+    content: " ";
+    position: absolute;
+    left: 10px;
+    right: 20px;
+    top: 10px;
+    height: 56px;
+    width: 160%;
+    border-radius: @btn-radius*2;
+    border: 1px solid @color-gray;
+    color: @color-gray;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+}
+
+.wrap-pd {
+    padding: 0px @px10;
+}
+
+.wrap-pd2 {
+    padding: @px10 0px;
+}
+
+.wrap {
+    padding: @px10;
+}
+
+.wrap-pdt {
+    padding-top: @px10;
+}
+
+.wrap-pdb {
+    padding-bottom: @px10;
+}
+
+.wrap-pdr {
+    padding-right: @px20;
+}
+
+.wrap-detail {
+    background: @color-white;
+    color: @color6;
+    font-size: @fts-small;
+    padding-bottom: @px10;
+    line-height: 1.3;
+}
+
+.wrap-detail img {
+    width: 100%;
+}
+
+.wrap-detail > h3 {
+    font-size: @fts-normal;
+    padding: 0px @px10;
+    margin: @px10 0px @px5;
+    text-align: center;
+    color: @color6;
+}
+
+.wrap-detail > p {
+    padding: 0px @px10;
+    margin-bottom: @px10;
+}
+
+.bg-height {
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 100% auto;
+}
+
+.bg-width {
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: auto 100%;
+}
+
+.distance {
+    margin-bottom: @distance;
+}
+
+// 箭头
+.with_arrow:after {
+    content: " ";
+    display: inline-block;
+    height: 6px;
+    width: 6px;
+    border-width: 2px 2px 0 0;
+    border-color: #C8C8CD;
+    border-style: solid;
+    -webkit-transform: rotate(45deg) translateY(-50%);
+    transform: rotate(45deg) translateY(-50%);
+}
+
+//样式重置
+.weui_dialog {
+    .weui_btn_dialog.primary {
+        background-color: #F05B0B;
+        color: #fff !important;
+    }
+    .weui_dialog_bd {
+        color: @color3 !important;
+    }
+    .weui_dialog_ft {
+        a:active {
+            background-color: #F05B0B;
+            color: #fff !important;
+        }
+    }
+
+}
+
+/**
+==================插件框架===============================
+*/
+/**
+.weui_actionsheet {
+    transform: translate(0, 100%);
+}
+
+
+* vue-router transition
+*/
+/*
+.router-view {
+    width: 100%;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    backface-visibility: hidden;
+}
+.vux-pop-out-enter-active,
+.vux-pop-out-leave-active,
+.vux-pop-in-enter-active,
+.vux-pop-in-leave-active {
+    will-change: transform;
+    height: 100%;
+    position: absolute;
+    left: 0;
+}
+.vux-pop-out-enter-active {
+    animation-name: popInLeft;
+}
+.vux-pop-out-leave-active {
+    animation-name: popOutRight;
+}
+.vux-pop-in-enter-active {
+    perspective: 1000;
+    animation-name: popInRight;
+}
+.vux-pop-in-leave-active {
+    animation-name: popOutLeft;
+}
+@keyframes popInLeft {
+    from {
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes popOutLeft {
+    from {
+        opacity: 1;
+    }
+    to {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+@keyframes popInRight {
+    from {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes popOutRight {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+    }
+}
+*/

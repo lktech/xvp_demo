@@ -1,0 +1,11 @@
+dist
+dist2
+dist8
+dist9
+node_modules
+bower_components
+.idea
+.project
+*.swp
+.DS_Store
+.DS_Store?

@@ -1,0 +1,95 @@
+@import "../../common/var.less";
+
+.vux-actionsheet {
+
+    .weui_cells_checkbox > label > * {
+        pointer-events: none;
+    }
+    .weui_cells > a {
+        color: #000;
+    }
+
+    .weui_cells {
+        margin: 0px !important;
+    }
+    .addTitle {
+        line-height: 30px;
+        color: @color9;
+        font-size: @fts-smaller;
+        padding-left: @px10;
+    }
+    .trueName {
+        font-size: @fts-big;
+    }
+    .userName {
+        font-size: @fts-small;
+        color: @color9
+    }
+    .time {
+        font-size: @fts-small;
+        color: @color9
+    }
+    .weui_cell_primary a {
+        display: block;
+    }
+    .active:before {
+        content: '\EA06' !important;
+        color: #09BB07 !important;
+    }
+    .weui_cells_checkbox {
+        overflow-y: auto;
+        -webkit-overflow-scrolling : touch;
+    }
+    .weui_cells:after {
+        content: "" !important;
+        height: 0px !important;
+        border-bottom: none;
+
+    }
+    .teacher {
+        color: #333333;
+        width: 100%;
+        .one {
+            position: relative;
+            height: 35px;
+            line-height: 35px;
+            img {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+            }
+            .trueName {
+                font-size: 14px;
+                margin-left: 10px;
+            }
+            .tag {
+                position: absolute;
+                top: 50%;
+                right: 0px;
+                height: 35px;
+                margin-top: -17.5px;
+                span {
+                    font-size: 12px;
+                    display: inline-block;
+                    background: #e6e6e6;
+                    color: #666666;
+                    padding-left: 3px;
+                    padding-right: 3px;
+                    border-radius: 4px;;
+                    margin-left: 5px;
+                    line-height: 18px;
+                }
+            }
+        }
+        .two {
+            font-size: 12px;
+            padding-top: 5px;
+            line-height: 18px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+            margin-left: 45px;
+        }
+    }
+}
