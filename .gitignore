@@ -8,6 +8,8 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 **/node_modules/
+**/dist/
+**/.idea
 .classpath
 .project
 .settings/
