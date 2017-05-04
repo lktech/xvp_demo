@@ -24,6 +24,20 @@ exports.routes = [
                 component: function(resolve){
                     require(['./views/personal/balance.vue'],resolve);
                 }
+            },
+            {
+                path:'cashrecord',
+                name:'cashrecord',
+                component: function(resolve){
+                    require(['./views/personal/cashrecord.vue'],resolve);
+                }
+            },
+            {
+                path:'withdrawals',
+                name:'withdrawals',
+                component: function(resolve){
+                    require(['./views/personal/withdrawals.vue'],resolve);
+                }
             },{
                 path:'verifyInfo',
                 name:'verifyInfo',
