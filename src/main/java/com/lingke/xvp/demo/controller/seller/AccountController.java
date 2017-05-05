@@ -1,5 +1,7 @@
 package com.lingke.xvp.demo.controller.seller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -177,8 +179,10 @@ public class AccountController {
 		XvpTlstoreaccountGetbankcitycodeRequest ropRequest = BeanCopyUtil.copy(request,
 				XvpTlstoreaccountGetbankcitycodeRequest.class);
 		XvpTlstoreaccountGetbankcitycodeResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
-		AccontBankCityCodeGetListGetResponse response = (AccontBankCityCodeGetListGetResponse) BeanCopyUtil
-				.copyList(ropResponse.getAreas(), AccountCityCodeGetResponse.class);
+		AccontBankCityCodeGetListGetResponse response = new AccontBankCityCodeGetListGetResponse();
+		List<AccountCityCodeGetResponse> list = BeanCopyUtil.copyList(ropResponse.getAreas(),
+				AccountCityCodeGetResponse.class);
+		response.addAll(list);
 		return response;
 	}
 
@@ -195,8 +199,10 @@ public class AccountController {
 		XvpTlstoreaccountGetbankinfoRequest ropRequest = BeanCopyUtil.copy(request,
 				XvpTlstoreaccountGetbankinfoRequest.class);
 		XvpTlstoreaccountGetbankinfoResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
-		AccontBankInfoListGetResponse response = (AccontBankInfoListGetResponse) BeanCopyUtil
-				.copyList(ropResponse.getBanks(), AccountBankInfoResponse.class);
+		List<AccountBankInfoResponse> list = BeanCopyUtil.copyList(ropResponse.getBanks(),
+				AccountBankInfoResponse.class);
+		AccontBankInfoListGetResponse response = new AccontBankInfoListGetResponse();
+		response.addAll(list);
 		return response;
 	}
 
@@ -233,8 +239,10 @@ public class AccountController {
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
 		XvpTlstoreaccountQuerywithdrawsResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
-		AccontWithDrawsQueryListResponse response = (AccontWithDrawsQueryListResponse) BeanCopyUtil
-				.copyList(ropResponse.getTlstoreaccountwithdraws(), AccontWithDrawsQueryResponse.class);
+		AccontWithDrawsQueryListResponse response = new AccontWithDrawsQueryListResponse();
+		List<AccontWithDrawsQueryResponse> list = BeanCopyUtil.copyList(ropResponse.getTlstoreaccountwithdraws(),
+				AccontWithDrawsQueryResponse.class);
+		response.addAll(list);
 		return response;
 	}
 }
