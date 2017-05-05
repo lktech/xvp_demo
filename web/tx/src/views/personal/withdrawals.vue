@@ -21,7 +21,7 @@
       <div class="popup1">
         <c-msg :status="cash_status" :msg="cash_title">
 	    	<div slot="btn">
-	    		<c-button :text="cash_text" type="primary" size="block" @click.native="btnClick"></c-button>
+	    		<c-button :text="cash_text" type="primary" size="block" @click.native="btnClick" style='background-color: #5ABA5A;'></c-button>
 	       </div>
 	    </c-msg>
       </div>
@@ -45,7 +45,7 @@
                 cash_result:false,
                 cash_text:'查看提现记录',
                 cash_title:'提现成功',
-                cash_status:1,
+                cash_status:0,
                 tips:''
 
             }
@@ -98,7 +98,6 @@
 			                that.cash_title='提现成功';
 			                that.cash_status=1;
 	                    }else{
-	                    	
 				            that.cash_text='返回';
 			                that.cash_title='提现失败';
 			                that.cash_status=0;
@@ -130,7 +129,13 @@
                 
             },
             btnClick(){
-            	utils.go({name:'balance',query:{}},this.$router);   // 回到余额
+            	if(this.cash_text=='查看提现记录'){
+            		utils.go({name:'cashrecord',query:{}},this.$router);   // 回到余额
+            	}else{
+            		utils.go({name:'balance',query:{}},this.$router);   // 回到余额
+            		
+            	}
+
             },
             statusCtrl(v,that){   // 状态变化
             	that.input_money=v;
@@ -146,7 +151,7 @@
         },
         computed: {
 		  placeholder: function() {
-		     return  "账号余额 " + this.maxvalue
+		    return  "账号余额 " + this.maxvalue;
 		  }
 		},
         components:{
@@ -162,4 +167,5 @@
         }
     }
 </script>
+
 

@@ -2,14 +2,15 @@
   <div>
     <c-top-back></c-top-back>
     <div v-if='record.length>0'>
-    	<!--<c-cell-wrap :title='item.create_time' v-for='item in record' v-if='item.title=="提现成功"'>
-        <c-cell title="提现手续费" :value='item.withdraw_commission' rightcolor='green'></c-cell>
-      </c-cell-wrap>-->
-      <c-cell-wrap :title='item.create_time' v-for='item in record' :key="item.id">
-        <c-cell :title="item.title" :value='item.withdraw_amount' rightcolor='red' v-if='item.title=="提现失败"'></c-cell>
-        <c-cell :title="item.title" :value='item.withdraw_amount' rightcolor='green' v-else></c-cell>
-      </c-cell-wrap>
-      
+      <div v-for='item in record' :key="item.id">
+      	<c-cell-wrap :title='item.create_time' v-if='item.status=="TXCG"'>
+	        <c-cell title="提现手续费" :value='item.withdraw_commission' rightcolor='green'></c-cell>
+	      </c-cell-wrap>
+	      <c-cell-wrap :title='item.create_time'>
+	        <c-cell :title="adStatusView(item.status).text" :value='item.withdraw_amount' rightcolor='green' v-if='item.status=="TXCG"'></c-cell>
+	        <c-cell :title="adStatusView(item.status).text" :value='item.withdraw_amount' rightcolor='red' v-else></c-cell>
+	      </c-cell-wrap>
+      </div>
     </div>
     <!--无数据提示-->
     <c-data-null v-else msg='最近没有提现记录哦！'>
@@ -23,6 +24,7 @@
 </template>
 <script>
   import utils from '../../libs/utils.js';
+  import constants from '../../libs/constants.js';
   export default {
     data() {
         return {
@@ -36,7 +38,7 @@
                 "withdraw_amount": 1000,
                 "withdraw_commission": 1,
                 "create_time": "2017-01-09 15:07:51",
-                "title":'提现成功'
+                "status":'TXCG'
             },{
                 "id": 1111,
                 "store_id": 111,
@@ -46,7 +48,7 @@
                 "withdraw_amount": 1000,
                 "withdraw_commission": 1,
                 "create_time": "2017-01-09 15:07:51",
-                "title":'提现成功'
+                "status":'TXCG'
             },{
                 "id": 1111,
                 "store_id": 111,
@@ -56,8 +58,28 @@
                 "withdraw_amount": 1000,
                 "withdraw_commission": 1,
                 "create_time": "2017-01-09 15:07:51",
-                "title":'提现失败'
-            },
+                "status":'TXSB'
+            },{
+                "id": 1111,
+                "store_id": 111,
+                "card_no": "1234567890123456789",
+                "bank_code": "123456789",
+                "bank_name": "招商银行",
+                "withdraw_amount": 1000,
+                "withdraw_commission": 1,
+                "create_time": "2017-01-09 15:07:51",
+                "status":'TXSB'
+            },{
+                "id": 1111,
+                "store_id": 111,
+                "card_no": "1234567890123456789",
+                "bank_code": "123456789",
+                "bank_name": "招商银行",
+                "withdraw_amount": 1000,
+                "withdraw_commission": 1,
+                "create_time": "2017-01-09 15:07:51",
+                "status":'TXCG'
+            }
         	],
           url:'',      // 滚动加载的链接
         }
@@ -87,6 +109,9 @@
 						this.record = data.result;
 					}
 				},
+				adStatusView(state) {
+          return constants.adStatusView(state);
+        },
       },
       components: {
         "cTopBack": require('../../components/x-top-back/x-top-back.vue'),
