@@ -16,7 +16,7 @@
 
 </template>
 <script>
-    import utils from '../../libs/utils.js'
+    import utils from '../libs/utils.js'
     export default {
         data (){
             return {
@@ -33,15 +33,15 @@
             }
         },
         components: {
-            "cTopBack": require('../../components/x-top-back/x-top-back.vue'),
-            "rGroup": require("../../components/group/group.vue"),
-            "rButton": require("../../components/button/button.vue"),
-            "rCell": require("../../components/cell/cell.vue"),
-            "r-messages": require("../../components/x-messages/x-messages.vue"),
+            "cTopBack": require('../components/x-top-back/x-top-back.vue'),
+            "rGroup": require("../components/group/group.vue"),
+            "rButton": require("../components/button/button.vue"),
+            "rCell": require("../components/cell/cell.vue"),
+            "r-messages": require("../components/x-messages/x-messages.vue"),
         }
     }
 
 </script>
 <style lang="less">
-    @import "../../assets/styles/views/personal";
+    @import "../assets/styles/views/personal";
 </style>

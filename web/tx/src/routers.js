@@ -2,49 +2,64 @@
 exports.routes = [
     {
         path: '/',
-        redirect:'/index'
+        redirect: '/index'
     },
     {//我的店铺
         path: '/index',
-        name:'index',
-        component: function(resolve){
-            require(['./views/index.vue'],resolve);
+        name: 'index',
+        component: function (resolve) {
+            require(['./views/index.vue'], resolve);
+        }
+    },
+    {//我的余额
+        path: '/balance',
+        name: 'balance',
+        component: function (resolve) {
+            require(['./views/balance.vue'], resolve);
+        }
+    },
+    {//提现绑定
+        path: '/txBind',
+        name: 'txBind',
+        component: function (resolve) {
+            require(['./views/txBind.vue'], resolve);
+        }
+    },
+    {//实名认证
+        path: '/verifyInfo',
+        name: 'verifyInfo',
+        component: function (resolve) {
+            require(['./views/verifyInfo.vue'], resolve);
+        }
+    },
+    {//提现绑卡
+        path: '/bindCard',
+        name: 'bindCard',
+        component: function (resolve) {
+            require(['./views/bindCard.vue'], resolve);
         }
     },
     {//个人实名认证
         path: '/personal',
-        name:'personal',
-        component: function(resolve){
-            require(['./views/personal/index.vue'],resolve);
+        name: 'personal',
+        component: function (resolve) {
+            require(['./views/personal/index.vue'], resolve);
         },
-        children:[
+        children: [
             {
-                path:'balance',
-                name:'balance',
-                component: function(resolve){
-                    require(['./views/personal/balance.vue'],resolve);
+                path: 'cashrecord',
+                name: 'cashrecord',
+                component: function (resolve) {
+                    require(['./views/personal/cashrecord.vue'], resolve);
                 }
             },
             {
-                path:'cashrecord',
-                name:'cashrecord',
-                component: function(resolve){
-                    require(['./views/personal/cashrecord.vue'],resolve);
+                path: 'withdrawals',
+                name: 'withdrawals',
+                component: function (resolve) {
+                    require(['./views/personal/withdrawals.vue'], resolve);
                 }
             },
-            {
-                path:'withdrawals',
-                name:'withdrawals',
-                component: function(resolve){
-                    require(['./views/personal/withdrawals.vue'],resolve);
-                }
-            },{
-                path:'verifyInfo',
-                name:'verifyInfo',
-                component: function(resolve){
-                    require(['./views/personal/verifyInfo.vue'],resolve);
-                }
-            }
         ]
     },
 ];
