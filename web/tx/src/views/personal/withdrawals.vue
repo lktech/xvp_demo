@@ -114,12 +114,6 @@
                 that.input_money=v;
                 if(s=='success'){
                     that.statusCtrl(v,that);
-                    
-                    if(that.input_money>100){
-                    	that.counter  = 3 + v*0.006;
-                    }else{
-                    	that.counter  = 3;
-                    }
                 }else{
                     that.disabled=true;
                     that.color='default';

@@ -56,17 +56,16 @@
             this.$emit('on-input', value, status);
             return false;
           } else if(value - 0 < this.minvalue) {
-            this.tips = '输入值不能低于最小值';
+            this.tips = '提现金额需大于100元';
             status = 'fail';
             this.$emit('on-input', value, status);
             return false;
           } else if(value - 0 > this.maxvalue) {
-            this.tips = '输入值不能超出最大值';
+            this.tips = '输入金额超过本次可提现金额';
             status = 'fail';
             this.$emit('on-input', value, status);
             return false;
           } else {
-          	console.log(888)
             this.tips = '';
             status = 'success';
             this.$emit('on-input', value, status);
