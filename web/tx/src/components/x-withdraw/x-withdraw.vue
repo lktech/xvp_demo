@@ -38,7 +38,11 @@
     computed: {
 
     },
-    watch: {},
+    watch: {
+    	tip(newd){    // 点全部提现，需要把tip置为空
+    		this.tips = newd;
+    	}
+    },
     methods: {
       verification() {
         var value = $.trim($('[data_id=inputNum]').val());

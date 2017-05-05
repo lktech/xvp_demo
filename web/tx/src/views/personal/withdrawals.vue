@@ -65,10 +65,11 @@
 	                    'userId':this.$route.query.id
 	                },
 	                success: function(data){
-	                    if(data.success){
+	                    if(data.code == 'SUCCESS'){
 	                        that.maxvalue=data.money;
+	                        that.bank_code = data.bank_code;
 	                    }else{
-	                        that.$vux.alert.show(data.msg);
+	                        that.$vux.toast.show(data.msg);
 	                    }
 	                }
 	            });
@@ -124,7 +125,8 @@
             	let that = this;
             	$('[data_id=inputNum]').val(that.maxvalue);
                 that.statusCtrl(that.maxvalue,that);
-                that.tips = '';
+                that.tips = new Date().getTime()+"";   // 先tips变，然后置为空
+                setTimeout(function(){that.tips = '';},10); // 先tips变，然后置为空
                 
             },
             btnClick(){
