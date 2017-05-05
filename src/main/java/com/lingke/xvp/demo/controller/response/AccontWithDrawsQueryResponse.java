@@ -44,6 +44,11 @@ public class AccontWithDrawsQueryResponse implements XvpResponse {
 	 * 创建时间
 	 */
 	private Date create_time;
+	
+	/**
+	 * 提现状态
+	 */
+	private String status;
 
 	public Long getId() {
 		return id;
@@ -109,12 +114,19 @@ public class AccontWithDrawsQueryResponse implements XvpResponse {
 		this.create_time = create_time;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "AccontWithDrawsQueryResponse [id=" + id + ", store_id=" + store_id + ", card_no=" + card_no
 				+ ", bank_code=" + bank_code + ", bank_name=" + bank_name + ", withdraw_amount=" + withdraw_amount
-				+ ", withdraw_commission=" + withdraw_commission + ", create_time=" + create_time + "]";
+				+ ", withdraw_commission=" + withdraw_commission + ", create_time=" + create_time + ", status=" + status
+				+ "]";
 	}
-	
-	
 }
