@@ -4,7 +4,7 @@
         <r-group>
             <r-cell title="个人账户提现账号绑定" class="cellTitle"></r-cell>
             <r-cell title="发卡银行" :value="cardBank" is-link @click.native="cardBankClick"></r-cell>
-            <r-address title="卡所在地" v-model="cityCode" :list="addressData"></r-address>
+            <r-cell title="卡所在地" :value="cityName" is-link @click.native="cityCodeClick"></r-cell>
         </r-group>
         <r-group>
             <r-cell title="开户行" :value="openingBank" is-link @click.native="openingBankClick" class="wd"></r-cell>
@@ -31,6 +31,28 @@
                 :address="subBankList"
                 @get-addressid="getSubBank"
                 @address-add="showSubBank=false" btn-txt="取消" title="选择支行"></r-address-checked>
+        <!--省-->
+        <r-popup v-model="showProvince">
+            <div class="popupArea">
+                <h3>请选择省</h3>
+                <div class="areaContent" :style="{maxHeight:maxH,overflow: 'auto'}">
+                    <r-group>
+                        <r-radio :options="province" v-model="provinceValue" @on-change="changeProvince"></r-radio>
+                    </r-group>
+                </div>
+            </div>
+        </r-popup>
+        <!--市-->
+        <r-popup v-model="showCity">
+            <div class="popupArea">
+                <h3>请选择市</h3>
+                <div class="areaContent" :style="{maxHeight:maxH,overflow: 'auto'}">
+                    <r-group>
+                        <r-radio :options="city" v-model="cityValue" @on-change="changeCity"></r-radio>
+                    </r-group>
+                </div>
+            </div>
+        </r-popup>
     </div>
 </template>
 
@@ -40,7 +62,7 @@
         data(){
             return {
                 type: this.$route.query.type,
-                cityCode: [],//城市编码
+                cityName: "",//城市
                 cardBank: "",
                 cardAddress: "",
                 openingBank: "",
@@ -56,7 +78,23 @@
 
                 //企业
                 license: "",
-                companyName: ""
+                companyName: "",
+
+                //省市
+                showProvince: false,
+                province: [{id: 1, name: "北京"}, {id: 2, name: "天津"}, {id: 3, name: "上海"}, {id: 4, name: "河北"}, {
+                    id: 5,
+                    name: "山东"
+                }],
+                provinceValue: {},
+                showCity: false,
+                city: [{id: 1, name: "北京市"}, {id: 2, name: "邯郸市"}, {id: 3, name: "衡水市"}],
+                cityValue: {}
+            }
+        },
+        computed: {
+            maxH(){
+                return $(window).height() * 0.5 + "px";
             }
         },
         mounted: function () {
@@ -118,6 +156,21 @@
             //下一步
             btnClick(){
 
+            },
+            //省选择
+            changeProvince (obj) {
+                this.cityName = obj.name;
+                this.showProvince = false;
+                this.showCity = true;
+            },
+            //市选择
+            changeCity(obj){
+                this.cityName += " " + obj.name;
+                this.showCity = false;
+            },
+            //点击省
+            cityCodeClick(){
+                this.showProvince = true;
             }
         },
         watch: {
@@ -154,6 +207,8 @@
             "rButton": require("../components/button/button.vue"),
             "rAddressChecked": require('../components/x-address-checked/x-address-checked.vue'),
             "rAddress": require("../components/address/address.vue"),
+            "rPopup": require("../components/popup/popup.vue"),
+            "rRadio": require("../components/radio/x-radio.vue"),
         }
     }
     //require("../../assets/styles/views/batchExport.less");
