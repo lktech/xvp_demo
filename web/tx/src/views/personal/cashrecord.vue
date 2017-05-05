@@ -10,7 +10,7 @@
     <!--无数据提示-->
     <c-data-null v-else msg='最近没有提现记录哦！'>
       <div class="wrap-pd">
-        <c-button text='返回首页' size='block' type='primary'></c-button>
+        <c-button text='返回首页' size='block' type='primary' :link='{name:"index"}'></c-button>
       </div>
     </c-data-null>
     <!-- 列表滚动加载-->
@@ -22,72 +22,33 @@
   export default {
     data() {
         return {
-          record: [
-            {
-                "id": 1111,
-                "store_id": 111,
-                "card_no": "1234567890123456789",
-                "bank_code": "123456789",
-                "bank_name": "招商银行",
-                "withdraw_amount": 1000,
-                "withdraw_commission": 1,
-                "create_time": "2017-01-09 15:07:51",
-                "title":'提现成功'
-            },{
-                "id": 1111,
-                "store_id": 111,
-                "card_no": "1234567890123456789",
-                "bank_code": "123456789",
-                "bank_name": "招商银行",
-                "withdraw_amount": 1000,
-                "withdraw_commission": 1,
-                "create_time": "2017-01-09 15:07:51",
-                "title":'提现失败'
-            }
-	        ],   // 数据
+        	record:[],
           url:'',      // 滚动加载的链接
         }
       },
       mounted: function () {
         this.$nextTick(function () {
-            let that = this;
-
-            utils.ajax({
-                url: "/seller/account/getAccountAmount",
-                success: function (res) {
-                    if (res.code == "SUCCESS") {
-                        let json = res.result;
-                        that.item.money = utils.formatPrice(json.withdrawals_amount);
-                        that.item.subMoneyL = utils.formatPrice(json.today_income_amount);
-                        that.item.subMoneyR = utils.formatPrice(json.income_amount);
-                    } else {
-                        that.$vux.alert.show(res.code);
-                    }
-                }
-            })
-        })
-    	},
-      ready() {
-          utils.MenuShare();
+//        utils.MenuShare();     //微信分享
 	        let that = this;
 	        that.url=basepath + "/seller/account/queryWithDraws";
 	        utils.ajax({
 	          url: that.url,
 	          data: {},
 	          success: function(data) {
-	            if(data.success) {
-	              that.record = data.obj;
+	            if(data.code=='SUCCESS') {
+	              that.record = data.result;
 	            } else {
-	              that.$vux.alert.show(data.msg);
+	              that.$vux.toast.show(data.msg);
 	            }
 	          },
 	        });
-      },
+        })
+    	},
       methods: {
 				// 滚动加载
 				load(data) {
-					if(data) {
-						this.record = data;
+					if(data.result) {
+						this.record = data.result;
 					}
 				},
       },

@@ -19,7 +19,7 @@ export default {
     size: String,//bob
     noradius: Boolean,//bob
     inline: Boolean,//bob
-    link: String//bob
+    link: [String,Object]//bob
   },
   computed: {
     classes () {
@@ -32,7 +32,8 @@ export default {
           weui_btn_small: this.size == "small",
           weui_btn_smaller: this.size == "smaller",
           weui_btn_small_block: this.size == "small-block",
-          weui_btn_inline: this.inline
+          weui_btn_inline: this.inline,
+          weui_btn_org: this.type == "org",
         },
         `weui_btn_${this.type}`,
         this.plain ? `weui_btn_plain_${this.type}` : ''

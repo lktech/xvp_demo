@@ -70,7 +70,7 @@
           data: this.ajaxData,
           success: function(data) {
             that.isLoading = false;
-            if(data.success) {
+            if(data.code=='SUCCESS') {
               if(data) {
                 that.$emit('on-load', data);
                 that.ajaxData.pageNumber++;

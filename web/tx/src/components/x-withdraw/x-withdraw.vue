@@ -4,7 +4,10 @@
       <div class="title">{{title?title:'提现金额'}}</div>
       <div class="num">
         <div class="num-mark">￥</div>
-        <div class="of"><input @keyup="verification" data_id="inputNum"></div>
+        <div class="of">
+        	<input @keyup="verification" data_id="inputNum" :placeholder="placeholder" style='font-size: 18px;color: #ccc;'>
+        	<span style="color: #F05B0B;font-size: 18px;" class="float-right" @click='toall'>全部提现</span>
+        </div>
       </div>
     </div>
     <div class="vux-1px-b tips">{{tips}}</div>
@@ -15,11 +18,11 @@
   export default {
   	props: {
 	    title: String,
-	    maxValue: Number,
+	    maxvalue: Number,
 	    cancelText: String,
 	    minvalue: Number,
 	    digit: Number,
-	    tip:String
+	    tip:String,
 	},
     mounted() {
       this.$nextTick(() => {})
@@ -28,6 +31,7 @@
     data() {
       return {
         tips: this.tip,
+        placeholder:'账号余额' + this.maxvalue
       }
     },
     computed: {
@@ -39,6 +43,7 @@
         var value = $.trim($('[data_id=inputNum]').val());
         var status = '';
         if(value) {
+        	value = parseInt(value);
           if(this.digit) {
             var reg = new RegExp("^[0-9]+(\.\\d{1," + this.digit + "})?$");
           } else {
@@ -60,6 +65,7 @@
             this.$emit('on-input', value, status);
             return false;
           } else {
+          	console.log(888)
             this.tips = '';
             status = 'success';
             this.$emit('on-input', value, status);
@@ -70,6 +76,9 @@
           this.$emit('on-input', value, status);
           return false;
         };
+      },
+      toall(){
+      	this.$emit('toallla');
       }
     },
     components: {
