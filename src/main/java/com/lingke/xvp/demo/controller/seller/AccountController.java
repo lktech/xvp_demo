@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Rop.api.ApiException;
+import com.Rop.api.request.XvpPhoneVerifycodeRequest;
 import com.Rop.api.request.XvpTlstoreaccountAddstorebankcardRequest;
 import com.Rop.api.request.XvpTlstoreaccountCompanycreateRequest;
 import com.Rop.api.request.XvpTlstoreaccountGetRequest;
@@ -20,6 +21,7 @@ import com.Rop.api.request.XvpTlstoreaccountGetstorebankcardRequest;
 import com.Rop.api.request.XvpTlstoreaccountPersoncreateRequest;
 import com.Rop.api.request.XvpTlstoreaccountQuerywithdrawsRequest;
 import com.Rop.api.request.XvpTlstoreaccountWithdrawalsRequest;
+import com.Rop.api.response.XvpPhoneVerifycodeResponse;
 import com.Rop.api.response.XvpTlstoreaccountGetResponse;
 import com.Rop.api.response.XvpTlstoreaccountGetbankcitycodeResponse;
 import com.Rop.api.response.XvpTlstoreaccountGetbankinfoResponse;
@@ -139,6 +141,9 @@ public class AccountController {
 	@RequestMapping(path = "/addStoreBankCard", method = RequestMethod.POST)
 	@ResponseBody
 	public XvpResponse addStoreBankCard(@RequestBody AccountBankCardRequest request) throws Exception {
+		if (!checkCode(request.getPhone(), request.getSn(), request.getVerfiy_code())) {
+			throw new RuntimeException("验证码输入错误");
+		}
 		XvpTlstoreaccountAddstorebankcardRequest ropRequest = BeanCopyUtil.copy(request,
 				XvpTlstoreaccountAddstorebankcardRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
@@ -244,5 +249,23 @@ public class AccountController {
 				AccontWithDrawsQueryResponse.class);
 		response.addAll(list);
 		return response;
+	}
+
+	/**
+	 * 校验验证码是否正确
+	 * 
+	 * @param request
+	 *            用户输入信息
+	 * @return
+	 * @throws Exception
+	 */
+	private Boolean checkCode(String phone, String sn, String verify_code) throws Exception {
+		XvpPhoneVerifycodeRequest ropRequest = new XvpPhoneVerifycodeRequest();
+		ropRequest.setApp_id(ropClientAdapter.getAppId());
+		ropRequest.setVerify_code(verify_code);
+		ropRequest.setPhone(phone);
+		ropRequest.setSn(sn);
+		XvpPhoneVerifycodeResponse response = ropClientAdapter.ropInvoke(ropRequest);
+		return Boolean.valueOf(response.getPhoneresult().getFlag());
 	}
 }
