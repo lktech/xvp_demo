@@ -123,7 +123,7 @@ public class AccountController {
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
 		XvpTlstoreaccountGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
-		AccountGetResponse response = BeanCopyUtil.copy(ropResponse, AccountGetResponse.class);
+		AccountGetResponse response = BeanCopyUtil.copy(ropResponse.getTlstoreaccount(), AccountGetResponse.class);
 		return response;
 	}
 
