@@ -5,17 +5,28 @@
         <c-cell title="银行卡" :value='bank_code'></c-cell>
     </c-cell-wrap>
     <c-cell-wrap>
-        <c-input-num title="提现金额" :maxvalue="maxvalue" :minvalue="100" :digit="2" @on-input="getInput" @toallla='toall'></c-input-num>
+        <c-input-num title="提现金额" :maxvalue="maxvalue" :minvalue="100" :digit="2" :tip='tips' @on-input="getInput"></c-input-num>
+        <c-cell :title="placeholder" value='全部提现' @ondelete='toall' rightcolor='org'></c-cell>
     </c-cell-wrap>
     <c-cell-wrap>
-        <c-cell title="提现手续费" :value='counter'></c-cell>
-        <c-cell title="实际提现金额" :value='money'></c-cell>
+        <c-cell title="提现手续费" :value="counter*100|formatPrice"></c-cell>
+        <c-cell title="实际提现金额" :value='money*100|formatPrice'></c-cell>
         <c-cell title="提现审核周期" value='1-2个工作日'></c-cell>
     </c-cell-wrap>
     <div class="wrap-pd">
         <c-button text="确定提现" :type="color" :disabled="disabled" @click.native="preserve" size="block"></c-button>
-        <c-button text="取消" @click="cancel" type="default" size="block"></c-button>
+        <c-button text="取消" @click.native="cancel" type="default" size="block"></c-button>
     </div>
+    <r-popup v-model="cash_result" height="100%">
+      <div class="popup1">
+        <c-msg :status="cash_status" :msg="cash_title">
+	    	<div slot="btn">
+	    		<c-button :text="cash_text" type="primary" size="block" @click.native="btnClick"></c-button>
+	       </div>
+	    </c-msg>
+      </div>
+    </r-popup>
+    
 </div>
 
 </template>
@@ -27,65 +38,130 @@
                 color:'default',                       //确定提现按钮颜色
                 disabled:true,                       //确定提现是否禁用
                 bank_code:'**** **** **** 6666',                           //银行卡
-                counter:'3.00元',                           //提现手续费
-                money:'0.00元',                           //实际提现金额
-                input_money:'',                              //输入的金额
-                maxvalue:1000                                 //最大提现金额
+                counter:3,                           //提现手续费
+                money:0,                           //实际提现金额
+                input_money:0,                              //输入的金额
+                maxvalue:1000,                                 //最大提现金额
+                cash_result:false,
+                cash_text:'查看提现记录',
+                cash_title:'提现成功',
+                cash_status:1,
+                tips:''
 
             }
         },
         ready(){
-            utils.MenuShare();
-            let that=this;
-            utils.ajax({
-                url: basepath + "/app/money",
-                dataType: 'json',
-                type: 'POST',
-                data:{
-                    'userId':this.$route.query.id
-                },
-                success: function(data){
-                    if(data.success){
-                        that.maxvalue=data.money;
-                    }else{
-                        that.$vux.alert.show(data.msg);
-                    }
-                }
-            });
+            
         },
+        mounted: function () {
+	        this.$nextTick(function () {
+//				utils.MenuShare();
+	            let that=this;
+	            utils.ajax({
+	                url: basepath + "/app/money",   //初始化信息
+	                dataType: 'json',
+	                type: 'POST',
+	                data:{
+	                    'userId':this.$route.query.id
+	                },
+	                success: function(data){
+	                    if(data.success){
+	                        that.maxvalue=data.money;
+	                    }else{
+	                        that.$vux.alert.show(data.msg);
+	                    }
+	                }
+	            });
+	        })
+    	},
         methods:{
-            cancel(){                                               //取消按钮
-                var link=this.$router._currentTransition.from.name;
-                utils.go({name:link,query:{}},this.$router,true);
+            cancel(){
+            	//取消按钮
+                utils.go({name:'balance',query:{}},this.$router);   //回到余额
             },
-            preserve(){
-            	console.log(88888)
-                this.$vux.toast.show('提现成功');
+            tocash(that){
+            	console.log('that.money',that.money);
+            	console.log('commission',that.counter);
+              	utils.ajax({
+	                url: basepath + "/seller/account/withDrawals",
+	                dataType: 'json',
+	                type: 'POST',
+	                data:{
+	                    'amount':that.money,    //实际提现金额
+	                    'commission':that.counter,        // 手续费
+	                },
+	                success: function(data){
+	                	that.cash_result=true;
+	                    if(data.code== 'SUCCESS'){
+	                        that.cash_text='查看提现记录';
+			                that.cash_title='提现成功';
+			                that.cash_status=1;
+	                    }else{
+	                    	
+				            that.cash_text='返回';
+			                that.cash_title='提现失败';
+			                that.cash_status=0;
+	                    }
+	                }
+	            });
+            },
+            preserve(){    // 确定提现
+				let that=this;
+                that.tocash(that);
             },
             getInput(v,s){
-                this.input_money=v;
-                console.log('s',s)
+            	let that = this;
+                that.input_money=v;
                 if(s=='success'){
-                    this.disabled=false;
-                    this.color='org';
-                    this.money=(v-v*0.006-3).toFixed(2)+'元';
+                    that.statusCtrl(v,that);
+                    
+                    if(that.input_money>100){
+                    	that.counter  = 3 + v*0.006;
+                    }else{
+                    	that.counter  = 3;
+                    }
                 }else{
-                    this.disabled=true;
-                    this.color='default';
+                    that.disabled=true;
+                    that.color='default';
                 }
                 
             },
-            toall(){
-            	console.log(this.maxvalue)
+            toall(){   //全部提现
+            	let that = this;
+            	$('[data_id=inputNum]').val(that.maxvalue);
+                that.statusCtrl(that.maxvalue,that);
+                that.tips = '';
+                
+            },
+            btnClick(){
+            	utils.go({name:'balance',query:{}},this.$router);   // 回到余额
+            },
+            statusCtrl(v,that){   // 状态变化
+            	that.input_money=v;
+            	that.disabled=false;
+                that.color='org';
+                that.money=(that.input_money-that.input_money*0.006-3).toFixed(2);
+                if(that.input_money>100){
+                	that.counter  = 3 + that.input_money*0.006;
+                }else{
+                	that.counter  = 3;
+                };
             }
         },
+        computed: {
+		  placeholder: function() {
+		     return  "账号余额 " + this.maxvalue
+		  }
+		},
         components:{
             "cGroup":require('../../components/group/group.vue'),
             "cTopBack": require('../../components/x-top-back/x-top-back.vue'),
             "cButton": require('../../components/button/button.vue'),
             "cCellWrap": require('../../components/x-cell/cell-wrap.vue'),
         	"cCell": require('../../components/x-cell/cell.vue'),
-            "cInputNum": require('../../components/x-withdraw/x-withdraw.vue')
+            "cInputNum": require('../../components/x-withdraw/x-withdraw.vue'),
+            "cMsg": require('../../components/x-messages/x-messages.vue'),
+            "rPopup": require('../../components/popup/popup.vue'),
         	
         }
     }

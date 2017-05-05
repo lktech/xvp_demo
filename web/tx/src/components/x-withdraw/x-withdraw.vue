@@ -5,8 +5,8 @@
       <div class="num">
         <div class="num-mark">￥</div>
         <div class="of">
-        	<input @keyup="verification" data_id="inputNum" :placeholder="placeholder" style='font-size: 18px;color: #ccc;'>
-        	<span style="color: #F05B0B;font-size: 18px;" class="float-right" @click='toall'>全部提现</span>
+        	<input @keyup="verification" data_id="inputNum" style='font-size: 18px;'>
+        	<span style="color: #F05B0B;font-size: 18px;" class="float-right" @click='toall' v-if='allcash'>全部提现</span>
         </div>
       </div>
     </div>
@@ -23,6 +23,7 @@
 	    minvalue: Number,
 	    digit: Number,
 	    tip:String,
+	    allcash:Boolean
 	},
     mounted() {
       this.$nextTick(() => {})
@@ -31,7 +32,7 @@
     data() {
       return {
         tips: this.tip,
-        placeholder:'账号余额' + this.maxvalue
+        
       }
     },
     computed: {
