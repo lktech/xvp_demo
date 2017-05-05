@@ -12,7 +12,7 @@ exports.adStatus={
 
 }
 /**
- *@about 订购应用   页面(三种状态：立即订购   待续费    已订购)
+ *@about 提现状态
  *@param
  * 		   adStatus：订购应用状态
  * @return "status":status,
