@@ -48,7 +48,6 @@
         var value = $.trim($('[data_id=inputNum]').val());
         var status = '';
         if(value) {
-        	value = parseInt(value);
           if(this.digit) {
             var reg = new RegExp("^[0-9]+(\.\\d{1," + this.digit + "})?$");
           } else {
