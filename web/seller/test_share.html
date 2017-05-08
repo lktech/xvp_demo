@@ -8,6 +8,10 @@ var json = {
     	"base_url":"hahah"
 };
 $.ajax({  
+	xhrFields: {
+        withCredentials: true
+    },
+    crossDomain: true,
     url : "/common/wxconfig/get",  
     type : "POST",
     dataType: 'json',
@@ -60,7 +64,7 @@ $.ajax({
 		    // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
 			wx.onMenuShareTimeline({
 			    title: 'test', // 分享标题
-			    link: window.location.href, // 分享链接
+			    link: 'http://172.20.5.67:8098', // 分享链接
 			    imgUrl: '', // 分享图标
 			    success: function (result) { 
 			        // 用户确认分享后执行的回调函数

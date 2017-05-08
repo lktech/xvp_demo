@@ -63,7 +63,7 @@
             if(!this.disabled){
               let that=this;
               utils.ajax({
-                  url: basepath + "/seller/seller/login",
+                  url: "/seller/seller/login",
                   dataType: 'json',
                   type: 'POST',
                   data:{
@@ -87,7 +87,7 @@
           login1(){
             let that=this;
             utils.ajax({
-                url: basepath + "/seller/store/get",
+                url:  "/seller/store/get",
                 dataType: 'json',
                 type: 'POST',
                 success: function(data){

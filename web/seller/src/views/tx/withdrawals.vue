@@ -14,7 +14,7 @@
             <c-cell title="实际提现金额" :value='money*100|formatPrice'></c-cell>
             <c-cell title="提现审核周期" value='1-2个工作日'></c-cell>
         </c-cell-wrap>
-        <div class="wrap-pd">
+        <div class="wrap">
             <c-button text="确定提现" :type="color" :disabled="disabled" @click.native="preserve" size="block"></c-button>
             <c-button text="取消" @click.native="cancel" type="gray" size="block"
                       style='color: #7D7D7D;background-color: #E6E6E6;'></c-button>
