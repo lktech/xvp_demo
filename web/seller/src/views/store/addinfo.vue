@@ -3,7 +3,7 @@
     <c-top-back></c-top-back>
     <c-group>
         <c-input title="店铺名称" @on-change="validate" placeholder="请输入店铺名称" required name="name" :max="20" v-model="formData.name" :is-type="kong"></c-input>
-        <c-city title="区域" v-model="formData.addr_code" @on-hide="logHide" placeholder="您所在的省市县" :list="addressData"></c-city>
+        <c-city title="区域" v-model="formData.addr_code" @on-hide="logHide" placeholder="您所在的省市县" :list="addressData" class="wh"></c-city>
     </c-group> 
     <c-group>   
         <c-input title="详细地址" @on-change="validate" placeholder="请输入您的详细地址" required name="address" v-model="formData.address" :max="100" :is-type="kong"></c-input>
@@ -139,7 +139,8 @@
 </script>
 <style>
     .addinfo .vux-popup-picker-value{
-        white-space: nowrap; width:210px; overflow: hidden; display: block;
+         display: block;
     }
+    .addinfo .wh .weui_label{width: initial;}
 </style>
 

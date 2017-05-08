@@ -520,7 +520,7 @@ exports.wang = function( t , u , m){
 
 exports.MenuShare=function(){
     $.ajax({
-      url:basepath+ "/common/wxconfig/get",
+      url:"/common/wxconfig/get",
       type:'POST',
       async:false,
       contentType:'application/json',
