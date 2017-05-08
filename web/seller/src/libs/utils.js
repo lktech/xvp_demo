@@ -520,7 +520,7 @@ exports.wang = function( t , u , m){
 
 exports.MenuShare=function(){
     $.ajax({
-      url: "/common/wxconfig/get",
+      url:basepath+ "/common/wxconfig/get",
       type:'POST',
       async:false,
       contentType:'application/json',
@@ -549,10 +549,10 @@ exports.MenuShare=function(){
                 imgUrl: 'http://img1.xiaovpu.com/3628208054774302.png' // 分享图标
             });
             wx.hideMenuItems({
-                menuList: ['menuItem:copyUrl'] 
+                menuList: ['menuItem:copyUrl']
             });
           })
-        } 
+        }
       },
-    });  
+    });
 }
