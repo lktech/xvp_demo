@@ -57,7 +57,7 @@
 </template>
 
 <script>
-    import utils from '../libs/utils.js';
+    import utils from '../../libs/utils.js';
     export default{
         data(){
             return {
@@ -77,7 +77,6 @@
                 showBank: false,
                 showSubBank: false,
                 subBankList: [],
-                addressData: require("../libs/components/data/china_address.json"),
 
                 //企业
                 license: "",
@@ -305,19 +304,19 @@
             }
         },
         components: {
-            "cTopBack": require('../components/x-top-back/x-top-back.vue'),
-            "rCell": require("../components/cell/cell.vue"),
-            "rGroup": require("../components/group/group.vue"),
-            "rInput": require("../components/input/input.vue"),
-            "rButton": require("../components/button/button.vue"),
-            "rAddressChecked": require('../components/x-address-checked/x-address-checked.vue'),
-            "rAddress": require("../components/address/address.vue"),
-            "rPopup": require("../components/popup/popup.vue"),
-            "rRadio": require("../components/radio/x-radio.vue"),
+            "cTopBack": require('../../components/x-top-back/x-top-back.vue'),
+            "rCell": require("../../components/cell/cell.vue"),
+            "rGroup": require("../../components/group/group.vue"),
+            "rInput": require("../../components/input/input.vue"),
+            "rButton": require("../../components/button/button.vue"),
+            "rAddressChecked": require('../../components/x-address-checked/x-address-checked.vue'),
+            "rAddress": require("../../components/address/address.vue"),
+            "rPopup": require("../../components/popup/popup.vue"),
+            "rRadio": require("../../components/radio/x-radio.vue"),
         }
     }
     //require("../../assets/styles/views/batchExport.less");
 </script>
 <style lang="less">
-    @import "../assets/styles/views/personal";
+    @import "../../assets/styles/views/personal";
 </style>

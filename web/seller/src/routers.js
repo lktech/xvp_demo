@@ -185,4 +185,62 @@ exports.routes = [
             }
         ]
     },
+    {//提现
+        path: '/tx',
+        name: 'tx',
+        component: function (resolve) {
+            require(['./views/tx/index.vue'], resolve);
+        },
+        children: [
+            {
+                path: 'cashrecord',
+                name: 'cashrecord',
+                component: function (resolve) {
+                    require(['./views/tx/cashrecord.vue'], resolve);
+                }
+            },
+            {
+                path: 'withdrawals',
+                name: 'withdrawals',
+                component: function (resolve) {
+                    require(['./views/tx/withdrawals.vue'], resolve);
+                }
+            },
+            {//我的店铺
+                path: 'myStore',
+                name: 'myStore',
+                component: function (resolve) {
+                    require(['./views/tx/myStore.vue'], resolve);
+                }
+            },
+            {//我的余额
+                path: 'balance',
+                name: 'balance',
+                component: function (resolve) {
+                    require(['./views/tx/balance.vue'], resolve);
+                }
+            },
+            {//提现绑定
+                path: 'txBind',
+                name: 'txBind',
+                component: function (resolve) {
+                    require(['./views/tx/txBind.vue'], resolve);
+                }
+            },
+            {//实名认证
+                path: 'verifyInfo',
+                name: 'verifyInfo',
+                component: function (resolve) {
+                    require(['./views/tx/verifyInfo.vue'], resolve);
+                }
+            },
+            {//提现绑卡
+                path: 'bindCard',
+                name: 'bindCard',
+                component: function (resolve) {
+                    require(['./views/tx/bindCard.vue'], resolve);
+                }
+            }
+        ]
+    },
 ];

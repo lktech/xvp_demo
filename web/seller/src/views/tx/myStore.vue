@@ -3,23 +3,23 @@
         <x-withdraw-count :info="item" @goClick="goClick"></x-withdraw-count>
         <ul class="list">
             <li>
-                <img src="../assets/images/1.png"/>
+                <img src="../../assets/images/1.png"/>
                 <p>添加商品</p>
             </li>
             <li>
-                <img src="../assets/images/2.png"/>
+                <img src="../../assets/images/2.png"/>
                 <p>我的仓库</p>
             </li>
             <li>
-                <img src="../assets/images/3.png"/>
+                <img src="../../assets/images/3.png"/>
                 <p>订单管理</p>
             </li>
             <li>
-                <img src="../assets/images/4.png"/>
+                <img src="../../assets/images/4.png"/>
                 <p>我的店铺</p>
             </li>
             <li>
-                <img src="../assets/images/5.png"/>
+                <img src="../../assets/images/5.png"/>
                 <p>店铺设置</p>
             </li>
         </ul>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-    import utils from '../libs/utils.js';
+    import utils from '../../libs/utils.js';
     export default{
         data(){
             return {
@@ -66,11 +66,11 @@
             }
         },
         components: {
-            "xWithdrawCount": require('../components/x-withdraw/x-withdraw-count.vue'),
+            "xWithdrawCount": require('../../components/x-withdraw/x-withdraw-count.vue'),
         }
     }
     //require("../../assets/styles/views/batchExport.less");
 </script>
 <style lang="less">
-    @import "../assets/styles/views/index";
+    @import "../../assets/styles/views/index";
 </style>
