@@ -4,7 +4,7 @@
 html,body{height:100%;width: 100%;-webkit-text-size-adjust:none;-webkit-touch-callout: none;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);padding:0;margin:0;font-size: @fts-normal !important;}
 html{overflow-x:hidden;}
 body{font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;line-height: @line-height;min-width:320px;word-break: break-word;background: @color-bg;color:@color3;}
-*{border:0;margin:0;padding:0;}
+*{border:0;margin:0;padding:0;box-sizing: border-box}
 ul{margin:0;padding:0;list-style:none;}
 ol{margin:0 0 0 20px;padding:0;}
 audio,canvas,video,embed {max-width:100%;display:inline-block;}
@@ -84,7 +84,62 @@ p{margin:0;}
 .bg-width{background-repeat: no-repeat; background-position: 0 0;background-size: auto 100%;}
 .distance{margin-bottom: @distance;}
 
+// 箭头
+.with_arrow:after {
+    content: " ";
+    display: inline-block;
+    height: 6px;
+    width: 6px;
+    border-width: 2px 2px 0 0;
+    border-color: #C8C8CD;
+    border-style: solid;
+    -webkit-transform: rotate(45deg) translateY(-50%);
+    transform: rotate(45deg) translateY(-50%);
+}
 
+//样式重置
+.weui_dialog {
+    .weui_btn_dialog.primary {
+        background-color: #F05B0B;
+        color: #fff !important;
+    }
+    .weui_dialog_bd {
+        color: @color3 !important;
+    }
+    .weui_dialog_ft {
+        a:active {
+            background-color: #F05B0B;
+            color: #fff !important;
+        }
+    }
+
+}
+.weui_btn_disabled {
+    color: #e7e4e4 !important;
+    background-color: #ccc !important;
+}
+.weui_cells{
+    font-size: 16px !important;
+}
+.vux-actionsheet .trueName{
+    font-size: 16px !important;
+}
+.vux-popup-picker-select{
+    padding-right: 10px;
+    .vux-popup-picker-value{
+        color: #888;
+        padding-right: initial !important;
+    }
+}
+.vux-popup-picker-select-box.weui_cell_bd:after{
+    right: 12px !important;
+}
+.weui_btn_primary{
+    &:active{
+        background-color: @color-theme !important;
+        color: #fff !important;
+    }
+}
 /**
 ==================插件框架===============================
 */

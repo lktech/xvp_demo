@@ -43,7 +43,7 @@
 </template>
 
 <script>
-    import utils from '../libs/utils.js';
+    import utils from '../../libs/utils.js';
     export default{
         data(){
             return {
@@ -131,16 +131,16 @@
             }
         },
         components: {
-            "cTopBack": require('../components/x-top-back/x-top-back.vue'),
-            "rCell": require("../components/cell/cell.vue"),
-            "rGroup": require("../components/group/group.vue"),
-            "rInput": require("../components/input/input.vue"),
-            "rButton": require("../components/button/button.vue"),
-            "rPopup": require("../components/popup/popup.vue"),
+            "cTopBack": require('../../components/x-top-back/x-top-back.vue'),
+            "rCell": require("../../components/cell/cell.vue"),
+            "rGroup": require("../../components/group/group.vue"),
+            "rInput": require("../../components/input/input.vue"),
+            "rButton": require("../../components/button/button.vue"),
+            "rPopup": require("../../components/popup/popup.vue"),
         }
     }
     //require("../../assets/styles/views/batchExport.less");
 </script>
 <style lang="less">
-    @import "../assets/styles/views/personal";
+    @import "../../assets/styles/views/personal";
 </style>

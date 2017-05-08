@@ -48,7 +48,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped="">
 @import '../../assets/styles/common/var.less';
 @import '../../assets/styles/components/variable.less';
 @import '../../assets/styles/components/tap.less';

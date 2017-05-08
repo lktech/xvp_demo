@@ -9,8 +9,8 @@ config.plugins.push(new webpack.HotModuleReplacementPlugin());
 // 这里配置：请求http://localhost:8090/api，
 // 相当于通过本地node服务代理请求到了http://cnodejs.org/api
 var proxy = [{
-    path: "/api/*",
-    target: "https://cnodejs.org",
+    path: "/*",
+    target: "http://172.20.5.67:8098",
     host: "cnodejs.org"
 }]
 //启动服务
