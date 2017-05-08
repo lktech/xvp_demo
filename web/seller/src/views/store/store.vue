@@ -45,7 +45,7 @@
           let that=this;
 
           utils.ajax({
-              url: basepath + "/seller/seller/login/check",
+              url:  "/seller/seller/login/check",
               dataType: 'json',
               type: 'POST',
               async:false,
@@ -68,7 +68,7 @@
           let that = this;
           utils.MenuShare();
           utils.ajax({
-              url: basepath + "/seller/store/get",
+              url:  "/seller/store/get",
               dataType: 'json',
               type: 'POST',
               success: function(data){
