@@ -133,6 +133,7 @@ public class OrderController {
 	public XvpResponse confirm(@RequestBody OrderConfirmRequest request) throws Exception {
 		XvpOrderAcceptgoodsRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderAcceptgoodsRequest.class);
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
+		ropRequest.setXvp_uid(SessionUtil.userGetUserId());
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
 	}
