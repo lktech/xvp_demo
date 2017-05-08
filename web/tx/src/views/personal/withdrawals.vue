@@ -6,7 +6,7 @@
     </c-cell-wrap>
     <c-cell-wrap>
         <c-input-num title="提现金额" :maxvalue="maxvalue" :minvalue="100" :digit="2" :tip='tips' @on-input="getInput"></c-input-num>
-        <c-cell :title="placeholder" value='全部提现' @ondelete='toall' rightcolor='org'></c-cell>
+        <c-cell :title="placeholder" value='全部提现' @ondelete='toall' rightcolor='org' class='overcell'></c-cell>
     </c-cell-wrap>
     <c-cell-wrap>
         <c-cell title="提现手续费" :value="counter*100|formatPrice"></c-cell>
@@ -15,7 +15,7 @@
     </c-cell-wrap>
     <div class="wrap-pd">
         <c-button text="确定提现" :type="color" :disabled="disabled" @click.native="preserve" size="block"></c-button>
-        <c-button text="取消" @click.native="cancel" type="default" size="block"></c-button>
+        <c-button text="取消" @click.native="cancel" type="gray" size="block" style='color: #7D7D7D;background-color: #E6E6E6;'></c-button>
     </div>
     <r-popup v-model="cash_result" height="100%">
       <div class="popup1">
@@ -58,7 +58,7 @@
 //				utils.MenuShare();
 	            let that=this;
 	            utils.ajax({
-	                url: basepath + "/app/money",   //初始化信息
+	                url: "/app/money",   //初始化信息
 	                dataType: 'json',
 	                type: 'POST',
 	                data:{
@@ -125,7 +125,7 @@
             	$('[data_id=inputNum]').val(that.maxvalue);
                 that.statusCtrl(that.maxvalue,that);
                 that.tips = new Date().getTime()+"";   // 先tips变，然后置为空
-                setTimeout(function(){that.tips = '';},10); // 先tips变，然后置为空
+                that.tips = '';
                 
             },
             btnClick(){
@@ -167,5 +167,11 @@
         }
     }
 </script>
+<style lang="less">
+	/*.overcell >　.weui_cell_bd{
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}*/
+</style>
 
 

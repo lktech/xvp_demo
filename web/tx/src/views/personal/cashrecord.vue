@@ -15,7 +15,7 @@
     <!--无数据提示-->
     <c-data-null v-else msg='最近没有提现记录哦！'>
       <div class="wrap-pd">
-        <c-button text='返回' size='block' type='primary' :link='{name:"balance"}'></c-button>
+        <c-button text='返回' size='block' type='primary' :link='{name:"balance"}' style='background-color: #5ABA5A;'></c-button>
       </div>
     </c-data-null>
     <!-- 列表滚动加载-->
@@ -88,7 +88,7 @@
         this.$nextTick(function () {
 //        utils.MenuShare();     //微信分享
 	        let that = this;
-	        that.url=basepath + "/seller/account/queryWithDraws";
+	        that.url= "/seller/account/queryWithDraws";
 	        utils.ajax({
 	          url: that.url,
 	          data: {},
