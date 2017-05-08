@@ -74,7 +74,7 @@
                 let that = this;
                 utils.ajax({
                     url:"/seller/order/query", type:'post', data: {order_status:id}, success: function (data) {
-                        if (data.code=="SUCESS") {
+                        if (data.code=="SUCCESS") {
                             that.orderData = data.result;
                             $.each(that.orderData,function(k,o){
                                 var arr=[];

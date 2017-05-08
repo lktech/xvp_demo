@@ -1,5 +1,5 @@
 Mock.mock(basepath + "/user/store/main",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "msg": null,
     'result':{
         'store_name':'店铺',
@@ -37,17 +37,17 @@ Mock.mock(basepath + "/user/store/main",'post',{
 
 
 Mock.mock(basepath + "/user/user/getIsvInfo",'post',{
-    "code": 'SUCESS'
+    "code": 'SUCCESS'
 });
 
 Mock.mock(basepath + "/user/product/sku/get",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "msg": null,
     'result':[{'id':'1','price':12,'stock':'199','sku_str':'value'},{'id':'2','price':15,'stock':'0','sku_str':'value'}]
 });
 
 Mock.mock(basepath + "/user/product/get",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "msg": null,
     'result':{
         'id':'1',
@@ -58,7 +58,7 @@ Mock.mock(basepath + "/user/product/get",'post',{
         'product_desc':'[]'}
 });
 Mock.mock(basepath + "/user/user/address/default",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "msg": null,
     'result':{
         'id':'1',
@@ -74,7 +74,7 @@ Mock.mock(basepath + "/user/user/address/default",'post',{
 });
 
 Mock.mock(basepath + "/user/order/add",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "msg": null,
     'result':{
         'order_id':'1',
@@ -82,7 +82,7 @@ Mock.mock(basepath + "/user/order/add",'post',{
 });
 
 Mock.mock(basepath + "/user/user/address/set",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "msg": null,
     'result':{
         'id':'1',
@@ -92,7 +92,7 @@ Mock.mock(basepath + "/user/user/address/set",'post',{
 
 
 Mock.mock(basepath + "/user/order/query",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "msg": null,
     // "result":[{
     //         'order_id':'1',
@@ -247,7 +247,7 @@ Mock.mock(basepath + "/user/order/query",'post',{
 
 
 Mock.mock(basepath + "/user/order/get",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "msg": null,
     "result":{
         'order_id':'1111',
@@ -289,11 +289,11 @@ Mock.mock(basepath + "/user/order/get",'post',{
 });
 
 Mock.mock(basepath + "/user/order/confirm",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "msg": null
 });
 Mock.mock(basepath + "/user/order/add",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "msg": null,
     'result':{
         'order_id':'12121212'

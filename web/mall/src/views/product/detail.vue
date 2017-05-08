@@ -122,7 +122,7 @@
                     async:false,
                     data:{"id":that.$route.query.product_id},
                     success: function(data){
-                        if(data.code=='SUCESS'){
+                        if(data.code=='SUCCESS'){
                             that.goods=data.result;
                             that.goods.logistics_fee=that.goods.logistics_fee;
                             that.logistics_fee1=utils.formatPrice(that.goods.logistics_fee);
@@ -132,7 +132,7 @@
                                 async:false,
                                 data:{"product_id":data.result.id},
                                 success: function(res){
-                                    if(res.code=='SUCESS'){
+                                    if(res.code=='SUCCESS'){
                                         var max=res.result[0].price*1;
                                         var min=res.result[0].price*1;
                                         var len=res.result.length;
@@ -183,7 +183,7 @@
                         //     utils.ajax({
                         //       url: basepath + "/user/user/getIsvInfo",
                         //       success: function(data) {
-                        //         if(data.code=="SUCESS") {  
+                        //         if(data.code=="SUCCESS") {  
 
                         //           $xvp.login({
                         //               app_key : data.result.appId,
@@ -193,7 +193,7 @@
                         //                   url: basepath + "/user/user/login",
                         //                   data:{'xvp_uid':xvp_uid},
                         //                   success: function(res) {
-                        //                     if(res.code=="SUCESS") { 
+                        //                     if(res.code=="SUCCESS") { 
                         //                       that.init();
 
                         //                     } else {
@@ -218,7 +218,7 @@
                 //   url:basepath+ "/common/wxconfig/get",
                 //   data:{'base_url':window.location.href.split('#')[0]},
                 //   success: function(data) {
-                //     if(data.code=='SUCESS') {
+                //     if(data.code=='SUCCESS') {
                 //       wx.config({
                 //           debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                 //           appId: data.result.appId, // 必填，公众号的唯一标识

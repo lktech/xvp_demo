@@ -72,7 +72,7 @@
                             'region_code':that.res.formData.addr_code[2],
                         },
                         success: function(data){
-                            if(data.code=="SUCESS"){
+                            if(data.code=="SUCCESS"){
                                 utils.go({path:'/store/store'},that.$router,true);
                             }else{
                                 that.$vux.alert.show({content:data.message,onHide :function(){
@@ -126,7 +126,7 @@
                     dataType: 'json',
                     type: 'POST',
                     success: function(data){
-                        if(data.code=="SUCESS"){
+                        if(data.code=="SUCCESS"){
                             that.res.formData.name=data.result.store_name;
                             if(data.result.logo){
                                 that.res.formData.logo = data.result.logo; //店铺名称

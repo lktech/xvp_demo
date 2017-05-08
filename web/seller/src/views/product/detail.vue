@@ -63,7 +63,7 @@
                     async:false,
                     data:{"id":that.$route.query.product_id},
                     success: function(data){
-                        if(data.code=='SUCESS'){
+                        if(data.code=='SUCCESS'){
                             that.goods=data.result;
                             that.goods.logistics_fee=that.goods.logistics_fee;
                             that.logistics_fee1=utils.formatPrice(that.goods.logistics_fee);
@@ -73,7 +73,7 @@
                                 async:false,
                                 data:{"product_id":data.result.id},
                                 success: function(res){
-                                    if(res.code=='SUCESS'){
+                                    if(res.code=='SUCCESS'){
                                         var max=res.result[0].price;
                                         var min=res.result[0].price;
                                         var len=res.result.length;

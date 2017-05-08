@@ -1,12 +1,12 @@
 //机器人列表 获取机器人列表
 Mock.mock(basepath + "/seller/product/query",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "msg": null,
     "result":[{"id":"930","name":"第三个大帅哥","pics":"http://okxm1ge1z.bkt.clouddn.com/07c4d71f-83a1-45fd-a3d3-0dc25d61a183.jpeg","product_detail":"","pay_type":"0","logistics_fee":"0","product_desc":"[]"},{"id":"929","name":"舒服的沙发","pics":"http://okxm1ge1z.bkt.clouddn.com/4d8bf045-f21e-43c8-9a4a-862b90bc441b.jpeg","product_detail":"","pay_type":"0","logistics_fee":"100","product_desc":"[]"},{"id":"928","name":"他了了了了了","pics":"http://okxm1ge1z.bkt.clouddn.com/adf2c38b-ebb8-44dc-a1fc-bda2d65e9a6b.jpg","product_detail":"","pay_type":"0","logistics_fee":"0","product_desc":"[]"},{"id":"927","name":"sdasd","pics":"http://okxm1ge1z.bkt.clouddn.com/fc236481-2679-49ec-94b0-ebf936201e1a.jpeg","product_detail":"","pay_type":"0","logistics_fee":"0","product_desc":"[]"},{"id":"925","name":"sadasd","pics":"http://okxm1ge1z.bkt.clouddn.com/88babc15-9960-4f9e-8f4d-ec5923f30c87.jpeg","product_detail":"","pay_type":"0","logistics_fee":"0","product_desc":"[]"},{"id":"924","name":"健健康康","pics":"http://okxm1ge1z.bkt.clouddn.com/15340771-a222-4ecd-a3b2-c8befd9547ed.jpg","product_detail":"","pay_type":"0","logistics_fee":"500","product_desc":"[]"},{"id":"923","name":"ghjjjjj","pics":"","product_detail":"","pay_type":"0","logistics_fee":"0","product_desc":"[]"},{"id":"922","name":"fgjkkkjj","pics":"","product_detail":"","pay_type":"0","logistics_fee":"500","product_desc":"[]"},{"id":"913","name":"你明明","pics":"http://okxm1ge1z.bkt.clouddn.com/a78f5999-5496-4377-b91c-90651e9269a2.jpg","product_detail":"","pay_type":"0","logistics_fee":"5555500","product_desc":"[]"},{"id":"912","name":"going您","pics":"http://okxm1ge1z.bkt.clouddn.com/d28799ac-52ca-4055-8b75-c689857e2d40.jpg","product_detail":"","pay_type":"0","logistics_fee":"5555500","product_desc":"[]"},{"id":"911","name":"了了了了了了了","pics":"","product_detail":"","pay_type":"0","logistics_fee":"100000","product_desc":"[]"}]
 });
 
 Mock.mock(basepath + "/seller/order/query",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "msg": null,
     // "result":[{
     //         'order_id':'1',
@@ -87,7 +87,7 @@ Mock.mock(basepath + "/seller/order/query",'post',{
 
 
 Mock.mock(basepath + "/seller/order/get",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "msg": null,
     "result":{
         'order_id':'1111',
@@ -128,30 +128,30 @@ Mock.mock(basepath + "/seller/order/get",'post',{
     }
 });
 Mock.mock(basepath + "/seller/order/delivery",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     
 });
 
 Mock.mock(basepath + "/seller/product/get",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "result":{"id":"851","name":"测试商品","pics":"http://okxm1ge1z.bkt.clouddn.com/6a15ca64-ba5d-46f9-9a68-b2842fbc796d.png","product_detail":"","pay_type":"0","logistics_fee":"0","product_desc":"[]"}
 });
 
 Mock.mock(basepath + "/seller/product/sku/get",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     "result":[{"id":"511","price":"1","stock":"12","sku_str":"gg"},{"id":"512","price":"2","stock":"0","sku_str":"dd"}]
 });
 
 Mock.mock(basepath + "/seller/seller/login",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     
 });
 
 Mock.mock(basepath + "/seller/product/add",'post',{
-    "code": 'SUCESS',
+    "code": 'SUCCESS',
     
 });
 
 
-Mock.mock(basepath + "/seller/store/get",'post',{"code":"SUCESS","result":{"store_name":"测试","owner_real_name":"","customer_service_phone":"213123123","region_code":"110101","detail_address":"撒打算打算打算打算打算","qq":null,'logo':"http://okxm1ge1z.bkt.clouddn.com/026e2cee-d3f5-468a-9bbf-257ec9a993c2.png"}});
+Mock.mock(basepath + "/seller/store/get",'post',{"code":"SUCCESS","result":{"store_name":"测试","owner_real_name":"","customer_service_phone":"213123123","region_code":"110101","detail_address":"撒打算打算打算打算打算","qq":null,'logo':"http://okxm1ge1z.bkt.clouddn.com/026e2cee-d3f5-468a-9bbf-257ec9a993c2.png"}});
 

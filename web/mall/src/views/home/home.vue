@@ -57,7 +57,7 @@
           utils.ajax({
             url: basepath + "/user/user/getIsvInfo",
             success: function(data) {
-              if(data.code=="SUCESS") {  
+              if(data.code=="SUCCESS") {  
 
                 $xvp.login({
                     app_key : data.result.appId,
@@ -67,7 +67,7 @@
                         url: basepath + "/user/user/login",
                         data:{'xvp_uid':xvp_uid},
                         success: function(res) {
-                          if(res.code=="SUCESS") { 
+                          if(res.code=="SUCCESS") { 
                             that.init();
 
                           } else {
@@ -105,7 +105,7 @@
             url: basepath + "/user/store/main",
             data:{'store_id':that.$route.query.id*1},
             success: function(data) {
-              if(data.code=="SUCESS") {
+              if(data.code=="SUCCESS") {
                 that.firstloading = true;
                 that.baseinfo.title = data.result.store_name; //店铺名称
                 localStorage.setItem('store_name',that.baseinfo.title);
@@ -119,7 +119,7 @@
                       url: basepath + "/user/product/sku/get",
                       data:{'product_id':v.id},
                       success: function(res) {
-                        if(res.code=="SUCESS") {
+                        if(res.code=="SUCCESS") {
                           var min=res.result[0].price*1;
                           var len=res.result.length;
 

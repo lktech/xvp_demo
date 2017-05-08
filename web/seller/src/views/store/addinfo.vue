@@ -61,7 +61,7 @@
                             'region_code':that.formData.addr_code[2]
                         },
                         success: function(data){
-                            if(data.code=="SUCESS"){
+                            if(data.code=="SUCCESS"){
                                 //that.login1();
                                 utils.go({path:'/store/store'},that.$router);
                             }else if(data.code=='auth_seller_error'){

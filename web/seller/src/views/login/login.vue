@@ -72,7 +72,7 @@
                   },
                   success: function(data){
                       console.log(data)
-                      if(data.code=="SUCESS"){
+                      if(data.code=="SUCCESS"){
                           //utils.header();
                           that.login1();
                       }else{
@@ -91,7 +91,7 @@
                 dataType: 'json',
                 type: 'POST',
                 success: function(data){
-                    if(data.code=="SUCESS"){
+                    if(data.code=="SUCCESS"){
                         utils.go({path:'/store/store'},that.$router);
                     }else{
                         utils.go({path:'/store/addinfo'},that.$router);

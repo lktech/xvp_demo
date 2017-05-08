@@ -39,12 +39,12 @@
             type:'post',
             datatype:'json',
             success: function(data) {
-              if(data.code=="SUCESS") {
+              if(data.code=="SUCCESS") {
                 that.goods=data.result;
                 $.each(data.result,function(k,o){
                   utils.ajax({
                       url:"/seller/product/sku/get", type:'post', data: {product_id:o.id}, success: function (res) {
-                          if (res.code=="SUCESS") {
+                          if (res.code=="SUCCESS") {
 
                               var min=res.result[0].price*1;
                               var max=min;
@@ -130,7 +130,7 @@
                     'id': that.selectId,
                   },
                   success: function(data) {
-                    if(data.code=="SUCESS") {
+                    if(data.code=="SUCCESS") {
                       for(var i=0;i<that.goods.length;i++){
                         if(that.goods[i].id==that.selectId){
                           that.goods.splice(i,1);

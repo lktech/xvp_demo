@@ -231,7 +231,7 @@
                   type: 'POST',
                   data:hold_obj,
                   success: function(data){
-                      if(data.code=="SUCESS"){
+                      if(data.code=="SUCCESS"){
                           that.show=true;
                       }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);

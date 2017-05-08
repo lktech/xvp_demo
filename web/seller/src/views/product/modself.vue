@@ -208,7 +208,7 @@
                   type: 'POST',
                   data:hold_obj,
                   success: function(data){
-                      if(data.code=="SUCESS"){
+                      if(data.code=="SUCCESS"){
                           utils.go({path:'/product/warehouse'},that.$router,true);
                       }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
@@ -280,7 +280,7 @@
                 "id":that.$route.query.id
               },
               success: function(data){
-                  if(data.code=="SUCESS"){
+                  if(data.code=="SUCCESS"){
                     that.formData.name=data.result.name;
                     that.formData.freight=data.result.logistics_fee/100+'';
                     that.formData.describe=data.result.product_detail?data.result.product_detail:'';
@@ -300,7 +300,7 @@
                     that.product_id=data.result.id;
                     utils.ajax({
                         url:"/seller/product/sku/get", type:'post', data: {product_id:data.result.id}, success: function (res) {
-                            if (res.code=="SUCESS") {
+                            if (res.code=="SUCCESS") {
                               if(res.result.length==1 && res.result[0].sku_str=='无规格'){
                                 that.status.specifications=false;
                                 that.formData.price=res.result[0].price/100+'';

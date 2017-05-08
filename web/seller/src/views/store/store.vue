@@ -50,7 +50,7 @@
               type: 'POST',
               async:false,
               success: function(data){
-                  if(data.code=="SUCESS"){
+                  if(data.code=="SUCCESS"){
                     if(data.result.flag=='no'){
                       utils.go({path:'/login/login'},that.$router,true);
                       return false;
@@ -72,7 +72,7 @@
               dataType: 'json',
               type: 'POST',
               success: function(data){
-                  if(data.code=="SUCESS"){
+                  if(data.code=="SUCCESS"){
                     that.flag=true;
                     var Yin=location.href;
                     var Y=Yin.substring(0,Yin.indexOf('/seller'));

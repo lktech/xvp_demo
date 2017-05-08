@@ -72,7 +72,7 @@
             fukuan(id){
                 utils.ajax({
                     url: basepath + "/user/order/payurl", data: {order_id:id}, success: function (res) {
-                        if (res.code=="SUCESS") {
+                        if (res.code=="SUCCESS") {
                             location.href=res.result.url;
                         }else{
                             that.$vux.alert.show(res.message);
@@ -90,7 +90,7 @@
                 that.status=id?id:'';
                 utils.ajax({
                     url:"/user/order/query", type:'post', data: {order_status:id?id:''}, success: function (data) {
-                        if (data.code=="SUCESS") {
+                        if (data.code=="SUCCESS") {
                             that.orderData = data.result;
                         }else if(data.code=='user_seller_error'){
                                 that.$vux.alert.show({content:'访问超时',onHide :function(){
@@ -116,7 +116,7 @@
                         order_id: that.order_id,
                     },
                     success: function (data) {
-                        if (data.code=="SUCESS") {
+                        if (data.code=="SUCCESS") {
                             that.orderList(that.status);
                             that.show=false;
                         }else{

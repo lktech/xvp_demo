@@ -72,7 +72,7 @@
 
                 utils.ajax({
                     url: basepath + "/user/user/address/default", success: function (data) {
-                        if (data.code=="SUCESS") {
+                        if (data.code=="SUCCESS") {
                             if(data.result){
                                 that.addressData=data.result;
                                 that.addressStatus=true;
@@ -80,7 +80,7 @@
                                 that.color='primary';
                                 that.addr_id=data.result.id;
                             }
-                        }else if(data.code!="SUCESS" && data.code!="xvp_user1008"){
+                        }else if(data.code!="SUCCESS" && data.code!="xvp_user1008"){
                             that.$vux.alert.show(data.message);
                         }else if(data.code=='user_seller_error'){
                             that.$vux.alert.show({content:'访问超时',onHide :function(){
@@ -108,13 +108,13 @@
                         }
                         utils.ajax({
                             url: basepath + "/user/order/add", data: obj, success: function (data) {    
-                                if (data.code=="SUCESS") {
+                                if (data.code=="SUCCESS") {
                                     var backUrl = basepath + "/mall/index.html#/order/detail?id=" + data.result.order_id;
                                     window.history.replaceState(null, "订单详情页", backUrl);
                                     localStorage.setItem("ORDERID",data.result.order_id);
                                     utils.ajax({
                                         url: basepath + "/user/order/payurl", data: {order_id:data.result.order_id}, success: function (res) {
-                                            if (res.code=="SUCESS") {
+                                            if (res.code=="SUCCESS") {
                                                 location.href=res.result.url;
                                             }else{
                                                 that.$vux.alert.show(res.message);
@@ -133,7 +133,7 @@
                     }else{
                         utils.ajax({
                             url: basepath + "/user/order/payurl", data: {order_id:localStorage.getItem("ORDERID")}, success: function (res) {
-                                if (res.code=="SUCESS") {
+                                if (res.code=="SUCCESS") {
                                     location.href=res.result.url;
                                 }else{
                                     that.$vux.alert.show(res.message);

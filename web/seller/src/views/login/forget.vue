@@ -92,7 +92,7 @@
                                 type: 'POST',
                                 data:{'phone':that.formData.phone},
                                 success: function(data){
-                                    if(data.code=="SUCESS"){
+                                    if(data.code=="SUCCESS"){
                                         that.formData.sn=data.result.sn;
                                     }else{
                                         that.$vux.alert.show({content:'发送失败，请重试',onHide :function(){
@@ -163,7 +163,7 @@
                         'sn':that.formData.sn
                       },
                       success: function(data){
-                          if(data.code=="SUCESS"){
+                          if(data.code=="SUCCESS"){
                               that.success=true;
                           }else{
                               that.$vux.alert.show({content:data.message,onHide :function(){

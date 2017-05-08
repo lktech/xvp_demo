@@ -92,7 +92,7 @@
                             order_item_id_list:utils.getSession("order_item_id_list")?JSON.parse(utils.getSession("order_item_id_list")):[]
                         },
                         success: function (data) {
-                            if (data.code=="SUCESS") {
+                            if (data.code=="SUCCESS") {
                                 that.$vux.alert.show({content:'发货成功',onHide :function(){
                                   utils.go({path:'list'},that.$router,true);
                                 }});

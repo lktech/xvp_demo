@@ -49,7 +49,7 @@
                     type: 'POST',
                     data:{id:id},
                     success: function(data){
-                        if(data.code=="SUCESS"){
+                        if(data.code=="SUCCESS"){
                             that.formData.name = data.result.name;
                             that.formData.phone = data.result.phone;
                             that.formData.post_code = data.result.post_code;
@@ -84,7 +84,7 @@
                             'str':that.formData.addr_text[0]+' '+that.formData.addr_text[1]+' '+that.formData.addr_text[2]+' '+that.formData.address
                         },
                         success: function(data){
-                            if(data.code=="SUCESS"){
+                            if(data.code=="SUCCESS"){
                                     utils.go({path:'/order/add'},that.$router,true);
                             }else if(data.code=='user_seller_error'){
                                 that.$vux.alert.show({content:'访问超时',onHide :function(){

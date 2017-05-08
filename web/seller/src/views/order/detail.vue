@@ -117,7 +117,7 @@
                         order_id: that.$route.query.id
                     },
                     success: function (data) {
-                        if (data.code=="SUCESS") {
+                        if (data.code=="SUCCESS") {
                             that.json=data.result;
                             utils.loadingHide();
                             that.discount=data.result.seller_discount_fee/100+'';
@@ -183,7 +183,7 @@
                             discount_amount:that.discount*100
                         },
                         success: function (data) {
-                            if (data.code=="SUCESS") {
+                            if (data.code=="SUCCESS") {
                                 that.$vux.alert.show({content:'更新成功',onHide :function(){
                                   utils.go({path:'/order/list'},that.$router,true);
                                 }});
