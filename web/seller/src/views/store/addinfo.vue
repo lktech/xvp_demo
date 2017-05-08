@@ -50,7 +50,7 @@
                 if(!this.disabled){
                     let that = this;
                     utils.ajax({
-                        url: basepath + "/seller/store/add",
+                        url:  "/seller/store/add",
                         dataType: 'json',
                         type: 'POST',
                         data:{

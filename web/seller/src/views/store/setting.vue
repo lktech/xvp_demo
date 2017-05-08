@@ -60,7 +60,7 @@
                 if(!this.res.disabled){
                     let that = this;
                     utils.ajax({
-                        url: basepath + "/seller/store/update",
+                        url:  "/seller/store/update",
                         dataType: 'json',
                         type: 'POST',
                         data:{
@@ -122,7 +122,7 @@
                 utils.MenuShare();
                 let that = this;
                 utils.ajax({
-                    url: basepath + "/seller/store/get",
+                    url:  "/seller/store/get",
                     dataType: 'json',
                     type: 'POST',
                     success: function(data){
