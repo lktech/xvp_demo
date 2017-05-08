@@ -1,18 +1,18 @@
 package com.lingke.xvp.demo.controller.request;
 
 public class AccountWithDrawsRequest implements XvpRequest {
-	private long amount;
-	private long commission;
-	public long getAmount() {
+	private Long amount;
+	private Long commission;
+	public Long getAmount() {
 		return amount;
 	}
-	public void setAmount(long amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
-	public long getCommission() {
+	public Long getCommission() {
 		return commission;
 	}
-	public void setCommission(long commission) {
+	public void setCommission(Long commission) {
 		this.commission = commission;
 	}
 	@Override
