@@ -54,7 +54,7 @@
                             that.item.subMoneyL = utils.formatPrice(json.today_income_amount);
                             that.item.subMoneyR = utils.formatPrice(json.income_amount);
                         } else {
-                            that.$vux.alert.show(res.code);
+                            that.$vux.alert.show(res.message);
                         }
                     }
                 })

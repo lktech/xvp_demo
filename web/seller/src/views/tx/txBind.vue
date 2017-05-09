@@ -87,7 +87,7 @@
                             }, 1000);
                         } else {
                             that.sendYzmBtn = false;
-                            that.$vux.alert.show(res.code);
+                            that.$vux.alert.show(res.message);
                         }
                     }
                 });
@@ -104,7 +104,7 @@
                                 //
                             }, 2000)
                         } else {
-                            that.$vux.alert.show(res.code);
+                            that.$vux.alert.show(res.message);
                         }
                     }
                 });

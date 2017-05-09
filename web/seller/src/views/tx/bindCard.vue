@@ -110,7 +110,7 @@
                                 that.bankList.push({id: obj.bankcode, trueName: obj.bankname});
                             });
                         } else {
-                            that.$vux.alert.show(res.code);
+                            that.$vux.alert.show(res.message);
                         }
                     }
                 });
@@ -125,7 +125,7 @@
                                 that.province.push({id: obj.code, name: obj.name});
                             })
                         } else {
-                            that.$vux.alert.show(res.code);
+                            that.$vux.alert.show(res.message);
                         }
                     }
                 });
@@ -201,7 +201,7 @@
                         if (res.code == "SUCCESS") {
 
                         } else {
-                            that.$vux.alert.show(res.code);
+                            that.$vux.alert.show(res.message);
                         }
                     }
                 })
@@ -224,7 +224,7 @@
                             that.showProvince = false;
                             that.showCity = true;
                         } else {
-                            that.$vux.alert.show(res.code);
+                            that.$vux.alert.show(res.message);
                         }
                     }
                 })
@@ -247,7 +247,7 @@
                                 that.subBankList.push({id: obj.bankcode, trueName: obj.bankname});
                             });
                         } else {
-                            that.$vux.alert.show(res.code);
+                            that.$vux.alert.show(res.message);
                         }
                     }
                 })
