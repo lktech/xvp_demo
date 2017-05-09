@@ -14,10 +14,6 @@ public class AccountBankCardGetResponse implements XvpResponse {
 	 * 银行卡所属人姓名
 	 */
 	private String user_name;
-	/**
-	 * 身份证号码
-	 */
-	private String certificate_number;
 
 	/**
 	 * 银行卡号
@@ -86,14 +82,6 @@ public class AccountBankCardGetResponse implements XvpResponse {
 
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
-	}
-
-	public String getCertificate_number() {
-		return certificate_number;
-	}
-
-	public void setCertificate_number(String certificate_number) {
-		this.certificate_number = certificate_number;
 	}
 
 	public String getCard_no() {
@@ -179,10 +167,11 @@ public class AccountBankCardGetResponse implements XvpResponse {
 	@Override
 	public String toString() {
 		return "AccountBankCardGetResponse [id=" + id + ", store_id=" + store_id + ", user_name=" + user_name
-				+ ", certificate_number=" + certificate_number + ", card_no=" + card_no + ", bank_code=" + bank_code
-				+ ", bank_name=" + bank_name + ", bank_branch_code=" + bank_branch_code + ", bank_branch_name="
-				+ bank_branch_name + ", bank_province_code=" + bank_province_code + ", bank_city_code=" + bank_city_code
+				+ ", card_no=" + card_no + ", bank_code=" + bank_code + ", bank_name=" + bank_name
+				+ ", bank_branch_code=" + bank_branch_code + ", bank_branch_name=" + bank_branch_name
+				+ ", bank_province_code=" + bank_province_code + ", bank_city_code=" + bank_city_code
 				+ ", card_auth_status=" + card_auth_status + ", company_name=" + company_name + ", buslince=" + buslince
 				+ "]";
-	}	
+	}
+
 }

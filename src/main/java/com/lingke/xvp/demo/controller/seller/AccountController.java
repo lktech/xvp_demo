@@ -1,6 +1,5 @@
 package com.lingke.xvp.demo.controller.seller;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -177,6 +176,9 @@ public class AccountController {
 		XvpTlstoreaccountGetstorebankcardResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		AccountBankCardGetResponse response = BeanCopyUtil.copy(ropResponse.getTlstoreaccountcard(),
 				AccountBankCardGetResponse.class);
+		String cardNo = "**** **** **** "
+				+ response.getCard_no().substring(response.getCard_no().length() - 4);
+		response.setCard_no(cardNo);
 		return response;
 	}
 
