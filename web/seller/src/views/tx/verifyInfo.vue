@@ -5,20 +5,25 @@
             <r-cell title="实名主体" :value="typeName" is-link @click.native="typeBtn"></r-cell>
         </r-group>
         <r-group title="请填写实名信息" v-if="typeName=='个人'">
-            <r-input title="姓名" v-model="trueName" placeholder="请输入姓名"></r-input>
+            <r-input title="姓名" :max="20" v-model="trueName" placeholder="请输入姓名"></r-input>
             <r-cell title="证件类型" value="身份证"></r-cell>
-            <r-input title="证件号码" v-model="idCode" placeholder="请输入证件号码"></r-input>
+            <r-input title="证件号码" :max="18" v-model="idCode" placeholder="请输入证件号码"></r-input>
         </r-group>
         <r-group title="请填写实名信息" v-else>
-            <r-input title="企业名称" v-model="companyName" placeholder="请输入企业名称"></r-input>
-            <r-input title="营业执照" v-model="businessLicense" placeholder="请输入营业执照号码"></r-input>
-            <r-input title="上传执照" :placeholder="'请上传您的营业执照照片('+picList.length+'/1)'" value="" disabled></r-input>
-            <div class="licensePic">
-                <img :src="item" @click="imgClick(index)" v-for="(item,index) in picList">
-                <a href="javascript:;" class="upload" v-if="picList.length<1">
-                    <input type="file" accept="image/*" @change="uploadFile($event.target)"/>
-                </a>
-            </div>
+            <r-input title="企业名称" :max="50" v-model="companyName" placeholder="请输入企业名称"></r-input>
+            <r-input title="营业执照" :max="20" v-model="businessLicense" placeholder="请输入营业执照号码"></r-input>
+            <!--<r-input title="上传执照" :placeholder="'请上传您的营业执照照片('+picList.length+'/1)'" value="" disabled></r-input>-->
+            <!--<div class="licensePic">-->
+            <!--&lt;!&ndash;<img :src="item" @click="imgClick(index)" v-for="(item,index) in picList">&ndash;&gt;-->
+            <!--&lt;!&ndash;<a href="javascript:;" class="upload" v-if="picList.length<1">&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="file" accept="image/*" @change="uploadFile($event.target)"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;</a>&ndash;&gt;-->
+
+            <!--</div>-->
+            <c-uploadmul title="上传执照" :list="picList" @upload="uploadFile" name="upload1" :max="1"
+                         class="uploadComponent">
+                <span slot="after-title" class="placeholder">请上传您的营业执照照片</span>
+            </c-uploadmul>
         </r-group>
         <div class="btn">
             <r-button type="primary" text="确认" @click.native="btnClick" :disabled="btnDisabled"></r-button>
@@ -61,51 +66,83 @@
                 }, {
                     id: 2,
                     trueName: "企业用户",
-                }]
+                }];
+
             })
         },
         methods: {
             btnClick(){
-                this.$vux.toast.show('提交成功');
+                let that = this;
+                if (that.typeName == "个人") {
+                    utils.ajax({
+                        url: "/seller/account/createPerson",
+                        data: {user_name: that.trueName, certificate_type: "身份证", certificate_number: that.idCode},
+                        success: function (res) {
+                            if (res.code == "SUCCESS") {
+                                that.$vux.alert.show("实名认证成功");
+                            } else {
+                                that.$vux.alert.show(res.message);
+                            }
+                        }
+                    })
+                } else {
+                    utils.ajax({
+                        url: "/seller/account/createCompany",
+                        data: {
+                            company_name: that.companyName,
+                            buslince: that.businessLicense,
+                            buslince_pic: that.picList[0]
+                        },
+                        success: function (res) {
+                            if (res.code == "SUCCESS") {
+                                that.$vux.alert.show("实名认证成功");
+                            } else {
+                                that.$vux.alert.show(res.message);
+                            }
+                        }
+                    })
+                }
+
             },
             getAddressId(id, obj){
                 this.typeName = obj.trueName.substr(0, 2);
                 this.adsStatus = false;
-                this.trueName="";
-                this.idCode="";
-                this.companyName="";
-                this.businessLicense="";
-                this.picList=[];
+                this.trueName = "";
+                this.idCode = "";
+                this.companyName = "";
+                this.businessLicense = "";
+                this.picList = [];
             },
             typeBtn(){
                 this.adsStatus = true;
             },
             //上传执照
-            uploadFile(target) {
-                let that = this;
-                that.$vux.loading.show(that.loadingText);
-                var myForm = new FormData();
-                myForm.append("file", target.files[0]);
-                var oReq = new XMLHttpRequest();
-                oReq.open("POST", basepath + "/wx/course/ask/uploadPic");
-                oReq.upload.onprogress = function (ev) {
-                    let num = ev.loaded / ev.total;
-                    if (num == 1) {
-                        that.loadingText = '99%';
-                    } else {
-                        that.loadingText = parseInt(num * 100) + "%";
-                    }
-                }
-                oReq.onload = function (response) {
-                    if (oReq.status == 200) {
-                        var data = JSON.parse(response.currentTarget.response);
-                        that.picList.push(data.picUrl);
-                        that.$vux.loading.hide();
-                        that.loadingText = "";
-                        that.checkCompany();
-                    }
-                }
-                oReq.send(myForm);
+            uploadFile(array) {
+                this.checkCompany();
+//                let that = this;
+//                that.$vux.loading.show(that.loadingText);
+//                var myForm = new FormData();
+//                myForm.append("file", target.files[0]);
+//                var oReq = new XMLHttpRequest();
+//                oReq.open("POST", basepath + "/wx/course/ask/uploadPic");
+//                oReq.upload.onprogress = function (ev) {
+//                    let num = ev.loaded / ev.total;
+//                    if (num == 1) {
+//                        that.loadingText = '99%';
+//                    } else {
+//                        that.loadingText = parseInt(num * 100) + "%";
+//                    }
+//                }
+//                oReq.onload = function (response) {
+//                    if (oReq.status == 200) {
+//                        var data = JSON.parse(response.currentTarget.response);
+//                        that.picList.push(data.picUrl);
+//                        that.$vux.loading.hide();
+//                        that.loadingText = "";
+//                        that.checkCompany();
+//                    }
+//                }
+//                oReq.send(myForm);
             },
             imgClick(index){
                 let that = this;
@@ -127,9 +164,9 @@
             },
             //检查企业实名认证
             checkCompany(){
-                if(this.companyName.indexOf(" ")==-1 && this.companyName !="" && this.businessLicense.indexOf(" ")==-1 && this.businessLicense !="" && this.picList.length !=0){
+                if (this.companyName.indexOf(" ") == -1 && this.companyName != "" && this.businessLicense.indexOf(" ") == -1 && this.businessLicense != "" && this.picList.length != 0) {
                     this.btnDisabled = false;
-                }else {
+                } else {
                     this.btnDisabled = true;
                 }
             }
@@ -142,10 +179,10 @@
             idCode(val, oldVal){
                 this.checkPerson();
             },
-            companyName(val,oldVal){
+            companyName(val, oldVal){
                 this.checkCompany();
             },
-            businessLicense(val,oldVal){
+            businessLicense(val, oldVal){
                 this.checkCompany();
             }
         },
@@ -156,6 +193,7 @@
             "rInput": require("../../components/input/input.vue"),
             "rButton": require("../../components/button/button.vue"),
             "rAddressChecked": require('../../components/x-address-checked/x-address-checked.vue'),
+            "cUploadmul": require('../../components/x-upload-img/x-upload-img-Slice.vue'),
         }
     }
     require("../../assets/styles/views/common.less");

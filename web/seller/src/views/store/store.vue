@@ -64,7 +64,7 @@
                     success: function (data) {
                         if (data.code == "SUCCESS") {
                             if (data.result.flag == 'no') {
-                                utils.go({path: '/login/login'}, that.$router, true);
+                                utils.go({path: '/login'}, that.$router, true);
                                 return false;
                             } else {
                                 that.init();
@@ -111,7 +111,7 @@
                 });
             },
             goClick(){
-                utils.go("/tx/balance", this.$router);
+                utils.go("/tx/balance?money="+this.item.money, this.$router);
             },
             clickLink(obj){
                 utils.go(obj.link, this.$router);

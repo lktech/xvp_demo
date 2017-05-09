@@ -4,8 +4,8 @@
         <r-messages :src="src" msg="我的账户余额" :money="money" class="account" fivetext="提现预计24小时后到账">
             <div slot="list" class="slot">
                 <r-group>
-                    <r-cell title="提现账号" value="未实名验证"></r-cell>
-                    <r-cell title="提现记录" is-link></r-cell>
+                    <r-cell title="提现账号" :value="txtStatus" :is-link="islink" :link="link"></r-cell>
+                    <r-cell title="提现记录" link="/tx/cashrecord" is-link></r-cell>
                 </r-group>
             </div>
             <div slot="btn">
@@ -24,9 +24,34 @@
                 money: 1000,
                 desc: "提现预计24小时后到账",
                 btnDisabled: true,
+                txtStatus: "",
+                islink: true,
+                link:"/tx/verifyInfo",
             }
         },
-
+        mounted: function () {
+            this.$nextTick(function () {
+                let that = this;
+                that.money = that.$route.query.money;
+                //认证信息
+                utils.ajax({
+                    url: "/seller/account/get",
+                    success: function (res) {
+                        if (res.code == "SUCCESS") {
+                            if (res.result) {
+                                that.txtStatus = "实名验证已通过";
+                                that.islink = false;
+                                that.link="";
+                            } else {
+                                that.txtStatus = "未实名验证";
+                            }
+                        } else {
+                            that.$vux.alert.show(res.message);
+                        }
+                    }
+                });
+            })
+        },
         methods: {
             btnClick(){
 

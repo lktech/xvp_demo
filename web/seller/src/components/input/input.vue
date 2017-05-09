@@ -360,7 +360,6 @@ export default {
     },
     currentValue (newVal) {
       if(!this.emoji){
-        console.log(escape(newVal))
         try{
          // newVal = unescape(escape(newVal).replace(/\%uD.{3}|(\%u[a-zA-Z0-9]{4}[^\u0000-\u00FF])+/g, ''));
          newVal = unescape(escape(newVal).replace(/\%uD.{3}|\%u263A\%uFE0F|\%u26F9|\%u2693\%uFE0F|\%u270C\%uFE0F|\%u270B|\%u261D\%uFE0F|\%u270D|\%u200D\%u2764\%uFE0F\%u200D|\%u26D1|\%u2618|\%u2B50\%uFE0F|\%u2728|\%u2604|\%u2600\%uFE0F|\%u26C5\%uFE0F|\%u2601\%uFE0F|\%u26C8|\%u26A1\%uFE0F|\%u2744\%uFE0F|\%u2603|\%u26C4\%uFE0F|(\%u[a-zA-Z0-9]{4}[^\u0000-\u00FF])+/g, ''));
