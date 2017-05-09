@@ -71,7 +71,6 @@
                     'password':md5(that.formData.password)
                   },
                   success: function(data){
-                      console.log(data)
                       if(data.code=="SUCCESS"){
                           //utils.header();
                           that.login1();
@@ -92,7 +91,7 @@
                 type: 'POST',
                 success: function(data){
                     if(data.code=="SUCCESS"){
-                        utils.go({path:'/store/store'},that.$router);
+                        utils.go({path:'/store/storeInfo'},that.$router);
                     }else{
                         utils.go({path:'/store/addinfo'},that.$router);
                     }
@@ -100,7 +99,7 @@
             });
           },
           forget(){
-            utils.go({path:'forget'},this.$router);
+            utils.go("/forget",this.$router);
           }
         },
         components:{

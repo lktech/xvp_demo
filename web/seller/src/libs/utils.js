@@ -180,7 +180,7 @@ exports.formatPrice = function (s) {
  * @return 无
  * @author bob
  */
- var that = this;
+var that = this;
 exports.ajax = function (obj) {
     if (!obj.url) {
         return;
@@ -200,7 +200,7 @@ exports.ajax = function (obj) {
         params = JSON.stringify(params);
     }
     $.ajax({
-    	xhrFields: {
+        xhrFields: {
             withCredentials: true
         },
         crossDomain: true,
@@ -257,12 +257,118 @@ exports.ajax = function (obj) {
  * @return string   带emoji表情的消息
  * @author bob
  */
-exports.emoji = function(value) {
-    var qqfaceMap = {"[微笑]":"0","[撇嘴]":"1","[色]":"2","[发呆]":"3","[得意]":"4","[流泪]":"5","[害羞]":"6","[闭嘴]":"7","[睡]":"8","[大哭]":"9","[尴尬]":"10","[发怒]":"11","[调皮]":"12","[呲牙]":"13","[惊讶]":"14","[难过]":"15","酷":"16","[冷汗]":"17","[抓狂]":"18","[吐]":"19","[偷笑]":"20","[愉快]":"21","[白眼]":"22","[傲慢]":"23","[饥饿]":"24","[困]":"25","[惊恐]":"26","[流汗]":"27","[憨笑]":"28","[悠闲]":"29","[奋斗]":"30","[咒骂]":"31","[疑问]":"32","[嘘]":"33","[晕]":"34","[疯了]":"35","[衰]":"36","[骷髅]":"37","[敲打]":"38","[再见]":"39","[擦汗]":"40","[抠鼻]":"41","[鼓掌]":"42","[糗大了]":"43","[坏笑]":"44","[左哼哼]":"45","[右哼哼]":"46","[哈欠]":"47","[鄙视]":"48","[委屈]":"49","[快哭了]":"50","[阴险]":"51","[亲亲]":"52","[吓]":"53","[可怜]":"54","[菜刀]":"55","[西瓜]":"56","[啤酒]":"57","[篮球]":"58","[乒乓]":"59","[咖啡]":"60","[饭]":"61","[猪头]":"62","[玫瑰]":"63","[凋谢]":"64","[嘴唇]":"65","[爱心]":"66","[心碎]":"67","[蛋糕]":"68","[闪电]":"69","[炸弹]":"70","[刀]":"71","[足球]":"72","[瓢虫]":"73","[便便]":"74","[月亮]":"75","[太阳]":"76","[礼物]":"77","[拥抱]":"78","[强]":"79","[弱]":"80","[握手]":"81","[胜利]":"82","[抱拳]":"83","[勾引]":"84","[拳头]":"85","[差劲]":"86","[爱你]":"87","[NO]":"88","[OK]":"89","[爱情]":"90","[飞吻]":"91","[跳跳]":"92","[发抖]":"93","[怄火]":"94","[转圈]":"95","[磕头]":"96","[回头]":"97","[跳绳]":"98","[投降]":"99","[激动]":"100","[乱舞]":"101","[献吻]":"102","[左太极]":"103","[右太极]":"104"};
-    var str= "\\[微笑\\]|\\[撇嘴\\]|\\[色\\]|\\[发呆\\]|\\[得意\\]|\\[流泪\\]|\\[害羞\\]|\\[闭嘴\\]|\\[睡\\]|\\[大哭\\]|\\[尴尬\\]|\\[发怒\\]|\\[调皮\\]|\\[呲牙\\]|\\[惊讶\\]|\\[难过\\]|\\[酷\\]|\\[冷汗\\]|\\[抓狂\\]|\\[吐\\]|\\[偷笑\\]|\\[愉快\\]|\\[白眼\\]|\\[傲慢\\]|\\[饥饿\\]|\\[困\\]|\\[惊恐\\]|\\[流汗\\]|\\[憨笑\\]|\\[悠闲\\]|\\[奋斗\\]|\\[咒骂\\]|\\[疑问\\]|\\[嘘\\]|\\[晕\\]|\\[疯了\\]|\\[衰\\]|\\[骷髅\\]|\\[敲打\\]|\\[再见\\]|\\[擦汗\\]|\\[抠鼻\\]|\\[鼓掌\\]|\\[糗大了\\]|\\[坏笑\\]|\\[左哼哼\\]|\\[右哼哼\\]|\\[哈欠\\]|\\[鄙视\\]|\\[委屈\\]|\\[快哭了\\]|\\[阴险\\]|\\[亲亲\\]|\\[吓\\]|\\[可怜\\]|\\[菜刀\\]|\\[西瓜\\]|\\[啤酒\\]|\\[篮球\\]|\\[乒乓\\]|\\[咖啡\\]|\\[饭\\]|\\[猪头\\]|\\[玫瑰\\]|\\[凋谢\\]|\\[嘴唇\\]|\\[爱心\\]|\\[心碎\\]|\\[蛋糕\\]|\\[闪电\\]|\\[炸弹\\]|\\[刀\\]|\\[足球\\]|\\[瓢虫\\]|\\[便便\\]|\\[月亮\\]|\\[太阳\\]|\\[礼物\\]|\\[拥抱\\]|\\[强\\]|\\[弱\\]|\\[握手\\]|\\[胜利\\]|\\[抱拳\\]|\\[勾引\\]|\\[拳头\\]|\\[差劲\\]|\\[爱你\\]|\\[NO\\]|\\[OK\\]|\\[爱情\\]|\\[飞吻\\]|\\[跳跳\\]|\\[发抖\\]|\\[怄火\\]|\\[转圈\\]|\\[磕头\\]|\\[回头\\]|\\[跳绳\\]|\\[投降\\]|\\[激动\\]|\\[乱舞\\]|\\[献吻\\]|\\[左太极\\]|\\[右太极\\]";
-    var reg = new RegExp(str,'g');
-    var result = value.replace(reg,function(r){
-        return '<img class="qqemoji qqemoji'+qqfaceMap[r]+'" src="'+exports.spaceGif+'">';
+exports.emoji = function (value) {
+    var qqfaceMap = {
+        "[微笑]": "0",
+        "[撇嘴]": "1",
+        "[色]": "2",
+        "[发呆]": "3",
+        "[得意]": "4",
+        "[流泪]": "5",
+        "[害羞]": "6",
+        "[闭嘴]": "7",
+        "[睡]": "8",
+        "[大哭]": "9",
+        "[尴尬]": "10",
+        "[发怒]": "11",
+        "[调皮]": "12",
+        "[呲牙]": "13",
+        "[惊讶]": "14",
+        "[难过]": "15",
+        "酷": "16",
+        "[冷汗]": "17",
+        "[抓狂]": "18",
+        "[吐]": "19",
+        "[偷笑]": "20",
+        "[愉快]": "21",
+        "[白眼]": "22",
+        "[傲慢]": "23",
+        "[饥饿]": "24",
+        "[困]": "25",
+        "[惊恐]": "26",
+        "[流汗]": "27",
+        "[憨笑]": "28",
+        "[悠闲]": "29",
+        "[奋斗]": "30",
+        "[咒骂]": "31",
+        "[疑问]": "32",
+        "[嘘]": "33",
+        "[晕]": "34",
+        "[疯了]": "35",
+        "[衰]": "36",
+        "[骷髅]": "37",
+        "[敲打]": "38",
+        "[再见]": "39",
+        "[擦汗]": "40",
+        "[抠鼻]": "41",
+        "[鼓掌]": "42",
+        "[糗大了]": "43",
+        "[坏笑]": "44",
+        "[左哼哼]": "45",
+        "[右哼哼]": "46",
+        "[哈欠]": "47",
+        "[鄙视]": "48",
+        "[委屈]": "49",
+        "[快哭了]": "50",
+        "[阴险]": "51",
+        "[亲亲]": "52",
+        "[吓]": "53",
+        "[可怜]": "54",
+        "[菜刀]": "55",
+        "[西瓜]": "56",
+        "[啤酒]": "57",
+        "[篮球]": "58",
+        "[乒乓]": "59",
+        "[咖啡]": "60",
+        "[饭]": "61",
+        "[猪头]": "62",
+        "[玫瑰]": "63",
+        "[凋谢]": "64",
+        "[嘴唇]": "65",
+        "[爱心]": "66",
+        "[心碎]": "67",
+        "[蛋糕]": "68",
+        "[闪电]": "69",
+        "[炸弹]": "70",
+        "[刀]": "71",
+        "[足球]": "72",
+        "[瓢虫]": "73",
+        "[便便]": "74",
+        "[月亮]": "75",
+        "[太阳]": "76",
+        "[礼物]": "77",
+        "[拥抱]": "78",
+        "[强]": "79",
+        "[弱]": "80",
+        "[握手]": "81",
+        "[胜利]": "82",
+        "[抱拳]": "83",
+        "[勾引]": "84",
+        "[拳头]": "85",
+        "[差劲]": "86",
+        "[爱你]": "87",
+        "[NO]": "88",
+        "[OK]": "89",
+        "[爱情]": "90",
+        "[飞吻]": "91",
+        "[跳跳]": "92",
+        "[发抖]": "93",
+        "[怄火]": "94",
+        "[转圈]": "95",
+        "[磕头]": "96",
+        "[回头]": "97",
+        "[跳绳]": "98",
+        "[投降]": "99",
+        "[激动]": "100",
+        "[乱舞]": "101",
+        "[献吻]": "102",
+        "[左太极]": "103",
+        "[右太极]": "104"
+    };
+    var str = "\\[微笑\\]|\\[撇嘴\\]|\\[色\\]|\\[发呆\\]|\\[得意\\]|\\[流泪\\]|\\[害羞\\]|\\[闭嘴\\]|\\[睡\\]|\\[大哭\\]|\\[尴尬\\]|\\[发怒\\]|\\[调皮\\]|\\[呲牙\\]|\\[惊讶\\]|\\[难过\\]|\\[酷\\]|\\[冷汗\\]|\\[抓狂\\]|\\[吐\\]|\\[偷笑\\]|\\[愉快\\]|\\[白眼\\]|\\[傲慢\\]|\\[饥饿\\]|\\[困\\]|\\[惊恐\\]|\\[流汗\\]|\\[憨笑\\]|\\[悠闲\\]|\\[奋斗\\]|\\[咒骂\\]|\\[疑问\\]|\\[嘘\\]|\\[晕\\]|\\[疯了\\]|\\[衰\\]|\\[骷髅\\]|\\[敲打\\]|\\[再见\\]|\\[擦汗\\]|\\[抠鼻\\]|\\[鼓掌\\]|\\[糗大了\\]|\\[坏笑\\]|\\[左哼哼\\]|\\[右哼哼\\]|\\[哈欠\\]|\\[鄙视\\]|\\[委屈\\]|\\[快哭了\\]|\\[阴险\\]|\\[亲亲\\]|\\[吓\\]|\\[可怜\\]|\\[菜刀\\]|\\[西瓜\\]|\\[啤酒\\]|\\[篮球\\]|\\[乒乓\\]|\\[咖啡\\]|\\[饭\\]|\\[猪头\\]|\\[玫瑰\\]|\\[凋谢\\]|\\[嘴唇\\]|\\[爱心\\]|\\[心碎\\]|\\[蛋糕\\]|\\[闪电\\]|\\[炸弹\\]|\\[刀\\]|\\[足球\\]|\\[瓢虫\\]|\\[便便\\]|\\[月亮\\]|\\[太阳\\]|\\[礼物\\]|\\[拥抱\\]|\\[强\\]|\\[弱\\]|\\[握手\\]|\\[胜利\\]|\\[抱拳\\]|\\[勾引\\]|\\[拳头\\]|\\[差劲\\]|\\[爱你\\]|\\[NO\\]|\\[OK\\]|\\[爱情\\]|\\[飞吻\\]|\\[跳跳\\]|\\[发抖\\]|\\[怄火\\]|\\[转圈\\]|\\[磕头\\]|\\[回头\\]|\\[跳绳\\]|\\[投降\\]|\\[激动\\]|\\[乱舞\\]|\\[献吻\\]|\\[左太极\\]|\\[右太极\\]";
+    var reg = new RegExp(str, 'g');
+    var result = value.replace(reg, function (r) {
+        return '<img class="qqemoji qqemoji' + qqfaceMap[r] + '" src="' + exports.spaceGif + '">';
     });
     return result;
 }
@@ -322,7 +428,7 @@ exports.layerPic = {
                 $this.rotateRight();//右旋转
             }
         });
-        this.btnRight.find("#rotateLeft").attr("href",img.src);
+        this.btnRight.find("#rotateLeft").attr("href", img.src);
     },
     autoCenter: function () {
         var w = $(window).width() - this.msg.width() - 10;
@@ -403,7 +509,7 @@ exports.detectVerticalSquash = function (img) {
         py = (ey + sy) >> 1;
     }
     var ratio = (py / ih);
-    return (ratio===0)?1:ratio;
+    return (ratio === 0) ? 1 : ratio;
 }
 
 
@@ -417,25 +523,25 @@ exports.detectVerticalSquash = function (img) {
  * @return string   无
  * @author bob
  */
-exports.imgToBase64 = function (cvs,file,callback,params) {
-    let prms = params || {"width":320,"cut":0.1,"imgtype":'png'};
+exports.imgToBase64 = function (cvs, file, callback, params) {
+    let prms = params || {"width": 320, "cut": 0.1, "imgtype": 'png'};
     let canvas = cvs,
         context = canvas.getContext("2d"),
         tmpImage = new Image(),
         base64Str = "";
     let URL = URL || webkitURL;
     tmpImage.src = URL.createObjectURL(file);
-    tmpImage.onload = function() {
+    tmpImage.onload = function () {
         let width = tmpImage.width, height = tmpImage.height;
         let scale = width / height;
-        let width1 = prms.width?prms.width : 320;
+        let width1 = prms.width ? prms.width : 320;
         let height1 = parseInt(width1 / scale);
         canvas.width = width1;
         canvas.height = height1;
         //context.drawImage(tmpImage, 0, 0, width, height, 0, 0, width1, height1);
-        exports.drawImageIOSFix(context,tmpImage, 0, 0, width, height, 0, 0, width1, height1);
-        let realCut = prms.cut?prms.cut :  0.1;
-        base64Str = canvas.toDataURL("image/"+prms.type,realCut);
+        exports.drawImageIOSFix(context, tmpImage, 0, 0, width, height, 0, 0, width1, height1);
+        let realCut = prms.cut ? prms.cut : 0.1;
+        base64Str = canvas.toDataURL("image/" + prms.type, realCut);
         callback(base64Str);
     }
 }
@@ -449,25 +555,25 @@ exports.imgToBase64 = function (cvs,file,callback,params) {
  * @return true(图片高)，false（图片宽）
  * @author bob
  */
-exports.imageIsWidth = function (url,scale,callback) {
-    if(!url){
+exports.imageIsWidth = function (url, scale, callback) {
+    if (!url) {
         return false;
     }
 
     let img = new Image();
     img.src = url;
 
-    if(img.complete){
-        if(img.width/img.height >= scale){
+    if (img.complete) {
+        if (img.width / img.height >= scale) {
             callback(true);
-        }else{
+        } else {
             callback(false);
         }
-    }else{
-        img.onload = function(){
-            if(img.width/img.height >= scale){
+    } else {
+        img.onload = function () {
+            if (img.width / img.height >= scale) {
                 callback(true);
-            }else{
+            } else {
                 callback(false);
             }
         }
@@ -484,11 +590,11 @@ exports.imageIsWidth = function (url,scale,callback) {
  * @return string   格式化时间字符串
  * @author bob
  */
-exports.fmtDate = function(date, format) {
-    if(typeof date == "string"){
+exports.fmtDate = function (date, format) {
+    if (typeof date == "string") {
         return date;
     }
-    if(typeof date == "number"){
+    if (typeof date == "number") {
         date = new Date(date);
     }
 
@@ -511,48 +617,50 @@ exports.fmtDate = function(date, format) {
 }
 
 
-exports.wang = function( t , u , m){
-    t.$vux.alert.show({content:m,onHide :function(){
-        u.go({path:'/login/login'},t.$router);
-    }});
+exports.wang = function (t, u, m) {
+    t.$vux.alert.show({
+        content: m, onHide: function () {
+            u.go("/login", t.$router);
+        }
+    });
 }
 
 
-exports.MenuShare=function(){
+exports.MenuShare = function () {
     $.ajax({
-      url:"/common/wxconfig/get",
-      type:'POST',
-      async:false,
-      contentType:'application/json',
-      data:JSON.stringify({'base_url':window.location.href.split('#')[0]}),
-      success: function(data) {
-        if(data.code=="SUCCESS") {
-          wx.config({
-              debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-              appId: data.result.appId, // 必填，公众号的唯一标识
-              timestamp: data.result.timestamp, // 必填，生成签名的时间戳
-              nonceStr: data.result.nonceStr, // 必填，生成签名的随机串
-              signature: data.result.signature,// 必填，签名，见附录1
-              jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline','hideMenuItems'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-          });
-          wx.ready(function(){
-            wx.onMenuShareAppMessage({
-                title: '小V铺商家管理后台', // 分享标题
-                desc: '帮您搭建基于社交场景的全新电商营销方案。', // 分享描述
-                link: 'http://demo.open.xiaovpu.com/seller/index.html', // 分享链接
-                imgUrl: 'http://img1.xiaovpu.com/3628208054774302.png' // 分享图标
-            });
+        url: basepath + "/common/wxconfig/get",
+        type: 'POST',
+        async: false,
+        contentType: 'application/json',
+        data: JSON.stringify({'base_url': window.location.href.split('#')[0]}),
+        success: function (data) {
+            if (data.code == "SUCCESS") {
+                wx.config({
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: data.result.appId, // 必填，公众号的唯一标识
+                    timestamp: data.result.timestamp, // 必填，生成签名的时间戳
+                    nonceStr: data.result.nonceStr, // 必填，生成签名的随机串
+                    signature: data.result.signature,// 必填，签名，见附录1
+                    jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'hideMenuItems'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                });
+                wx.ready(function () {
+                    wx.onMenuShareAppMessage({
+                        title: '小V铺商家管理后台', // 分享标题
+                        desc: '帮您搭建基于社交场景的全新电商营销方案。', // 分享描述
+                        link: 'http://demo.open.xiaovpu.com/seller/index.html', // 分享链接
+                        imgUrl: 'http://img1.xiaovpu.com/3628208054774302.png' // 分享图标
+                    });
 
-            wx.onMenuShareTimeline({
-                title: '小V铺商家管理后台', // 分享标题
-                link: 'http://demo.open.xiaovpu.com/seller/index.html', // 分享链接
-                imgUrl: 'http://img1.xiaovpu.com/3628208054774302.png' // 分享图标
-            });
-            wx.hideMenuItems({
-                menuList: ['menuItem:copyUrl']
-            });
-          })
-        }
-      },
+                    wx.onMenuShareTimeline({
+                        title: '小V铺商家管理后台', // 分享标题
+                        link: 'http://demo.open.xiaovpu.com/seller/index.html', // 分享链接
+                        imgUrl: 'http://img1.xiaovpu.com/3628208054774302.png' // 分享图标
+                    });
+                    wx.hideMenuItems({
+                        menuList: ['menuItem:copyUrl']
+                    });
+                })
+            }
+        },
     });
 }

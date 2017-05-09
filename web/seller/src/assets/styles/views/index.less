@@ -2,21 +2,24 @@
 
 .index {
     ul.list {
+        overflow: hidden;
+        background-color: #fff;
         li {
+
             float: left;
             width: 33.3333%;
             padding: 18px 0;
             text-align: center;
             border-bottom: 1px solid @color-e5;
-            border-right:1px solid @color-e5;
+            border-right: 1px solid @color-e5;
             img {
                 width: 60px;
                 height: 60px;
             }
-            &:nth-child(3n){
+            &:nth-child(3n) {
                 border-right: none;
             }
-            p{
+            p {
                 padding-top: 5px;
                 color: @color6;
                 font-size: @fts-small;

@@ -77,13 +77,13 @@ router.beforeEach((to, from, next) => {
       }
       document.body.appendChild(i);
     }
-    if(to.path == "/login/login"){
+    if(to.path == "/login"){
         document.setTitle('会员登录');
     }
-    if(to.path == "/login/forget"){
+    if(to.path == "/forget"){
         document.setTitle('忘记密码');
     }
-    if(to.path == "/login/register"){
+    if(to.path == "/register"){
         document.setTitle('商家注册');
     }
     if(to.path == "/order/detail"){

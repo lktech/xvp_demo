@@ -1,8 +1,14 @@
 <template>
-    <div v-if="flag">
-        <c-withdraw-count title="可提现金额" :money='money' subTitleL='今日收入' @click.native="withdraw" :subMoneyL='subMoneyL'
-                          subTitleR='累计收入' :subMoneyR='subMoneyR'></c-withdraw-count>
-        <c-entrance :list="entranceData"></c-entrance>
+    <div v-if="flag" class="index">
+        <c-withdraw-count :info="item" @goClick="goClick"></c-withdraw-count>
+        <!--<c-entrance :list="entranceData"></c-entrance>-->
+        <ul class="list">
+            <li v-for="(item,index) in entranceData" @click="clickLink(item)">
+                <img :src="item.icon"/>
+                <p>{{item.title}}</p>
+            </li>
+
+        </ul>
         <p class="xv_copyright">版权所有@2016-2017 小V铺</p>
     </div>
 
@@ -34,9 +40,14 @@
                     icon: 'http://img1.xiaovpu.com/3027349865458448.png'
                 }],
                 flag: true,
-                money: "",
-                subMoneyL: "",
-                subMoneyR: ""
+                item: {
+                    title: "可提现金额",
+                    money: "",
+                    subTitleL: "今日收入",
+                    subMoneyL: "",
+                    subTitleR: "累计收入",
+                    subMoneyR: "",
+                },
             }
         },
         mounted: function () {
@@ -67,9 +78,9 @@
                     success: function (res) {
                         if (res.code == "SUCCESS") {
                             let json = res.result;
-                            that.money = utils.formatPrice(json.withdrawals_amount);
-                            that.subMoneyL = utils.formatPrice(json.today_income_amount);
-                            that.subMoneyR = utils.formatPrice(json.income_amount);
+                            that.item.money = utils.formatPrice(json.withdrawals_amount);
+                            that.item.subMoneyL = utils.formatPrice(json.today_income_amount);
+                            that.item.subMoneyR = utils.formatPrice(json.income_amount);
                         } else {
                             that.$vux.alert.show(res.message);
                         }
@@ -99,13 +110,19 @@
                     }
                 });
             },
-            withdraw(){
+            goClick(){
                 utils.go("/tx/balance", this.$router);
+            },
+            clickLink(obj){
+                utils.go(obj.link, this.$router);
             }
         },
         components: {
-            "cEntrance": require('../../components/x-entrance/x-entrance.vue'),
-            "cWithdrawCount": require('../../components/x-withdraw/x-withdraw-count.vue'),
+//            "cEntrance": require('../../components/x-entrance/x-entrance.vue'),
+            "cWithdrawCount": require('../../components/x-withdraw/x-withdraw-count-new.vue'),
         },
     }
 </script>
+<style lang="less">
+    @import "../../assets/styles/views/index";
+</style>
