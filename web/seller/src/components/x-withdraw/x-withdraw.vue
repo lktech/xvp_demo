@@ -15,12 +15,12 @@
   export default {
   	props: {
 	    title: String,
-	    maxvalue: Number,
+	    maxvalue: [String,Number],
 	    cancelText: String,
-	    minvalue: Number,
+	    minvalue: [String,Number],
 	    digit: Number,
 	    tip:String,
-      val:String,
+      val:[String,Number],
       placeholder:String,
       words:Object
 	},
@@ -59,20 +59,25 @@
             status = 'fail';
             this.$emit('on-input', value, status);
             return false;
-          } else if(value - 0 < this.minvalue) {
-            this.tips = this.words.min || '输入值不能低于最小值';
-            status = 'fail';
-            this.$emit('on-input', value, status);
-            return false;
-          } else if(value - 0 > this.maxvalue) {
-            this.tips = this.words.max || '输入值不能超出最大值';
-            status = 'fail';
-            this.$emit('on-input', value, status);
-            return false;
-          } else {
-            this.tips = '';
-            status = 'success';
-            this.$emit('on-input', value, status);
+          } else if(this.maxvalue){
+          	console.log(111)
+          	if(value - 0 < this.minvalue) {
+	            this.tips = this.words.min || '输入值不能低于最小值';
+	            status = 'fail';
+	            this.$emit('on-input', value, status);
+	            return false;
+	          } else if(value - 0 > this.maxvalue) {
+	            this.tips = this.words.max || '输入值不能超出最大值';
+	            status = 'fail';
+	            this.$emit('on-input', value, status);
+	            return false;
+	          } else {
+	            this.tips = '';
+	            status = 'success';
+	            this.$emit('on-input', value, status);
+	          }
+          }else{
+          	this.tips = '无可提现的余额';
           }
         } else {
           this.tips = this.words.empty || '输入值不能为空';
