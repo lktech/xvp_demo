@@ -20,10 +20,10 @@
             <!--&lt;!&ndash;</a>&ndash;&gt;-->
 
             <!--</div>-->
-            <c-uploadmul title="上传执照" :list="picList" @upload="uploadFile" name="upload1" :max="1"
-                         class="uploadComponent">
-                <span slot="after-title" class="placeholder">请上传您的营业执照照片</span>
-            </c-uploadmul>
+            <!--<c-uploadmul title="上传执照" :list="picList" @upload="uploadFile" name="upload1" :max="1"-->
+                         <!--class="uploadComponent">-->
+                <!--<span slot="after-title" class="placeholder">请上传您的营业执照照片</span>-->
+            <!--</c-uploadmul>-->
         </r-group>
         <div class="btn">
             <r-button type="primary" text="确认" @click.native="btnClick" :disabled="btnDisabled"></r-button>
@@ -79,7 +79,12 @@
                         data: {user_name: that.trueName, certificate_type: "身份证", certificate_number: that.idCode},
                         success: function (res) {
                             if (res.code == "SUCCESS") {
-                                that.$vux.alert.show("实名认证成功");
+                                that.$vux.alert.show({
+                                    content: '实名认证成功',
+                                    onHide () {
+                                        utils.go("/tx/balance?money="+that.$route.query.money, that.$router);
+                                    }
+                                })
                             } else {
                                 that.$vux.alert.show(res.message);
                             }
@@ -95,7 +100,12 @@
                         },
                         success: function (res) {
                             if (res.code == "SUCCESS") {
-                                that.$vux.alert.show("实名认证成功");
+                                that.$vux.alert.show({
+                                    content: '实名认证成功',
+                                    onHide () {
+                                        utils.go("/tx/balance?money="+that.$route.query.money, that.$router);
+                                    }
+                                })
                             } else {
                                 that.$vux.alert.show(res.message);
                             }
@@ -164,7 +174,7 @@
             },
             //检查企业实名认证
             checkCompany(){
-                if (this.companyName.indexOf(" ") == -1 && this.companyName != "" && this.businessLicense.indexOf(" ") == -1 && this.businessLicense != "" && this.picList.length != 0) {
+                if (this.companyName.indexOf(" ") == -1 && this.companyName != "" && this.businessLicense.indexOf(" ") == -1 && this.businessLicense != "") {
                     this.btnDisabled = false;
                 } else {
                     this.btnDisabled = true;
