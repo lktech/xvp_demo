@@ -106,7 +106,7 @@ public class SellerController {
 		Instant sellerLogoutEnd = Instant.now();
 		logger.info("用户退出总共花费：" + (Duration.between(sellerLogoutStart, sellerLogoutEnd).toMillis()/ 1000) + "秒");
 		Instant sellerLoginStart = Instant.now();
-		SessionUtil.sellerLogin(seller.getId());
+		SessionUtil.sellerLogin(seller);
 		Instant sellerLoginEnd = Instant.now();
 		logger.info("用户登录总共花费：" + (Duration.between(sellerLoginStart, sellerLoginEnd).toMillis()/ 1000) + "秒");
 		if(!StringUtils.isEmpty(seller.getXvpStoreId())){

@@ -1,8 +1,10 @@
 package com.lingke.xvp.demo.controller.seller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -126,7 +128,10 @@ public class AccountController {
 		XvpTlstoreaccountGetRequest ropRequest = new XvpTlstoreaccountGetRequest();
 		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
-		XvpTlstoreaccountGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
+		XvpTlstoreaccountGetResponse ropResponse = ropClientAdapter.ropInvokeErrorReturnNull(ropRequest);
+		if (ropResponse == null) {
+			return null;
+		}
 		AccountGetResponse response = BeanCopyUtil.copy(ropResponse.getTlstoreaccount(), AccountGetResponse.class);
 		return response;
 	}
@@ -141,6 +146,10 @@ public class AccountController {
 	@RequestMapping(path = "/addStoreBankCard", method = RequestMethod.POST)
 	@ResponseBody
 	public XvpResponse addStoreBankCard(@RequestBody AccountBankCardRequest request) throws Exception {
+		String phone = SessionUtil.getSellerLoginPhone();
+		if (!phone.equals(request.getPhone())) {
+			throw new RuntimeException("当前登录用户电话号码与绑定银行卡电话号码不一致");
+		}
 		if (!checkCode(request.getPhone(), request.getSn(), request.getVerfiy_code())) {
 			throw new RuntimeException("验证码输入错误");
 		}
@@ -187,7 +196,9 @@ public class AccountController {
 		AccontBankCityCodeGetListGetResponse response = new AccontBankCityCodeGetListGetResponse();
 		List<AccountCityCodeGetResponse> list = BeanCopyUtil.copyList(ropResponse.getAreas(),
 				AccountCityCodeGetResponse.class);
-		response.addAll(list);
+		if (!CollectionUtils.isEmpty(list)) {
+			response.addAll(list);
+		}
 		return response;
 	}
 
@@ -207,7 +218,9 @@ public class AccountController {
 		List<AccountBankInfoResponse> list = BeanCopyUtil.copyList(ropResponse.getBanks(),
 				AccountBankInfoResponse.class);
 		AccontBankInfoListGetResponse response = new AccontBankInfoListGetResponse();
-		response.addAll(list);
+		if (!CollectionUtils.isEmpty(list)) {
+			response.addAll(list);
+		}
 		return response;
 	}
 
@@ -247,7 +260,9 @@ public class AccountController {
 		AccontWithDrawsQueryListResponse response = new AccontWithDrawsQueryListResponse();
 		List<AccontWithDrawsQueryResponse> list = BeanCopyUtil.copyList(ropResponse.getTlstoreaccountwithdraws(),
 				AccontWithDrawsQueryResponse.class);
-		response.addAll(list);
+		if (!CollectionUtils.isEmpty(list)) {
+			response.addAll(list);
+		}
 		return response;
 	}
 

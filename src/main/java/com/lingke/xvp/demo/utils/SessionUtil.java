@@ -6,18 +6,24 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import com.lingke.xvp.demo.XvpConstants;
+import com.lingke.xvp.demo.db.dao.Seller;
 
 public class SessionUtil {
 	public final static String SELLER_LOGIN_ID = "SELLER_LOGIN_ID";
+	public final static String SELLER_LOGIN_PHONE = "SELLER_LOGIN_PHONE";
 	public final static String USER_LOGIN_ID = "USER_LOGIN_ID";
 	public final static String SELLER_STORELOGIN_ID = "SELLER_STORELOGIN_ID";
 	public final static String USER_STORELOGIN_ID = "USER_STORELOGIN_ID";
-	private final static  Logger logger = LoggerFactory.getLogger(SessionUtil.class);
-	public static void sellerLogin(Long value) {
-		logger.info("SessionUtil->sellerLogin 调用开始：{},",value);
-		RequestContextHolder.getRequestAttributes().setAttribute(
-				SELLER_LOGIN_ID, value, RequestAttributes.SCOPE_SESSION);
-		logger.info("SessionUtil->sellerLogin 调用结束：{},",value);
+
+	private final static Logger logger = LoggerFactory.getLogger(SessionUtil.class);
+
+	public static void sellerLogin(Seller seller) {
+		logger.info("SessionUtil->sellerLogin 调用开始：{},", seller.getId());
+		RequestContextHolder.getRequestAttributes().setAttribute(SELLER_LOGIN_ID, seller.getId(),
+				RequestAttributes.SCOPE_SESSION);
+		RequestContextHolder.getRequestAttributes().setAttribute(SELLER_LOGIN_PHONE, seller.getPhone(),
+				RequestAttributes.SCOPE_SESSION);
+		logger.info("SessionUtil->sellerLogin 调用结束：{},", seller.getId());
 	}
 
 	public static boolean checkSellerLogin() {
@@ -30,29 +36,37 @@ public class SessionUtil {
 	public static void sellerLogout() {
 		logger.info("SessionUtil->sellerLogout 调用开始");
 		RequestContextHolder.getRequestAttributes().removeAttribute(SELLER_LOGIN_ID, RequestAttributes.SCOPE_SESSION);
-		RequestContextHolder.getRequestAttributes().removeAttribute(SELLER_STORELOGIN_ID, RequestAttributes.SCOPE_SESSION);
+		RequestContextHolder.getRequestAttributes().removeAttribute(SELLER_LOGIN_PHONE, RequestAttributes.SCOPE_SESSION);
+		RequestContextHolder.getRequestAttributes().removeAttribute(SELLER_STORELOGIN_ID,
+				RequestAttributes.SCOPE_SESSION);
 		logger.info("SessionUtil->sellerLogout 调用结束");
 	}
-	
+
 	public static Long getSellerLoginId() {
 		logger.info("SessionUtil->getSellerLoginId 调用开始");
-		Long sellerLoginId = (Long)RequestContextHolder.getRequestAttributes().getAttribute(
-				SELLER_LOGIN_ID, RequestAttributes.SCOPE_SESSION);
+		Long sellerLoginId = (Long) RequestContextHolder.getRequestAttributes().getAttribute(SELLER_LOGIN_ID,
+				RequestAttributes.SCOPE_SESSION);
 		logger.info("SessionUtil->getSellerLoginId 调用结束");
 		return sellerLoginId;
 	}
-
+	public static String getSellerLoginPhone() {
+		logger.info("SessionUtil->getSellerLoginId 调用开始");
+		String sellerLoginPhone = (String) RequestContextHolder.getRequestAttributes().getAttribute(SELLER_LOGIN_PHONE,
+				RequestAttributes.SCOPE_SESSION);
+		logger.info("SessionUtil->getSellerLoginId 调用结束");
+		return sellerLoginPhone;
+	}
 	public static void sellerSetStoreId(String value) {
 		logger.info("SessionUtil->sellerSetStoreId 调用开始");
-		RequestContextHolder.getRequestAttributes().setAttribute(
-				SELLER_STORELOGIN_ID, value, RequestAttributes.SCOPE_SESSION);
+		RequestContextHolder.getRequestAttributes().setAttribute(SELLER_STORELOGIN_ID, value,
+				RequestAttributes.SCOPE_SESSION);
 		logger.info("SessionUtil->sellerSetStoreId 调用结束");
 	}
 
 	public static String sellerGetStoreId() {
 		logger.info("SessionUtil->sellerGetStoreId 调用开始");
-		Object ob = RequestContextHolder.getRequestAttributes().getAttribute(
-				SELLER_STORELOGIN_ID, RequestAttributes.SCOPE_SESSION);
+		Object ob = RequestContextHolder.getRequestAttributes().getAttribute(SELLER_STORELOGIN_ID,
+				RequestAttributes.SCOPE_SESSION);
 		if (ob == null) {
 			throw new RuntimeException(XvpConstants.ERROR_MESSAGE04);
 		}
@@ -61,25 +75,23 @@ public class SessionUtil {
 	}
 
 	public static void userLogin(String value) {
-		logger.info("SessionUtil->userLogin 调用开始：{}",value);
-		RequestContextHolder.getRequestAttributes().setAttribute(USER_LOGIN_ID,
-				value, RequestAttributes.SCOPE_SESSION);
-		logger.info("SessionUtil->userLogin 调用结束：{}",value);
+		logger.info("SessionUtil->userLogin 调用开始：{}", value);
+		RequestContextHolder.getRequestAttributes().setAttribute(USER_LOGIN_ID, value, RequestAttributes.SCOPE_SESSION);
+		logger.info("SessionUtil->userLogin 调用结束：{}", value);
 	}
 
-	
 	public static boolean checkUserLogin() {
 		logger.info("SessionUtil->checkUserLogin 调用开始");
-		boolean isUserLogin = RequestContextHolder.getRequestAttributes().getAttribute(
-				USER_LOGIN_ID, RequestAttributes.SCOPE_SESSION) != null;
+		boolean isUserLogin = RequestContextHolder.getRequestAttributes().getAttribute(USER_LOGIN_ID,
+				RequestAttributes.SCOPE_SESSION) != null;
 		logger.info("SessionUtil->checkUserLogin 调用结束");
 		return isUserLogin;
 	}
-	
+
 	public static String userGetUserId() {
 		logger.info("SessionUtil->userGetUserId 调用开始");
-		Object ob = RequestContextHolder.getRequestAttributes().getAttribute(
-				USER_LOGIN_ID, RequestAttributes.SCOPE_SESSION);
+		Object ob = RequestContextHolder.getRequestAttributes().getAttribute(USER_LOGIN_ID,
+				RequestAttributes.SCOPE_SESSION);
 		if (ob == null) {
 			throw new RuntimeException(XvpConstants.ERROR_MESSAGE05);
 		}
@@ -88,16 +100,16 @@ public class SessionUtil {
 	}
 
 	public static void userSetStoreId(String value) {
-		logger.info("SessionUtil->userSetStoreId 调用开始：{}",value);
-		RequestContextHolder.getRequestAttributes().setAttribute(
-				USER_STORELOGIN_ID, value, RequestAttributes.SCOPE_SESSION);
-		logger.info("SessionUtil->userSetStoreId 调用结束{}",value);
+		logger.info("SessionUtil->userSetStoreId 调用开始：{}", value);
+		RequestContextHolder.getRequestAttributes().setAttribute(USER_STORELOGIN_ID, value,
+				RequestAttributes.SCOPE_SESSION);
+		logger.info("SessionUtil->userSetStoreId 调用结束{}", value);
 	}
 
 	public static String userGetStoreId() {
 		logger.info("SessionUtil->userGetStoreId 调用开始");
-		Object ob = RequestContextHolder.getRequestAttributes().getAttribute(
-				USER_STORELOGIN_ID, RequestAttributes.SCOPE_SESSION);
+		Object ob = RequestContextHolder.getRequestAttributes().getAttribute(USER_STORELOGIN_ID,
+				RequestAttributes.SCOPE_SESSION);
 		if (ob == null) {
 			throw new RuntimeException(XvpConstants.ERROR_MESSAGE04);
 		}

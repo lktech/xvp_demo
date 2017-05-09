@@ -42,6 +42,18 @@ public class XvpRopClient implements InitializingBean {
 		}
 		return resp;
 	}
+	public <T extends RopResponse> T ropInvokeErrorReturnNull(RopRequest<T> ropRequest)
+			throws ApiException {
+		logger.info("rop 调用开始，method：{},request：{}", ropRequest
+				.getApiMethodName(), ropRequest.getTextParams().toString());
+		T resp = null;
+		resp = ropClient.execute(ropRequest, sessionKey);
+		logger.info("rop 调用结束，response：{}", resp.getBody());
+		if (!resp.isSuccess()) {
+			return null;
+		}
+		return resp;
+	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
