@@ -222,12 +222,14 @@ exports.ajax = function (obj) {
                     //    title: '错误',
                     //    message: '您的账号已被禁用，请联系客服'
                     //});
-                } else if (data.code == "401") {
-                    exports.setUser("");
+                } else if (data.code == "auth_seller_error") {
+                    sessionStorage.userStatus=0;
+                    //exports.setUser("");
                     //Notification.error({
                     //    title: '错误',
                     //    message: '您尚未登录，请登录'
                     //});
+
                 } else {
                     //Notification.error({
                     //    title: '错误',

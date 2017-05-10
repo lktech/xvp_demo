@@ -2,11 +2,14 @@
 exports.routes = [
     {
         path: '/',
-        redirect: '/store/store'
+        redirect: '/store/storeInfo'
     },
     {//登录
         path: '/login',
         name: 'login',
+        meta: {
+            auth: false
+        },
         component: function (resolve) {
             require(['./views/login/login.vue'], resolve);
         }
@@ -14,6 +17,9 @@ exports.routes = [
     {//注册
         path: '/register',
         name: 'register',
+        meta: {
+            auth: false
+        },
         component: function (resolve) {
             require(['./views/login/register.vue'], resolve);
         }
@@ -21,6 +27,9 @@ exports.routes = [
     {//忘记密码
         path: '/forget',
         name: 'forget',
+        meta: {
+            auth: false
+        },
         component: function (resolve) {
             require(['./views/login/forget.vue'], resolve);
         }
@@ -28,6 +37,9 @@ exports.routes = [
     {//店铺
         path: '/store',
         name: 'store',
+        meta: {
+            auth: true
+        },
         component: function (resolve) {
             require(['./views/store/index.vue'], resolve);
         },
@@ -35,6 +47,9 @@ exports.routes = [
             {
                 path: 'addinfo',
                 name: 'addinfo',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/store/addinfo.vue'], resolve);
                 }
@@ -42,6 +57,9 @@ exports.routes = [
             {
                 path: 'storeInfo',
                 name: 'storeInfo',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/store/store.vue'], resolve);
                 }
@@ -49,6 +67,9 @@ exports.routes = [
             {
                 path: 'setting',
                 name: 'setting',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/store/setting.vue'], resolve);
                 }
@@ -58,6 +79,9 @@ exports.routes = [
     {//商品
         path: '/product',
         name: 'product',
+        meta: {
+            auth: true
+        },
         component: function (resolve) {
             require(['./views/product/index.vue'], resolve);
         },
@@ -66,6 +90,9 @@ exports.routes = [
             {
                 path: 'addself',
                 name: 'addself',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/product/addself.vue'], resolve);
                 }
@@ -73,6 +100,9 @@ exports.routes = [
             {
                 path: 'modself',
                 name: 'modself',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/product/modself.vue'], resolve);
                 }
@@ -80,6 +110,9 @@ exports.routes = [
             {
                 path: 'warehouse',
                 name: 'warehouse',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/product/warehouse.vue'], resolve);
                 }
@@ -87,6 +120,9 @@ exports.routes = [
             {
                 path: 'detail',
                 name: 'detail',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/product/detail.vue'], resolve);
                 }
@@ -103,6 +139,9 @@ exports.routes = [
             {
                 path: 'list',
                 name: 'list',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/order/list.vue'], resolve);
                 }
@@ -110,6 +149,9 @@ exports.routes = [
             {
                 path: 'detail',
                 name: 'detail',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/order/detail.vue'], resolve);
                 }
@@ -117,6 +159,9 @@ exports.routes = [
             {
                 path: 'logistics',
                 name: 'logistics',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/order/logistics.vue'], resolve);
                 }
@@ -178,6 +223,9 @@ exports.routes = [
     {//提现
         path: '/tx',
         name: 'tx',
+        meta: {
+            auth: true
+        },
         component: function (resolve) {
             require(['./views/tx/index.vue'], resolve);
         },
@@ -185,6 +233,9 @@ exports.routes = [
             {
                 path: 'cashrecord',
                 name: 'cashrecord',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/tx/cashrecord.vue'], resolve);
                 }
@@ -192,6 +243,9 @@ exports.routes = [
             {
                 path: 'withdrawals',
                 name: 'withdrawals',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/tx/withdrawals.vue'], resolve);
                 }
@@ -199,6 +253,9 @@ exports.routes = [
             {//我的店铺
                 path: 'myStore',
                 name: 'myStore',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/tx/myStore.vue'], resolve);
                 }
@@ -206,6 +263,9 @@ exports.routes = [
             {//我的余额
                 path: 'balance',
                 name: 'balance',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/tx/balance.vue'], resolve);
                 }
@@ -213,6 +273,9 @@ exports.routes = [
             {//提现绑定
                 path: 'txBind',
                 name: 'txBind',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/tx/txBind.vue'], resolve);
                 }
@@ -220,6 +283,9 @@ exports.routes = [
             {//实名认证
                 path: 'verifyInfo',
                 name: 'verifyInfo',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/tx/verifyInfo.vue'], resolve);
                 }
@@ -227,6 +293,9 @@ exports.routes = [
             {//提现绑卡
                 path: 'bindCard',
                 name: 'bindCard',
+                meta: {
+                    auth: true
+                },
                 component: function (resolve) {
                     require(['./views/tx/bindCard.vue'], resolve);
                 }

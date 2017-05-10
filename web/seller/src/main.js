@@ -38,13 +38,18 @@ const router = new VueRouter({
         if (savedPosition) {
             return savedPosition;
         } else {
-            return {x: 0,y: 0 };
+            return {x: 0, y: 0};
         }
     }
 });
 
-const history = window.sessionStorage
-history.clear()
+const history = window.sessionStorage;
+let userStatus = history.userStatus;
+let mobile = sessionStorage.mobile;
+
+history.clear();
+history.userStatus = userStatus;
+sessionStorage.mobile = mobile;
 let historyCount = history.getItem('count') * 1 || 0
 history.setItem('/', 0)
 
@@ -65,55 +70,67 @@ router.beforeEach((to, from, next) => {
         to.path !== '/' && history.setItem(to.path, historyCount)
         store.commit('UPDATE_DIRECTION', 'forward')
     }
-    document.setTitle = function(t) {
-      document.title = t;
-      var i = document.createElement('iframe');
-      i.src = '//m.baidu.com/favicon.ico';
-      i.style.display = 'none';
-      i.onload = function() {
-        setTimeout(function(){
-          i.remove();
-        }, 9)
-      }
-      document.body.appendChild(i);
+    document.setTitle = function (t) {
+        document.title = t;
+        var i = document.createElement('iframe');
+        i.src = '//m.baidu.com/favicon.ico';
+        i.style.display = 'none';
+        i.onload = function () {
+            setTimeout(function () {
+                i.remove();
+            }, 9)
+        }
+        document.body.appendChild(i);
     }
-    if(to.path == "/login"){
+    if (to.path == "/login") {
         document.setTitle('会员登录');
     }
-    if(to.path == "/forget"){
+    if (to.path == "/forget") {
         document.setTitle('忘记密码');
     }
-    if(to.path == "/register"){
+    if (to.path == "/register") {
         document.setTitle('商家注册');
     }
-    if(to.path == "/order/detail"){
+    if (to.path == "/order/detail") {
         document.setTitle('订单详情');
     }
-    if(to.path == "/order/list"){
+    if (to.path == "/order/list") {
         document.setTitle('我的订单');
     }
-    if(to.path == "/product/addself"){
+    if (to.path == "/product/addself") {
         document.setTitle('添加自营商品');
     }
-    if(to.path == "/product/detail"){
+    if (to.path == "/product/detail") {
         document.setTitle('商品详情');
     }
-    if(to.path == "/product/modself"){
+    if (to.path == "/product/modself") {
         document.setTitle('编辑自营商品');
     }
-    if(to.path == "/store/addinfo"){
+    if (to.path == "/store/addinfo") {
         document.setTitle('填写店铺信息');
     }
-    if(to.path == "/store/setting"){
+    if (to.path == "/store/setting") {
         document.setTitle('店铺设置');
     }
-    if(to.path == "/product/warehouse"){
+    if (to.path == "/product/warehouse") {
         document.setTitle('我的仓库');
     }
-    setTimeout(next,50);
+    console.log(sessionStorage.userStatus)
+    if (to.meta.auth) {
+        if (sessionStorage.userStatus == 1) {
+            next();
+        } else {
+            let redirect = encodeURIComponent(to.path);
+            next("/login?redirect=" + redirect);
+        }
+    }
+    else {
+        setTimeout(next, 50);
+    }
+
 });
 router.afterEach(route => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     utils.loadingHide();
 });
 
