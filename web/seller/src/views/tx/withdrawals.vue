@@ -168,10 +168,10 @@
                 that.statusCtrl(that.maxvalue/100, that);
             },
             btnClick(){
-                if (this.cash_text == '查看提现记录') {
-                    utils.go({name: 'cashrecord', query: {}}, this.$router); // 回到余额
+                if (this.cash_text == '查看提现记录') {   
+                    utils.go({path: '/tx/cashrecord', query: {}}, this.$router); // 回到提现记录   成功
                 } else {
-                    utils.go({name: 'balance', query: {}}, this.$router);   // 回到余额
+                    utils.go({path: '/tx/balance', query: {}}, this.$router);   // 回到余额   失败
                 }
 
             },

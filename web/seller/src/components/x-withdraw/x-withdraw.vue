@@ -60,7 +60,6 @@
             this.$emit('on-input', value, status);
             return false;
           } else if(this.maxvalue){
-          	console.log(111)
           	if(value - 0 < this.minvalue) {
 	            this.tips = this.words.min || '输入值不能低于最小值';
 	            status = 'fail';
