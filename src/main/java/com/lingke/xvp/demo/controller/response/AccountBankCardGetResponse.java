@@ -59,6 +59,8 @@ public class AccountBankCardGetResponse implements XvpResponse {
 	 * 企业营业执照
 	 */
 	private String buslince;
+	private String bank_province_name;
+	private String bank_city_name;
 
 	public Long getId() {
 		return id;
@@ -164,6 +166,22 @@ public class AccountBankCardGetResponse implements XvpResponse {
 		this.buslince = buslince;
 	}
 
+	public String getBank_province_name() {
+		return bank_province_name;
+	}
+
+	public void setBank_province_name(String bank_province_name) {
+		this.bank_province_name = bank_province_name;
+	}
+
+	public String getBank_city_name() {
+		return bank_city_name;
+	}
+
+	public void setBank_city_name(String bank_city_name) {
+		this.bank_city_name = bank_city_name;
+	}
+
 	@Override
 	public String toString() {
 		return "AccountBankCardGetResponse [id=" + id + ", store_id=" + store_id + ", user_name=" + user_name
@@ -171,7 +189,8 @@ public class AccountBankCardGetResponse implements XvpResponse {
 				+ ", bank_branch_code=" + bank_branch_code + ", bank_branch_name=" + bank_branch_name
 				+ ", bank_province_code=" + bank_province_code + ", bank_city_code=" + bank_city_code
 				+ ", card_auth_status=" + card_auth_status + ", company_name=" + company_name + ", buslince=" + buslince
-				+ "]";
+				+ ", bank_province_name=" + bank_province_name + ", bank_city_name=" + bank_city_name + "]";
 	}
+
 
 }

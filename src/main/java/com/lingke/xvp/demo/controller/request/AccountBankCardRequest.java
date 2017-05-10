@@ -57,7 +57,8 @@ public class AccountBankCardRequest implements XvpRequest {
 	 * 验证码
 	 */
 	private String verfiy_code;
-
+	private String bank_province_name;
+	private String bank_city_name;
 	/**
 	 * 企业营业执照
 	 */
@@ -175,6 +176,22 @@ public class AccountBankCardRequest implements XvpRequest {
 		this.verfiy_code = verfiy_code;
 	}
 
+	public String getBank_province_name() {
+		return bank_province_name;
+	}
+
+	public void setBank_province_name(String bank_province_name) {
+		this.bank_province_name = bank_province_name;
+	}
+
+	public String getBank_city_name() {
+		return bank_city_name;
+	}
+
+	public void setBank_city_name(String bank_city_name) {
+		this.bank_city_name = bank_city_name;
+	}
+
 	@Override
 	public String toString() {
 		return "AccountBankCardRequest [user_name=" + user_name + ", certificate_number=" + certificate_number
@@ -182,7 +199,9 @@ public class AccountBankCardRequest implements XvpRequest {
 				+ ", bank_branch_code=" + bank_branch_code + ", bank_branch_name=" + bank_branch_name
 				+ ", bank_province_code=" + bank_province_code + ", bank_city_code=" + bank_city_code
 				+ ", company_name=" + company_name + ", phone=" + phone + ", sn=" + sn + ", verfiy_code=" + verfiy_code
-				+ ", buslince=" + buslince + "]";
+				+ ", bank_province_name=" + bank_province_name + ", bank_city_name=" + bank_city_name + ", buslince="
+				+ buslince + "]";
 	}
+
 
 }
