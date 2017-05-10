@@ -23,8 +23,8 @@
             </c-cell>
         </c-cell-wrap>
         <c-cell-wrap>
-            <c-cell title="提现手续费" :value="counter*100|formatPrice"></c-cell>
-            <c-cell title="实际提现金额" :value='money*100|formatPrice'></c-cell>
+            <c-cell title="提现手续费" :value="counter"></c-cell>
+            <c-cell title="实际提现金额" :value='money'></c-cell>
             <c-cell title="提现审核周期" value='1-2个工作日'></c-cell>
         </c-cell-wrap>
         <div class="wrap">
@@ -65,13 +65,15 @@
     export default {
         data (){
             return {
-                color: 'default',                       //确定提现按钮颜色
-                disabled: true,                       //确定提现是否禁用
-                bank_code: '',                           //银行卡
-                counter: 3,                           //提现手续费
-                money: 0,                           //实际提现金额
-                input_money: null,                              //输入的金额
-                maxvalue: 100000,                                 //最大提现金额
+                color: 'default',                        // 确定提现按钮颜色
+                disabled: true,                       	 // 确定提现是否禁用
+                bank_code: '',                           // 银行卡
+                data_counter: 3,                         // 提现手续费
+                data_money: 0,                           // 实际提现金额
+                counter:'3.00元',                        // 页面展示的 提现手续费
+                money:'0.00元',                          // 页面展示的 实际提现金额
+                input_money: null,                      // 输入的金额
+                maxvalue: 100000,                       // 最大提现金额
                 cash_result: false,
                 cash_text: '查看提现记录',
                 cash_title: '提现成功',
@@ -124,18 +126,16 @@
         methods: {
             cancel(){
                 //取消按钮
-                utils.go({name: 'balance', query: {}}, this.$router);   //回到余额
+                utils.go({path: '/tx/balance', query: {}}, this.$router);   //回到余额
             },
             tocash(that){
-                console.log('that.money', that.money);
-                console.log('commission', that.counter);
                 utils.ajax({
                     url: "/seller/account/withDrawals",
                     dataType: 'json',
                     type: 'POST',
                     data: {
-                        'amount': that.money,    //实际提现金额
-                        'commission': that.counter,        // 手续费
+                        'amount': that.data_money*100,    //    实际提现金额
+                        'commission': that.data_counter*100,        // 手续费
                     },
                     success: function (data) {
                         that.cash_result = true;
@@ -182,13 +182,19 @@
             statusCtrl(v, that){   // 状态变化
                 that.input_money = v;
                 that.disabled = false;
-                if(that.input_money>0){
+                if(that.input_money > 0){
                 	that.color = 'primary';
-                	that.money = (that.input_money - that.input_money * 0.006 - 3).toFixed(2);
+                	//向后台提交的实际提现金额
+                	that.data_money = that.input_money - that.input_money * 0.006 - 3; 
+                	that.money  = that.data_money.toFixed(2) + '元';   // 页面展示的实际提现金额
 	                if (that.input_money > 100) {
-	                    that.counter = 3 + that.input_money * 0.006;
+	                	//后台提交的提现手续费
+	                    that.data_counter = 3 + that.input_money * 0.006;  
+	                    //页面展示的提现手续费
+	                    that.counter  = utils.formatPrice(that.data_counter*100) + '元';
 	                } else {
-	                    that.counter = 3;
+	                    that.data_counter = 3;
+	                    that.counter  = utils.formatPrice(that.data_counter*100) + '元';
 	                }
                 }else{
                 	that.color = 'default';
@@ -213,5 +219,11 @@
         }
     }
 </script>
+<style lang="less" scoped>
+	.popup1 .weui_btn_primary:active {
+	    background-color: #5ABA5A !important;
+	    color: #fff !important;
+	}
+</style>
 
 
