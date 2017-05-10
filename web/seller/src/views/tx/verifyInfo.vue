@@ -76,13 +76,13 @@
                 if (that.typeName == "个人") {
                     utils.ajax({
                         url: "/seller/account/createPerson",
-                        data: {user_name: that.trueName, certificate_type: "身份证", certificate_number: that.idCode},
+                        data: {user_name: that.trueName, certificate_type: 0, certificate_number: that.idCode},
                         success: function (res) {
                             if (res.code == "SUCCESS") {
                                 that.$vux.alert.show({
                                     content: '实名认证成功',
                                     onHide () {
-                                        utils.go("/tx/balance?money="+that.$route.query.money, that.$router);
+                                        utils.go("/tx/balance", that.$router);
                                     }
                                 })
                             } else {
@@ -103,7 +103,7 @@
                                 that.$vux.alert.show({
                                     content: '实名认证成功',
                                     onHide () {
-                                        utils.go("/tx/balance?money="+that.$route.query.money, that.$router);
+                                        utils.go("/tx/balance", that.$router);
                                     }
                                 })
                             } else {

@@ -1,10 +1,11 @@
 <template>
     <div class="balance">
         <c-top-back></c-top-back>
-        <r-messages :src="src" msg="我的账户余额" :money="money" class="account" fivetext="提现预计24小时后到账">
+        <r-messages :src="src" msg="我的账户余额" :money="money" class="account" :fivetext="fivetext">
             <div slot="list" class="slot">
                 <r-group>
-                    <r-cell title="提现账号" :value="txtStatus" :is-link="islink" :link="link"></r-cell>
+                    <r-cell title="提现账号" :value="txtStatus" :is-link="islink" :link="link"
+                            :class="{flag:isShow}"></r-cell>
                     <r-cell title="提现记录" link="/tx/cashrecord" is-link></r-cell>
                 </r-group>
             </div>
@@ -26,14 +27,29 @@
                 btnDisabled: true,
                 txtStatus: "",
                 islink: true,
-                link: "/tx/verifyInfo?money=" + this.$route.query.money,
+                link: "/tx/verifyInfo",
                 accountInfo: {},
+                isShow: false,
+                fivetext: "提现预计24小时后到账",
+                bindCard: false,//是否绑卡成功
+                rzStatus: "",
             }
         },
         mounted: function () {
             this.$nextTick(function () {
                 let that = this;
-                that.money = that.$route.query.money;
+                //可提现金额
+                utils.ajax({
+                    url: "/seller/account/getAccountAmount",
+                    success: function (res) {
+                        if (res.code == "SUCCESS") {
+                            let json = res.result;
+                            that.money = utils.formatPrice(json.withdrawals_amount);
+                        } else {
+                            that.$vux.alert.show(res.message);
+                        }
+                    }
+                })
                 //认证信息
                 utils.ajax({
                     url: "/seller/account/get",
@@ -45,6 +61,35 @@
                                 that.btnDisabled = false;
                                 that.link = "";
                                 that.accountInfo = res.result;
+                                utils.ajax({
+                                    url: "/seller/account/getStoreBankCard",
+                                    success: function (response) {
+                                        if (response.code == "SUCCESS") {
+                                            that.isShow = true;
+                                            that.txtStatus = response.result.card_no;
+                                            that.bindCard = true;//绑卡成功
+                                            if (res.result.account_type == 1) {
+                                                response.result.card_auth_status = "RZSB";
+                                                switch (response.result.card_auth_status) {
+                                                    case "WRZ":
+                                                        that.fivetext = "银行账户认证待审核，需要等待1个工作日！";
+                                                        that.btnDisabled = true;
+                                                        break;
+                                                    case "RZCG":
+                                                        that.fivetext = "提现预计24小时后到账";
+                                                        break;
+                                                    case "RZSB":
+                                                        that.fivetext = "银行账户认证失败，请重新编辑提现账号！";
+                                                        that.rzStatus = "rzsb";
+                                                        that.bindCard = false;
+                                                        break;
+                                                }
+                                            }
+                                        } else {
+                                            //
+                                        }
+                                    }
+                                });
                             } else {
                                 that.txtStatus = "未实名验证";
                             }
@@ -57,13 +102,19 @@
         },
         methods: {
             btnClick(){
-                if (this.accountInfo.account_type == 0) {
-                    //个人
-                    utils.go("/tx/bindCard?type=1", this.$router);
+                if (this.bindCard) {
+                    utils.go("/tx/withdrawals", this.$router);
                 } else {
-                    //企业
-                    utils.go("/tx/bindCard?type=2", this.$router);
+                    if (this.accountInfo.account_type == 0) {
+                        //个人
+                        utils.go("/tx/bindCard?type=1", this.$router);
+                    } else {
+                        //企业
+                        utils.go("/tx/bindCard?type=2&rzStatus=" + this.rzStatus, this.$router);
+                    }
                 }
+
+
             }
         },
         components: {

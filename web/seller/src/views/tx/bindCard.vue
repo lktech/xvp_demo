@@ -21,12 +21,15 @@
         <div class="btn">
             <r-button type="primary" text="下一步" @click.native="btnClick" :disabled="btnDisabled"></r-button>
         </div>
+        <!--银行-->
+        <r-address-checked :defaultStatus="cardBankCode"
+                           v-model="showBank"
+                           :address="bankList"
+                           @get-addressid="getBank"
+                           @address-add="showBank=false" btn-txt="取消" title="提现银行"></r-address-checked>
+        <!--支行-->
         <r-address-checked
-                v-model="showBank"
-                :address="bankList"
-                @get-addressid="getBank"
-                @address-add="showBank=false" btn-txt="取消" title="提现银行"></r-address-checked>
-        <r-address-checked
+                :defaultStatus="openingBankCode"
                 v-model="showSubBank"
                 :address="subBankList"
                 @get-addressid="getSubBank"
@@ -117,12 +120,14 @@
             return {
                 type: this.$route.query.type,
                 provinceName: "",//省
+                provinceCode: "",//省编码
                 cityName: "",//城市
                 cityCode: "",//城市编码
                 cardBank: "",//银行
                 cardBankCode: "",//银行编码
                 cardAddress: "",
-                openingBank: "",
+                openingBank: "",//支行
+                openingBankCode: "",//支行编码
                 cardNumber: "",
                 trueName: "",
                 idCode: "",
@@ -153,6 +158,8 @@
                 btnDisabledBind: true,
                 radioValue: "",
                 agreement: false,
+                sn: "",
+
             }
         },
         computed: {
@@ -195,6 +202,54 @@
                         }
                     }
                 });
+
+                //信息回显
+                if (this.$route.query.rzStatus == "rzsb") {
+                    utils.ajax({
+                        url: "/seller/account/getStoreBankCard",
+                        success: function (res) {
+                            if (res.code == "SUCCESS") {
+                                let json = res.result;
+
+                                that.cardBank = json.bank_name;
+                                that.cardBankCode = json.bank_code;
+                                json.bank_province_name = "北京市";
+                                that.provinceName = json.bank_province_name;
+                                that.provinceCode = json.bank_province_code;
+                                that.provinceValue = {id: that.provinceCode, name: that.provinceName};
+                                console.log(that.provinceValue)
+                                json.bank_city_name = "北京";
+                                that.cityName = json.bank_city_name;
+                                that.cityCode = json.bank_city_code;
+
+                                that.openingBank = json.bank_branch_name;
+                                that.openingBankCode = json.bank_branch_code;
+
+                                that.cardNumber = "";//银行卡号置空
+                                that.companyName = json.company_name;
+                                that.license = json.buslince;
+
+                                //渲染支行
+                                utils.ajax({
+                                    url: "/seller/account/getBankInfo",
+                                    data: {citycode: that.cityCode, bankcode: that.cardBankCode},
+                                    success: function (res) {
+                                        if (res.code == "SUCCESS") {
+                                            that.subBankList = [];
+                                            res.result.forEach(function (obj, i) {
+                                                that.subBankList.push({id: obj.bankcode, trueName: obj.bankname});
+                                            });
+                                        } else {
+                                            that.$vux.alert.show(res.message);
+                                        }
+                                    }
+                                })
+                            } else {
+                                that.$vux.alert.show(res.message);
+                            }
+                        }
+                    });
+                }
             })
         },
         methods: {
@@ -202,7 +257,15 @@
             cardBankClick(){
                 this.showBank = true;
             },
-            //开户行
+            //卡所在地
+            cityCodeClick(){
+                if (this.cardBank) {
+                    this.showProvince = true;
+                } else {
+                    this.$vux.alert.show("请选择发卡银行");
+                }
+            },
+            //支行点击
             openingBankClick(){
                 if (this.cityName) {
                     this.showSubBank = true;
@@ -216,9 +279,18 @@
                 this.cardBankCode = id;
                 this.cardBank = obj.trueName;
                 this.showBank = false;
+
+                //重置所在地和支行
+                this.provinceName = "";
+                this.provinceCode = "";
+                this.cityName = "";
+                this.cityCode = "";
+                this.openingBank = "";//支行
+                this.openingBankCode = "";//支行编码
             },
             //支行点击
             getSubBank(id, obj){
+                this.openingBankCode = id;
                 this.openingBank = obj.trueName;
                 this.showSubBank = false;
             },
@@ -242,39 +314,13 @@
             btnClick(){
                 let that = this;
                 that.showTxBind = true;
-                return false;
-                let param = {
-                    "user_name": "张三",
-                    "certificate_number": "220102198706019690",
-                    "card_no": "1234567890123456789",
-                    "bank_code": "123456789",
-                    "bank_name": "招商银行",
-                    "bank_branch_code": "1234567890",
-                    "bank_branch_name": "招商银行望京支行",
-                    "bank_province_code": "110000",
-                    "bank_city_code": "110100",
-                    "company_name": "融数金服",
-                    "buslince": "110105019962316",
-                    "phone": "15148236954",
-                    "sn": "11wewsfddasf",
-                    "verfiy_code": "123456",
-                };
-                utils.ajax({
-                    url: "/seller/account/addStoreBankCard",
-                    data: {},
-                    success: function (res) {
-                        if (res.code == "SUCCESS") {
-
-                        } else {
-                            that.$vux.alert.show(res.message);
-                        }
-                    }
-                })
             },
             //省选择
             changeProvince (obj) {
+                console.log(obj)
                 let that = this;
                 that.provinceName = obj.name;
+                that.provinceCode = obj.id;
 
                 //渲染市
                 utils.ajax({
@@ -317,14 +363,7 @@
                     }
                 })
             },
-            //卡所在地
-            cityCodeClick(){
-                if (this.cardBank) {
-                    this.showProvince = true;
-                } else {
-                    this.$vux.alert.show("请选择发卡银行");
-                }
-            },
+
             //提现绑定
             checkTxBind(){
                 if (this.yzm.length == 6 && this.radioValue == 1) {
@@ -339,9 +378,10 @@
                 that.sendYzmBtn = true;
                 utils.ajax({
                     url: "/seller/seller/verify",
-                    data:{phone:that.mobile},
+                    data: {phone: that.mobile},
                     success: function (res) {
                         if (res.code == "SUCCESS") {
+                            that.sn = res.result.sn;
                             that.txt = "已发送(" + second + ")秒";
                             var timer = setInterval(function () {
                                 if (second > 1) {
@@ -363,19 +403,38 @@
             },
             bindBtnClick(){
                 let that = this;
+                let param = {
+                    "user_name": that.trueName,
+                    "certificate_number": that.idCode,
+                    "card_no": that.cardNumber,
+                    "bank_code": that.cardBankCode,
+                    "bank_name": that.cardBank,
+                    "bank_branch_code": that.openingBankCode,
+                    "bank_branch_name": that.openingBank,
+                    "bank_province_code": that.provinceCode,
+                    "bank_city_code": that.cityCode,
+                    "company_name": that.companyName,
+                    "buslince": that.license,
+                    "phone": that.mobile,
+                    "sn": that.sn,
+                    "verfiy_code": that.yzm,
+                    bank_province_name: that.provinceName,
+                    bank_city_name: that.cityName
+                };
                 utils.ajax({
-                    url: "/1",
+                    url: "/seller/account/addStoreBankCard",
+                    data: param,
                     success: function (res) {
                         if (res.code == "SUCCESS") {
                             that.$vux.toast.show('提交成功');
                             setTimeout(function () {
-                                //
+                                utils.go("/tx/balance", that.$router);
                             }, 2000)
                         } else {
                             that.$vux.alert.show(res.message);
                         }
                     }
-                });
+                })
             },
             //支付协议
             agreementClick(){

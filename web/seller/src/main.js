@@ -115,7 +115,7 @@ router.beforeEach((to, from, next) => {
     if (to.path == "/product/warehouse") {
         document.setTitle('我的仓库');
     }
-    console.log(sessionStorage.userStatus)
+
     if (to.meta.auth) {
         if (sessionStorage.userStatus == 1) {
             next();

@@ -111,7 +111,7 @@
                 });
             },
             goClick(){
-                utils.go("/tx/balance?money="+this.item.money, this.$router);
+                utils.go("/tx/balance", this.$router);
             },
             clickLink(obj){
                 utils.go(obj.link, this.$router);
