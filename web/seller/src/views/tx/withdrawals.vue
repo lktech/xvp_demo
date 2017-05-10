@@ -73,7 +73,7 @@
                 counter:'3.00元',                        // 页面展示的 提现手续费
                 money:'0.00元',                          // 页面展示的 实际提现金额
                 input_money: null,                      // 输入的金额
-                maxvalue: 0,                       // 最大提现金额
+                maxvalue: 0,                            // 最大提现金额
                 cash_result: false,
                 cash_text: '查看提现记录',
                 cash_title: '提现成功',
@@ -95,9 +95,7 @@
                     url: "/seller/account/getStoreBankCard",   //绑卡信息
                     dataType: 'json',
                     type: 'POST',
-                    data: {
-//                      'userId': this.$route.query.id
-                    },
+                    data: {},
                     success: function (data) {
                         if (data.code == 'SUCCESS') {
                             that.bank_code = data.result.card_no;
@@ -110,9 +108,7 @@
                     url: "/seller/account/getAccountAmount",   //账户金额
                     dataType: 'json',
                     type: 'POST',
-                    data: {
-//                      'userId': this.$route.query.id
-                    },
+                    data: {},
                     success: function (data) {
                         if (data.code == 'SUCCESS') {
                             that.maxvalue = data.result.withdrawals_amount;
