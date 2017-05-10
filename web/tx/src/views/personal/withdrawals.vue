@@ -81,8 +81,6 @@
                 utils.go({name:'balance',query:{}},this.$router);   //回到余额
             },
             tocash(that){
-            	console.log('that.money',that.money);
-            	console.log('commission',that.counter);
               	utils.ajax({
 	                url: basepath + "/seller/account/withDrawals",
 	                dataType: 'json',

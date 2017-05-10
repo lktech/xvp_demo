@@ -125,7 +125,6 @@
             if(obj.name.indexOf('Yprice')!=-1){
               var i=obj.name.split('_')[1];
               this.status.specifica_list_status[i].price=obj.valid;
-              console.log(this.status.specifica_list_status)
             }
             if(obj.name.indexOf('Ystock')!=-1){
               var i=obj.name.split('_')[1];
@@ -133,7 +132,6 @@
             }
             if(obj.name.indexOf('Yvalue')!=-1){
               var i=obj.name.split('_')[1];
-              console.log(obj.valid)
               this.status.specifica_list_status[i].value=obj.valid;
             }
             this.judge();

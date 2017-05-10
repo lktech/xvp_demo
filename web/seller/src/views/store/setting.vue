@@ -130,7 +130,6 @@
                             that.res.formData.name=data.result.store_name;
                             if(data.result.logo){
                                 that.res.formData.logo = data.result.logo; //店铺名称
-                                console.log(that.res.formData.logo);
                             }
                             that.res.formData.phone=data.result.customer_service_phone;
                             that.res.formData.QQ=data.result.qq;
