@@ -134,8 +134,8 @@
                     dataType: 'json',
                     type: 'POST',
                     data: {
-                        'amount': that.data_money*100,    //    实际提现金额
-                        'commission': that.data_counter*100,        // 手续费
+                        'amount': that.data_money*100,              //    实际提现金额
+                        'commission': that.data_counter*100,        //    手续费
                     },
                     success: function (data) {
                         that.cash_result = true;
@@ -173,7 +173,7 @@
             },
             btnClick(){
                 if (this.cash_text == '查看提现记录') {
-                    utils.go({name: 'cashrecord', query: {}}, this.$router);   // 回到余额
+                    utils.go({name: 'cashrecord', query: {}}, this.$router); // 回到余额
                 } else {
                     utils.go({name: 'balance', query: {}}, this.$router);   // 回到余额
                 }
@@ -184,13 +184,14 @@
                 that.disabled = false;
                 if(that.input_money > 0){
                 	that.color = 'primary';
-                	//向后台提交的实际提现金额
+                	// 向后台提交的实际提现金额
                 	that.data_money = that.input_money - that.input_money * 0.006 - 3; 
-                	that.money  = that.data_money.toFixed(2) + '元';   // 页面展示的实际提现金额
+                	// 页面展示的实际提现金额
+                	that.money  = that.data_money.toFixed(2) + '元';   
 	                if (that.input_money > 100) {
-	                	//后台提交的提现手续费
+	                // 后台提交的提现手续费
 	                    that.data_counter = 3 + that.input_money * 0.006;  
-	                    //页面展示的提现手续费
+	                // 页面展示的提现手续费
 	                    that.counter  = utils.formatPrice(that.data_counter*100) + '元';
 	                } else {
 	                    that.data_counter = 3;
