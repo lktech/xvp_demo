@@ -171,6 +171,6 @@
 </script>
 <style>
     .tabbar-wrap2 .vux-popup-picker-value{
-        white-space: nowrap; width:210px; overflow: hidden; display: block;
+         display: block;
     }
 </style>

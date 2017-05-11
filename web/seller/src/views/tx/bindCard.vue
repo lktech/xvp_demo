@@ -330,6 +330,9 @@
                 let that = this;
                 that.provinceName = obj.name;
                 that.provinceCode = obj.id;
+                if (this.$route.query.rzStatus == "") {
+                    this.proStatus = 2;
+                }
                 if (this.proStatus > 1) {
                     //渲染市
                     utils.ajax({
