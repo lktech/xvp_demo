@@ -6,7 +6,8 @@
                 <p>{{one.name | getValue}}</p>
             </div>
             <div class="weui_cell_ft">
-                <input type="radio" class="weui_check" v-model="currentValue" :id="`radio_${uuid}_${index}`"
+                <input type="radio" class="weui_check" v-model="currentValue" @click="radioChange(one)"
+                       :id="`radio_${uuid}_${index}`"
                        :value="one">
                 <span class="weui_icon_checked"></span>
             </div>
@@ -40,6 +41,7 @@
                 required: true
             },
             value: "",
+            defaultValue: "",
             fillMode: {
                 type: Boolean,
                 default: false
@@ -54,13 +56,18 @@
             }
         },
         mounted () {
-            this.handleChangeEvent = true
+            this.handleChangeEvent = true;
         },
         methods: {
             getKey,
             onFocus () {
                 this.currentValue = this.fillValue || ''
                 this.isFocus = true
+            },
+            radioChange(obj){
+                if (obj.id == this.currentValue.id) {
+                    this.$emit('on-change', obj);
+                }
             }
         },
         watch: {
@@ -69,20 +76,23 @@
                 if (newVal !== '' && isOption) {
                     this.fillValue = ''
                 }
-                this.$emit('on-change', newVal)
-                this.$emit('input', newVal)
+                this.$emit('on-change', newVal);
+                this.$emit('input', newVal);
             },
             fillValue (newVal) {
                 if (this.fillMode && this.isFocus) {
                     this.currentValue = newVal
                 }
+            },
+            defaultValue(newVal, oldVal){
+                this.currentValue = newVal;
             }
         },
         data () {
             return {
                 fillValue: '',
                 isFocus: false,
-                currentValue: this.value
+                currentValue: this.defaultValue
             }
         }
     }

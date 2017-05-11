@@ -40,7 +40,8 @@
                 <h3>请选择省 <a href="javascript:;" class="close" @click="showProvince=false">关闭</a></h3>
                 <div class="areaContent" :style="{maxHeight:maxH,overflow: 'auto'}">
                     <r-group>
-                        <r-radio :options="province" v-model="provinceValue" @on-change="changeProvince"></r-radio>
+                        <r-radio :options="province" v-model="provinceValue" :defaultValue="defaultProvince"
+                                 @on-change="changeProvince"></r-radio>
                     </r-group>
                 </div>
             </div>
@@ -48,10 +49,11 @@
         <!--市-->
         <r-popup v-model="showCity" :hide-on-blur="false">
             <div class="popupArea">
-                <h3>请选择市</h3>
+                <h3>请选择市<a href="javascript:;" class="close" @click="showCity=false">关闭</a></h3>
                 <div class="areaContent" :style="{maxHeight:maxH,overflow: 'auto'}">
                     <r-group>
-                        <r-radio :options="city" v-model="cityValue" @on-change="changeCity"></r-radio>
+                        <r-radio :options="city" v-model="cityValue" :defaultValue="defaultCity"
+                                 @on-change="changeCity"></r-radio>
                     </r-group>
                 </div>
             </div>
@@ -144,10 +146,13 @@
                 //省市
                 showProvince: false,
                 province: [],//省列表
-                provinceValue: {},//默认选中省
+                provinceValue: {},//选中的省
+                defaultProvince: {},//默认省
                 showCity: false,
                 city: [],//市列表
-                cityValue: {},//默认选择市
+                cityValue: {},//选中的市
+                defaultCity: {},//默认市
+                proStatus: 0,
 
                 //提现绑定
                 mobile: sessionStorage.mobile,
@@ -173,6 +178,8 @@
         mounted: function () {
             this.$nextTick(function () {
                 let that = this;
+
+
                 //银行列表
                 utils.ajax({
                     url: "/seller/account/getBankInfo",
@@ -213,14 +220,16 @@
 
                                 that.cardBank = json.bank_name;
                                 that.cardBankCode = json.bank_code;
-                                json.bank_province_name = "北京市";
+                                //json.bank_province_name = "北京市";
                                 that.provinceName = json.bank_province_name;
                                 that.provinceCode = json.bank_province_code;
-                                that.provinceValue = {id: that.provinceCode, name: that.provinceName};
-                                console.log(that.provinceValue)
-                                json.bank_city_name = "北京";
+                                that.defaultProvince = {id: that.provinceCode, name: that.provinceName};
+
+
+                                //json.bank_city_name = "北京市";
                                 that.cityName = json.bank_city_name;
                                 that.cityCode = json.bank_city_code;
+                                that.defaultCity = {id: that.cityCode, name: that.cityName};
 
                                 that.openingBank = json.bank_branch_name;
                                 that.openingBankCode = json.bank_branch_code;
@@ -317,28 +326,29 @@
             },
             //省选择
             changeProvince (obj) {
-                console.log(obj)
+                this.proStatus++;
                 let that = this;
                 that.provinceName = obj.name;
                 that.provinceCode = obj.id;
-
-                //渲染市
-                utils.ajax({
-                    url: "/seller/account/getBankCity",
-                    data: {citycode: obj.id},
-                    success: function (res) {
-                        if (res.code == "SUCCESS") {
-                            that.city = [];
-                            res.result.forEach(function (obj, i) {
-                                that.city.push({id: obj.code, name: obj.name});
-                            });
-                            that.showProvince = false;
-                            that.showCity = true;
-                        } else {
-                            that.$vux.alert.show(res.message);
+                if (this.proStatus > 1) {
+                    //渲染市
+                    utils.ajax({
+                        url: "/seller/account/getBankCity",
+                        data: {citycode: obj.id},
+                        success: function (res) {
+                            if (res.code == "SUCCESS") {
+                                that.city = [];
+                                res.result.forEach(function (obj, i) {
+                                    that.city.push({id: obj.code, name: obj.name});
+                                });
+                                that.showProvince = false;
+                                that.showCity = true;
+                            } else {
+                                that.$vux.alert.show(res.message);
+                            }
                         }
-                    }
-                })
+                    })
+                }
             },
             //市选择
             changeCity(obj){
