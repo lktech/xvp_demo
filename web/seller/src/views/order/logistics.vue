@@ -81,7 +81,7 @@
                 if(!this.disabled){
                     let that = this;
                     utils.ajax({
-                        url: basepath + "/seller/order/delivery",
+                        url:"/seller/order/delivery",
                         dataType: 'json',
                         type: 'POST',
                         data: {

@@ -23,7 +23,7 @@
             
             let that = this;
             utils.ajax({
-                url: basepath + "/mall/invoice_category/list",
+                url: "/mall/invoice_category/list",
                 dataType: 'json',
                 type: 'POST',
                 success: function(data){

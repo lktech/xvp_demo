@@ -224,7 +224,7 @@
               
               let that=this;
               utils.ajax({
-                  url: basepath + "/seller/product/add",
+                  url:"/seller/product/add",
                   dataType: 'json',
                   type: 'POST',
                   data:hold_obj,

@@ -175,7 +175,7 @@
                 if(this.discount*100<((this.discount1*100)+(this.json.pay*1))){
                     let that = this;
                     utils.ajax({
-                        url: basepath + "/seller/order/discount",
+                        url: "/seller/order/discount",
                         dataType: 'json',
                         type: 'POST',
                         data: {

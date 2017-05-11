@@ -69,7 +69,6 @@
                                             that.txtStatus = response.result.card_no;
                                             that.bindCard = true;//绑卡成功
                                             if (res.result.account_type == 1) {
-                                                response.result.card_auth_status = "RZSB";
                                                 switch (response.result.card_auth_status) {
                                                     case "WRZ":
                                                         that.fivetext = "银行账户认证待审核，需要等待1个工作日！";

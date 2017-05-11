@@ -125,7 +125,7 @@
               title: '商品删除后不可恢复请确认？',
               onConfirm() {
                 utils.ajax({
-                  url: basepath + "/seller/product/delete",
+                  url: "/seller/product/delete",
                   data: {
                     'id': that.selectId,
                   },

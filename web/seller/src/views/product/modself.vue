@@ -203,7 +203,7 @@
 
               let that=this;
               utils.ajax({
-                  url: basepath + "/seller/product/update",
+                  url: "/seller/product/update",
                   dataType: 'json',
                   type: 'POST',
                   data:hold_obj,
@@ -273,7 +273,7 @@
           utils.MenuShare();
           let that = this;
           utils.ajax({
-              url: basepath + "/seller/product/get",
+              url: "/seller/product/get",
               dataType: 'json',
               type: 'POST',
               data:{

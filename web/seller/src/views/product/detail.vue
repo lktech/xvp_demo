@@ -59,7 +59,7 @@
                 //utils.MenuShare();    
                 let that = this;
                 utils.ajax({
-                    url: basepath + "/seller/product/get",
+                    url: "/seller/product/get",
                     async:false,
                     data:{"id":that.$route.query.product_id},
                     success: function(data){
@@ -69,7 +69,7 @@
                             that.logistics_fee1=utils.formatPrice(that.goods.logistics_fee);
                             that.goods.product_desc=JSON.parse(that.goods.product_desc);
                             utils.ajax({
-                                url: basepath + "/seller/product/sku/get",
+                                url: "/seller/product/sku/get",
                                 async:false,
                                 data:{"product_id":data.result.id},
                                 success: function(res){
@@ -164,7 +164,7 @@
                 //     that.pageId=utils.getSession('pageId');
                 // }else{
                 //     utils.ajax({
-                //         url: basepath + "/mall/store/get",
+                //         url:  "/mall/store/get",
                 //         dataType: 'json',
                 //         type: 'POST',
                 //         success: function(data){

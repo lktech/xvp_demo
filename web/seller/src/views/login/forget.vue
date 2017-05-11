@@ -80,14 +80,14 @@
            send_out(){
                 let that=this;
                 utils.ajax({
-                    url: basepath + "/seller/seller/check",
+                    url: "/seller/seller/check",
                     dataType: 'json',
                     type: 'POST',
                     data:{'phone':that.formData.phone},
                     success: function(data){
                         if(data.result.flag==="yes"){
                             utils.ajax({
-                                url: basepath + "/seller/seller/verify",
+                                url: "/seller/seller/verify",
                                 dataType: 'json',
                                 type: 'POST',
                                 data:{'phone':that.formData.phone},
@@ -153,7 +153,7 @@
                   }
                   let that=this;
                   utils.ajax({
-                      url: basepath + "/seller/seller/reset",
+                      url: "/seller/seller/reset",
                       dataType: 'json',
                       type: 'POST',
                       data:{

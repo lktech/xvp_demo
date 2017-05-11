@@ -107,7 +107,7 @@
             // login1(){
             //   let that=this;
             //   utils.ajax({
-            //       url: basepath + "/mall/auth",
+            //       url: "/mall/auth",
             //       dataType: 'json',
             //       type: 'POST',
             //       success: function(data){
