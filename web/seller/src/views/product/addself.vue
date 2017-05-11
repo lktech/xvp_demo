@@ -274,7 +274,7 @@
           },
           onCancel(){
               this.show=false;
-              utils.go({path:'/store/store'},this.$router,true);
+              utils.go({path:'/store/storeInfo'},this.$router,true);
           },
           onConfirm(){
             location.reload();

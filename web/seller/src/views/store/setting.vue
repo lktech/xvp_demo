@@ -73,7 +73,7 @@
                         },
                         success: function(data){
                             if(data.code=="SUCCESS"){
-                                utils.go({path:'/store/store'},that.$router,true);
+                                utils.go({path:'/store/storeInfo'},that.$router,true);
                             }else{
                                 that.$vux.alert.show({content:data.message,onHide :function(){
                                                             return false

@@ -63,7 +63,7 @@
                         success: function(data){
                             if(data.code=="SUCCESS"){
                                 //that.login1();
-                                utils.go({path:'/store/store'},that.$router);
+                                utils.go({path:'/store/storeInfo'},that.$router);
                             }else if(data.code=='auth_seller_error'){
                                 utils.wang(that,utils,data.message);
 
