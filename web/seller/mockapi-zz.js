@@ -40,6 +40,10 @@ Mock.mock(basepath + "/seller/account/getBankCity", "post", {
     result:
         [
             {
+                code:"1000",
+                name:"北京市"
+            },
+            {
                 "code": "220100",
                 "name": "石家庄市"
             },
@@ -52,7 +56,9 @@ Mock.mock(basepath + "/seller/account/getBankCity", "post", {
 });
 Mock.mock(basepath + "/1", "post", {
     code: "SUCCESS",
-    result: {}
+    result: [
+        {id:1,name:"北京市"}
+    ]
 });
 Mock.mock(basepath + "/1", "post", {
     code: "SUCCESS",
