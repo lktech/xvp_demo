@@ -13,6 +13,14 @@
                 <r-button type="primary" text="提现" @click.native="btnClick" :disabled="btnDisabled"></r-button>
             </div>
         </r-messages>
+        <div class="hint">
+            <h3><r-icon type="info"></r-icon>温馨提示</h3>
+            1.提现手续费：3元/笔
+            <br/>2.通道手续费：提现金额的0.6%
+            <br/>3.提现计算公式：实际提现金额=提现金额-通道手续费-提现手续费
+            <br/>4.例：申请提现1000元
+            <br/>5.实际提现金额：1000-1000*0.6%-3=991元
+        </div>
     </div>
 
 </template>
@@ -122,6 +130,7 @@
             "rButton": require("../../components/button/button.vue"),
             "rCell": require("../../components/cell/cell.vue"),
             "r-messages": require("../../components/x-messages/x-messages.vue"),
+            "r-icon":require("../../components/icon/icon.vue"),
         }
     }
 
