@@ -70,7 +70,7 @@
                                             that.bindCard = true;//绑卡成功
                                             if (res.result.account_type == 1) {
                                                 switch (response.result.card_auth_status) {
-                                                    case "WRZ":
+                                                    case "RZZ":
                                                         that.fivetext = "银行账户认证待审核，需要等待1个工作日！";
                                                         that.btnDisabled = true;
                                                         break;

@@ -285,6 +285,7 @@
             },
             //银行点击
             getBank(id, obj){
+                let that=this;
                 this.cardBankCode = id;
                 this.cardBank = obj.trueName;
                 this.showBank = false;
@@ -293,8 +294,8 @@
 
                 this.provinceName = "";
                 this.provinceCode = "";
-                this.provinceValue={};
-console.log("省",this.provinceValue)
+
+
                 this.cityName = "";
                 this.cityCode = "";
                 this.openingBank = "";//支行

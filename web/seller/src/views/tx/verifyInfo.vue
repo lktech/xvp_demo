@@ -96,7 +96,7 @@
                         data: {
                             company_name: that.companyName,
                             buslince: that.businessLicense,
-                            buslince_pic: that.picList[0]
+                            //buslince_pic: that.picList[0]
                         },
                         success: function (res) {
                             if (res.code == "SUCCESS") {
