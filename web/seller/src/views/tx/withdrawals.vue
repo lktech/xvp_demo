@@ -111,7 +111,6 @@
                     data: {},
                     success: function (data) {
                         if (data.code == 'SUCCESS') {
-                            data.result.withdrawals_amount=30000
                             that.maxvalue = data.result.withdrawals_amount;
                         } else {
                             that.$vux.alert.show(data.message);
