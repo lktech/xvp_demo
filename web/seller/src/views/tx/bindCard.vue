@@ -290,8 +290,11 @@
                 this.showBank = false;
 
                 //重置所在地和支行
+
                 this.provinceName = "";
                 this.provinceCode = "";
+                this.provinceValue={};
+console.log("省",this.provinceValue)
                 this.cityName = "";
                 this.cityCode = "";
                 this.openingBank = "";//支行
