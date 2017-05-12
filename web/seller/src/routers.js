@@ -5,6 +5,16 @@ exports.routes = [
         redirect: '/store/storeInfo'
     },
     {//登录
+        path: '/test',
+        name: 'test',
+        meta: {
+            auth: false
+        },
+        component: function (resolve) {
+            require(['./views/tx/test.vue'], resolve);
+        }
+    },
+    {//登录
         path: '/login',
         name: 'login',
         meta: {

@@ -131,7 +131,7 @@
                     type: 'POST',
                     data: {
                         'amount': that.input_money * 100,              //    实际提现金额
-                        'commission': 1||that.data_counter * 100,        //    手续费
+                        'commission': 1 || that.data_counter * 100,        //    手续费
                     },
                     success: function (data) {
                         that.cash_result = true;
@@ -164,7 +164,9 @@
             },
             toall(){   //全部提现
                 let that = this;
+                that.input_money = that.maxvalue / 100;
                 $('[data_id=inputNum]').val(that.maxvalue / 100);
+                that.statusCtrl(that.maxvalue, that);
             },
             btnClick(){
                 if (this.cash_text == '查看提现记录') {

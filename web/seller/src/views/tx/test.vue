@@ -1,6 +1,7 @@
 <template>
     <div>
-        <r-button type="primary" text="下一步" @click.native="btnClick" ></r-button>
+        <r-button type="primary" text="下一步" @click.native="btnClick"></r-button>
+        <div v-html="provinceValue.name"></div>
         <!--省-->
         <r-popup v-model="showProvince" :hide-on-blur="false">
             <div class="popupArea">
@@ -20,16 +21,39 @@
     import utils from '../../libs/utils.js';
     export default{
         data(){
-            return {}
+            return {
+
+                showProvince: false,
+                province: [],
+                provinceValue: {},
+                defaultProvince: {}
+            }
         },
         mounted: function () {
             this.$nextTick(function () {
-
+                let that = this;
+                //省列表
+                utils.ajax({
+                    url: "/seller/account/getBankCity",
+                    success: function (res) {
+                        if (res.code == "SUCCESS") {
+                            that.province = [];
+                            res.result.forEach(function (obj, i) {
+                                that.province.push({id: obj.code, name: obj.name});
+                            })
+                        } else {
+                            that.$vux.alert.show(res.message);
+                        }
+                    }
+                });
             })
         },
         methods: {
             btnClick(){
-
+                this.showProvince = true;
+            },
+            changeProvince(obj){
+                console.log(obj)
             }
         },
         computed: {
