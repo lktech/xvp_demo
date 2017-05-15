@@ -46,6 +46,9 @@ public class XvpInterceptorConfig extends WebMvcConfigurerAdapter {
 		@Override
 		public boolean preHandle(HttpServletRequest request,
 				HttpServletResponse response, Object handler) throws Exception {
+			if (request.getMethod().equals("OPTIONS")) {
+				return true;
+			}
 			if (SessionUtil.checkSellerLogin()) {
 				return true;
 			}
@@ -58,6 +61,9 @@ public class XvpInterceptorConfig extends WebMvcConfigurerAdapter {
         @Override
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
                 throws Exception {
+        	if (request.getMethod().equals("OPTIONS")) {
+				return true;
+			}        	
         	if(SessionUtil.checkUserLogin()){
         		return true;
         	}
