@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -13,7 +14,11 @@ import com.lingke.xvp.demo.utils.SessionUtil;
 
 @Configuration
 public class XvpInterceptorConfig extends WebMvcConfigurerAdapter {
-	
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedOrigins("*").allowCredentials(true)// 就是这个啦
+				.allowedMethods("GET", "POST", "OPTIONS").maxAge(7200);
+		}
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration sellerInterceptor = registry.addInterceptor(new SellerInterceptor());
         // 拦截配置
