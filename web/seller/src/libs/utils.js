@@ -200,10 +200,6 @@ exports.ajax = function (obj) {
         params = JSON.stringify(params);
     }
     $.ajax({
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         url: url,
         dataType: dataType,
         contentType: contentType,

@@ -1,7 +1,7 @@
 <!-- 子组件   -->
 <template>
   <div class="product" @click="handleClick">
-    <div class="pdt-img"><img v-lazy="pic" :style="{'height':imgHeight}"/></div>
+    <div class="pdt-img":style="{'height':imgHeight,background:'url('+pic+') no-repeat center center','backgroundSize':'cover'}"></div>
     <div class="pdt-info">
       <div class="pdt-tit">{{title}}</div>
       <div class="pdt-price txt-ofl">
