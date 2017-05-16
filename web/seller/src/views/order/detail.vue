@@ -235,5 +235,6 @@
     .wq-detail .vux-step-item-main{
         background-color:#fff !important;
     }
+    .wq-detail .weui_panel_hd{padding: 4px 15px 10px !important;}
 </style>
 
