@@ -153,7 +153,7 @@
 
 
                 //提现绑定
-                mobile: sessionStorage.mobile,
+                mobile:localStorage.mobile,
                 showTxBind: false,
                 yzm: "",
                 sendYzmBtn: false,
