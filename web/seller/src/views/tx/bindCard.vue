@@ -221,13 +221,12 @@
                                 //json.bank_province_name = "北京市";
                                 that.provinceName = json.bank_province_name;
                                 that.provinceCode = json.bank_province_code;
-                                //that.defaultProvince = {key: that.provinceCode, value: that.provinceName};
-
+                                that.provinceValue = {key: that.provinceCode, value: that.provinceName};
 
                                 //json.bank_city_name = "北京市";
                                 that.cityName = json.bank_city_name;
                                 that.cityCode = json.bank_city_code;
-                                //that.defaultCity = {key: that.cityCode, value: that.cityName};
+                                that.cityValue = {key: that.cityCode, value: that.cityName};
 
                                 that.openingBank = json.bank_branch_name;
                                 that.openingBankCode = json.bank_branch_code;
@@ -336,7 +335,7 @@
                 this.proStatus++;
                 let that = this;
                 that.provinceName = obj.value;
-                that.provinceCode = obj.id;
+                that.provinceCode = obj.key;
                 if (this.$route.query.rzStatus == "" || this.$route.query.rzStatus == undefined) {
                     this.proStatus = 2;
                 }

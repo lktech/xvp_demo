@@ -84,7 +84,6 @@
                 }
             },
             value(newVal,oldVal){
-                console.log(newVal)
                 this.currentValue = newVal
             }
         },
