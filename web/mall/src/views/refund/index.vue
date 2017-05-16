@@ -85,7 +85,7 @@
           utils.MenuShare();
         let that = this;
         utils.ajax({
-          url: basepath + "/app/refund",
+          url: "/app/refund",
           success: function(data) {
             if(data.success) {
               that.json.goods_title = data.obj.title;
@@ -116,7 +116,7 @@
 				upload(url) {
           let that = this;
           utils.ajax({
-            url: basepath + "/app/upload",
+            url: "/app/upload",
             dataType: 'json',
             type: 'POST',
             data: {
@@ -155,7 +155,7 @@
             return;
           }
           utils.ajax({
-            url: basepath + "/app/submitrefund",
+            url: "/app/submitrefund",
             dataType: 'json',
             type: 'POST',
             data: {

@@ -38,7 +38,7 @@
             utils.MenuShare();
             let that=this;
             utils.ajax({
-                url: basepath + "/app/money",
+                url: "/app/money",
                 dataType: 'json',
                 type: 'POST',
                 data:{

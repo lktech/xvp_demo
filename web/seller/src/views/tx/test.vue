@@ -4,22 +4,10 @@
         <!--<div v-html="provinceValue.name"></div>-->
 
         <r-group title="object options">
-            <r-radio :options="radio003" :value="defaultValue" @on-change="change"></r-radio>
+            <r-radio :options="radioData" :value="defaultValue" @on-change="change"></r-radio>
         </r-group>
 
-        <!--省-->
-        <r-popup v-model="showProvince" :hide-on-blur="false">
-            <div class="popupArea">
-                <h3>请选择省 <a href="javascript:;" class="close" @click="showProvince=false">关闭</a></h3>
-                <div class="areaContent" :style="{maxHeight:maxH,overflow: 'auto'}">
-                    <r-group>
-                        <r-radio fill-mode fill-label="Other" fill-placeholder="other" :options="radio003" @on-change="change"></r-radio>
-                        <!--<r-radio :options="province" v-model="provinceValue"-->
-                                 <!--@on-change="changeProvince"></r-radio>-->
-                    </r-group>
-                </div>
-            </div>
-        </r-popup>
+        <r-button type="primary" text="清空" @click.native="clearClick"></r-button>
     </div>
 </template>
 
@@ -30,14 +18,14 @@
             return {
 
                 showProvince: false,
-                radio003: [{
+                radioData: [{
                     key: '001',
-                    value: 'radio001'
+                    value: '北京市'
                 }, {
                     key: '002',
-                    value: 'radio002'
+                    value: '天津市'
                 }],
-                defaultValue:"",
+                defaultValue:{},
             }
         },
         mounted: function () {
@@ -48,11 +36,8 @@
                     url: "/seller/account/getBankCity",
                     success: function (res) {
                         if (res.code == "SUCCESS") {
-                            that.province = [];
-                            res.result.forEach(function (obj, i) {
-                                that.province.push(obj);
-                                that.defaultValue="001";
-                            })
+                            that.defaultValue={key:"002",value:"天津市"};
+
                         } else {
                             that.$vux.alert.show(res.message);
                         }
@@ -66,6 +51,9 @@
             },
             change(obj){
                 console.log(obj)
+            },
+            clearClick(){
+                this.defaultValue={};
             }
         },
         computed: {
@@ -78,7 +66,7 @@
             "rInput": require("../../components/input/input.vue"),
             "rButton": require("../../components/button/button.vue"),
             "rPopup": require("../../components/popup/popup.vue"),
-            "rRadio": require("../../components/radio/radio1.vue"),
+            "rRadio": require("../../components/radio/x-radio.vue"),
         }
     }
     //require("../../assets/styles/views/batchExport.less");

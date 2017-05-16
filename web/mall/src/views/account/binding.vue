@@ -97,7 +97,7 @@
             choice_bank(){              //点击发卡银行显示列表
                 let that=this;
                 utils.ajax({
-                    url: basepath + "/app/bank",
+                    url: "/app/bank",
                     dataType: 'json',
                     type: 'POST',
                     data:{},
@@ -143,7 +143,7 @@
             choice_open_bank(){
                 let that=this;
                 utils.ajax({
-                    url: basepath + "/app/open_bank",
+                    url: "/app/open_bank",
                     dataType: 'json',
                     type: 'POST',
                     data:{},
@@ -194,7 +194,7 @@
             send_out(){
                 let that=this;
                 utils.ajax({
-                    url: basepath + "/app/send_out",
+                    url: "/app/send_out",
                     dataType: 'json',
                     type: 'POST',
                     data:{},
@@ -211,7 +211,7 @@
                 if(!this.res.disabled1){
                     let that=this;
                     utils.ajax({
-                        url: basepath + "/app/send_out",
+                        url: "/app/send_out",
                         dataType: 'json',
                         type: 'POST',
                         data:{

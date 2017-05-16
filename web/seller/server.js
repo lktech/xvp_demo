@@ -3,7 +3,7 @@
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
-config.entry.unshift('webpack-dev-server/client?http://localhost:8090', "webpack/hot/dev-server");
+config.entry.unshift('webpack-dev-server/client?http://localhost:8095', "webpack/hot/dev-server");
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 // 这里配置：请求http://localhost:8090/api，
@@ -18,6 +18,7 @@ var app = new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     hot:true,
     historyApiFallback: true,
+    disableHostCheck: true,
     proxy:proxy
 });
-app.listen(8090);
+app.listen(8095);

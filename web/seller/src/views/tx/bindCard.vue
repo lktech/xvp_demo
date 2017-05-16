@@ -40,8 +40,7 @@
                 <h3>请选择省 <a href="javascript:;" class="close" @click="showProvince=false">关闭</a></h3>
                 <div class="areaContent" :style="{maxHeight:maxH,overflow: 'auto'}">
                     <r-group>
-                        <r-radio :options="province" v-model="provinceValue" :defaultValue="defaultProvince"
-                                 @on-change="changeProvince"></r-radio>
+                        <r-radio :options="province" :value="provinceValue" @on-change="changeProvince"></r-radio>
                     </r-group>
                 </div>
             </div>
@@ -52,8 +51,7 @@
                 <h3>请选择市<a href="javascript:;" class="close" @click="showCity=false">关闭</a></h3>
                 <div class="areaContent" :style="{maxHeight:maxH,overflow: 'auto'}">
                     <r-group>
-                        <r-radio :options="city" v-model="cityValue" :defaultValue="defaultCity"
-                                 @on-change="changeCity"></r-radio>
+                        <r-radio :options="city" :value="cityValue" @on-change="changeCity"></r-radio>
                     </r-group>
                 </div>
             </div>
@@ -147,12 +145,12 @@
                 showProvince: false,
                 province: [],//省列表
                 provinceValue: {},//选中的省
-                defaultProvince: {},//默认省
                 showCity: false,
                 city: [],//市列表
                 cityValue: {},//选中的市
-                defaultCity: {},//默认市
                 proStatus: 0,
+                proNum: 0,
+
 
                 //提现绑定
                 mobile: sessionStorage.mobile,
@@ -202,7 +200,7 @@
                         if (res.code == "SUCCESS") {
                             that.province = [];
                             res.result.forEach(function (obj, i) {
-                                that.province.push({id: obj.code, name: obj.name});
+                                that.province.push({key: obj.code, value: obj.name});
                             })
                         } else {
                             that.$vux.alert.show(res.message);
@@ -223,13 +221,13 @@
                                 //json.bank_province_name = "北京市";
                                 that.provinceName = json.bank_province_name;
                                 that.provinceCode = json.bank_province_code;
-                                that.defaultProvince = {id: that.provinceCode, name: that.provinceName};
+                                //that.defaultProvince = {key: that.provinceCode, value: that.provinceName};
 
 
                                 //json.bank_city_name = "北京市";
                                 that.cityName = json.bank_city_name;
                                 that.cityCode = json.bank_city_code;
-                                that.defaultCity = {id: that.cityCode, name: that.cityName};
+                                //that.defaultCity = {key: that.cityCode, value: that.cityName};
 
                                 that.openingBank = json.bank_branch_name;
                                 that.openingBankCode = json.bank_branch_code;
@@ -285,10 +283,15 @@
             },
             //银行点击
             getBank(id, obj){
-                let that=this;
+                let that = this;
                 this.cardBankCode = id;
                 this.cardBank = obj.trueName;
                 this.showBank = false;
+//                this.proNum++;
+//                if (this.proNum > 1) {
+//                    this.provinceValue = {};
+//                    this.cityValue = {};
+//                }
 
                 //重置所在地和支行
 
@@ -307,7 +310,7 @@
                 this.openingBank = obj.trueName;
                 this.showSubBank = false;
             },
-            //检查个人
+            //验证个人
             check(){
                 if (this.cardBank != "" && this.cityCode != "" && this.openingBank != "" && /^\d{16,21}$/.test(this.cardNumber) && this.trueName.indexOf(" ") == -1 && this.trueName != "" && /^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/.test(this.idCode)) {
                     this.btnDisabled = false;
@@ -315,7 +318,7 @@
                     this.btnDisabled = true;
                 }
             },
-            //检查企业
+            //验证企业
             checkCompany(){
                 if (this.cardBank != "" && this.cityCode != "" && this.openingBank != "" && /^\d{16,21}$/.test(this.cardNumber) && this.license.indexOf(" ") == -1 && this.license != "" && this.companyName.indexOf(" ") == -1 && this.companyName != "") {
                     this.btnDisabled = false;
@@ -332,7 +335,7 @@
             changeProvince (obj) {
                 this.proStatus++;
                 let that = this;
-                that.provinceName = obj.name;
+                that.provinceName = obj.value;
                 that.provinceCode = obj.id;
                 if (this.$route.query.rzStatus == "" || this.$route.query.rzStatus == undefined) {
                     this.proStatus = 2;
@@ -341,12 +344,12 @@
                     //渲染市
                     utils.ajax({
                         url: "/seller/account/getBankCity",
-                        data: {citycode: obj.id},
+                        data: {citycode: obj.key},
                         success: function (res) {
                             if (res.code == "SUCCESS") {
                                 that.city = [];
                                 res.result.forEach(function (obj, i) {
-                                    that.city.push({id: obj.code, name: obj.name});
+                                    that.city.push({key: obj.code, value: obj.name});
                                 });
                                 that.showProvince = false;
                                 that.showCity = true;
@@ -360,14 +363,14 @@
             //市选择
             changeCity(obj){
                 let that = this;
-                this.cityName = obj.name;
+                this.cityName = obj.value;
                 this.showCity = false;
-                this.cityCode = obj.id;
+                this.cityCode = obj.key;
 
                 //渲染开户行
                 utils.ajax({
                     url: "/seller/account/getBankInfo",
-                    data: {citycode: obj.id, bankcode: that.cardBankCode},
+                    data: {citycode: obj.key, bankcode: that.cardBankCode},
                     success: function (res) {
                         if (res.code == "SUCCESS") {
                             that.subBankList = [];

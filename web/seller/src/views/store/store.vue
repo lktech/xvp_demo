@@ -38,6 +38,10 @@
                     title: '店铺设置',
                     link: 'Setting',
                     icon: 'http://img1.xiaovpu.com/3027349865458448.png'
+                },{
+                    title: '我的账户',
+                    link: '/tx/balance',
+                    icon: 'http://om4gg3sec.bkt.clouddn.com/22114455.png'
                 }],
                 flag: true,
                 item: {

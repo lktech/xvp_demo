@@ -55,7 +55,7 @@
           let that = this ;
 
           utils.ajax({
-            url: basepath + "/user/user/getIsvInfo",
+            url: "/user/user/getIsvInfo",
             success: function(data) {
               if(data.code=="SUCCESS") {  
 
@@ -64,7 +64,7 @@
                     isv_url: data.result.isvUrl,
                     success : function(xvp_uid){
                       utils.ajax({
-                        url: basepath + "/user/user/login",
+                        url: "/user/user/login",
                         data:{'xvp_uid':xvp_uid},
                         success: function(res) {
                           if(res.code=="SUCCESS") { 
@@ -102,7 +102,7 @@
           utils.setSession('pageId',this.$route.query.id);
           let that = this;
           utils.ajax({
-            url: basepath + "/user/store/main",
+            url: "/user/store/main",
             data:{'store_id':that.$route.query.id*1},
             success: function(data) {
               if(data.code=="SUCCESS") {
@@ -116,7 +116,7 @@
                 that.component=that.component1;
                 $.each(that.component1,function(i,v){
                     utils.ajax({
-                      url: basepath + "/user/product/sku/get",
+                      url: "/user/product/sku/get",
                       data:{'product_id':v.id},
                       success: function(res) {
                         if(res.code=="SUCCESS") {

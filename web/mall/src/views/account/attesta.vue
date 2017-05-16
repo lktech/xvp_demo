@@ -132,7 +132,7 @@
                 if(!this.disabled){
                    let that = this;
                    utils.ajax({
-                       url: basepath + "/app/Authentication",
+                       url: "/app/Authentication",
                        dataType: 'json',
                        type: 'POST',
                        data:{
@@ -158,7 +158,7 @@
             upload(src){                
                 let that = this;
                 utils.ajax({
-                    url: basepath + "/app/upload",
+                    url: "/app/upload",
                     dataType: 'json',
                     type: 'POST',
                     data:{'src':src},
@@ -183,7 +183,7 @@
             utils.MenuShare();
             let that = this;
             utils.ajax({
-                url: basepath + "/app/card",
+                url: "/app/card",
                 dataType: 'json',
                 type: 'POST',
                 data:{'id':'1'},

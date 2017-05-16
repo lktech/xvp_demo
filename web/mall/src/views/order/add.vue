@@ -71,7 +71,7 @@
                 })
 
                 utils.ajax({
-                    url: basepath + "/user/user/address/default", success: function (data) {
+                    url: "/user/user/address/default", success: function (data) {
                         if (data.code=="SUCCESS") {
                             if(data.result){
                                 that.addressData=data.result;
@@ -107,13 +107,13 @@
                             buy_sku_list:that.arr
                         }
                         utils.ajax({
-                            url: basepath + "/user/order/add", data: obj, success: function (data) {    
+                            url: "/user/order/add", data: obj, success: function (data) {    
                                 if (data.code=="SUCCESS") {
-                                    var backUrl = basepath + "/mall/index.html#/order/detail?id=" + data.result.order_id;
+                                    var backUrl = "/mall/index.html#/order/detail?id=" + data.result.order_id;
                                     window.history.replaceState(null, "订单详情页", backUrl);
                                     localStorage.setItem("ORDERID",data.result.order_id);
                                     utils.ajax({
-                                        url: basepath + "/user/order/payurl", data: {order_id:data.result.order_id}, success: function (res) {
+                                        url: "/user/order/payurl", data: {order_id:data.result.order_id}, success: function (res) {
                                             if (res.code=="SUCCESS") {
                                                 location.href=res.result.url;
                                             }else{
@@ -132,7 +132,7 @@
                         });
                     }else{
                         utils.ajax({
-                            url: basepath + "/user/order/payurl", data: {order_id:localStorage.getItem("ORDERID")}, success: function (res) {
+                            url: "/user/order/payurl", data: {order_id:localStorage.getItem("ORDERID")}, success: function (res) {
                                 if (res.code=="SUCCESS") {
                                     location.href=res.result.url;
                                 }else{

@@ -118,7 +118,7 @@ export default {
         if(that.addData.lname){
             if(that.urlAdd){
                 utils.ajax({
-                    url:basepath + that.urlAdd,
+                    url:that.urlAdd,
                     dataType:'json',
                     type:'POST',
                     data:that.addData,

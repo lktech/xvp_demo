@@ -41,7 +41,7 @@
           utils.MenuShare();
         let that = this;
         utils.ajax({
-          url: basepath + "/app/account",
+          url: "/app/account",
           data: {},
           success: function(data) {
             if(data.success) {

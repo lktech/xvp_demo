@@ -74,8 +74,8 @@
                         },
                         success: function (data) {
                             if (data.code == "SUCCESS") {
-                                sessionStorage.userStatus = 1;
-                                sessionStorage.mobile = that.formData.phone;
+                                localStorage.userStatus = 1;
+                                localStorage.mobile = that.formData.phone;
                                 //utils.header();
                                 that.login1();
                             } else {

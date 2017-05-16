@@ -56,7 +56,7 @@
           utils.MenuShare();
         let that = this;
         utils.ajax({
-            url:basepath + "/app/msg/user",
+            url:"/app/msg/user",
             success:function(data){
               if(data.success) {
                 that.firstloading = true;

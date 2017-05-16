@@ -29,7 +29,7 @@
       ready() {
           utils.MenuShare();
         let that = this;
-        that.url=basepath + "/app/cashirecord";
+        that.url="/app/cashirecord";
         utils.ajax({
           url: that.url,
           data: {},

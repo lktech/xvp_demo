@@ -118,7 +118,7 @@
             init(){
                 let that = this;
                 utils.ajax({
-                    url: basepath + "/user/product/get",
+                    url: "/user/product/get",
                     async:false,
                     data:{"id":that.$route.query.product_id},
                     success: function(data){
@@ -128,7 +128,7 @@
                             that.logistics_fee1=utils.formatPrice(that.goods.logistics_fee);
                             that.goods.product_desc=JSON.parse(that.goods.product_desc);
                             utils.ajax({
-                                url: basepath + "/user/product/sku/get",
+                                url: "/user/product/sku/get",
                                 async:false,
                                 data:{"product_id":data.result.id},
                                 success: function(res){

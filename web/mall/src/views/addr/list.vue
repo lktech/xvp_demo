@@ -16,7 +16,7 @@
             demo(){
                 let that = this;
                 $.ajax({
-                    url: basepath + "/app/sendRegMsg",
+                    url: "/app/sendRegMsg",
                     dataType: 'json',
                     type: 'POST',
                     data:{

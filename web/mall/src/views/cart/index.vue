@@ -38,7 +38,7 @@
         let that = this;
         // 购物车列表
         utils.ajax({
-          url: basepath + "/app/msg/cart",
+          url: "/app/msg/cart",
           success: function(data) {
             if(data.success) {
               that.shop = data.obj.store.name;

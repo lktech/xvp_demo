@@ -223,7 +223,7 @@ exports.ajax = function (obj) {
                     //    message: '您的账号已被禁用，请联系客服'
                     //});
                 } else if (data.code == "auth_seller_error") {
-                    sessionStorage.userStatus=0;
+                    localStorage.userStatus=0;
                     //exports.setUser("");
                     //Notification.error({
                     //    title: '错误',

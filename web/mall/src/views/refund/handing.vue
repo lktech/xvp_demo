@@ -86,7 +86,7 @@
           utils.MenuShare();
         let that = this;
         utils.ajax({
-          url: basepath + "/app/handing",
+          url: "/app/handing",
           data: {
             id: that.$route.params.id
           },
@@ -132,7 +132,7 @@
               content: '如您主动关闭正在处理的退款后，您无法再次发起退款申请，请务必谨慎操作',
               onConfirm() { //  点击撤销退款
                 utils.ajax({
-                  url: basepath + "/app/closerefund",
+                  url: "/app/closerefund",
                   data: {
                     id: that.json.refund_id
                   },

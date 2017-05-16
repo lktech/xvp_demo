@@ -3,11 +3,12 @@
         <label class="weui_cell weui_cell_radio weui_check_label" :for="`radio_${uuid}_${index}`"
                v-for="(one, index) in options">
             <div class="weui_cell_bd weui_cell_primary">
-                <p>{{one.value | getValue}}</p>
+                <p>{{one.name | getValue}}</p>
             </div>
             <div class="weui_cell_ft">
-                <input type="radio" class="weui_check" v-model="currentValue" :id="`radio_${uuid}_${index}`"
-                       :value="one" @click="radioChange(one)">
+                <input type="radio" class="weui_check" v-model="currentValue" @click="radioChange(one)"
+                       :id="`radio_${uuid}_${index}`"
+                       :value="one">
                 <span class="weui_icon_checked"></span>
             </div>
         </label>
@@ -40,6 +41,7 @@
                 required: true
             },
             value: "",
+            defaultValue: "",
             fillMode: {
                 type: Boolean,
                 default: false
@@ -54,17 +56,16 @@
             }
         },
         mounted () {
-            this.handleChangeEvent = true
+            this.handleChangeEvent = true;
         },
         methods: {
             getKey,
-            getValue,
             onFocus () {
                 this.currentValue = this.fillValue || ''
                 this.isFocus = true
             },
             radioChange(obj){
-                if (obj.key == this.currentValue.key) {
+                if (obj.id == this.currentValue.id) {
                     this.$emit('on-change', obj);
                 }
             }
@@ -75,24 +76,23 @@
                 if (newVal !== '' && isOption) {
                     this.fillValue = ''
                 }
-                this.$emit('on-change', newVal)
-                this.$emit('input', newVal)
+                this.$emit('on-change', newVal);
+                this.$emit('input', newVal);
             },
             fillValue (newVal) {
                 if (this.fillMode && this.isFocus) {
                     this.currentValue = newVal
                 }
             },
-            value(newVal,oldVal){
-                console.log(newVal)
-                this.currentValue = newVal
+            defaultValue(newVal, oldVal){
+                this.currentValue = newVal;
             }
         },
         data () {
             return {
                 fillValue: '',
                 isFocus: false,
-                currentValue: this.value
+                currentValue: this.defaultValue
             }
         }
     }

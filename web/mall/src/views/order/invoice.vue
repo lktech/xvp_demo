@@ -102,7 +102,7 @@
             }
             if(this.$route.query.id){
                 utils.ajax({
-                    url: basepath + "/mall/invoice/get",
+                    url: "/mall/invoice/get",
                     dataType: 'json',
                     type: 'POST',
                     data:JSON.stringify({'id':this.$route.query.id}),
@@ -111,7 +111,7 @@
                             that.res.inv_type=data.obj.invoice_type_name;
                             if(data.obj.invoice_type=='NORMAL'){
                                 utils.ajax({
-                                    url: basepath + "/mall/invoice_category/list",
+                                    url: "/mall/invoice_category/list",
                                     dataType: 'json',
                                     type: 'POST',
                                     success: function(data){
@@ -189,7 +189,7 @@
             Choice(){
                 let that = this;
                 utils.ajax({
-                    url: basepath + "/mall/invoice_type/list",
+                    url: "/mall/invoice_type/list",
                     dataType: 'json',
                     type: 'POST',
                     success: function(data){
@@ -244,7 +244,7 @@
                         if(that.res.inv_type=='普通发票'){
                             that.res.inv_ordinary=true;
                             utils.ajax({
-                                url: basepath + "/mall/invoice_category/list",
+                                url: "/mall/invoice_category/list",
                                 dataType: 'json',
                                 type: 'POST',
                                 async:false,
@@ -364,7 +364,7 @@
                         }
                         let that = this;
                         utils.ajax({
-                            url: basepath + "/mall/invoice/add",
+                            url: "/mall/invoice/add",
                             dataType: 'json',
                             type: 'POST',
                             data:JSON.stringify(parem),
@@ -401,7 +401,7 @@
                 this.res.mailStatus=true;
                 let that = this;
                 utils.ajax({
-                    url: basepath + "/mall/user_address/list",
+                    url: "/mall/user_address/list",
                     dataType: 'json',
                     type: 'POST',
                     success: function(data){
@@ -440,7 +440,7 @@
             addr_default(){
                 let that = this;
                 utils.ajax({
-                    url: basepath + "/mall/invoice_address/get",
+                    url: "/mall/invoice_address/get",
                     dataType: 'json',
                     type: 'POST',
                     success: function(data){

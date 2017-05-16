@@ -114,7 +114,7 @@
             updateOrder(){
                 let that = this;
                 utils.ajax({
-                    url: basepath + "/user/order/payurl", data: {order_id:that.$route.query.id}, success: function (res) {
+                    url: "/user/order/payurl", data: {order_id:that.$route.query.id}, success: function (res) {
                         if (res.code=="SUCCESS") {
                             location.href=res.result.url;
                         }else if(data.code=='user_seller_error'){
@@ -187,7 +187,7 @@
             onConfirm(){
                 let that = this;
                 utils.ajax({
-                    url: basepath + "/user/order/confirm",
+                    url: "/user/order/confirm",
                     dataType: 'json',
                     type: 'POST',
                     data: {

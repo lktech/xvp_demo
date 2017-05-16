@@ -44,12 +44,12 @@ const router = new VueRouter({
 });
 
 const history = window.sessionStorage;
-let userStatus = history.userStatus;
-let mobile = sessionStorage.mobile;
+// let userStatus = history.userStatus;
+// let mobile = sessionStorage.mobile;
 
 history.clear();
-history.userStatus = userStatus;
-sessionStorage.mobile = mobile;
+// history.userStatus = userStatus;
+// sessionStorage.mobile = mobile;
 let historyCount = history.getItem('count') * 1 || 0
 history.setItem('/', 0)
 
@@ -115,9 +115,12 @@ router.beforeEach((to, from, next) => {
     if (to.path == "/product/warehouse") {
         document.setTitle('我的仓库');
     }
+    if (to.path == "/tx/balance") {
+        document.setTitle('我的余额');
+    }
 
     if (to.meta.auth) {
-        if (sessionStorage.userStatus == 1) {
+        if (localStorage.userStatus == 1) {
             next();
         } else {
             let redirect = encodeURIComponent(to.path);
