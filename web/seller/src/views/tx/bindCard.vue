@@ -162,6 +162,7 @@
                 radioValue: "",
                 agreement: false,
                 sn: "",
+                showId: "",
 
             }
         },
@@ -177,11 +178,11 @@
             this.$nextTick(function () {
                 let that = this;
                 //绑定实名认证
-                that.trueName= that.$route.query.name;
-                that.idCode= that.$route.query.num;
+                that.trueName = that.$route.query.name;
+                that.idCode = that.$route.query.num;
 
-                that.companyName= that.$route.query.company;
-                that.license= that.$route.query.buslince;
+                that.companyName = that.$route.query.company;
+                that.license = that.$route.query.buslince;
 
                 //银行列表
                 utils.ajax({
@@ -220,7 +221,7 @@
                         success: function (res) {
                             if (res.code == "SUCCESS") {
                                 let json = res.result;
-
+                                that.showId = json.id;
                                 that.cardBank = json.bank_name;
                                 that.cardBankCode = json.bank_code;
                                 //json.bank_province_name = "北京市";
@@ -445,20 +446,39 @@
                     bank_province_name: that.provinceName,
                     bank_city_name: that.cityName
                 };
-                utils.ajax({
-                    url: "/seller/account/addStoreBankCard",
-                    data: param,
-                    success: function (res) {
-                        if (res.code == "SUCCESS") {
-                            that.$vux.toast.show('提交成功');
-                            setTimeout(function () {
-                                utils.go("/tx/balance", that.$router);
-                            }, 2000)
-                        } else {
-                            that.$vux.alert.show(res.message);
+                if (that.$route.query.rzStatus == "rzsb") {
+                    param.id = that.showId;
+                    utils.ajax({
+                        url: "/seller/account/updateCompanyStoreBankCard",
+                        data: param,
+                        success: function (res) {
+                            if (res.code == "SUCCESS") {
+                                that.$vux.toast.show('提交成功');
+                                setTimeout(function () {
+                                    utils.go("/tx/balance", that.$router);
+                                }, 2000)
+                            } else {
+                                that.$vux.alert.show(res.message);
+                            }
                         }
-                    }
-                })
+                    })
+                } else {
+                    utils.ajax({
+                        url: "/seller/account/addStoreBankCard",
+                        data: param,
+                        success: function (res) {
+                            if (res.code == "SUCCESS") {
+                                that.$vux.toast.show('提交成功');
+                                setTimeout(function () {
+                                    utils.go("/tx/balance", that.$router);
+                                }, 2000)
+                            } else {
+                                that.$vux.alert.show(res.message);
+                            }
+                        }
+                    })
+                }
+
             },
             //支付协议
             agreementClick(){

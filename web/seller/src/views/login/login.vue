@@ -41,8 +41,11 @@
             this.$nextTick(function () {
                 this.$vux.alert.hide();
                 utils.loadingHide();
-                //this.login1('1');
+//                this.login1('1');
                 utils.MenuShare();
+                if (localStorage.userStatus==1){
+                    utils.go('/store/storeInfo', this.$router);
+                }
             })
         },
         methods: {
