@@ -208,7 +208,7 @@ exports.ajax = function (obj) {
         data: params,
         success: function (data) {
             exports.loadingHide();
-            if (data.code) {
+            if (data.code=="SUCCESS") {
                 if (obj.success) {
                     obj.success(data);
                 }
@@ -227,6 +227,9 @@ exports.ajax = function (obj) {
                     //});
 
                 } else {
+                    if (obj.success) {
+                        obj.success(data);
+                    }
                     //Notification.error({
                     //    title: '错误',
                     //    message: data.msg

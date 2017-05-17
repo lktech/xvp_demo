@@ -444,7 +444,9 @@
                     "sn": that.sn,
                     "verfiy_code": that.yzm,
                     bank_province_name: that.provinceName,
-                    bank_city_name: that.cityName
+                    bank_city_name: that.cityName,
+                    certificate_type:0,
+                    buslince_pic:"",
                 };
                 if (that.$route.query.rzStatus == "rzsb") {
                     param.id = that.showId;
