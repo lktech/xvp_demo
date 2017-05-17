@@ -118,6 +118,15 @@ router.beforeEach((to, from, next) => {
     if (to.path == "/tx/balance") {
         document.setTitle('我的余额');
     }
+    if (to.path == "/tx/bindCard") {
+        document.setTitle('提现绑卡');
+    }
+    if (to.path == "/tx/cashrecord") {
+        document.setTitle('提现记录');
+    }
+    if (to.path == "/tx/withdrawals") {
+        document.setTitle('提现');
+    }
 
     if (to.meta.auth) {
         if (localStorage.userStatus == 1) {
