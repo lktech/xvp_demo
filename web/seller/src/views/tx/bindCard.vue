@@ -11,12 +11,12 @@
             <r-input title="银行卡" :max="21" v-model="cardNumber" placeholder="请输入银行卡号"></r-input>
         </r-group>
         <r-group v-if="type==1">
-            <r-input title="真实姓名" :max="20" v-model="trueName" placeholder="请输入真实姓名" :disabled="true"></r-input>
-            <r-input title="身份证号" :max="18" v-model="idCode" placeholder="请输入身份证号码" :disabled="true"></r-input>
+            <r-input title="真实姓名" :max="20" v-model="trueName" placeholder="请输入真实姓名"></r-input>
+            <r-input title="身份证号" :max="18" v-model="idCode" placeholder="请输入身份证号码"></r-input>
         </r-group>
         <r-group v-else>
-            <r-input title="企业名称" :max="50" v-model="companyName" placeholder="请输入企业名称" :disabled="true"></r-input>
-            <r-input title="营业执照" :max="20" v-model="license" placeholder="请输入营业执照" :disabled="true"></r-input>
+            <r-input title="企业名称" :max="50" v-model="companyName" placeholder="请输入企业名称" ></r-input>
+            <r-input title="营业执照" :max="20" v-model="license" placeholder="请输入营业执照" ></r-input>
         </r-group>
         <div class="btn">
             <r-button type="primary" text="下一步" @click.native="btnClick" :disabled="btnDisabled"></r-button>
@@ -39,7 +39,7 @@
             <div class="popupArea">
                 <h3>请选择省 <a href="javascript:;" class="close" @click="showProvince=false">关闭</a></h3>
                 <div class="areaContent" :style="{maxHeight:maxH,overflow: 'auto'}">
-                    <r-group>
+                    <r-group v-if="init">
                         <r-radio :options="province" :value="provinceValue" @on-change="changeProvince"></r-radio>
                     </r-group>
                 </div>
@@ -50,7 +50,7 @@
             <div class="popupArea">
                 <h3>请选择市<a href="javascript:;" class="close" @click="showCity=false">关闭</a></h3>
                 <div class="areaContent" :style="{maxHeight:maxH,overflow: 'auto'}">
-                    <r-group>
+                    <r-group v-if="init">
                         <r-radio :options="city" :value="cityValue" @on-change="changeCity"></r-radio>
                     </r-group>
                 </div>
@@ -163,6 +163,7 @@
                 agreement: false,
                 sn: "",
                 showId: "",
+                init:false
 
             }
         },
@@ -268,6 +269,7 @@
             //发卡银行
             cardBankClick(){
                 this.showBank = true;
+                this.init=true;
             },
             //卡所在地
             cityCodeClick(){
@@ -371,7 +373,6 @@
                 this.cityName = obj.value;
                 this.showCity = false;
                 this.cityCode = obj.key;
-
                 //渲染开户行
                 utils.ajax({
                     url: "/seller/account/getBankInfo",
