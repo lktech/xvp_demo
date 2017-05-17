@@ -21,6 +21,7 @@ import com.Rop.api.request.XvpTlstoreaccountGetstoreaccountamountRequest;
 import com.Rop.api.request.XvpTlstoreaccountGetstorebankcardRequest;
 import com.Rop.api.request.XvpTlstoreaccountPersoncreateRequest;
 import com.Rop.api.request.XvpTlstoreaccountQuerywithdrawsRequest;
+import com.Rop.api.request.XvpTlstoreaccountUpdatecompanystorebankcardRequest;
 import com.Rop.api.request.XvpTlstoreaccountWithdrawalsRequest;
 import com.Rop.api.response.XvpPhoneVerifycodeResponse;
 import com.Rop.api.response.XvpTlstoreaccountGetResponse;
@@ -161,6 +162,31 @@ public class AccountController {
 	}
 
 	/**
+	 * 企业绑卡更新
+	 * 
+	 * @param request
+	 * @return
+	 * @throws ApiException
+	 */
+	@RequestMapping(path = "/updateCompanyStoreBankCard", method = RequestMethod.POST)
+	@ResponseBody
+	public XvpResponse updateCompanyStoreBankCard(@RequestBody AccountBankCardRequest request) throws Exception {
+		String phone = SessionUtil.getSellerLoginPhone();
+		if (!phone.equals(request.getPhone())) {
+			throw new RuntimeException("当前登录用户电话号码与绑定银行卡电话号码不一致");
+		}
+		if (!checkCode(request.getPhone(), request.getSn(), request.getVerfiy_code())) {
+			throw new RuntimeException("验证码输入错误");
+		}
+		XvpTlstoreaccountUpdatecompanystorebankcardRequest ropRequest = BeanCopyUtil.copy(request,
+				XvpTlstoreaccountUpdatecompanystorebankcardRequest.class);
+		ropRequest.setApp_id(ropClientAdapter.getAppId());
+		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
+		ropClientAdapter.ropInvoke(ropRequest);
+		return null;
+	}
+
+	/**
 	 * 获取绑卡信息
 	 * 
 	 * @param request
@@ -176,8 +202,7 @@ public class AccountController {
 		XvpTlstoreaccountGetstorebankcardResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		AccountBankCardGetResponse response = BeanCopyUtil.copy(ropResponse.getTlstoreaccountcard(),
 				AccountBankCardGetResponse.class);
-		String cardNo = "**** **** **** "
-				+ response.getCard_no().substring(response.getCard_no().length() - 4);
+		String cardNo = "**** **** **** " + response.getCard_no().substring(response.getCard_no().length() - 4);
 		response.setCard_no(cardNo);
 		return response;
 	}
