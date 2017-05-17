@@ -5,7 +5,7 @@
         <div class="weui_actionsheet" :class="{'weui_actionsheet_toggle': show}">
             <div class="weui_actionsheet_menu">
                 <div class="addTitle" v-if='title'>{{title}}</div>
-                <div class="weui_cells weui_cells_checkbox">
+                <div class="weui_cells weui_cells_checkbox" v-if="show">
                     <div class="weui_cell weui_check_label" v-for="item in formatList"
                          @click.stop="getid(item.id,{trueName:item.trueName,userName:item.userName,time:item.time,e:$event})">
                         <div class="weui_cell_hd">
