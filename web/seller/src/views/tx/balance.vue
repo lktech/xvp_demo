@@ -95,6 +95,8 @@
                                                         that.btnDisabled = false;
                                                         break;
                                                 }
+                                            }else {
+                                                that.btnDisabled = false;
                                             }
                                         } else {
                                             that.btnDisabled = false;
