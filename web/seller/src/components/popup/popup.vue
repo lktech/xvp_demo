@@ -1,6 +1,6 @@
 <template>
   <transition name="vux-popup-animate">
-    <div v-show="show" :style="{height:height}" class="vux-popup">
+    <div v-show="show" :style="{height:height,overflow:'hidden'}" class="vux-popup">
       <slot></slot>
     </div>
   </transition>
