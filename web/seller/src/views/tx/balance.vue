@@ -14,7 +14,10 @@
             </div>
         </r-messages>
         <div class="hint">
-            <h3><r-icon type="info"></r-icon>温馨提示</h3>
+            <h3>
+                <r-icon type="info"></r-icon>
+                温馨提示
+            </h3>
             1.提现手续费：3元/笔
             <br/>2.通道手续费：提现金额的0.6%
             <br/>3.提现计算公式：实际提现金额=提现金额-通道手续费-提现手续费
@@ -114,10 +117,10 @@
                 } else {
                     if (this.accountInfo.account_type == 0) {
                         //个人
-                        utils.go("/tx/bindCard?type=1", this.$router);
+                        utils.go("/tx/bindCard?type=1&name=" + this.accountInfo.user_name + "&num=" + this.accountInfo.certificate_number, this.$router);
                     } else {
                         //企业
-                        utils.go("/tx/bindCard?type=2&rzStatus=" + this.rzStatus, this.$router);
+                        utils.go("/tx/bindCard?type=2&rzStatus=" + this.rzStatus + "&company=" + this.accountInfo.company_name + "&buslince=" + this.accountInfo.buslince, this.$router);
                     }
                 }
 
@@ -130,7 +133,7 @@
             "rButton": require("../../components/button/button.vue"),
             "rCell": require("../../components/cell/cell.vue"),
             "r-messages": require("../../components/x-messages/x-messages.vue"),
-            "r-icon":require("../../components/icon/icon.vue"),
+            "r-icon": require("../../components/icon/icon.vue"),
         }
     }
 
