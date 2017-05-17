@@ -39,7 +39,7 @@
             <div class="popupArea">
                 <h3>请选择省 <a href="javascript:;" class="close" @click="showProvince=false">关闭</a></h3>
                 <div class="areaContent" :style="{maxHeight:maxH,overflow: 'auto'}">
-                    <r-group>
+                    <r-group v-if="init">
                         <r-radio :options="province" :value="provinceValue" @on-change="changeProvince"></r-radio>
                     </r-group>
                 </div>
@@ -50,7 +50,7 @@
             <div class="popupArea">
                 <h3>请选择市<a href="javascript:;" class="close" @click="showCity=false">关闭</a></h3>
                 <div class="areaContent" :style="{maxHeight:maxH,overflow: 'auto'}">
-                    <r-group>
+                    <r-group v-if="init">
                         <r-radio :options="city" :value="cityValue" @on-change="changeCity"></r-radio>
                     </r-group>
                 </div>
@@ -163,6 +163,7 @@
                 agreement: false,
                 sn: "",
                 showId: "",
+                init: false,
 
             }
         },
@@ -216,6 +217,8 @@
 
                 //信息回显
                 if (this.$route.query.rzStatus == "rzsb") {
+
+                    that.init = true;
                     utils.ajax({
                         url: "/seller/account/getStoreBankCard",
                         success: function (res) {
@@ -267,7 +270,9 @@
         methods: {
             //发卡银行
             cardBankClick(){
+                this.proNum++;
                 this.showBank = true;
+                this.init = false;
             },
             //卡所在地
             cityCodeClick(){
@@ -492,6 +497,11 @@
             }
         },
         watch: {
+            showBank(val){
+                if(!val){
+                    this.init = true;
+                }
+            },
             cardBank(val, oldVal){
                 if (this.type == 1) {
                     this.check();
