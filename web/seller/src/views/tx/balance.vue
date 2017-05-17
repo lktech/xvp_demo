@@ -69,7 +69,6 @@
                             if (res.result) {
                                 that.txtStatus = "实名验证已通过";
                                 that.islink = false;
-                                that.btnDisabled = false;
                                 that.link = "";
                                 that.accountInfo = res.result;
                                 utils.ajax({
@@ -87,15 +86,18 @@
                                                         break;
                                                     case "RZCG":
                                                         that.fivetext = "提现预计24小时后到账";
+                                                        that.btnDisabled = false;
                                                         break;
                                                     case "RZSB":
                                                         that.fivetext = "银行账户认证失败，请重新编辑提现账号！";
                                                         that.rzStatus = "rzsb";
                                                         that.bindCard = false;
+                                                        that.btnDisabled = false;
                                                         break;
                                                 }
                                             }
                                         } else {
+                                            that.btnDisabled = false;
                                             //
                                         }
                                     }
