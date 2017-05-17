@@ -15,8 +15,8 @@
             <r-input title="身份证号" :max="18" v-model="idCode" placeholder="请输入身份证号码"></r-input>
         </r-group>
         <r-group v-else>
-            <r-input title="企业名称" :max="50" v-model="companyName" placeholder="请输入企业名称" ></r-input>
-            <r-input title="营业执照" :max="20" v-model="license" placeholder="请输入营业执照" ></r-input>
+            <r-input title="企业名称" :max="50" v-model="companyName" placeholder="请输入企业名称"></r-input>
+            <r-input title="营业执照" :max="20" v-model="license" placeholder="请输入营业执照"></r-input>
         </r-group>
         <div class="btn">
             <r-button type="primary" text="下一步" @click.native="btnClick" :disabled="btnDisabled"></r-button>
@@ -444,8 +444,8 @@
                     "verfiy_code": that.yzm,
                     bank_province_name: that.provinceName,
                     bank_city_name: that.cityName,
-                    certificate_type:0,
-                    buslince_pic:"",
+                    certificate_type: 0,
+                    buslince_pic: "",
                 };
                 if (that.$route.query.rzStatus == "rzsb") {
                     param.id = that.showId;
@@ -459,7 +459,12 @@
                                     utils.go("/tx/balance", that.$router);
                                 }, 2000)
                             } else {
-                                that.$vux.alert.show(res.message);
+                                that.$vux.alert.show({
+                                    content: res.message,
+                                    onHide(){
+                                        that.showTxBind = false;
+                                    }
+                                });
                             }
                         }
                     })
