@@ -39,7 +39,7 @@
             <div class="popupArea">
                 <h3>请选择省 <a href="javascript:;" class="close" @click="showProvince=false">关闭</a></h3>
                 <div class="areaContent" :style="{maxHeight:maxH,overflow: 'auto'}">
-                    <r-group v-if="init">
+                    <r-group>
                         <r-radio :options="province" :value="provinceValue" @on-change="changeProvince"></r-radio>
                     </r-group>
                 </div>
@@ -50,7 +50,7 @@
             <div class="popupArea">
                 <h3>请选择市<a href="javascript:;" class="close" @click="showCity=false">关闭</a></h3>
                 <div class="areaContent" :style="{maxHeight:maxH,overflow: 'auto'}">
-                    <r-group v-if="init">
+                    <r-group>
                         <r-radio :options="city" :value="cityValue" @on-change="changeCity"></r-radio>
                     </r-group>
                 </div>
@@ -163,7 +163,6 @@
                 agreement: false,
                 sn: "",
                 showId: "",
-                init:false
 
             }
         },
@@ -269,7 +268,6 @@
             //发卡银行
             cardBankClick(){
                 this.showBank = true;
-                this.init=true;
             },
             //卡所在地
             cityCodeClick(){
