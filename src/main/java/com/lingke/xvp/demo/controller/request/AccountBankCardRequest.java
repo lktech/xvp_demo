@@ -59,6 +59,8 @@ public class AccountBankCardRequest implements XvpRequest {
 	private String verfiy_code;
 	private String bank_province_name;
 	private String bank_city_name;
+	private String certificate_type;
+	private String buslince_pic;
 	/**
 	 * 企业营业执照
 	 */
@@ -192,6 +194,22 @@ public class AccountBankCardRequest implements XvpRequest {
 		this.bank_city_name = bank_city_name;
 	}
 
+	public String getCertificate_type() {
+		return certificate_type;
+	}
+
+	public void setCertificate_type(String certificate_type) {
+		this.certificate_type = certificate_type;
+	}
+
+	public String getBuslince_pic() {
+		return buslince_pic;
+	}
+
+	public void setBuslince_pic(String buslince_pic) {
+		this.buslince_pic = buslince_pic;
+	}
+
 	@Override
 	public String toString() {
 		return "AccountBankCardRequest [user_name=" + user_name + ", certificate_number=" + certificate_number
@@ -199,8 +217,9 @@ public class AccountBankCardRequest implements XvpRequest {
 				+ ", bank_branch_code=" + bank_branch_code + ", bank_branch_name=" + bank_branch_name
 				+ ", bank_province_code=" + bank_province_code + ", bank_city_code=" + bank_city_code
 				+ ", company_name=" + company_name + ", phone=" + phone + ", sn=" + sn + ", verfiy_code=" + verfiy_code
-				+ ", bank_province_name=" + bank_province_name + ", bank_city_name=" + bank_city_name + ", buslince="
-				+ buslince + "]";
+				+ ", bank_province_name=" + bank_province_name + ", bank_city_name=" + bank_city_name
+				+ ", certificate_type=" + certificate_type + ", buslince_pic=" + buslince_pic + ", buslince=" + buslince
+				+ "]";
 	}
 
 
