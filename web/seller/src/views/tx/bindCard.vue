@@ -347,6 +347,7 @@
                 let that = this;
                 that.provinceName = obj.value;
                 that.provinceCode = obj.key;
+                that.cityName="";
                 if (this.$route.query.rzStatus == "" || this.$route.query.rzStatus == undefined) {
                     this.proStatus = 2;
                 }
