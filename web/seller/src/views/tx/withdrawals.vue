@@ -89,7 +89,7 @@
         },
         mounted: function () {
             this.$nextTick(function () {
-				utils.MenuShare();
+                utils.MenuShare();
                 let that = this;
                 utils.ajax({
                     url: "/seller/account/getStoreBankCard",   //绑卡信息
@@ -149,7 +149,16 @@
             },
             preserve(){    // 确定提现
                 let that = this;
-                that.tocash(that);
+                that.$vux.confirm.show({
+                    content: '确认要提现到' + that.bank_code + '账号？',
+                    onConfirm(){
+                        that.tocash(that);
+                    },
+                    onCancel(){
+
+                    }
+                });
+
             },
             getInput(v, s){
                 let that = this;
