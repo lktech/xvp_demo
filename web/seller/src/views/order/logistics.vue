@@ -125,7 +125,7 @@
             "cCell": require('../../components/cell/cell.vue'),
             "cInput":require('../../components/input/input.vue'),
             "cGroup":require('../../components/group/group.vue'),
-            "cAddr": require('../../components/x-address-checked/x-address-checked.vue'),
+            "cAddr": require('../../components/x-address-checked/x-address-checked1.vue'),
             "cButton":require('../../components/button/button.vue'),
 
         }
