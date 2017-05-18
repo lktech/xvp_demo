@@ -48,6 +48,7 @@ import com.lingke.xvp.demo.controller.response.AccountBankInfoResponse;
 import com.lingke.xvp.demo.controller.response.AccountCityCodeGetResponse;
 import com.lingke.xvp.demo.controller.response.AccountGetResponse;
 import com.lingke.xvp.demo.controller.response.XvpResponse;
+import com.lingke.xvp.demo.exception.DemoException;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
 
@@ -59,6 +60,8 @@ import com.lingke.xvp.demo.utils.SessionUtil;
 public class AccountController {
 	@Autowired
 	private XvpRopClient ropClientAdapter;
+
+	private static final String VERIFY_CODE_ERROR = "verify_code_error";
 
 	/**
 	 * 查询账户金额信息
@@ -151,7 +154,7 @@ public class AccountController {
 			throw new RuntimeException("当前登录用户电话号码与绑定银行卡电话号码不一致");
 		}
 		if (!checkCode(request.getPhone(), request.getSn(), request.getVerfiy_code())) {
-			throw new RuntimeException("验证码输入错误");
+			throw new DemoException(VERIFY_CODE_ERROR, "验证码输入错误");
 		}
 		XvpTlstoreaccountAddstorebankcardRequest ropRequest = BeanCopyUtil.copy(request,
 				XvpTlstoreaccountAddstorebankcardRequest.class);
@@ -176,7 +179,7 @@ public class AccountController {
 			throw new RuntimeException("当前登录用户电话号码与绑定银行卡电话号码不一致");
 		}
 		if (!checkCode(request.getPhone(), request.getSn(), request.getVerfiy_code())) {
-			throw new RuntimeException("验证码输入错误");
+			throw new DemoException(VERIFY_CODE_ERROR, "验证码输入错误");
 		}
 		XvpTlstoreaccountUpdatecompanystorebankcardRequest ropRequest = BeanCopyUtil.copy(request,
 				XvpTlstoreaccountUpdatecompanystorebankcardRequest.class);
