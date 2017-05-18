@@ -2,7 +2,7 @@
     <div class="bindCard">
         <c-top-back></c-top-back>
         <r-group>
-            <r-cell title="个人账户提现账号绑定" class="cellTitle"></r-cell>
+            <r-cell :title="defaultTitle" class="cellTitle"></r-cell>
             <r-cell title="发卡银行" :value="cardBank" is-link @click.native="cardBankClick"></r-cell>
             <r-cell title="卡所在地" :value="provinceName +' '+cityName" is-link @click.native="cityCodeClick"></r-cell>
         </r-group>
@@ -119,6 +119,7 @@
         data(){
             return {
                 type: this.$route.query.type,
+                defaultTitle: this.type == 1 ? "个人账户提现账号绑定" : "企业账户提现账号绑定",
                 provinceName: "",//省
                 provinceCode: "",//省编码
                 cityName: "",//城市
@@ -347,7 +348,7 @@
                 let that = this;
                 that.provinceName = obj.value;
                 that.provinceCode = obj.key;
-                that.cityName="";
+                that.cityName = "";
                 if (this.$route.query.rzStatus == "" || this.$route.query.rzStatus == undefined) {
                     this.proStatus = 2;
                 }
@@ -465,9 +466,9 @@
                                     utils.go("/tx/balance", that.$router);
                                 }, 2000)
                             } else {
-                                if(res.code=="verify_code_error"){
+                                if (res.code == "verify_code_error") {
                                     that.$vux.alert.show(res.message);
-                                }else {
+                                } else {
                                     that.$vux.alert.show({
                                         content: res.message,
                                         onHide(){
@@ -489,9 +490,9 @@
                                     utils.go("/tx/balance", that.$router);
                                 }, 2000)
                             } else {
-                                if(res.code=="verify_code_error"){
+                                if (res.code == "verify_code_error") {
                                     that.$vux.alert.show(res.message);
-                                }else {
+                                } else {
                                     that.$vux.alert.show({
                                         content: res.message,
                                         onHide(){
@@ -512,7 +513,7 @@
         },
         watch: {
             showBank(val){
-                if(!val){
+                if (!val) {
                     this.init = true;
                 }
             },
