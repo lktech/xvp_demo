@@ -165,7 +165,7 @@
                 sn: "",
                 showId: "",
                 init: false,
-
+                isSendCode: false,
             }
         },
         computed: {
@@ -413,6 +413,7 @@
                     success: function (res) {
                         if (res.code == "SUCCESS") {
                             that.sn = res.result.sn;
+                            that.isSendCode = true;
                             that.txt = "已发送(" + second + ")秒";
                             var timer = setInterval(function () {
                                 if (second > 1) {
@@ -454,55 +455,59 @@
                     certificate_type: 0,
                     buslince_pic: "",
                 };
-                if (that.$route.query.rzStatus == "rzsb") {
-                    param.id = that.showId;
-                    utils.ajax({
-                        url: "/seller/account/updateCompanyStoreBankCard",
-                        data: param,
-                        success: function (res) {
-                            if (res.code == "SUCCESS") {
-                                that.$vux.toast.show('提交成功');
-                                setTimeout(function () {
-                                    utils.go("/tx/balance", that.$router);
-                                }, 2000)
-                            } else {
-                                if (res.code == "verify_code_error") {
-                                    that.$vux.alert.show(res.message);
+                if (that.isSendCode) {
+                    if (that.$route.query.rzStatus == "rzsb") {
+                        param.id = that.showId;
+                        utils.ajax({
+                            url: "/seller/account/updateCompanyStoreBankCard",
+                            data: param,
+                            success: function (res) {
+                                if (res.code == "SUCCESS") {
+                                    that.$vux.toast.show('提交成功');
+                                    setTimeout(function () {
+                                        utils.go("/tx/balance", that.$router);
+                                    }, 2000)
                                 } else {
-                                    that.$vux.alert.show({
-                                        content: res.message,
-                                        onHide(){
-                                            that.showTxBind = false;
-                                        }
-                                    });
+                                    if (res.code == "verify_code_error") {
+                                        that.$vux.alert.show(res.message);
+                                    } else {
+                                        that.$vux.alert.show({
+                                            content: res.message,
+                                            onHide(){
+                                                that.showTxBind = false;
+                                            }
+                                        });
+                                    }
                                 }
                             }
-                        }
-                    })
-                } else {
-                    utils.ajax({
-                        url: "/seller/account/addStoreBankCard",
-                        data: param,
-                        success: function (res) {
-                            if (res.code == "SUCCESS") {
-                                that.$vux.toast.show('提交成功');
-                                setTimeout(function () {
-                                    utils.go("/tx/balance", that.$router);
-                                }, 2000)
-                            } else {
-                                if (res.code == "verify_code_error") {
-                                    that.$vux.alert.show(res.message);
+                        })
+                    } else {
+                        utils.ajax({
+                            url: "/seller/account/addStoreBankCard",
+                            data: param,
+                            success: function (res) {
+                                if (res.code == "SUCCESS") {
+                                    that.$vux.toast.show('提交成功');
+                                    setTimeout(function () {
+                                        utils.go("/tx/balance", that.$router);
+                                    }, 2000)
                                 } else {
-                                    that.$vux.alert.show({
-                                        content: res.message,
-                                        onHide(){
-                                            that.showTxBind = false;
-                                        }
-                                    });
+                                    if (res.code == "verify_code_error") {
+                                        that.$vux.alert.show(res.message);
+                                    } else {
+                                        that.$vux.alert.show({
+                                            content: res.message,
+                                            onHide(){
+                                                that.showTxBind = false;
+                                            }
+                                        });
+                                    }
                                 }
                             }
-                        }
-                    })
+                        })
+                    }
+                }else {
+                    that.$vux.alert.show("请先发送验证码");
                 }
 
             },
