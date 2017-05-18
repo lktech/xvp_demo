@@ -10,7 +10,7 @@
             <r-input title="证件号码" :max="18" v-model="idCode" placeholder="请输入证件号码"></r-input>
         </r-group>
         <r-group title="请填写实名信息" v-else>
-            <r-input title="企业名称" :max="50" v-model="companyName" placeholder="请输入企业名称"></r-input>
+            <r-input title="企业名称" :max="30" v-model="companyName" placeholder="请输入企业名称"></r-input>
             <r-input title="营业执照" :max="20" v-model="businessLicense" placeholder="请输入营业执照号码"></r-input>
             <!--<r-input title="上传执照" :placeholder="'请上传您的营业执照照片('+picList.length+'/1)'" value="" disabled></r-input>-->
             <!--<div class="licensePic">-->
@@ -174,7 +174,7 @@
             },
             //检查企业实名认证
             checkCompany(){
-                if (this.companyName.indexOf(" ") == -1 && this.companyName != "" && this.businessLicense.indexOf(" ") == -1 && this.businessLicense != "") {
+                if (this.companyName.indexOf(" ") == -1 && this.companyName != "" && /^[0-9a-zA-Z]{15,18}$/.test(this.businessLicense) && this.businessLicense != "") {
                     this.btnDisabled = false;
                 } else {
                     this.btnDisabled = true;
