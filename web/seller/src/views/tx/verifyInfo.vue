@@ -183,7 +183,7 @@
 
         },
         watch: {
-            name(val, oldVal){
+            trueName(val, oldVal){
                 this.checkPerson();
             },
             idCode(val, oldVal){
@@ -202,7 +202,7 @@
             "rGroup": require("../../components/group/group.vue"),
             "rInput": require("../../components/input/input.vue"),
             "rButton": require("../../components/button/button.vue"),
-            "rAddressChecked": require('../../components/x-address-checked/x-address-checked.vue'),
+            "rAddressChecked": require('../../components/x-address-checked/x-address-checked1.vue'),
             "cUploadmul": require('../../components/x-upload-img/x-upload-img-Slice.vue'),
         }
     }
