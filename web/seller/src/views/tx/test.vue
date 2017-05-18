@@ -3,10 +3,12 @@
         <r-button type="primary" text="下一步" @click.native="btnClick"></r-button>
         <!--<div v-html="provinceValue.name"></div>-->
 
-        <r-group title="object options">
+        <r-group title="标题">
             <r-radio :options="radioData" :value="defaultValue" @on-change="change"></r-radio>
         </r-group>
-
+        <r-group title="default">
+            <r-radio :options="radio001" @on-change="change"></r-radio>
+        </r-group>
         <r-button type="primary" text="清空" @click.native="clearClick"></r-button>
     </div>
 </template>
@@ -66,7 +68,7 @@
             "rInput": require("../../components/input/input.vue"),
             "rButton": require("../../components/button/button.vue"),
             "rPopup": require("../../components/popup/popup.vue"),
-            "rRadio": require("../../components/radio/x-radio.vue"),
+            "rRadio": require("../../components/radio/radio.vue"),
         }
     }
     //require("../../assets/styles/views/batchExport.less");
