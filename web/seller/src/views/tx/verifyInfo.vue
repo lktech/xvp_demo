@@ -11,7 +11,7 @@
         </r-group>
         <r-group title="请填写实名信息" v-else>
             <r-input title="企业名称" :max="30" v-model="companyName" placeholder="请输入企业名称"></r-input>
-            <r-input title="营业执照" :max="20" v-model="businessLicense" placeholder="请输入营业执照号码"></r-input>
+            <r-input title="营业执照" :max="18" v-model="businessLicense" placeholder="请输入营业执照号码"></r-input>
             <!--<r-input title="上传执照" :placeholder="'请上传您的营业执照照片('+picList.length+'/1)'" value="" disabled></r-input>-->
             <!--<div class="licensePic">-->
             <!--&lt;!&ndash;<img :src="item" @click="imgClick(index)" v-for="(item,index) in picList">&ndash;&gt;-->
