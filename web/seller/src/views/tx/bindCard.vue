@@ -119,7 +119,7 @@
         data(){
             return {
                 type: this.$route.query.type,
-                defaultTitle: this.type == 1 ? "个人账户提现账号绑定" : "企业账户提现账号绑定",
+                defaultTitle: this.$route.query.type == 1 ? "个人账户提现账号绑定" : "企业账户提现账号绑定",
                 provinceName: "",//省
                 provinceCode: "",//省编码
                 cityName: "",//城市
