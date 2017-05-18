@@ -89,7 +89,7 @@
         },
         mounted: function () {
             this.$nextTick(function () {
-//				utils.MenuShare();
+				utils.MenuShare();
                 let that = this;
                 utils.ajax({
                     url: "/seller/account/getStoreBankCard",   //绑卡信息

@@ -648,13 +648,13 @@ exports.MenuShare = function () {
                     wx.onMenuShareAppMessage({
                         title: '小V铺商家管理后台', // 分享标题
                         desc: '帮您搭建基于社交场景的全新电商营销方案。', // 分享描述
-                        link: 'http://demo.open.xiaovpu.com/seller/index.html', // 分享链接
+                        link: location.origin +'/seller/index.html', // 分享链接
                         imgUrl: 'http://img1.xiaovpu.com/3628208054774302.png' // 分享图标
                     });
 
                     wx.onMenuShareTimeline({
                         title: '小V铺商家管理后台', // 分享标题
-                        link: 'http://demo.open.xiaovpu.com/seller/index.html', // 分享链接
+                        link:location.origin +'/seller/index.html', // 分享链接
                         imgUrl: 'http://img1.xiaovpu.com/3628208054774302.png' // 分享图标
                     });
                     wx.hideMenuItems({

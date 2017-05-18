@@ -464,12 +464,16 @@
                                     utils.go("/tx/balance", that.$router);
                                 }, 2000)
                             } else {
-                                that.$vux.alert.show({
-                                    content: res.message,
-                                    onHide(){
-                                        that.showTxBind = false;
-                                    }
-                                });
+                                if(res.code=="verify_code_error"){
+                                    that.$vux.alert.show(res.message);
+                                }else {
+                                    that.$vux.alert.show({
+                                        content: res.message,
+                                        onHide(){
+                                            that.showTxBind = false;
+                                        }
+                                    });
+                                }
                             }
                         }
                     })
@@ -484,7 +488,16 @@
                                     utils.go("/tx/balance", that.$router);
                                 }, 2000)
                             } else {
-                                that.$vux.alert.show(res.message);
+                                if(res.code=="verify_code_error"){
+                                    that.$vux.alert.show(res.message);
+                                }else {
+                                    that.$vux.alert.show({
+                                        content: res.message,
+                                        onHide(){
+                                            that.showTxBind = false;
+                                        }
+                                    });
+                                }
                             }
                         }
                     })
