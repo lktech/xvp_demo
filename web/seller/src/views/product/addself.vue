@@ -278,6 +278,7 @@
           },
           onConfirm(){
             location.reload();
+              window.scrollTo(0, 0);
                 // this.formData={
                 //       name:'',
                 //       describe:'',

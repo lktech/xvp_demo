@@ -469,7 +469,13 @@
                                     }, 2000)
                                 } else {
                                     if (res.code == "verify_code_error") {
-                                        that.$vux.alert.show(res.message);
+                                        that.$vux.alert.show({
+                                            content: res.message,
+                                            onHide(){
+                                                that.yzm="";
+                                                that.showTxBind = true;
+                                            }
+                                        });
                                     } else {
                                         that.$vux.alert.show({
                                             content: res.message,
@@ -493,7 +499,13 @@
                                     }, 2000)
                                 } else {
                                     if (res.code == "verify_code_error") {
-                                        that.$vux.alert.show(res.message);
+                                        that.$vux.alert.show({
+                                            content: res.message,
+                                            onHide(){
+                                                that.yzm="";
+                                                that.showTxBind = true;
+                                            }
+                                        });
                                     } else {
                                         that.$vux.alert.show({
                                             content: res.message,
