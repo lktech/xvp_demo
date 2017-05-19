@@ -112,7 +112,7 @@ export default {
 
 .vux-number-input {
   float:left;
-  height:20px;
+  height:28px;
   font-size:20px;
   color: @number-input-font-color;
   appearance: none;
@@ -126,7 +126,7 @@ export default {
 }
 .vux-number-selector {
   float:left;
-  height:20px;
+  height:28px;
   font-size:25px;
   line-height:18px;
   color:@number-button-font-color;
