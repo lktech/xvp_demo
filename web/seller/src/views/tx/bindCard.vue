@@ -196,7 +196,10 @@
                                 that.bankList.push({id: obj.bankcode, trueName: obj.bankname});
                             });
                         } else {
-                            that.$vux.alert.show(res.message);
+                            that.$vux.alert.show({
+                                content: res.message,
+                                onHide(){}
+                            });
                         }
                     }
                 });
@@ -211,7 +214,10 @@
                                 that.province.push({key: obj.code, value: obj.name});
                             })
                         } else {
-                            that.$vux.alert.show(res.message);
+                            that.$vux.alert.show({
+                                content: res.message,
+                                onHide(){}
+                            });
                         }
                     }
                 });
@@ -256,12 +262,18 @@
                                                 that.subBankList.push({id: obj.bankcode, trueName: obj.bankname});
                                             });
                                         } else {
-                                            that.$vux.alert.show(res.message);
+                                            that.$vux.alert.show({
+                                                content: res.message,
+                                                onHide(){}
+                                            });
                                         }
                                     }
                                 })
                             } else {
-                                that.$vux.alert.show(res.message);
+                                that.$vux.alert.show({
+                                    content: res.message,
+                                    onHide(){}
+                                });
                             }
                         }
                     });
@@ -280,7 +292,10 @@
                 if (this.cardBank) {
                     this.showProvince = true;
                 } else {
-                    this.$vux.alert.show("请选择发卡银行");
+                    this.$vux.alert.show({
+                        content: "请选择发卡银行",
+                        onHide(){}
+                    });
                 }
             },
             //支行点击
@@ -288,7 +303,10 @@
                 if (this.cityName) {
                     this.showSubBank = true;
                 } else {
-                    this.$vux.alert.show("请选择卡所在地");
+                    this.$vux.alert.show({
+                        content: "请选择卡所在地",
+                        onHide(){}
+                    });
                 }
 
             },
@@ -323,7 +341,7 @@
             },
             //验证个人
             check(){
-                if (this.cardBank != "" && this.cityCode != "" && this.openingBank != "" && /^\d{16,21}$/.test(this.cardNumber) && this.trueName.indexOf(" ") == -1 && this.trueName != "" && /^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/.test(this.idCode)) {
+                if (this.cardBank != "" && this.cityCode != "" && this.openingBank != "" && /^\d{15,21}$/.test(this.cardNumber) && this.trueName.indexOf(" ") == -1 && this.trueName != "" && /^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/.test(this.idCode)) {
                     this.btnDisabled = false;
                 } else {
                     this.btnDisabled = true;
@@ -331,7 +349,7 @@
             },
             //验证企业
             checkCompany(){
-                if (this.cardBank != "" && this.cityCode != "" && this.openingBank != "" && /^\d{16,21}$/.test(this.cardNumber) && /^[0-9a-zA-Z]{15,18}$/.test(this.license) && this.license != "" && this.companyName.indexOf(" ") == -1 && this.companyName != "") {
+                if (this.cardBank != "" && this.cityCode != "" && this.openingBank != "" && /^\d{15,21}$/.test(this.cardNumber) && /^[0-9a-zA-Z]{15,18}$/.test(this.license) && this.license != "" && this.companyName.indexOf(" ") == -1 && this.companyName != "") {
                     this.btnDisabled = false;
                 } else {
                     this.btnDisabled = true;
@@ -366,7 +384,10 @@
                                 that.showProvince = false;
                                 that.showCity = true;
                             } else {
-                                that.$vux.alert.show(res.message);
+                                that.$vux.alert.show({
+                                    content: res.message,
+                                    onHide(){}
+                                });
                             }
                         }
                     })
@@ -389,7 +410,10 @@
                                 that.subBankList.push({id: obj.bankcode, trueName: obj.bankname});
                             });
                         } else {
-                            that.$vux.alert.show(res.message);
+                            that.$vux.alert.show({
+                                content: res.message,
+                                onHide(){}
+                            });
                         }
                     }
                 })
@@ -427,7 +451,10 @@
                             }, 1000);
                         } else {
                             that.sendYzmBtn = false;
-                            that.$vux.alert.show(res.message);
+                            that.$vux.alert.show({
+                                content: res.message,
+                                onHide(){}
+                            });
                         }
                     }
                 });

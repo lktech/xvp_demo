@@ -118,6 +118,9 @@ router.beforeEach((to, from, next) => {
     if (to.path == "/tx/balance") {
         document.setTitle('我的余额');
     }
+    if (to.path == "/tx/verifyInfo") {
+        document.setTitle('实名验证');
+    }
     if (to.path == "/tx/bindCard") {
         document.setTitle('提现绑卡');
     }
