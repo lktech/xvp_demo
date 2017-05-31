@@ -11,7 +11,7 @@
         <File>/data/logs/xvp_demo/server.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <FileNamePattern>server.log.%d{yyyy-MM-dd}</FileNamePattern>
+            <FileNamePattern>/data/logs/backup/server.log.%d{yyyy-MM-dd}</FileNamePattern>
             <!-- keep 30 days' worth of history -->
             <maxHistory>30</maxHistory>
         </rollingPolicy>
