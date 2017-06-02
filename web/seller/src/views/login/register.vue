@@ -99,7 +99,7 @@
                             });
                         }else{
                             that.$vux.alert.show({content:'手机号已注册,点击确定去登陆',onHide :function(){
-                              utils.go({path:'/login/login'},that.$router);
+                              utils.go({path:'/login'},that.$router);
                             }});
                         }
                     }
