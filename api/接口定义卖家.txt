@@ -1,0 +1,221 @@
+接口全是post方式调用，请求和响应的数据格式都是json
+
+1. 获取短信验证码
+   url: /seller/seller/verify
+   
+   input:{phone:value}
+   output:{code:"SUCESS",result:{sn:value}} 或者 {code:"",message:""}--不是成功时code可能是任何的一个编码，message是具体的异常信息
+
+1. check手机号是否已注册
+   url: /seller/seller/check
+   
+   input:{phone:value}
+   output:{code:"SUCESS"result:{flag:yes|no}}  yes 表示已注册，no表示没有注册
+   
+   或者 调用错误时{code:"error_code",message:"error_message"}
+
+2. 商家注册
+   url ： /seller/seller/register
+   
+   input {phone:value,sn:value,password:value,verify_code:value}
+   output{code:"SUCESS"} 或者 {code:"",message:""}
+   
+3. 商家登录：
+
+   url /seller/seller/login
+   
+   input {phone:value,password:value}
+   output{code:"SUCESS"}  或者{code:"",message:""}
+
+4. 忘记密码接口
+	url ： /seller/seller/reset
+   
+   input {phone:value,sn:value,password:value,verify_code:value}
+   output{code:"SUCESS"}或者 {code:"",message:""}
+   
+5. 添加店铺信息
+
+   url ： /seller/store/add
+   
+   input {store_name:value,owner_real_name:value,customer_service_phone:value,
+		  region_code:value,detail_address:value,qq:value}
+   output{code:"SUCESS"}或者 {code:"",message:""}  
+   
+6. 修改店铺信息   
+  
+   url ： /seller/store/update
+   
+   input {store_name:value,owner_real_name:value,customer_service_phone:value,
+		  region_code:value,detail_address:value,qq:value}
+   output{code:"SUCESS"}或者 {code:"",message:""}
+   
+6. 获取店铺信息   
+  
+   url ： /seller/store/get
+   
+   input
+   output{code:"SUCESS" result:{store_name:value,owner_real_name:value,customer_service_phone:value,
+		  region_code:value,detail_address:value,qq:value}}
+   
+   或者 {code:"",message:""}   
+
+7. 新增商品
+
+   url ： /seller/product/add
+   
+   input {name:value,pics:value,product_detail:value,
+		  pay_type:value,product_desc:value
+		  ,logistics_fee:value,sku:[{price:value,stock:value,sku_str:value}]}
+   output{code:"SUCESS"}或者 {code:"",message:""}
+   
+8. 获取商品
+
+   url ： /seller/product/get
+   
+   input  {id:value}
+   output {code:"SUCESS",result:{
+			id:value,name:value,pics:value,product_detail:value,
+			pay_type:value,product_desc:value,logistics_fee:value
+		  }}
+   或者 {code:"",message:""}   
+   
+   
+9. 删除商品
+
+   url ： /seller/product/delete
+   
+   input  {id:value}
+   output {code:"SUCESS"}
+   或者 {code:"",message:""}   
+   
+   
+10 修改商品
+
+   url ： /seller/product/update
+   
+   input {id:value,name:value,pics:value,product_detail:value,
+		  pay_type:value,product_desc:value,logistics_fee:value
+		  ,sku:[{id:value,price:value,stock:value,sku_str:value}]}
+   output{code:"SUCESS"}或者 {code:"",message:""} 
+     
+11 我的仓库查询商品
+
+   url ： /seller/product/query
+   
+   input 
+   output  {code:"SUCESS",result:[{id:value,name:value,pics:value,product_detail:value,
+			pay_type:value,product_desc:value,logistics_fee:value}]
+			}
+		或者 {code:"",message:""}     
+		
+3. 获取商品的sku信息
+ url: /seller/product/sku/get
+   
+   input:{product_id:value}
+   output:{code:"SUCESS",result:
+			[{id:value,price:value,stock:value,sku_str:value}]
+		  } 		
+		
+12 上传图片
+    待定
+	
+13 订单管理查询
+
+   url ： /seller/order/query
+   
+   input  {order_status:"DFK"||"DFH"||"DSH"||"YWC"||空}
+   output  {code:"SUCESS",result:[{order_id:value,pay_type:value,items_total_fee:订单去除运费和优惠的商品金额,
+			seller_discount_fee:优惠金额,logistic_fee:运费金额,pay_amount:	最终支付的金额
+			user_remark:用户的备注,seller_remark:卖家的备注,order_status,订单状态 DFK：待付款 DFH：待发货 DSH：待收货 YSH： 已收货
+			,address:物流配送地址,address_name:收件人,address_phone:收件电话,
+			create_time:创建时间,pay_time,支付时间,confirm_receive_time:最后确认收货时间,
+			xvporderitems:[{id:value,product_id:value,sku_id:value,product_name:value,price:value,
+							sku_str:value,item_count:购买数量,delivery_id:物流ID,create_time:vlue}],
+							
+			orderdeliverys:[{id:value,logistics_company_code:快递公司编码,logistics_company_name:快递公司名称,
+							logistics_num:	运单号,need_logistics_flg:是否需要物流, 0 不要物流 1 需要物流,create_time:value}]				
+			}
+			]
+			}
+		或者 {code:"",message:""}   
+
+		
+14 订单详情查询
+
+   url ： /seller/order/get
+   
+   input  {order_id:value}
+   output  {code:"SUCESS",result:{order_id:value,pay_type:value,items_total_fee:订单去除运费和优惠的商品金额,
+			seller_discount_fee:优惠金额,logistic_fee:运费金额,pay_amount:	最终支付的金额
+			user_remark:用户的备注,seller_remark:卖家的备注,order_status,订单状态 DFK：待付款 DFH：待发货 DSH：待收货 YSH： 已收货
+			,address:物流配送地址,address_name:收件人,address_phone:收件电话,
+			create_time:创建时间,pay_time,支付时间,confirm_receive_time:最后确认收货时间,
+			xvporderitems:[{id:value,product_id:value,sku_id:value,product_name:value,price:value,
+							sku_str:value,item_count:购买数量,delivery_id:物流ID,create_time:vlue}],
+							
+			orderdeliverys:[{id:value,logistics_company_code:快递公司编码,logistics_company_name:快递公司名称,
+							logistics_num:	运单号,need_logistics_flg:是否需要物流, 0 不要物流 1 需要物流,create_time:value}]				
+			}}
+		或者 {code:"",message:""}
+
+15 订单发货
+
+    url ： /seller/order/delivery
+   
+   input  {order_id:value,logistics_company_code:快递公司编码,logistics_company_name:快递公司名称,
+		logistics_num:	运单号,need_logistics_flg:是否需要物流, 0 不要物流 1 需要物流,
+		order_item_id_list:[1,2,3]}	
+	output{code:"SUCESS"}或者 {code:"",message:""} 	
+	
+16 更新订单优惠金额
+
+	
+    url ： /seller/order/discount
+   
+   input  {order_id:value,discount_amount:value}
+   output{code:"SUCESS"}或者 {code:"",message:""} 
+   
+17 获取是省行政区划
+
+   url ： /common/getprovinceareas
+   
+   input  
+   output{code:"SUCESS",result:[{code,name}]}或者 {code:"",message:""} 
+   
+18 获取是市行政区划
+
+   url ： /common/getcityareas
+   
+   input  {province_code:value}
+   output{code:"SUCESS",result:[{code,name}]}或者 {code:"",message:""} 
+     
+19 获取是县区行政区划
+
+   url ： /common/getcountyareas
+   
+   input  {city_code:value}
+   output{code:"SUCESS",result:[{code,name}]}或者 {code:"",message:""}    
+   
+   
+20 登录时首先check是否登录过的接口
+
+   url ： /seller/seller/login/check
+   
+   input 
+   output  {code:"SUCESS",result:{flag:yes|no}   --yes 登录过，no 未登录过
+			}
+		或者 {code:"",message:""}     
+		
+		
+21 获取微信config 接口
+
+   url ： /common/wxconfig/get
+   
+   input  {base_url:value}
+
+   output  {code:"SUCESS",result:{"signature":"2167cb1cea6d57b0db37bf7594fc387c42867732",
+						"appId":"wx9130fbba59fae4be","nonceStr":"kz7xouzvb38j","timestamp":1490604941}   
+			}
+		或者 {code:"",message:""}     
+
+		
