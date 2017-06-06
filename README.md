@@ -52,14 +52,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ![](https://github.com/lktech/xvp_demo/raw/master/image/03.png)<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/04.png)<br>
 
-###3.注册后,加入QQ群451528860，联系平台人员，立马为您审批<br>
-
-###4.登录后，点击右上角昵称，选择`应用管理`，进入应用列表页面 <br>
+###3.登录后，点击右上角昵称，选择`应用管理`，进入应用列表页面 <br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/05.png)<br>
 
-###5.添加应用<br>
+###4.添加应用<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/06.png)<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/07.png)<br>
+
+###5.加入QQ群451528860，联系平台人员，立马为您审批<br>
 
 ###6.点击账号信息，查看详情信息<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/08.png)<br>
