@@ -20,7 +20,7 @@
         },
         data () {
             return {
-                src: this.logo ? this.logo : "http://xiaovpu.com/static/image/logo.png"
+                src: this.logo ? this.logo : "http://xiaovpu.com/img/logo.png"
             }
         },
         computed: {},
