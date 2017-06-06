@@ -10,7 +10,7 @@
                     :maxvalue="maxvalue/100"
                     :words="words"
                     :val="input_money"
-                    :minvalue="0.02"
+                    :minvalue="100"
                     :digit="2"
                     @on-input="getInput">
             </c-input-num>
@@ -131,7 +131,7 @@
                     type: 'POST',
                     data: {
                         'amount': that.input_money * 100,              //    实际提现金额
-                        'commission': 1 || that.data_counter * 100,        //    手续费
+                        'commission': that.data_counter * 100,        //    手续费
                     },
                     success: function (data) {
                         that.cash_result = true;
