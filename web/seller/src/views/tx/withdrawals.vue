@@ -10,7 +10,7 @@
                     :maxvalue="maxvalue/100"
                     :words="words"
                     :val="input_money"
-                    :minvalue="100"
+                    :minvalue="0"
                     :digit="2"
                     @on-input="getInput">
             </c-input-num>
