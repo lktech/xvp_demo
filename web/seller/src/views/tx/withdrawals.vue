@@ -189,20 +189,13 @@
                 that.disabled = false;
                 if (that.input_money > 0) {
                     that.color = 'primary';
-                    if (that.input_money >= 100) {
+                    //if (that.input_money >= 100) {
                         that.data_money = that.input_money - that.input_money * 0.006 - 3;
                         that.money = utils.formatPrice(that.data_money * 100) + '元';
 
                         that.data_counter = 3 + that.input_money * 0.006;
                         that.counter = utils.formatPrice(that.data_counter * 100) + '元';
-                    }
-//                    else {
-//                        that.data_money = that.input_money - 3;
-//                        that.money = utils.formatPrice(that.data_money * 100) + '元';
-//
-//                        that.data_counter = 3;
-//                        that.counter = utils.formatPrice(that.data_counter * 100) + '元';
-//                    }
+                    //}
                 } else {
                     that.color = 'default';
                     that.disabled = true;
