@@ -111,7 +111,7 @@
                     data: {},
                     success: function (data) {
                         if (data.code == 'SUCCESS') {
-                            that.maxvalue = data.result.withdrawals_amount;
+                            that.maxvalue =50000|| data.result.withdrawals_amount;
                         } else {
                             that.$vux.alert.show(data.message);
                         }
