@@ -111,7 +111,7 @@
                     data: {},
                     success: function (data) {
                         if (data.code == 'SUCCESS') {
-                            that.maxvalue =5000000|| data.result.withdrawals_amount;
+                            that.maxvalue = data.result.withdrawals_amount;
                         } else {
                             that.$vux.alert.show(data.message);
                         }
@@ -166,8 +166,8 @@
                     that.input_money = v;
                     that.statusCtrl(v, that);
                 } else {
-                    that.counter="3.00元";
-                    that.money="0.00元"
+                    that.counter = "3.00元";
+                    that.money = "0.00元"
                     that.disabled = true;
                     that.color = 'default';
                 }
@@ -192,11 +192,11 @@
                 if (that.input_money > 0) {
                     that.color = 'primary';
                     //if (that.input_money >= 100) {
-                        that.data_money = that.input_money - that.input_money * 0.006 - 3;
-                        that.money =parseFloat(that.data_money).toFixed(2)   + '元';//实际提现金额
+                    that.data_money = that.input_money - that.input_money * 0.006 - 3;
+                    that.money = parseFloat(that.data_money).toFixed(2) + '元';//实际提现金额
 
-                        that.data_counter = 3 + that.input_money * 0.006;
-                        that.counter =parseFloat(that.data_counter).toFixed(2)  + '元'; //手续费
+                    that.data_counter = 3 + that.input_money * 0.006;
+                    that.counter = parseFloat(that.data_counter).toFixed(2) + '元'; //手续费
                     //}
                 } else {
                     that.color = 'default';
