@@ -41,13 +41,11 @@ public class StoreController {
 	@ResponseBody
 	public XvpResponse storeMain(@RequestBody StoreMainRequest request) throws Exception{
 		XvpStoreGetRequest ropRequest = BeanCopyUtil.copy(request, XvpStoreGetRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpStoreGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		Store store = ropResponse.getStore();
 		StoreMainResponse response = BeanCopyUtil.copy(store, StoreMainResponse.class);
 		response.setLogo(getLogo(store.getExtendfields()));
 		XvpProductQueryRequest ropProductRequest= new XvpProductQueryRequest();
-		ropProductRequest.setApp_id(ropClientAdapter.getAppId());
 		ropProductRequest.setStore_id(request.getStore_id());
 		ropProductRequest.setPage_no(XvpConstants.PAGE_NO);
 		ropProductRequest.setPage_size(XvpConstants.PAGE_SIZE);

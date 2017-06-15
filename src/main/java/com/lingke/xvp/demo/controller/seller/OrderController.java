@@ -50,7 +50,6 @@ public class OrderController {
 	@RequestMapping(path = "/query", method = RequestMethod.POST)
 	public XvpResponse query(@RequestBody OrderQueryRequest request) throws Exception {
 		XvpOrderQueryRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderQueryRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
 		ropRequest.setPage_no(XvpConstants.PAGE_NO);
 		ropRequest.setPage_size(XvpConstants.PAGE_SIZE);
@@ -75,7 +74,6 @@ public class OrderController {
 	@RequestMapping(path = "/get", method = RequestMethod.POST)
 	public XvpResponse get(@RequestBody OrderGetRequest request) throws Exception {
 		XvpOrderGetRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderGetRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpOrderGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		OrderQueryResponse response = copyXvpOrderToXvpResponse(ropResponse.getXvporder());
 		return response;
@@ -96,7 +94,6 @@ public class OrderController {
 		StringBuilder itemIds = new StringBuilder();
 		request.getOrder_item_id_list().forEach(x -> itemIds.append(x).append(","));
 		ropRequest.setOrder_item_id_list(itemIds.deleteCharAt(itemIds.length() - 1).toString());
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
 	}
@@ -112,7 +109,6 @@ public class OrderController {
 	@RequestMapping(path = "/discount", method = RequestMethod.POST)
 	public XvpResponse discount(@RequestBody OrderDiscountRequest request) throws Exception {
 		XvpOrderDiscountRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderDiscountRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
 	}

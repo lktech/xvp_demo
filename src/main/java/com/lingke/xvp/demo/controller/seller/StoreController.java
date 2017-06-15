@@ -50,7 +50,6 @@ public class StoreController {
 	@ResponseBody
 	public XvpResponse createStore(@RequestBody StoreCreateRequest request) throws Exception {
 		XvpStoreCreateRequest ropRequest = BeanCopyUtil.copy(request, XvpStoreCreateRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		String extendFields = getExtendField(request.getRegion_code(),request.getDetail_address(),request.getQq(),null);
 		ropRequest.setExtend_fields(extendFields);
 		XvpStoreCreateResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
@@ -108,7 +107,6 @@ public class StoreController {
 	@ResponseBody
 	public XvpResponse updateStore(@RequestBody StoreUpdateRequest request) throws Exception {
 		XvpStoreUpdateRequest ropRequest = BeanCopyUtil.copy(request, XvpStoreUpdateRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.parseLong(SessionUtil.sellerGetStoreId()));
 		String extendFields = getExtendField(request.getRegion_code(),request.getDetail_address(),request.getQq(),request.getLogo());
 		ropRequest.setExtend_fields(extendFields);
@@ -127,7 +125,6 @@ public class StoreController {
 	@ResponseBody
 	public XvpResponse getStore() throws Exception {
 		XvpStoreGetRequest ropRequest = new XvpStoreGetRequest();
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		String storeId= SessionUtil.sellerGetStoreId();
 		if(StringUtils.isEmpty(storeId)){
 			return null;

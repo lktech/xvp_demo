@@ -52,7 +52,6 @@ public class OrderController {
 	@ResponseBody
 	public XvpResponse addOrder(@RequestBody OrderCreateRequest request) throws Exception {
 		XvpOrderCreateRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderCreateRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setPay_type(XvpConstants.DEFAULT_PAY_TYPE);
 		ropRequest.setUser_id(SessionUtil.userGetUserId());
 		ropRequest.setStore_id(Long.parseLong(SessionUtil.userGetStoreId()));
@@ -85,7 +84,6 @@ public class OrderController {
 	@RequestMapping(path = "/query", method = RequestMethod.POST)
 	public XvpResponse query(@RequestBody OrderQueryRequest request) throws Exception {
 		XvpOrderQueryRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderQueryRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.userGetStoreId()));
 		ropRequest.setUser_id(SessionUtil.userGetUserId());
 		ropRequest.setPage_no(XvpConstants.PAGE_NO);
@@ -110,7 +108,6 @@ public class OrderController {
 	@RequestMapping(path = "/get", method = RequestMethod.POST)
 	public XvpResponse get(@RequestBody OrderGetRequest request) throws Exception {
 		XvpOrderGetRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderGetRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpOrderGetResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		String store_id = ropResponse.getXvporder().getStore_id();
 		String user_id = ropResponse.getXvporder().getXvp_uid();
@@ -132,7 +129,6 @@ public class OrderController {
 	@RequestMapping(path = "/confirm", method = RequestMethod.POST)
 	public XvpResponse confirm(@RequestBody OrderConfirmRequest request) throws Exception {
 		XvpOrderAcceptgoodsRequest ropRequest = BeanCopyUtil.copy(request, XvpOrderAcceptgoodsRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setXvp_uid(SessionUtil.userGetUserId());
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;

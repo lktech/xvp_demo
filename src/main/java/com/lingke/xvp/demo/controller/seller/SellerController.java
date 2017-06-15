@@ -44,7 +44,6 @@ public class SellerController {
 	@RequestMapping(value = "/verify", method = RequestMethod.POST)
 	public XvpResponse verify(@RequestBody SellerVerifyRequest request) throws Exception {
 		XvpPhoneSendcodeRequest ropRequest = BeanCopyUtil.copy(request, XvpPhoneSendcodeRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		XvpPhoneSendcodeResponse xvpUserCreateResponse = ropClientAdapter.ropInvoke(ropRequest);
 		SellerVerifyResponse sellerVerifyResponse = new SellerVerifyResponse();
 		sellerVerifyResponse.setSn(xvpUserCreateResponse.getPhoneresult().getSn());
@@ -145,7 +144,6 @@ public class SellerController {
 	 */
 	private Boolean checkCode(SellerRegisterRequest request) throws Exception {
 		XvpPhoneVerifycodeRequest ropRequest = BeanCopyUtil.copy(request, XvpPhoneVerifycodeRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setVerify_code(request.getVerfiy_code());
 		XvpPhoneVerifycodeResponse response = ropClientAdapter.ropInvoke(ropRequest);
 		return Boolean.valueOf(response.getPhoneresult().getFlag());

@@ -74,7 +74,6 @@ public class AccountController {
 	@ResponseBody
 	public XvpResponse getAccountAmount() throws Exception {
 		XvpTlstoreaccountGetstoreaccountamountRequest ropRequest = new XvpTlstoreaccountGetstoreaccountamountRequest();
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
 		XvpTlstoreaccountGetstoreaccountamountResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		AccountAmountResponse response = BeanCopyUtil.copy(ropResponse.getTlstoreaccountamount(),
@@ -94,7 +93,6 @@ public class AccountController {
 	public XvpResponse createCompany(@RequestBody AccountCompanyCreateRequest request) throws Exception {
 		XvpTlstoreaccountCompanycreateRequest ropRequest = BeanCopyUtil.copy(request,
 				XvpTlstoreaccountCompanycreateRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
@@ -112,7 +110,6 @@ public class AccountController {
 	public XvpResponse createPerson(@RequestBody AccountPersonCreateRequest request) throws Exception {
 		XvpTlstoreaccountPersoncreateRequest ropRequest = BeanCopyUtil.copy(request,
 				XvpTlstoreaccountPersoncreateRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
@@ -129,7 +126,6 @@ public class AccountController {
 	@ResponseBody
 	public XvpResponse get() throws Exception {
 		XvpTlstoreaccountGetRequest ropRequest = new XvpTlstoreaccountGetRequest();
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
 		XvpTlstoreaccountGetResponse ropResponse = ropClientAdapter.ropInvokeErrorReturnNull(ropRequest);
 		if (ropResponse == null) {
@@ -158,7 +154,6 @@ public class AccountController {
 		}
 		XvpTlstoreaccountAddstorebankcardRequest ropRequest = BeanCopyUtil.copy(request,
 				XvpTlstoreaccountAddstorebankcardRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
@@ -183,7 +178,6 @@ public class AccountController {
 		}
 		XvpTlstoreaccountUpdatecompanystorebankcardRequest ropRequest = BeanCopyUtil.copy(request,
 				XvpTlstoreaccountUpdatecompanystorebankcardRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
@@ -200,7 +194,6 @@ public class AccountController {
 	@ResponseBody
 	public XvpResponse getStoreBankCard() throws Exception {
 		XvpTlstoreaccountGetstorebankcardRequest ropRequest = new XvpTlstoreaccountGetstorebankcardRequest();
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
 		XvpTlstoreaccountGetstorebankcardResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		AccountBankCardGetResponse response = BeanCopyUtil.copy(ropResponse.getTlstoreaccountcard(),
@@ -266,7 +259,6 @@ public class AccountController {
 	public XvpResponse withdrawals(@RequestBody AccountWithDrawsRequest request) throws Exception {
 		XvpTlstoreaccountWithdrawalsRequest ropRequest = BeanCopyUtil.copy(request,
 				XvpTlstoreaccountWithdrawalsRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
 		ropClientAdapter.ropInvoke(ropRequest);
 		return null;
@@ -284,7 +276,6 @@ public class AccountController {
 	public XvpResponse queryWithDraws(@RequestBody AccountWithDrawsQueryRequest request) throws Exception {
 		XvpTlstoreaccountQuerywithdrawsRequest ropRequest = BeanCopyUtil.copy(request,
 				XvpTlstoreaccountQuerywithdrawsRequest.class);
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setStore_id(Long.valueOf(SessionUtil.sellerGetStoreId()));
 		XvpTlstoreaccountQuerywithdrawsResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		AccontWithDrawsQueryListResponse response = new AccontWithDrawsQueryListResponse();
@@ -306,7 +297,6 @@ public class AccountController {
 	 */
 	private Boolean checkCode(String phone, String sn, String verify_code) throws Exception {
 		XvpPhoneVerifycodeRequest ropRequest = new XvpPhoneVerifycodeRequest();
-		ropRequest.setApp_id(ropClientAdapter.getAppId());
 		ropRequest.setVerify_code(verify_code);
 		ropRequest.setPhone(phone);
 		ropRequest.setSn(sn);
