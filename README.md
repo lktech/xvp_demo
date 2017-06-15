@@ -65,7 +65,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ![](https://github.com/lktech/xvp_demo/raw/master/image/08.png)<br>
 
 ###7.审核通过后，申请小微铺核心API<br>
-①点API信息；②选择未申请；③选择小微铺核心API；④选中需要申请的API；⑤申请API<br>
+①点API信息；②选择未申请；③选择小微铺核心API（ruixue.xvp开头的）；④选中需要申请的API；⑤申请API<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/09.png)<br>
 
 ###8.申请API审批通过后，点击API信息，选择已申请，点击API，查看API详细信息(入参，返回结果示例，错误码等)<br>
@@ -110,7 +110,8 @@ git clone https://github.com/lktech/xvp_demo.git
 ###2.解压SDK，将RopExSdk.jar放在项目lib文件夹下<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/13.png)<br>
 
-###3.修改src/main/resources下的application.properties配置文件为开发者模式，配置如下<br>
+###3.将config文件下的application.properties、application-pro.properties、application.properties三个文件复制到src/main/resources下；
+修改src/main/resources下的application.properties配置文件为开发者模式，配置如下<br>
 spring.profiles.active=dev
 
 ###4.修改src/main/resources下的application-dev.properties配置文件<br>
@@ -154,7 +155,7 @@ mvn clean package
 
 ##创建数据库<br>
 
-###1.安装MySQL<br>
+###1.安装MySQL5.6以上版本<br>
 
 官方下载地址http://dev.mysql.com/downloads/mysql/#downloads<br>
 
