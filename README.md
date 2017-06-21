@@ -112,6 +112,7 @@ git clone https://github.com/lktech/xvp_demo.git
 
 ###3.将config文件下的application.properties、application-pro.properties、application.properties三个文件复制到src/main/resources下<br>
 ![](https://github.com/lktech/xvp_demo/raw/master/image/16.png)<br>
+将config文件夹删除
 修改src/main/resources下的application.properties配置文件为开发者模式，配置如下<br>
 spring.profiles.active=dev
 
