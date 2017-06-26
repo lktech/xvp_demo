@@ -121,7 +121,7 @@ public class SellerController {
 	public XvpResponse reset(@RequestBody SellerRegisterRequest request) throws Exception {
 		Seller seller = Seller.getSellerByPhone(request.getPhone());
 		if (seller == null) {
-			throw new RuntimeException("手机号输入错误");
+			throw new RuntimeException("手机号未注册");
 		}
 		if (!checkCode(request)) {
 			throw new RuntimeException("验证码输入错误");
