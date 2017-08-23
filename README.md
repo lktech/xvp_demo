@@ -136,10 +136,10 @@ com.lingke.xvp.db.password=替换为您的数据库password
 com.lingke.xvp.db.name=替换为您的数据库name
 
 #isv
-#当开发者申请账号为沙箱时，com.xiaovpu.openapi.isv.url值应为http://sit-open.xiaovpu.com/isv/
-#当开发申请账号为正式时，com.xiaovpu.openapi.isv.url值为http://open.xiaovpu.com/isv/
+#当开发者申请账号为沙箱时，com.xiaovpu.openapi.isv.url值应为http://openapi.sit.xiaovpu.rx.top/isv/
+#当开发申请账号为正式时，com.xiaovpu.openapi.isv.url值为http://open.xiaovpu.rx.top/isv/
 
-com.xiaovpu.openapi.isv.url=http://sit-open.xiaovpu.com/isv/
+com.xiaovpu.openapi.isv.url=http://openapi.sit.xiaovpu.rx.top/isv/
 ```
 
 ###5.在项目根目录下，执行打包<br>
