@@ -9,17 +9,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tech.nodex.tutils2.jackson.JsonUtils;
+
 import com.Rop.api.domain.XvpOrder;
 import com.Rop.api.domain.XvpOrderItem;
 import com.Rop.api.request.XvpOrderAcceptgoodsRequest;
 import com.Rop.api.request.XvpOrderCreateRequest;
 import com.Rop.api.request.XvpOrderGetRequest;
 import com.Rop.api.request.XvpOrderQueryRequest;
-import com.Rop.api.request.XvpTlpayGetpayurlRequest;
+import com.Rop.api.request.XvpTlpayGetpayurlwxRequest;
 import com.Rop.api.response.XvpOrderCreateResponse;
 import com.Rop.api.response.XvpOrderGetResponse;
 import com.Rop.api.response.XvpOrderQueryResponse;
-import com.Rop.api.response.XvpTlpayGetpayurlResponse;
+import com.Rop.api.response.XvpTlpayGetpayurlwxResponse;
 import com.lingke.xvp.demo.XvpConstants;
 import com.lingke.xvp.demo.XvpRopClient;
 import com.lingke.xvp.demo.controller.request.OrderConfirmRequest;
@@ -36,8 +38,6 @@ import com.lingke.xvp.demo.controller.response.XvpResponse;
 import com.lingke.xvp.demo.exception.UserNoLoginException;
 import com.lingke.xvp.demo.utils.BeanCopyUtil;
 import com.lingke.xvp.demo.utils.SessionUtil;
-
-import tech.nodex.tutils2.jackson.JsonUtils;
 
 /**
  * Created by yuwb on 2017-03-13. 订单相关业务处理
@@ -65,8 +65,8 @@ public class OrderController {
 
 	@RequestMapping(path = "/payurl", method = RequestMethod.POST)
 	public XvpResponse payurl(@RequestBody OrderGetRequest request) throws Exception {
-		XvpTlpayGetpayurlRequest ropRequest = new XvpTlpayGetpayurlRequest();
-		XvpTlpayGetpayurlResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
+		XvpTlpayGetpayurlwxRequest ropRequest = new XvpTlpayGetpayurlwxRequest();
+		XvpTlpayGetpayurlwxResponse ropResponse = ropClientAdapter.ropInvoke(ropRequest);
 		OrderPayUrlResponse response = new OrderPayUrlResponse();
 		response.setUrl(ropResponse.getUrl().getPay_url() + "?appId=" + ropClientAdapter.getAppId() + "&orderId="
 				+ request.getOrder_id());
