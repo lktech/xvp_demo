@@ -4,13 +4,26 @@
       <div>
           <c-cell-wrap>
               <c-input title="商品名称" @on-change="validate" placeholder="请输入商品名称" required name="name" :max="30" v-model="formData.name" :is-type="kong"></c-input>
-              <c-uploadmul title='添加商品封面图' :list="img_list1" @upload="upload1" name="upload1" :max="1">
-              </c-uploadmul>
+              <!--<c-uploadmul title='添加商品封面图' :list="img_list1" @upload="upload1" name="upload1" :max="1">
+              </c-uploadmul>-->
+              <c-uploadmul
+              		title="添加商品封面图"
+							   :list="img_list1"
+							   @upload="upload1"
+							   :max="1">
+							</c-uploadmul>
           </c-cell-wrap>
           <c-cell-wrap>
               <c-input title="商品描述" @on-change="validate" placeholder="请输入商品描述" name="describe" :max="500" v-model="formData.describe" :is-type="kong"></c-input>
-              <c-uploadmul title='添加商品详情图' :list="img_list2" @upload="upload2" name="upload2" :max="9">
-              </c-uploadmul>
+              <!--<c-uploadmul title='添加商品详情图' :list="img_list2" @upload="upload2" name="upload2" :max="9">
+              </c-uploadmul>-->
+              <c-uploadmul
+              	id='upload'
+              		title="添加商品详情图"
+							   :list="img_list2"
+							   @upload="upload2"
+							   :max="9">
+							</c-uploadmul>
           </c-cell-wrap>
           <c-cell-wrap>
               <c-cell title="付款方式" value='微信支付'></c-cell>
@@ -99,15 +112,66 @@
         }
       },
       methods: {
-          upload1(src){
+      		convertBase64UrlToBlob(urlData){  
+      
+						var bytes=window.atob(urlData.split(',')[1]);        //去掉url的头，并转换为byte  
+					  
+						//处理异常,将ascii码小于0的转换为大于0  
+				    var ab = new ArrayBuffer(bytes.length);  
+				    var ia = new Uint8Array(ab);  
+				    for (var i = 0; i < bytes.length; i++) {  
+				        ia[i] = bytes.charCodeAt(i);  
+				    }  
+				  
+				    return new Blob( [ab] , {type : 'image/png'});  
+					},  
+          upload1(base64){
             $('input').blur();
-            this.img_list1=src;
-            this.judge();
+            // 将base64以表单方式提交
+						var formData = new FormData();
+						let that = this;
+						formData.append("file",that.convertBase64UrlToBlob(base64));
+						$.ajax({
+	            type: "POST",
+	            url: basepath + "/qiniu/uploadPic",
+	            data: formData,
+	            async:false,
+	            contentType: false,
+	            processData: false,
+	            dataType: "json",
+	            success: function (res) {
+                that.img_list1 = [res.result.url];
+                utils.loadingHide();
+                that.judge();
+	
+	            }
+	        	});
+//          that.img_list1=src;
+//					that.judge();
+            
           },
-          upload2(src){
+          upload2(base64){
             $('input').blur();
-            this.img_list2=src;
-            this.judge();
+            // 将base64以表单方式提交
+						var formData = new FormData();
+						let that = this;
+						formData.append("file",that.convertBase64UrlToBlob(base64));
+						$.ajax({
+	            type: "POST",
+	            url: basepath + "/qiniu/uploadPic",
+	            data: formData,
+	            async:false,
+	            contentType: false,
+	            processData: false,
+	            dataType: "json",
+	            success: function (res) {
+                that.img_list2.push(res.result.url);
+                utils.loadingHide();
+                that.judge();
+	            }
+	        	});
+//          this.img_list2=src;
+//          this.judge();
           },
           validate(obj){
             if(obj.name=='name'){
@@ -317,7 +381,8 @@
         "cCellWrap": require('../../components/cell/cell-wrap.vue'),
         "cInput":require('../../components/input/input.vue'),
         "cSwitch": require('../../components/switch/switch.vue'),
-        "cUploadmul": require('../../components/x-upload-img/x-upload-img-Slice.vue'),
+//      "cUploadmul": require('../../components/x-upload-img/x-upload-img-Slice.vue'),
+        "cUploadmul": require('../../components/x-upload-img/x-upload-img.vue'),
         //"cChoiceTag": require('../../components/choice-tag.vue'),
         "cButton": require('../../components/button/button.vue'),
         "cNumber": require('../../components/number/number.vue'),

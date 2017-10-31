@@ -16,7 +16,7 @@
 	              <li v-for="(item,index) in list" class="weui_uploader_file" :style="'background-image:url('+ item +')'" @click="showDel(index)"></li>
 	            </ul>
 	            <div class="weui_uploader_input_wrp" v-show="list.length < max">
-	              <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" @change="change" ref='input'>
+	              <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" @change="change($event.target)" ref='input'>
 	            </div>
 	          </div>
 	        </div>
@@ -69,11 +69,15 @@ export default {
   	
   },
   methods: {
-	  change() {
+	  change(target) {
 	    let that = this;
 	    utils.loadingShow("上传中");
 	    utils.imgToBase64(this.$refs.canvas, this.$refs.input.files[0], function(base64) {
 	      that.$emit('upload', base64);
+	      	if (target.files.length == 1) {
+                target.value = "";
+                // 解决相同图片上传会出现上传不了的bug
+            }
 	    });
 	  },
 	  showDel(index){
