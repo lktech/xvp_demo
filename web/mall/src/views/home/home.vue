@@ -27,7 +27,7 @@
 				<span slot="label">首页</span>
 			</c-tabbar-item>
 			<c-tabbar-item @on-item-click='toMy'>
-				<img slot="icon" src="../../../../seller/src/assets/images/my.png">
+				<img slot="icon" src="../../assets/images/my.png">
 				<span slot="label">我的</span>
 			</c-tabbar-item>
             <!--<c-tabbar-item selected>
