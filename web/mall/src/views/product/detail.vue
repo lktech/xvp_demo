@@ -14,7 +14,8 @@
             </c-product-wrap>
             <c-cell-wrap>
                 <c-cell :title="storeInfo.name" value="进入店铺" is-link @click.native="link_home">
-                    <img class="wq-img" slot="icon" src='http://static.taggole.com/sithbrobot/poster/1489997146660.jpg'/>
+                    <!--<img class="wq-img" slot="icon" src='http://static.taggole.com/sithbrobot/poster/1489997146660.jpg'/>-->
+                    <img class="wq-img" slot="icon" src='../../assets/images/icon.jpg'/>
                 </c-cell>
             </c-cell-wrap>
 

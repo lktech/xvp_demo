@@ -22,14 +22,22 @@
 
         </div>
         <c-tabbar style='height:58px;'>
-            <c-tabbar-item selected>
+        	<c-tabbar-item selected>
+				<img slot="icon" src="../../assets/images/home.png">
+				<span slot="label">首页</span>
+			</c-tabbar-item>
+			<c-tabbar-item @on-item-click='toMy'>
+				<img slot="icon" src="../../../../seller/src/assets/images/my.png">
+				<span slot="label">我的</span>
+			</c-tabbar-item>
+            <!--<c-tabbar-item selected>
                 <img slot="icon" src="http://static.taggole.com/sithbrobot/poster/1490339048405.jpg">
                 <span slot="label">首页</span>
             </c-tabbar-item>
             <c-tabbar-item link="/order/list">
                 <img slot="icon" src="http://static.taggole.com/sithbrobot/poster/1490339019315.jpg">
                 <span slot="label">我的</span>
-            </c-tabbar-item>
+            </c-tabbar-item>-->
         </c-tabbar>
     </div>
 </template>
@@ -90,6 +98,9 @@
             })
         },
         methods: { // 搜索
+        	toMy() {
+				utils.go('/order/list', this.$router)
+			},
             // 滚动加载
             load(data) {
                 if (data) {

@@ -16,14 +16,22 @@
           <p style="text-align:center;">确认收货后，订单交易完成，钱款将立即到达商家账户</p>
         </c-confirm>
         <c-tabbar style='height:58px;'>
-            <c-tabbar-item  @click.native="next">
+        	<c-tabbar-item  @click.native="next">
+				<img slot="icon" src="../../assets/images/home1.png">
+				<span slot="label">首页</span>
+			</c-tabbar-item>
+			<c-tabbar-item selected>
+				<img slot="icon" src="../../../../seller/src/assets/images/my1.png">
+				<span slot="label">我的</span>
+			</c-tabbar-item>
+            <!--<c-tabbar-item  @click.native="next">
               <img slot="icon"  src="http://static.taggole.com/sithbrobot/poster/1490951254855.jpg">
               <span slot="label">首页</span>
             </c-tabbar-item>
             <c-tabbar-item selected >
               <img slot="icon" src="http://static.taggole.com/sithbrobot/poster/1490951277761.jpg">
               <span slot="label">我的</span>
-            </c-tabbar-item>
+            </c-tabbar-item>-->
           </c-tabbar>
     </div>
 </template>
